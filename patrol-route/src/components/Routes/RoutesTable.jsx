@@ -1,5 +1,4 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -7,6 +6,9 @@ import { deleteRoute, deleteRouteAsync, getRoutesAsync } from '../../redux/patro
 
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
+  const [watchRoute, setWatchRoute] = useState(false)
+  const [ routePlan , setRoutePlan ] = useState('')
+
   const map = routes[1]
   const dispatch = useDispatch();
   useEffect(async() => {
@@ -25,13 +27,54 @@ function RoutesTable() {
     let data = routes[0].RoutePlans.filter(routePlan => routePlan.Id === id)
     console.log(data);
     
+    
   }
 
-  useEffect(() => {
+  const handleShowRoute = (id) => {
+    setWatchRoute(!watchRoute)
+    let route = routes[0].RoutePlans.filter(routePlan => routePlan.Id === id)
     
-  },[])
+    setRoutePlan(route[0])
+  }
+
+  // useEffect(() => {
+    
+  // },[])
   
   return (
+    watchRoute ? 
+    <div>
+      <h3>Route {routePlan.Id}</h3>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Point Number</TableCell>
+                <TableCell>Laitude</TableCell>
+                <TableCell>Longitde</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {
+                // console.log(routePlan)
+                routePlan.CheckPoints.map((routePoint, index) => {
+                  return(
+                    <TableRow key={index}>
+                      <TableCell>{index}</TableCell>
+                      <TableCell>{routePoint.Latitude}</TableCell>
+                      <TableCell>{routePoint.Longitude}</TableCell>
+                      <TableCell>{routePoint.WaitforSeconds}</TableCell>
+                    </TableRow>
+                  )
+                })
+              }
+            </TableBody>
+          </Table>
+        </TableContainer>
+      <button onClick={() => setWatchRoute(!watchRoute)}> back</button>
+    </div>
+      :
     <div className='RoutesTable'>
 
         <TableContainer>
@@ -49,7 +92,7 @@ function RoutesTable() {
             return(
               <TableRow key={index}>
                 <TableCell>{index+1}</TableCell>
-                <TableCell>{route.Id}</TableCell>
+                <TableCell onClick={() => handleShowRoute(route.Id)} >{route.Id}</TableCell>
                 <button onClick={() => {handleEditRoute(route.Id)}}>Edit Route</button>
                 <button onClick={() => {handleDelete(route.Id)}}>Delete Route</button>
               </TableRow>

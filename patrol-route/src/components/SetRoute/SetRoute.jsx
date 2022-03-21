@@ -32,6 +32,7 @@ function SetRoute() {
 
         // remove the option to draw on the map
         map.removeInteraction(draw)
+        
     }
 
     useEffect(()=>{
@@ -53,7 +54,7 @@ function SetRoute() {
                 WaitforSeconds: waitforSeconds,
                 Devices: []
             }
-
+            console.log(e.target);
             let points = routePoint
             points.push(template)
             setRoutePoints(points)
@@ -62,6 +63,7 @@ function SetRoute() {
     }, [])
 
   return (
+
     <div>
         <p>Route
             <input type="text" placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)}/>    
