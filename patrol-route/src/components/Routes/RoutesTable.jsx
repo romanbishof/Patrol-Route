@@ -65,6 +65,9 @@ function RoutesTable() {
                       <TableCell>{routePoint.Latitude}</TableCell>
                       <TableCell>{routePoint.Longitude}</TableCell>
                       <TableCell>{routePoint.WaitforSeconds}</TableCell>
+                      <TableCell>
+                        <button>delete</button>
+                      </TableCell>
                     </TableRow>
                   )
                 })
