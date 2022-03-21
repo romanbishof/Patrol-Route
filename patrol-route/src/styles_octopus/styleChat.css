@@ -1,0 +1,310 @@
+.chat-window-new .card-box {
+    border: 1px solid rgba(54, 64, 74, 0.08);
+    -moz-border-radius: 5px;
+    background-clip: padding-box;
+    background-color: #ffffff;
+}
+
+/* Chat widget */
+
+.chat-window-new {
+    position: absolute;
+    z-index: 99999;
+    bottom: 0;
+   
+    width: 280px;
+   
+}
+    .chat-window-new .card-box {
+        border-radius: 5px 5px 0 0;
+        padding:0;
+        margin:0;
+    }
+
+
+    .chat-window-new .portlet-heading {
+        color: #ffffff;
+        padding:5px 10px;
+        background-color: #e35722;
+        border-radius: 10px 10px 0px 0px;
+    }
+
+        .chat-window-new .portlet-heading .portlet-title {
+            color: #ffffff;
+            float: left;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 0;
+            margin-top: 6px;
+            letter-spacing: 0.03em;
+        }
+        .chat-window-new .portlet-heading .portlet-widgets {
+            display: inline-block;
+            float: right;
+            font-size: 15px;
+            line-height: 30px;
+            padding-left: 15px;
+            position: relative;
+            text-align: right;
+        }
+            .chat-window-new .portlet-heading .portlet-widgets .divider {
+                margin: 0 5px;
+            }
+
+        .chat-window-new .portlet-heading a {
+            color: #ffffff!important;
+        }
+        .chat-window-new .portlet-heading .portlet-widgets .divider {
+            margin: 0 5px;
+        }
+    .chat-window-new .chat-conversation {
+        padding: 10px;
+    }
+
+
+    .chat-window-new .chat-send {
+        padding-left: 10px;
+        padding-right: 20px;
+    }
+
+        .chat-window-new .chat-send button {
+            width: 100%;
+        }
+
+    .chat-window-new .chat-inputbar {
+        padding-left: 30px;
+        padding-right: 0;
+    }
+
+    .chat-window-new #todo-message {
+        font-size: 16px;
+    }
+
+    .chat-window-new .todo-list li {
+        border: 0px;
+        margin: 0px;
+        padding: 5px !important;
+        background: transparent !important;
+        display: block;
+    }
+
+    .chat-window-new .todo-send {
+        padding-left: 0px;
+    }
+/* Chat widget */
+    .chat-window-new .conversation-list {
+        list-style: none;
+        height: 330px !important;
+        padding: 0 !important;
+        overflow-y: auto;
+    }
+
+        .chat-window-new .conversation-list li {
+            margin-bottom: 24px;
+        }
+
+        .chat-window-new .conversation-list .chat-avatar {
+            display: inline-block;
+            float: left;
+            text-align: center;
+            /*width: 40px;*/
+        }
+
+        .chat-window-new .conversation-list .chat-avatar-date {
+            display: inline-block;
+            float: left;
+            text-align: center;
+            margin-left: 6px;
+        }
+
+
+        .chat-window-new .conversation-list .odd .chat-avatar-date {
+            display: inline-block;
+            float: right;
+            text-align: center;
+           margin-right:39px;
+        }
+        .chat-window-new .conversation-list .chat-avatar-date i {
+            
+            font-size: 11px;
+            font-style: normal;
+        }
+
+.conversation-list .chat-avatar img {
+    border-radius: 100%;
+    width: 100%;
+}
+
+.conversation-list .chat-avatar span {
+    border-radius: 100%;
+    background-color: #e35722;
+    color: white;
+    padding: 3px;
+    width: 27px;
+    height: 27px;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+}
+
+        .conversation-list .chat-avatar i {
+            font-size: 12px;
+            font-style: normal;
+        }
+
+.conversation-list .ctext-wrap {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: #cccccc;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 10px;
+    position: relative;
+    float:left;
+}
+.conversation-list .odd .ctext-wrap {
+   
+    float: right;
+}
+
+        .conversation-list .ctext-wrap i {
+            color: #2a3142;
+            display: block;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .conversation-list .ctext-wrap p {
+            margin: 0;
+            padding-top: 3px;
+        }
+
+    .conversation-list .ctext-wrap:after {
+        right: 100%;
+        top: 15px;
+        border: 5px solid rgba(213, 242, 239, 0);
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-right-color: #cccccc;
+        margin-top: -5px;
+    }
+
+.conversation-list .conversation-text {
+    display: inline-block;
+    float: left;
+    font-size: 12px;
+    margin-left: 6px;
+    width: 84%;
+    word-break: break-word;
+    line-height: 16px;
+    opacity: 1;
+}
+
+    .conversation-list .odd .chat-avatar {
+        float: right !important;
+    }
+
+    .conversation-list .odd .conversation-text {
+        float: right !important;
+        margin-right: 12px;
+        text-align: right;
+        width: 77% !important;
+    }
+
+.conversation-list .odd .ctext-wrap a {
+    color:white;
+}
+
+    .conversation-list .odd p {
+        color: #f2f2f2;
+    }
+
+    .conversation-list .odd .ctext-wrap {
+        background: #e35722 !important;
+    }
+
+        .conversation-list .odd .ctext-wrap i {
+            color: #ffffff;
+        }
+
+        .conversation-list .odd .ctext-wrap:after {
+            border-color: rgba(238, 238, 242, 0) !important;
+            border-left-color: #e35722 !important;
+            left: 100% !important;
+            top: 15px !important;
+            right: unset;
+        }
+
+.chat-send {
+    padding-left: 0px;
+    padding-right: 30px;
+}
+
+    .chat-send button {
+        width: 100%;
+    }
+
+.chat-inputbar {
+    padding-left: 30px;
+}
+
+.chat-textarea {
+     height: 40px!important;
+    resize: none;
+    overflow: auto;
+}
+#todo-message {
+    font-size: 16px;
+}
+
+.todo-list li {
+    border: 0px;
+    margin: 0px;
+    padding: 5px !important;
+    background: transparent !important;
+    display: block;
+}
+
+.todo-send {
+    padding-left: 0px;
+}
+
+
+.blink_me_chat {
+    animation-name: blinker;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes blinker {
+    0% {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}
+
+
+
+
+.chat-window-new .conversation-list::-webkit-scrollbar {
+    display: none;
+    width: 4px !important;
+}
+
+.chat-window-new .conversation-list:hover::-webkit-scrollbar {
+    display: initial;
+}
+

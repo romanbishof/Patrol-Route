@@ -1,0 +1,50 @@
+﻿/* Kiosk V3 - Blue */
+
+#kiosk-home a:hover {
+    color: #115F8D;
+}
+
+/*.v3-kisok-title h1 {
+    text-shadow: 1px 1px #115F8D;
+}*/
+
+.v3-kiosk {
+    background-color: #115F8D;
+}
+
+.v3-kiosk-main .v3-form .has-error, .v3-kiosk-main .v3-form .has-error .checkbox {
+    color: #d7f0fe;
+
+}
+
+.v3-kiosk-main .btn:disabled {
+    box-shadow: inset 0px 1px 0px 0px #bce1f7, 4px 4px 20px rgba(0, 0, 0, 0.3);
+
+}
+
+/*.v3-kiosk-main .btn:not(:disabled) {
+    box-shadow: inset 0px 1px 0px 0px #bce1f7, 4px 4px 20px rgba(0, 0, 0, 0.3);
+    border: 3px solid #008ee2;
+    color: #003e63;
+}*/
+
+/*.v3-kiosk-main .btn:not(:disabled):hover {
+    border: 3px solid #00507f;
+}*/
+
+.kiosk-form-slide .kiosk-form-side {
+    border-color: #a0d9fa;
+}
+
+.form-control:focus {
+    border-color: #638fa9;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(17, 95, 141, 0.6);
+}
+
+.tooltip-inner {
+  border-bottom: 2px solid #115F8D;
+}
+
+/*.companyLogo {
+    border: 2px #115F8D solid;
+}*/

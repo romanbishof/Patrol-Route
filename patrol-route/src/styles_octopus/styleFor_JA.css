@@ -1,0 +1,23 @@
+body {font-size: 10px;}
+
+.v3-title .v3-title-btn, .v3-title a.v3-title-btn, .v3-title a.v3-title-btn:focus, .v3-title a.v3-title-btn:active, 
+.v3-title a.v3-edit, .v3-title a.v3-edit:focus, .v3-title a.v3-edit:active, .v3-title a.v3-edit-cancel, 
+.v3-title a.v3-edit-cancel:focus, .v3-title a.v3-edit-cancel:active, .btn-sm, .btn-group-sm > .btn, .v3-title .v3-txt {font-size:10px;}
+
+
+#mainMenu .list-group-item a, #mainMenu .companyUser, #pushMenu .list-group-item a {font-size: 11px;}
+
+.btn, .v3-bottom-bar .btn-primary, .v3-bottom-bar .btn-lg, .v3-bottom-bar .btn-primary, .v3-bottom-bar .btn-lg, .form-control, 
+.incident-title .incident-bar-btn {font-size: 12px;}
+
+.glyphicon, .glyphicons {font-size:13px;}
+
+h4, .h4, #breadCrumbs .active {font-size:14px;}
+
+.v3-title h3 {font-size: 16px!important;}
+
+.v3-title h3 {font-size:19px;}
+
+h2, .h2 {font-size: 23px;}
+
+h1, .h1 {font-size: 26px;}

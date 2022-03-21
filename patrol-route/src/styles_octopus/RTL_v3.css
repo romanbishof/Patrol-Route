@@ -1,0 +1,1838 @@
+﻿/* OCTOPUS V3.0 - RTL */
+
+
+/* Document - RTL fix */
+* {
+    direction: rtl;
+    text-align: right;
+}
+
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .tooltip, .popover {font-family: Arial, sans-serif;}
+
+
+
+.pull-left {
+    float: right !important;
+}
+
+.pull-right {
+    float: left !important;
+}
+
+.text-right {
+    text-align: left !important;
+}
+
+.text-left {
+    text-align: right !important;
+}
+
+.close {
+    float: left;
+}
+
+.row-centered div {
+    text-align: center;
+}
+
+
+
+.maL10 {margin-right:10px!important;}
+.maL5 {margin-right: 5px;}
+.maR5 {margin-left: 5px;}
+
+.btn span.caret {margin:0 5px 0 0;}
+.dropdown-menu {right:0;}
+
+.divFileShow {margin-right:0; margin-left:10px;}
+
+/* Login - RTL fix */
+#login .input-group-addon:first-child {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border-left: 0;
+    border-right: 1px solid #cccccc;
+}
+
+#login #licensekey, #login #user, #login #password, #login #selectLanguage {
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#login .checkbox label {
+    padding-right: 20px;
+}
+
+#login input[type="checkbox"] {
+    margin-left: 0;
+    margin-right: -20px;
+}
+
+#login .glyphicon-log-in {
+    transform: scale(-1, 1);
+}
+
+#login #loginButton i {
+    margin: 0 0 0 10px;
+}
+
+#login .form-control-feedback {
+    right: auto;
+    right: initial;
+    left: 0;
+}
+
+#login .has-error .form-control-feedback {
+    right: auto;
+    right: initial;
+}
+
+.has-feedback .form-control {
+    padding-right: 12px;
+    padding-left: 47.5px;
+}
+
+#login .tooltip.left {
+    margin-left: -10px;
+}
+
+#siteseal {
+    left: 10px;
+    right: inherit;
+}
+
+
+/* Main Menu - RTL fix */
+.list-group {
+    padding: 0;
+}
+
+#mainMenu .list-group-item a {
+    float: right;
+    padding: 10px 10px 10px 0;
+    border-left: 0 none;
+    border-right: 5px solid #2c2c2c;
+}
+
+    #mainMenu .list-group-item a:hover, #mainMenu .list-group-item a.active {
+        border-left: 0 none;
+    }
+
+    #mainMenu .list-group-item a.twoLines {
+        padding: 5px 10px 0 0;
+    }
+
+#mainMenu .icns {
+    float: right;
+    margin: 0 0 0 10px;
+    transform: scale(-1, 1);
+}
+
+#mainMenu .icnCandC {
+    margin-top: 4px;
+}
+
+#mainMenu .icnTest {
+    margin-top: 3px;
+}
+
+#mainMenu .list-group-item a .label {
+    float: left;
+    margin: 2px 0 0 8px;
+}
+
+#mainMenu .mainSearch .glyphicon {
+    transform: scale(-1, 1);
+}
+
+.organization-messages {
+    margin: 0px 20px 0 0;
+}
+
+.organization-messages span {
+    position: absolute;
+    left: 21px;
+    right: unset;
+    width: auto;
+    padding: 1px 4px;
+    font-size: 11px;
+    background: white;
+    color: black;
+    z-index: 9;
+}
+
+/* Push Menu - RTL fix */
+#pushMenu {
+    right: 160px;
+    left: auto;
+    left: initial;
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+    #pushMenu a.closeArrow {
+        right: 300px;
+        left: auto;
+        left: initial;
+        padding: 8px 4px 0 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    #pushMenu #pushArrow {
+        right: 0;
+        left: auto;
+        left: initial;
+    }
+
+        #pushMenu #pushArrow span {
+            margin: 0 -1px 0 0;
+            transform: scale(-1, 1);
+        }
+
+    #pushMenu .list-group-item a {
+        padding: 8px 10px 15px 6px;
+        border-left: 0 none;
+        border-right: 5px solid #2c2c2c;
+    }
+
+        #pushMenu .list-group-item a span.hasBadge {
+            padding-right: 0;
+            width: 80px;
+            display: inline-block;
+            margin-top: 2px;
+        }
+
+        #pushMenu .list-group-item a span.glyphicon {
+            float: right;
+            margin: 2px 0 15px 5px;
+        }
+
+        #pushMenu .list-group-item a .label {
+            right: auto !important;
+            right: initial !important;
+            left: 5px;
+        }
+
+
+/* Wrapper - RTL fix */
+#wrapper {
+    margin: 0 160px 0 0;
+}
+
+/* Content only backdrop - RTL fix  */
+#inner-backdrop {
+    margin: 0 160px 0 0;
+}
+
+/* Hot Buttons - RTL fix */
+#hotButtons ul.nav {
+    float: left;
+    padding-right: 0;
+}
+
+    #hotButtons ul.nav li {
+        float: left;
+    }
+
+#hotButtons .new-window {
+    right: auto !important;
+    right: initial !important;
+    left: 0;
+    transform: scale(-1, 1);
+}
+
+/* Breadcrumbs - RTL fix */
+#btnBack {
+    float: right;
+    padding: 7px 16px 7px 23px;
+    border-right: none;
+    border-left: 1px #e2815b solid;
+    box-shadow: -1px -2px 3px rgba(0, 0, 0, 0.5);
+}
+
+    #btnBack .glyphicon {
+        padding-right: 0;
+        padding-left: 5px;
+    }
+
+#breadCrumbs {
+    padding: 5px 110px 5px 10px;
+}
+
+.breadcrumb > li + li:before {
+    content: "\e225";
+}
+
+
+/* Modal footer button spacing fix */
+.modal-footer .btn + .btn {
+    margin-left: 0px;
+    margin-right:5px;
+    margin-bottom: 0;
+}
+
+
+
+/* ASSETS - RTL fix */
+.glyphicon-triangle-left:before {
+    content: "\e250";
+}
+
+.glyphicon-triangle-right:before {
+    content: "\e251";
+}
+
+.glyphicon-chevron-right:before {
+    content: "\e079";
+}
+
+.glyphicon-chevron-left:before {
+    content: "\e080";
+}
+
+.glyphicons-chevron-right:before {
+    content: "\e225";
+}
+
+.glyphicons-chevron-left:before {
+    content: "\e224";
+}
+
+.gly-rotate {
+    transform: rotate(270deg);
+}
+
+.glyphicon-asterisk, .glyphicons-asterisk {
+    padding-right: 0px;
+    padding-left: 5px;
+}
+
+.popover.bottom > .arrow, .popover.top > .arrow {
+    /*margin-left: 0;
+    margin-right: -11px;
+    border-bottom: none;
+    border-top: none;*/
+}
+
+.popover.bottom > .arrow:after {right: -10px;}
+
+.pnotify-action {
+    float: left;
+}
+
+.radio-inline, .radio-inline + .radio-inline, .checkbox-inline, .checkbox-inline + .checkbox-inline {
+    /*margin-right: 0;*/
+    margin-left: 10px;
+}
+
+.border-right {
+    border-right: none;
+    border-left: 1px solid #dddddd;
+}
+
+.pager .previous > a, .pager .previous > span {
+    float: right;
+}
+
+.pager .next > a, .pager .next > span {
+    float: left;
+}
+
+/* Main Content - RTL fix */
+.v3-form input[type=number] {
+    padding: 0 10px 0 0;
+}
+
+.v3-title a.v3-edit, .v3-title a.v3-edit:active, .v3-title a.v3-edit:focus, .v3-title a.v3-edit-cancel, .v3-title a.v3-edit-cancel:active, .v3-title a.v3-edit-cancel:focus {
+    margin: 5px 0 0 10px;
+}
+
+    .v3-title a.v3-edit span {
+        padding-right: 0;
+        padding-left: 3px;
+    }
+
+.v3-title a.close {
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+.v3-title .v3-txt {
+    margin: 0 0 0 10px;
+}
+
+/*.v3-title a.v3-title-btn.v3-btn-arrow span {
+   transform: scale(-1, 1);
+}*/
+
+.v3-bottom-bar .glyphicons-log-out, .v3-bottom-bar .glyphicon-ban-circle, .v3-bottom-bar .glyphicons-user-ban, .v3-title a.v3-edit .glyphicons-log-out {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+/*.v3-bottom-bar .glyphicon-ban-circle {
+    margin: 0 15px;
+}*/
+
+.v3-form .form-group label {
+    float: right;
+}
+
+.bootstrap-datetimepicker-widget .list-unstyled {
+    margin-right: -38px !important;
+}
+
+
+.bootstrap-datetimepicker-widget span {
+    text-align: center !important;
+}
+
+.bootstrap-datetimepicker-widget tbody:first-child {
+    direction: ltr;
+}
+
+
+
+
+/*שעות לפני הדקות*/
+.bootstrap-datetimepicker-widget .timepicker-picker table {
+    direction: ltr !important;
+}
+
+.timepicker.col-sm-5 {
+    padding: 0 !important;
+    padding-right: 30px !important;
+}
+
+.v3-form .v3-form-indent {
+    margin-left: 0;
+    margin-right: 18px;
+    border-left: none;
+    border-right: 3px solid #dedede;
+}
+
+.v3-form .input-group-addon {
+    border-right: none;
+    border-left: 1px solid #cccccc;
+}
+
+.v3-form .has-error .input-group-addon {
+    border-right: none;
+    border-left: 1px solid #db0400;
+}
+
+.v3-form .form-control-feedback {
+    right: auto !important;
+    right: initial !important;
+    left: 22px !important;
+}
+
+.v3-form .input-group .form-control-feedback {
+    right: auto !important;
+    right: initial !important;
+    left: 31px !important;
+}
+
+.v3-form .has-error input {
+    /*padding: 0 10px 0 47.5px;*/
+}
+
+.v3-form ol.v3-related-list {
+    padding: 5px 25px 5px 0;
+}
+
+.v3-search {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+    .v3-search button .glyphicon {
+        transform: scale(-1, 1);
+    }
+
+.v3-table .table-striped td[data-sort-c]:after,
+.v3-table .table-striped td[data-sort-desc=false]:after,
+.v3-table .table-striped td[data-sort-desc=true]:after,
+.v3-table .table-striped th[data-sort-c-client]:after {
+    float: right;
+    padding-right: 0;
+    padding-left: 4px;
+}
+
+
+
+th {
+    text-align: right;
+}
+
+.v3-table-more a {
+    text-align: center !important;
+}
+
+@media (max-width: 1200px) {
+    .v3-stats {
+        float: none !important;
+        float: initial !important;
+    }
+}
+
+.v3-stats div {
+    text-align: center !important;
+}
+
+.v3-tbl-user-title {
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+ul.v3-tbl-actions .glyphicon:not(.glyphicon-ok), ul.v3-tbl-actions .glyphicons:not(.glyphicons-chevron-right):not(.glyphicons-chevron-left):not(.glyphicons-question-sign) {
+    transform: scale(-1, 1);
+}
+
+.v3-tbl-user-zm {
+    /*padding: 20px 20px 0 0;*/
+    padding: 10px 10px 0 0;
+    left: auto;
+    right: 0;
+}
+
+ul.v3-tbl-actions {
+    text-align:left;
+}
+
+
+
+ul.v3-tbl-actions li {
+    /*border-right: none;
+    border-left: 1px solid #cccccc;*/
+    margin-left: 0;
+    margin-right: -4px;
+}
+
+    ul.v3-tbl-actions li a {
+        text-align: center !important;
+    }
+
+.highlight ul.v3-tbl-actions li {
+    border-left-color: #e35722;
+}
+
+.v3-table .table-striped tbody tr.highlight:hover ul.v3-tbl-actions li {
+    border-left-color: #cccccc;
+}
+
+
+ul.v3-tbl-icons .glyphicon:not(.glyphicon-ok), ul.v3-tbl-icons .glyphicons:not(.glyphicons-chevron-right):not(.glyphicons-chevron-left):not(.glyphicons-question-sign) {
+    transform: scale(-1, 1);
+}
+ul.v3-tbl-icons {
+    text-align: right;
+}
+    ul.v3-tbl-icons li {
+        /*border-right: none;
+    border-left: 1px solid #cccccc;*/
+        margin-left: 0;
+        margin-right: -4px;
+    }
+
+        ul.v3-tbl-icons li a {
+            text-align: center !important;
+        }
+
+.highlight ul.v3-tbl-icons li {
+    border-left-color: #e35722;
+}
+
+.v3-table .table-striped tbody tr.highlight:hover ul.v3-tbl-icons li {
+    border-left-color: #cccccc;
+}
+
+
+.v3-tabs {
+    padding-right: 0;
+}
+
+    .v3-tabs > li > a {
+        border-left: 1px solid transparent;
+        border-right: none;
+    }
+
+    /*.v3-tabs li:not(.active):not(#dash-stats) a {
+        border-left-color: #585858;
+        box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.5);
+    }*/
+
+        .v3-tabs li:not(.active):not(#dash-stats) a:hover, .v3-tabs li:not(.active):not(#dash-stats) a:focus {
+            border-right-color: transparent;
+        }
+
+.v3-title .v3-title-btn, .v3-title a.v3-title-btn, .v3-title a.v3-title-btn:focus, .v3-title a.v3-title-btn:active, .v3-title a.v3-edit, .v3-title a.v3-edit:focus, .v3-title a.v3-edit:active {
+    margin: 5px 0 0 10px;
+}
+
+.btn-group > .btn:first-child {margin-left:10px; margin-right:0;}
+
+    .v3-title a.v3-title-btn span, .v3-title a.v3-edit span {
+        padding-right: 0;
+        padding-left: 3px;
+    }
+
+    .v3-title a.v3-title-btn.v3-btn-arrow {
+        margin: 15px 0 0 0;
+        padding: 10px 7px;
+    }
+
+        .v3-title a.v3-title-btn.v3-btn-arrow span {
+            padding: 0;
+            margin: 0;
+        }
+
+.cac-cams .v3-title-btn, .cac-cams a.v3-title-btn, .cac-cams a.v3-title-btn:active, .cac-cams a.v3-title-btn:focus {
+    margin: 5px 20px 0 0;
+}
+
+.v3-title .v3-title-btn, .v3-title a.v3-title-btn, .v3-title a.v3-title-btn:focus, .v3-title a.v3-title-btn:active {
+    margin-top: 7px;
+}
+
+.v3-radio-images {
+    padding-left: 15px;
+    padding-right: 0;
+}
+
+    .v3-radio-images label {
+        margin-left: 5px;
+        margin-right: 0;
+    }
+
+.v3-filter {
+    margin: 7px 0 0 10px;
+}
+
+    .v3-filter span, .v3-box.new .v3-title-menu .fieldsWrap span  {
+        margin: 6px 0 0 7px;
+    }
+
+/* Visitors Module - RTL fix */
+#vis-step1 {
+    left: auto !important;
+    left: initial !important;
+    right: 25px;
+}
+
+.v3-bottom-bar .glyphicon-log-out {
+    transform: scale(1, 1);
+}
+
+/* Command and Control Module - RTL fix */
+
+.cac-cams .glyphicon-triangle-left:before {
+    content: "\e251";
+}
+
+.cac-cams .glyphicon-triangle-right:before {
+    content: "\e250";
+}
+
+.cac-cams .glyphicon-chevron-right:before {
+    content: "\e080";
+}
+
+.cac-cams .glyphicon-chevron-left:before {
+    content: "\e079";
+}
+
+#cac-cams-tree .glyphicon-chevron-right:before {
+    content: "\e079";
+}
+
+#cac-cams-tree .glyphicon-chevron-left:before {
+    content: "\e080";
+}
+
+.cac-camera-playback {
+    text-align: left !important;
+    direction: ltr !important;
+}
+
+.modal-body .cac-camera .glyphicon {
+    transform: scale(-1, 1);
+}
+
+.cac-cam-ptz-menu .glyphicons {
+    transform: scale(-1, 1);
+}
+
+.cac-cam-ptz-menu a.ptz-up {
+    padding-left: 0;
+    margin-left: 0;
+    padding-right: 50%;
+    margin-right: -25px;
+    z-index: 9;
+}
+
+.cac-cam-ptz-menu a.ptz-down {
+    padding-left: 0;
+    margin-left: 0;
+    padding-right: 50%;
+    margin-right: -25px;
+}
+
+.integration-ptz .glyphicons {
+    transform: scale(-1, 1);
+}
+
+.integration-ptz a.ptz-up {
+    top: 10%;
+    margin-right: 50%;
+    z-index: 9;
+}
+
+.integration-ptz a.ptz-down {
+    margin-top: 50%;
+    margin-right: 50%;
+}
+
+.cam-wowza a.refresh {
+    left: auto;
+    left: initial;
+    right: 5px;
+}
+
+.cam-wowza a.fullscreen {
+    right: auto;
+    right: initial;
+    left: 8px;
+}
+
+.nav #nextCamBtn .glyphicons, nav #provCamBtn .glyphicons {
+    /*transform: scale(-1, 1);*/
+}
+
+#dialog___Cac__EditSeverity .checkbox {
+    padding-left: 0;
+    padding-right: 28px;
+}
+
+#sop-addedit-scroll #olActions {
+    margin-right: 0;
+    padding-right: 0;
+}
+
+    #sop-addedit-scroll #olActions .radio-container {
+        margin-left: 0;
+        margin-right: 30px;
+    }
+
+        #sop-addedit-scroll #olActions .radio-container .radio:last-child {
+            margin-right: initial;
+            padding-right: initial;
+            margin-left: 5px;
+            padding-left: 0;
+        }
+
+    #sop-addedit-scroll #olActions li:before {
+        content: counter(step-counter) "\e728";
+        border-right: none;
+        border-left: 2px solid #e35722;
+        padding-right: 0;
+        padding-left: 5px;
+        margin-right: 0;
+        margin-left: 2px;
+    }
+
+#formEditOOOPopover .v3-form-indent {
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+#cac-rules-addsensor .v3-search {
+    width: 145px;
+}
+
+.octTree .glyphicons-chevron-right {
+    /*transform: scale(-1, 1);*/
+}
+
+/* Dashboard - RTL fix */
+.v3-tabs #dash-stats {
+    margin: 6px 0 0 20px;
+}
+
+    .v3-tabs #dash-stats .label {
+        margin-left: 0;
+        margin-right: 7px;
+    }
+
+    .v3-tabs #dash-stats .glyphicons {
+        margin-left: 0;
+        margin-right: 7px;
+    }
+
+.incident-head-title {
+    padding-right: 0;
+    padding-left: 20px;
+}
+
+.msg-head-text > div {float:right;}
+.msg-head-text .actions {float:left; padding-left:20px;}
+
+
+.incident-rows .incident .incident-txt p {
+    border-left: none;
+    padding-left: 0;
+    border-right: 1px solid #606060;
+    padding-right: 5px;
+}
+
+.incident-rows .incident .incident-status {
+    text-align: right !important;
+}
+
+    .incident-rows .incident .incident-status div, .incident-rows .incident .incident-status span {
+        text-align: right !important;
+        border-left: none;
+        padding-left: 0;
+        border-right: 1px solid #606060;
+        padding-right: 5px;
+    }
+
+.incident-rows .incident.severity5 .incident-txt p, .incident-rows .incident.severity5 .incident-status div, .incident-rows .incident.severity5 .incident-status span {
+    border-right-color: #cc7d7d !important;
+}
+
+.incident-rows .incident.severity4 .incident-txt p, .incident-rows .incident.severity4 .incident-status div, .incident-rows .incident.severity4 .incident-status span {
+    border-right-color: #cc9b7d !important;
+}
+
+.incident-rows .incident.severity3 .incident-txt p, .incident-rows .incident.severity3 .incident-status div, .incident-rows .incident.severity3 .incident-status span {
+    border-right-color: #cebd7e !important;
+}
+
+.incident-rows .incident.severity2 .incident-txt p, .incident-rows .incident.severity2 .incident-status div, .incident-rows .incident.severity2 .incident-status span {
+    border-right-color: #bace7e !important;
+}
+
+.message .message-photo-zm {
+    padding: 14px 14px 0 0;
+    left: auto;
+    left: initial;
+    right: 0;
+}
+
+@media (max-width: 1600px) {
+    .message .message-photo-zm {
+        padding: 8px 8px 0 0;
+    }
+}
+
+/*.message a.message-actions, .task a.task-actions {
+    border-left: none;
+    border-right: 1px solid #c4c4c4;
+}*/
+
+.task .task-txt {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.task .task-txt h4, .message .message-txt h4 {float:right;}
+
+#dashboard-cams-container {
+    left: 0;
+    right: auto;
+    right: initial;
+}
+
+#dashboard-cams-button .dashboard-cams-orange {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#dashboard-cams-button .dashboard-cams-grey {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* CSS for dashboard-control-container */
+
+#dashboard-control-container, #dashboard-control-container2 {
+    right: 0;
+    left: auto;
+    left: initial;
+}
+
+#dashboard-control-button .dashboard-control-orange, #dashboard-control-button2 .dashboard-control-orange, #dashboard-control-button2 .dashboard-control-orange2 {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#dashboard-control-button .dashboard-control-grey, #dashboard-control-button2 .dashboard-control-grey2 {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;        
+}
+
+#dashboard-control-button .dashboard-control-orgback {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#dashboard-control-trees .map-control,#dashboard-control-trees2 .map-control {
+    margin-right: 10px;
+}
+
+.device-control {
+    width:100%;
+}
+#divTreeComponentConfiguration {
+    width: 130%;
+}
+/* CSS for map-controler and device-contoller */
+#map-control .Node {
+    margin-right: 18px;
+    zoom: 1;
+}
+
+#map-control .IsRoot {
+    margin-right: 0;
+}
+
+#map-control .Content {
+    margin-right: 25px;
+}
+
+#map-control.v3 .Expand, #map-control.v5 .Expand {
+    float: right;
+}
+
+#map-control .ExpandClosed .Expand {
+    margin-right: 3px;
+    transform: scale(-1, 1);
+    float: right;
+}
+
+#map-control.v3 .ExpandLeaf .Expand {
+    margin-right: 3px;
+    transform: scale(-1, 1);
+    float: right;
+}
+
+#map-control.v5 .ExpandLeaf .Expand {    
+    transform: scale(-1, 1);
+    float: right;
+}
+
+#map-control.v3 .Node, #map-control.v5 .Node {
+    margin-right: 18px;
+    background-position: top right;
+}
+
+#map-control.v3 .IsLast {
+    background-image: url(/Images/i_half.gif);
+    background-repeat: no-repeat;
+}
+
+#map-control .Action {
+    display: none;
+    margin-right: 18px;
+}
+
+#map-control.v5 .ExpandOpen > .Expand {
+    margin-right:3px;
+}
+
+#map-control.v5 .Node.ExpandLeaf {    
+    background-position: top right;    
+}
+
+.imgFloorPosition {
+    position: relative;
+    top: 0px;
+    right: 0px;
+}
+
+.imgOrgPlanPosition {
+    position: relative;
+    top: 0px;
+    right: 0px;
+}
+
+.toggleTree {
+    left: 20%;
+    right: inherit;
+}
+
+/* END CSS for map-control */
+
+.incident-title .incident-x {
+    margin: 0 10px 0 -5px;
+}
+
+.incident-title .incident-bar-btn {
+    border-right: 0;
+    border-left: 1px solid #2c2c2c;
+}
+
+    .incident-title .incident-bar-btn .v3-filetype b {
+        left: 3px;
+    }
+
+    .incident-title .incident-bar-btn label {
+        margin-right: 0;
+        margin-left: 3px;
+    }
+
+.incident-widget-body ol {
+    margin-left: 0;
+    padding-left: 0;
+    margin-right: 15px;
+    padding-right: 10px;
+}
+
+    .incident-widget-body ol li::before {
+        border-right: none;
+        border-left: 2px solid #e35722;
+        padding-right: 0;
+        margin-right: 0;
+        padding-left: 5px;
+        margin-left: 8px;
+    }
+
+    .incident-widget-body ol li div.checkbox {
+        margin-left: 0;
+        margin-right: -50px;
+    }
+
+    .incident-widget-body ol li:nth-child(n+10) div.checkbox {
+        margin-right: -58px;
+    }
+
+    .incident-widget-body ol li input[type="checkbox"] {
+        margin-right: 0;
+        margin-left: 50px;
+    }
+
+    .incident-widget-body ol li div.radio {
+        margin-left: 0;
+        margin-right: 45px;
+    }
+
+        .incident-widget-body ol li div.radio.radio-2nd {
+            margin-left: 0;
+            margin-right: 20px;
+        }
+
+    .incident-widget-body ol li div:not(.radio) label {
+        padding-left: 0;
+        padding-right: 40px;
+    }
+
+.incident-widget-body ul.incident-sops {
+    padding-left: 0;
+    padding-right: 2px;
+}
+
+    .incident-widget-body ul.incident-sops li::before {
+        padding-right: 0;
+        padding-left: 10px;
+    }
+
+.incident-report-user-details .v3-portrait-photo {
+    margin: 0 auto;
+}
+
+.incident-report-user-msg {margin: 0 0 0 10px;}
+
+#ComposeMMessages h1 span {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+.incident-social-result .incident-social-txt {
+    margin-left: 0;
+    margin-right: 20%;
+}
+
+
+
+#eventPropForm {
+    margin-right: 0;
+    margin-left: 26px;
+}
+
+.incident-sop-container {
+    padding-left: 0;
+    padding-right: 44px;
+}
+
+.incident-sop-divider {
+    margin-right: 50%;
+}
+
+    .incident-sop-divider.closed {
+        right: auto;
+        right: inherit;
+        left: 0;
+        margin-right: 0;
+    }
+
+        .incident-sop-divider.closed a {
+            transform: rotate(-180deg);
+        }
+
+    .incident-sop-divider abbr {
+     
+         /*margin: 30px -18px 20px 0;*/
+        /*transform: rotate(90deg);*/
+
+        margin: 58px -36px 40px 0;
+        width: 99px;
+    }
+
+    .incident-sop-divider a {
+        margin-left: 0;
+        margin-right: 2px;
+    }
+
+#eventModal .incident-sop-divider {
+    margin-right: 48.5%;
+    margin-left: 20px;
+}
+
+#fileUpToEvent-divDrop .btn {
+    margin: 2px 0 10px 5px;
+    padding: 3px 12px;
+}
+
+ol#last10events-pop {
+    padding: 0 30px 0 10px;
+}
+
+    ol#last10events-pop:not(.hide-style) li a span {
+        padding-left: 0;
+        padding-right: 5px;
+    }
+
+        ol#last10events-pop:not(.hide-style) li a span.text-sm {
+            text-align: left;
+        }
+
+/* Alarms - Push (TEMP) - RTL fix */
+#alarmMoreDetails {
+    left: auto !important;
+    left: initial !important;
+    right: 305px;
+}
+
+    #alarmMoreDetails span {
+        margin-right: 0;
+        margin-left: 10px;
+    }
+
+/* PNotify - RTL fix */
+.ui-pnotify-icon, .ui-pnotify-icon span {
+    float: right;
+    margin-right: 0;
+    margin-left: .2em;
+}
+
+.ui-pnotify-sticker {
+    float: left;
+}
+
+/* Messages Module - RTL fix */
+
+.messages-menu {
+    margin-right:-40px;
+    margin-left:0;
+}
+.pm {
+    margin-right:-25px;    
+}
+
+.messages-menu ul li.list-group-item {
+    border-left:0 none;
+    border-right: 5px solid transparent;
+}
+
+#msg .glyphicons-unshare {
+    transform: scale(-1, 1);
+}
+
+#msg .msg-search .v3-pointer {
+    margin-right: 0;
+    margin-left: 15px;
+}
+
+#msg .msg-message-icn {
+    right: auto;
+    right: initial;
+    left: 0;
+}
+
+#msg .msg-message-chk {
+    left: auto;
+    left: initial;
+    right: 0;
+}
+
+    #msg .msg-message-chk .checkbox {
+        margin-left: 0;
+        margin-right: -30px;
+    }
+
+        #msg .msg-message-chk .checkbox input {
+            margin-left: 0 !important;
+            width: 17px;
+            height: 17px;
+        }
+
+        #msg .msg-message-chk .checkbox label::before {
+            padding-top: 0;
+            margin-right: 0;
+        }
+
+        #msg .msg-message-chk .checkbox label::after {
+            padding-left: 0;
+            padding-right: 3px;
+            margin-right: 0;
+        }
+
+#msg #msg-inbox .msg-content-container {
+    left: auto;
+    left: initial;
+    right: 15px;
+}
+
+    #msg #msg-inbox .msg-content-container .msg-content {
+        left: auto;
+        left: initial;
+        right: 30%;
+    }
+
+#msg #msg-empty .msg-content .msg-content-txt {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+#msg #msg-sent .msg-table-container .pull-left .msg-table {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+#msg #msg-sent .msg-table-container .pull-right .msg-table {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+#msg #msg-sent .v3-portrait {
+    margin-left: 0;
+    margin-right: 35px;
+}
+
+#msg #msg-sent .msg-table-container {
+    margin-left: 0;
+    margin-right: 35px;
+}
+
+/*#msg-compose-modal .modal-body .msg-compose-result-entry a {
+    margin-right: 0;
+    margin-left: 3px;
+}*/
+
+#msg-compose-modal .modal-body .btn {
+    padding: 5px 5px 5px 10px;
+}
+
+#msg-compose-modal .modal-body .dropdown-menu {
+    left: 60px;
+}
+
+.col-xs-push-3 {
+    left: 0;
+    right: 25%;
+}
+
+#msg-compose-modal .modal-body .msg-compose-ml76 {
+    margin-left: 0;
+    margin-right: 76px;
+}
+
+#msg-compose-modal .modal-body .msg-msgMessage .btn {
+    margin: 2px 0 10px 5px;
+}
+
+#msg-radius-pop .feed-pop-btn-menu, #msg-radius-pop .feed-pop-btn-menu .col-sm-12 {
+    text-align: center;
+}
+
+/* Awesome Checkbox - RTL fix */
+.checkbox {
+    padding-left: 0;
+    padding-right: 20px;
+}
+
+    .checkbox label {
+        padding-left: 0;
+        padding-right: 5px;
+    }
+
+        .checkbox label::before {
+            left: auto;
+            left: initial;
+            right: 0;
+            margin-left: 0;
+            margin-right: -20px;
+        }
+
+        .checkbox label::after {
+            left: auto;
+            left: initial;
+            right: 0;
+            margin-left: 0;
+            margin-right: -20px;
+            padding-left: 0;
+            padding-right: 3px;
+        }
+
+.checkbox-big {
+    padding-right: 0;
+}
+
+    .checkbox-big label::before {
+        padding-top: 0;
+        margin-right: 0;
+    }
+
+    .checkbox-big label::after {
+        padding-left: 0;
+        padding-right: 4px;
+        margin-right: 0;
+    }
+
+.checkbox-action {
+    padding-left: 0;
+    padding-right: 5px;
+}
+
+    .checkbox-action input {
+        margin-top: 1px;
+    }
+
+    .checkbox-action label::before {
+        padding-top: 0;
+        margin-right: 0;
+    }
+
+    .checkbox-action label::after {
+        padding-left: 0;
+        padding-right: 3px;
+        margin-right: 0;
+    }
+
+.cac-ol-sadap .checkbox input[type="checkbox"] {
+    margin-right: -50px;
+}
+
+.modal .checkbox-fixed input[type="checkbox"] {
+    margin-right: -20px;
+}
+
+.radio {
+    padding-right: 0;
+    padding-left: 20px;
+}
+
+    .radio label {
+        padding-left: 0;
+        padding-right: 5px;
+    }
+
+        .radio label::before {
+            left: auto;
+            left: initial;
+            right: 0;
+            margin-left: 0;
+            margin-right: -20px;
+        }
+
+        .radio label::after {
+            left: auto;
+            left: initial;
+            right: 3px;
+            margin-left: 0;
+            margin-right: -20px;
+        }
+
+.radio-fix {
+    margin-right: 20px;
+}
+
+/* Kiosk - RTL fix */
+.kiosk-confirm-slide .checkbox {
+    padding-right: 0;
+    padding-left: 30px;
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+    .kiosk-confirm-slide .checkbox label {
+        padding-left: 0;
+        padding-right: 20px;
+    }
+
+    .kiosk-confirm-slide .checkbox input[type="checkbox"]:checked + label::after,
+    .kiosk-confirm-slide .checkbox input[type="radio"]:checked + label::after {
+        margin-right: 0;
+        margin-left: -2px;
+        padding-left: 0;
+        padding-right: 5px;
+    }
+
+/* Map - RTL fix */
+
+#map_v3 .menu li:first-child {
+    right: auto;
+    right: initial;
+    left: 5px;
+}
+
+#map_v3 #circle_menu {
+    right: auto;
+    right: initial;
+    left: 10px;
+}
+
+#map_v3 .map_menu .map_menu_header {
+    height: 9%;
+    background-color: #e35722;
+    color: #fff;
+    padding: 5px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#map_v3 .map_menu .map_menu_header .myOrganization {
+            margin-left:0px;
+            margin-right:12px;                                    
+            color: #fff;
+}
+#map_v3 .map_menu .map_menu_header h3 {
+            font-size: 14px;
+            font-weight: normal;
+            margin: 1px 0 0 25px;
+            color: #fff;
+        }
+
+
+#map_v3 .map_menu .v3-x {
+    right: auto;
+    right: initial;
+    left: 10px;
+}
+
+#map_v3 ul.map_legend {
+    margin: 5px 5px 5px 0;
+}
+
+    #map_v3 ul.map_legend .menu_more {
+        margin: 3px 0 0 10px;
+    }
+
+    #map_v3 ul.map_legend img {
+        margin-right: 0;
+        margin-left: 7px;
+    }
+
+    #map_v3 ul.map_legend .checkbox input {
+        width: 17px;
+        height: 17px;
+        margin-top: 1px;
+        cursor: pointer;
+    }
+
+#map_v3 .legendIcon {
+    transform: scale(-1, 1);
+}
+
+#map_v3 .map_menu ul#listOfGuardsLinks li {
+    padding: 0 0 0 10px;
+    margin-right: 0;
+    margin-left: 5px;
+    border-right: none;
+    border-left: 1px solid #999;
+}
+
+    #map_v3 .map_menu ul#listOfGuardsLinks li .glyphicons {
+        margin-right: 0;
+        margin-left: 6px;
+    }
+
+#map_v3 #showSearch_Form .form-group a {
+    text-align: left;
+}
+
+#map_v3 #pointOfInterestColorLegend {
+    left: auto;
+    left: initial;
+    right: 50px;
+}
+
+#mapBodyIframe .popover ol.popover_menu {
+    padding: 0 38px 0 5px;
+}
+
+    #mapBodyIframe .popover ol.popover_menu li .glyphicons-screenshot {
+        margin-right: 0;
+        margin-left: 8px;
+    }
+
+#mapBodyIframe span[data-count-li] {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+/* Testing and Measuring - RTL fix */
+
+.v3-gauge text {
+    direction: ltr;
+}
+
+#pageAllSitesControlSubject .graphparent {
+    border-right: none;
+    border-left: 1px solid #d5d5d5;
+}
+
+#pageAllSitesControlSubject .graphinfoRight {
+    right: 70px;
+    direction: rtl;
+}
+
+    #pageAllSitesControlSubject .graphinfoRight div {
+        text-align: left;
+    }
+
+#pageAllSitesControlSubject .siteAVG {
+    right: 3px;
+}
+
+/* Assessments - RTL fix */
+
+#assContainer #assContent .ass-que {
+    margin: 0 28px 10px 0;
+}
+
+#assContainer #assContent .ass-que-title {
+    margin-left: 0;
+    margin-right: -28px;
+}
+
+.orgplan-svg {
+    position:absolute;
+    top:0;
+    right:0;
+}
+
+#msg-selectall-div button, #msg-convert-div button, #msg-archive-div button, #msg-forward-div button, #msg-reply-div button, #msg-resend-div button {
+    margin-left: 3px;
+}
+
+/*.msg-details-margin {
+    margin-right:0em;
+    margin-left: 4em;
+}*/ 
+
+#msg-message-chk {
+    min-height: 0;
+    padding: .45em .7em .5em .5em;
+    margin: 1.5px 0 0 0;
+    background: #f8f8f8;
+    border-radius: 0 !important;
+    color: #2d2d2d;
+    border-width: 0 1px 1px 0px;
+    border-style: solid;
+    border-color: #e7e7e7;
+    font-weight: normal;
+}
+    #msg-message-chk input[type="checkbox"] {
+        right: 23px;
+        cursor: pointer;
+    }
+.msg-message-chk input[type="checkbox"] {
+    right: 14px;
+}
+
+#accord {    
+    border-right: 0px;        
+    border-left: 1px solid;
+    border-color: #e7e7e7;
+}
+
+/*.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+    position: absolute;
+    margin-right: -20px;
+    margin-left: 0px;
+}*/
+
+.btn .glyphicons, .btn .halflings, .btn .filetypes, .btn .social {
+    margin-left: .3em;
+}
+
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+    position: absolute;    
+    left: inherit!important;
+    right: .5em;
+    top: 50%;
+    margin-top: -8px;
+    transform: scaleX(-1);
+}
+  
+
+
+/* NEW DESIGN INNER PAGES */
+.btn-team {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+.v3-box.new .v3-title a:not(.v3-txt) {
+    margin-left: 0;
+    margin-right: 5px;
+}
+
+.v3-box.new .v3-title a i.fa.fa-refresh {margin-left:5px;}
+
+.v3-box.new .t6 {
+    margin-left:0;
+    margin-right:10px;
+}
+
+.nav-tabs > li > a {
+    margin-left: 2px;    
+    margin-right:0px;
+}
+.v3-tabs > li > a {margin:0;}
+
+.v3-box.new .v3-title-menu select {margin-right:0; margin-left:5px;}
+.v3-box.new .v3-search {margin-left:5px;}
+
+/* Rule Condition */
+
+.logicalOR_tab {
+    margin-left: 5px;
+}
+
+.logicalOR {
+    margin-left: 8px;
+}
+
+.logicalOR_remove_button {
+    position: absolute;
+    top: 0px;
+    padding: 12px 1px 10px 1px;
+    margin-right: -5px;
+    left: -1px;
+    right: 90%;
+}
+
+.logicalOR_addtab_button {
+    padding: 5px !important;
+    border-radius: 4px 4px 4px 4px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.addLogicalORGroup {
+    margin-left: 10px;
+}
+
+.removeCondition {
+    position: absolute;
+    top: 0px;    
+    left:0px;
+}
+
+.eventTypefield {
+    padding-right: 30px;
+    padding-left: 45px;
+}
+
+.eventSubCodeField {
+    padding-left: 45px!important;
+}
+
+.octTimeFrameDiv {
+    width: 59%;
+    margin-right: 1%;
+}
+
+/* End Rule Condition */
+.termsOfUse li:before {
+    content: counters(item, ".") ".";
+    counter-increment: item;
+    padding-right: 10px;
+    padding-left: 0;
+    margin-left: -20px;
+    margin-right: 0;
+}
+.termsOfUse *{
+    text-align:left!important;
+    direction:ltr!important;
+}
+
+
+/* ACTIVITY CALENDAR */
+.calendatMainView {
+    left: initial;
+    right: 10px;
+} 
+    .calenderDay {float: right;}
+    .weeklyTime {float:right;}
+    .divActivities {float:right;}
+    .divActivities a.delete {float:left;}
+    .activity .time {float:right; margin:2px 0 0 10px;}
+    .weekDays div {float: right;}
+    .activity .title {font-size:13px;}
+    #LegendList .col-xs-10 {padding-left:10px; padding-right:0;}
+    #LegendList .col-xs-2 .checkbox {margin-right:0; margin-left:5px;}
+
+    #calendarDiv .fc-month-view .fc-day-grid-event {text-align:right;}
+    #calendarDiv .fc-month-view .fc-event-dot {margin:2px 4px 0 6px;}
+ /* END ACTIVITY CALENDAR */
+
+.componentActive {    
+    margin-right: 5px;
+    margin-left: 0px;
+}
+
+.rtlruleEngineCorrectWidth {
+    width:99%;
+}
+
+.rtlruleEngineCorrectPadding {
+    padding-left: 7px;
+}
+
+.refreshBtnfix {
+    position: relative;
+    top: -2px;
+    margin-left: 4px!important;
+    margin-right: -3px!important;
+}
+
+.toggleEventDetails {
+    float:right;
+}
+
+/* organization plan - direction */
+.direction-ltr {
+    direction: ltr;
+}
+
+/* PARKING */
+.parkingDiv h4, .parkingDiv .status {text-align:center;}
+.parkingDiv form, .parkingDiv form label {text-align:center;}
+
+
+
+
+
+
+
+/* War rooms - Client view - Tablet */
+
+.btn i {padding:0 0 0 10px;}
+
+.btn > span + i {
+    padding: 0 10px 0 0;
+}
+
+/*fix date range*/
+.btn i.dateEnd-txt, .btn i.dateStart-txt {padding:0;}
+
+.col-lg-6 > .btn i {padding:0 0 0 5px;}
+.deviceStatus {border-left: 0 none; border-right: 3px solid #33a343; padding-left:0; padding-right:5px;}
+#DivImgFloor {margin:0;}
+
+.PolycomCircle .stop {left:initial; right:50px;}
+
+
+/* End Client view - Tablet */
+
+
+#divTrainingTable .ui-accordion .ui-accordion-header {padding: .7em 1.7em .7em .7em ;}
+
+
+/* Dashboard Table */
+.incident-head-title .head-text .head-name {width: 10%;}
+.incident-head-title .head-text .head-date {width: 10%;}
+.incident-head-title .head-text .head-address {width: 15%;}
+.incident-head-title .head-text .head-source {width: 10%;}
+.incident-head-title .head-text .head-org {width: 10%;}
+.incident-head-title .head-text .head-responsible {width: 10%;}
+.incident-head-title .head-text .head-incident-id {width: 5%;}
+.incident-head-title .head-text .head-time {width: 5%;}
+.incident-head-title .head-text .head-GuardsOnTheway {width: 5%;}
+.incident-head-title .head-text .head-status-xd {width: 5%;}
+
+.incident-rows .incident .incident-txt p.responsibleName {
+            width: 11%;
+        }
+.incident-rows .incident .incident-txt p.incidentID {
+            width: 5.5%;
+        }
+
+.idfClientSubList {
+    background-color: #adacacd9;
+    border-right: 100px solid #dddddd;
+}
+
+.comboTreeDropDownContainer li {
+    padding-right: 15px !important;
+    padding-left: 0 !important;
+}
+
+.comboTreeParentPlus {
+    right: -12px !important;
+    float: right !important;
+}
+
+.comboTreeArrowBtn {
+    left: 1px!important;
+}
+.comboTreeInputBox {
+    padding-right:14px!important;
+}
+
+
+.incident-rows .incident .incident-ico-width100 span {
+ 
+    float: left;
+}
+
+.child_row td {
+    padding-left: initial !important;
+    padding-right: 40px !important;
+}
+
+
+.map_logo_octopus {
+    left: 0%;
+    right: auto !important;
+}

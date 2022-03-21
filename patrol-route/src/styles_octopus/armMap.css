@@ -1,0 +1,267 @@
+﻿#armTable.arm-blue tbody tr:hover {
+    background-color: #42BDFF !important;
+}
+
+#armTable.arm-blue tbody tr:nth-child(odd) {
+    background-color: #DAEBF3;
+}
+
+#armTable.arm-blue tbody tr:nth-child(even) {
+    background-color: #B4DAEF;
+}
+
+#armTable.arm-blue tr th {
+    background-color: #115F8D;
+    color: #fff;
+}
+
+#armTable.arm-blue tbody tr.floor-not-ready {
+    background-color: #eee !important;
+}
+
+.armmap-prepare-status {
+    border-radius: 5px;
+    background-color: initial;
+}
+
+    .armmap-prepare-status:hover {
+        background-color: initial;
+        border-color: #fff !important;
+    }
+
+.armmap-action-status {
+    border-radius: 5px;
+    width: 100px;
+}
+
+.armmap-settings {
+    border-radius: 5px;
+    width: 100px;
+}
+
+.armmap-input-search {
+    font-size: 14px;
+    padding: 5px 95px 5px 15px;
+    border-radius: 3px;
+    width: 337px;
+    border: solid 1px;
+}
+
+.armmap-builds-input-search {
+    font-size: 14px;
+    padding: 5px 95px 5px 15px;
+    border-radius: 3px;
+    width: 100%;
+    border: solid 1px;
+}
+
+.armmap-builds-search {
+    font-size: 14px;
+    padding: 2px 95px 2px 10px;
+    width: 337px;
+}
+
+    .armmap-input-search .arm-blue:focus {
+        outline: 1px solid #115F8D;
+    }
+
+.armmap-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.armmap-dropdown-content {
+    display: none;
+    position: fixed;
+    width: 337px;
+    max-height: 400px;
+    overflow: auto;
+    z-index: 1;
+    margin-top: 1px;
+}
+
+div.armmap-dropdown-content.arm-blue {
+    background-color: #DAEBF3;
+    border: 1px solid #115F8D;
+}
+
+.armmap-dropdown-content span {
+    color: black;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: block;
+}
+
+
+.armmap-dropdown-content input[type='checkbox'] {
+    font-weight: bold;
+}
+
+.armmap-dropdown span.arm-blue:hover {
+    background-color: #42BDFF;
+}
+
+.armmap-input-search-ddl {
+    position: relative;
+    padding: 7px;
+    float: right;
+    pointer-events: none;
+    margin-left: -95px;
+}
+
+    .armmap-input-search-ddl.arm-blue {
+        color: #115F8D;
+    }
+
+
+.armmap-show {
+    display: block;
+}
+
+.armbuildingmap_select {
+    height: 30px !important;
+    padding: 4px !important 12px;
+}
+
+.armmap-buildsettings {
+    padding: 42px 5px 0px 5px;
+}
+
+/* RTL */
+.armmap-campus-rtl {
+    padding: 5px 68px 0px 5px;
+}
+
+.armmap-build-rtl {
+    padding: 5px 68px 0px 5px;
+}
+
+
+.armmap-patrol-rtl {
+    margin-right: 15px;
+}
+
+.armmap-patrolbtn-rtl {
+    margin-right: 5px;
+}
+
+.armmap-floors-rtl {
+    margin-right: 20px;
+}
+
+/* LTR */
+.armmap-campus-ltr {
+    padding: 5px 5px 0px 68px;
+}
+
+.armmap-build-ltr {
+    padding: 5px 5px 0px 68px;
+}
+
+.armmap-patrol-ltr {
+    margin-left: 15px;
+}
+
+.armmap-patrolbtn-ltr {
+    margin-left: 5px;
+}
+.armmap-floors-ltr {
+    margin-left: 20px;
+}
+
+/* ORANGE */
+#armTable.arm-orange tbody tr:hover {
+    background-color: #ffa641 !important;
+}
+
+#armTable.arm-orange tbody tr:nth-child(odd) {
+    background-color: #f2e8d9;
+}
+
+#armTable.arm-orange tbody tr:nth-child(even) {
+    background-color: #efd6b4;
+}
+
+#armTable.arm-orange tr th {
+    background-color: #f96a33;
+    color: #fff;
+}
+
+#armTable.arm-orange tbody tr.floor-not-ready {
+    background-color: #fff3f3 !important;
+}
+
+    #armTable.arm-orange tbody tr.floor-not-ready:hover {
+        background-color: #ff723e !important;
+    }
+
+.armmap-input-search .arm-orange:focus {
+    outline: 1px solid #f96a33;
+}
+
+div.armmap-dropdown-content.arm-orange {
+    background-color: #f2e8d9;
+    border: 1px solid #f96a33;
+}
+
+div.armmap-dropdown-content.arm-build {
+    background-color: white;
+    border: 1px solid black;
+}
+
+.armmap-dropdown span.arm-orange:hover {
+    background-color: #ffa641;
+}
+
+.armmap-input-search-ddl.arm-orange {
+    color: #8d5f10;
+}
+
+/* GREEN */
+#armTable.arm-green tbody tr:hover {
+    background-color: #ff723e !important; /**/
+}
+
+#armTable.arm-green tbody tr:nth-child(odd) {
+    background-color: #fbe9e7; /**/
+}
+
+#armTable.arm-green tbody tr:nth-child(even) {
+    background-color: #ffcdbb; /**/
+}
+
+#armTable.arm-green tr th {
+    background-color: #ff723e;
+    color: #fff;
+}
+
+#armTable.arm-green tbody tr.floor-not-ready {
+    background-color: #fff3f3 !important;
+}
+
+    #armTable.arm-green tbody tr.floor-not-ready:hover {
+        background-color: #ff723e !important;
+    }
+
+.armmap-input-search .arm-green:focus {
+    outline: 1px solid #ff723e;
+}
+
+div.armmap-dropdown-content.arm-green {
+    background-color: #fbe9e7;
+    border: 1px solid #ff723e;
+}
+
+.armmap-dropdown span.arm-green:hover {
+    background-color: #ffa641; /**/
+}
+
+.armmap-input-search-ddl.arm-green {
+    color: #8d5f10; /**/
+}
+
+#armmap-buildings span:hover {
+    background-color: dodgerblue;
+    color: white;
+}

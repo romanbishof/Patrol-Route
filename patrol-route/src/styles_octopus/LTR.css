@@ -1,0 +1,572 @@
+﻿/*
+     Version 4
+ */
+
+.headFix {
+    position:fixed;top:0px;right:0px;z-index:99
+}
+
+/*#region Init*/
+
+*
+{
+    direction: ltr;
+    text-align: left;
+}
+
+.float
+{
+    float: left;
+}
+
+.field-icon {
+    float: left !important;
+    /*margin-right: 10px;
+    margin-top: -25px;
+    position: relative;*/
+    z-index: 2;
+}
+
+.floatOpp
+{
+    float: right !important;
+}
+
+.alignOpp
+{
+    text-align:right;
+}
+
+/*#endregion*/
+
+/*#region Grid*/
+
+.span-full, .span-1-2, .span-1-3, .span-2-3, .span-1-4, .span-3-4, .span-1-5, .span-2-5, .span-3-5, .span-4-5, .span-1-10, .span-3-10, .span-7-10, .span-9-10, .span-1-6, .span-5-6, .span-1-7, .span-2-7, .span-3-7, .span-4-7, .span-5-7, .span-6-7
+{
+    float: left;
+}
+
+/*#endregion*/
+
+/*#region Panel*/
+
+.panel
+{
+    right: 0;
+}
+
+/*#endregion*/
+
+/*#region Autocomplete*/
+
+ul.ui-autocomplete li.ui-menu-item *
+{
+    float: left;
+}
+
+ul.ui-autocomplete li.ui-menu-item img
+{
+    margin-right: 10px;
+}
+
+/*#endregion*/
+
+/*#region Title & Hot Btns*/
+
+#titleAndHotButtons
+{
+    background: url(../Images/BTNs/Design/TitleHotBtnBG.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+/*#endregion*/
+
+/*#region Table*/
+
+        .tableHeader 
+        {
+            border-right:none;
+        }
+
+                .tableHeader th:last-child
+        {
+            border-right:none;
+        }
+
+                            .tableHeader th
+            {
+                        border-right: 1px solid #d9d9d9;
+            }
+
+/*#endregion*/
+
+/*#region Form*/
+
+input[type=checkbox].css-checkbox + label.css-label
+{
+    padding-left: 29px;
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label
+{
+    background-position: 0 -20px;
+}
+
+input[type=radio].css-radio + label.css-label-radio
+{
+       padding-left: 20px;
+    padding-right: 1.5%;
+}
+
+input[type=radio].css-radio:checked + label.css-label-radio
+{
+    background-position: 0% -15px;
+    padding-left: 20px;
+    padding-right: 1.5%;
+}
+
+/*#endregion*/
+
+/*#region Text*/
+
+.oppAlign
+{
+    text-align: right;
+}
+
+.oppDirection
+{
+    direction: rtl;
+}
+
+.textAlign
+{
+    text-align: left;
+}
+
+/*#endregion*/
+
+/*#region Date And Time*/
+
+#dateAndTime
+{
+    margin-right: 6%;
+}
+
+.quickNav
+{
+    padding-right: 7%;
+}
+
+/*#endregion*/
+
+/*#region Company*/
+
+#companyName
+{
+    margin-left: 4%;
+}
+
+/*#endregion*/
+
+/*#region Menu*/
+
+.menuItem img, .menuItem label
+{
+    margin-left: 7%;
+}
+
+.menuNotification
+{
+    margin-right: 33%;
+}
+
+
+
+.subList li
+{
+    padding: 3% 0 3%;
+}
+
+/*#endregion*/
+
+/*#region Map*/
+
+.crimeText
+{
+    margin-left: 2%;
+}
+
+/*#endregion*/
+
+/*#region Messages*/
+
+#ContactList li .span-9-10 a
+{
+    padding-left: 10%;
+}
+
+#composeMessage > .span-3-5 > .span-9-10
+{
+    padding-left: 9%;
+}
+
+#ComposeMMessages h1
+{
+    margin-left: 2.5%;
+}
+
+/*#endregion*/
+
+/*#region Users*/
+
+#userManagement .user-menu
+{
+    margin-left: 3%;
+}
+
+.user-menu
+{
+    margin-left: 2.5%;
+}
+
+
+/*#endregion*/
+
+/*#region Cameras And Sensors*/
+
+#DivImgFloor
+{
+    margin-left: 2%;
+}
+
+/*#endregion*/
+
+/*#region Patrol*/
+
+#btnFind
+{
+    margin-left: -10%;
+}
+
+/*#endregion*/
+
+/*#region Scan Point*/
+
+#deleteRouteButton
+{
+    right: 1%;
+}
+
+/*#endregion*/
+
+/*#region Task Management*/
+
+#deleteTraning
+{
+    margin-right: 1.7%;
+}
+
+/*#endregion*/
+
+/*#region Event Management*/
+
+.EventImageUrlList ul li
+{
+    margin-right: 4%;
+}
+
+/*#endregion*/
+
+/*#region Organiztion*/
+
+#organiztionInnerNav .user-menu:first-child
+{
+    margin-left: 6%;
+}
+
+#generalInfo
+{
+    border-right: 1px dashed rgba(0,0,0,.35);
+    padding-right: 13%;
+}
+
+
+/*#endregion*/
+
+/*#region Media Queries*/
+
+/*641px -> 1024px*/
+@media only screen and (min-width: 641px) and (max-width:1024px)
+{
+}
+
+/*1025px -> 1440px*/
+@media only screen and (min-width: 1025px) and (max-width: 1440px)
+{
+    /*#region Sections*/
+
+    #soundMode
+    {
+        top: 2.2%;
+        left: 10.5%;
+    }
+
+    /*#endregion*/
+
+    /*#region Menu*/
+
+
+    /*#endregion*/
+
+    /*#region Title and Hot Buttons*/
+
+    .quickNav img
+    {
+        margin-right: 4%;
+    }
+
+    #dateAndTime
+    {
+        margin-left: 8%;
+    }
+
+    #alramState
+    {
+        margin-left: 75%;
+    }
+
+    /*#endregion*/
+
+    /*#region Shoutout Visitors*/
+
+    .shoutoutTableMargin
+    {
+        margin: 2.5% 0.5% 0% 4%;
+    }
+
+    /*#endregion*/
+
+    /*#region Map*/
+
+    #legendHeader
+    {
+        margin-left: 4%;
+    }
+
+    /*#endregion*/
+
+}
+
+/*1441px -> 1600px*/
+@media only screen and (min-width: 1441px) and (max-width: 1600px)
+{
+    /*#region Sections*/
+
+    #soundMode
+    {
+        top: 2.2%;
+        left: 9.5%;
+    }
+
+    /*#endregion*/
+
+        /*#region Menu*/
+
+    /*#endregion*/
+
+    /*#region Title and Hot Buttons*/
+
+    .quickNav img
+    {
+        margin-right: 4%;
+    }
+
+    #alramState
+    {
+        margin-left: 60%;
+    }
+
+    /*#endregion*/
+
+    /*#region Shoutout Visitors*/
+
+    .shoutoutTableMargin
+    {
+        margin: 2.5% 0.5% 0% 4%;
+    }
+
+    /*#endregion*/
+
+    /*#region Organization*/
+
+    .OemailItem:last-child .addEmailToList
+    {
+        left: 0em;
+    }
+
+    /*#endregion*/
+
+    /*#region Map*/
+
+    #legendHeader
+    {
+        margin-left: 2.1%;
+    }
+
+    /*#endregion*/
+}
+
+/*1601px -> 1920*/
+@media only screen and (min-width: 1601px) and (max-width: 1920px)
+{
+    /*#region Sections*/
+
+    #soundMode
+    {
+        top: 2.2%;
+        left: 9.5%;
+    }
+
+    /*#endregion*/
+
+    
+        /*#region Menu*/
+
+
+
+    /*#endregion*/
+
+    /*#region Title and Hot Buttons*/
+
+    .quickNav img
+    {
+        margin-right: 4%;
+    }
+
+    /*#endregion*/
+
+    /*#region Shoutout Visitors*/
+
+    .shoutoutTableMargin
+    {
+        margin: 2.5% 0.5% 0% 4%;
+    }
+
+    /*#endregion*/
+
+    /*#region Organization*/
+
+    .OemailItem:last-child .addEmailToList
+    {
+        left: 0.5em;
+    }
+
+    /*#endregion*/
+
+    /*#region User Management*/
+
+    .bottonNavRight
+    {
+        left: 82%;
+    }
+
+    /*#endregion*/
+
+}
+
+/*1921px -> up*/
+@media only screen and (min-width: 1921px)
+{
+}
+
+/*ipad*/
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5)
+{
+}
+
+/*#endregion*/
+
+li.liButton {
+    float: right !important;
+}
+
+div.ccMenu {
+    text-align: right !important;
+}
+
+div.ccMenu div.ccWidthFix {
+    float: left !important;
+}
+
+.bottomNav {
+    float: right !important;
+}
+
+.floatRight {
+    float: left !important;
+}
+
+#newpassword {
+    width: 150px !important;
+    float: left !important;
+    margin-top: 10px;
+}
+
+#btnnewshow, #btnnewpassword {
+    width: 27px !important;
+    height: 27px;
+    float: left !important;
+    margin: 10px 0 0 10px;
+}
+
+.bottomNavCenter3 div {
+    float: right;
+}
+
+.reportContainer, .reportBtnContainer {
+    float: left !important;
+    margin-left: 0 !important;
+    margin-right: 20px !important;
+}
+
+div#routineVer {
+    float: left !important;
+}
+
+div.routines .labelSpace {
+    margin-right: 0 !important;
+    margin-left: 10px !important;
+}
+
+div.routines div {
+    float: left !important;
+    margin-left: 0 !important;
+    margin-right: 20px !important;
+}
+
+div.routineBot {
+    float: left !important;
+}
+
+div.routineBot div {
+    float: left !important;
+}
+
+div.routineBot div.routineSel {
+    margin-left: 0 !important;
+    margin-right: 100px !important;
+}
+
+.ggrid {
+    margin-left: 0 !important;
+    margin-right: 20px !important;
+}
+
+.actionTable a {
+    margin-left: 0 !important;
+    margin-right: 10px !important;
+}

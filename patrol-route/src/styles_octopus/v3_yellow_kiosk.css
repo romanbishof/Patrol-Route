@@ -1,0 +1,67 @@
+﻿/* Kiosk V3 - Yellow */
+
+#kiosk-home a:hover {
+    color: #e8ac00;
+}
+
+/*.v3-kisok-title h1 {
+    text-shadow: 1px 1px #e8ac00;
+}*/
+
+.v3-kiosk {
+    background-color: #e8ac00;
+}
+
+.v3-kiosk-main .v3-form .has-error, .v3-kiosk-main .v3-form .has-error .checkbox {
+    color: #fff;
+
+}
+
+.v3-kiosk-main .v3-form {
+    color: #2d2d2d;
+    text-shadow: 1px 1px #ffca30;
+}
+
+.v3-kiosk-main .btn:disabled {
+    box-shadow: inset 0px 1px 0px 0px #f8e9be, 4px 4px 20px rgba(0, 0, 0, 0.3);
+
+}
+
+/*.v3-kiosk-main .btn:not(:disabled) {
+    box-shadow: inset 0px 1px 0px 0px #f8e9be, 4px 4px 20px rgba(0, 0, 0, 0.3);
+    border: 3px solid #faba01;
+    color: #594200;
+}*/
+
+/*.v3-kiosk-main .btn:not(:disabled):hover {
+    border: 3px solid #7f5e00;
+}*/
+
+.kiosk-form-slide .kiosk-form-side {
+    border-color: #f9e19d;
+}
+
+.kiosk-form-slide h3, .kiosk-confirm-slide h3, .kiosk-success h3 {
+    color: #2d2d2d;
+}
+
+.v3-kiosk .v3-form .form-control[readonly] {
+    color: #2d2d2d;
+}
+
+.form-control:focus {
+    border-color: #aa9864;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(250, 186, 1, 0.6);
+}
+
+.tooltip-inner {
+  border-bottom: 2px solid #faba01;
+}
+
+.kiosk-confirm-slide .signature h4 {
+    color: #2d2d2d;
+}
+
+/*.companyLogo {
+    border: 2px #faba01 solid;
+}*/

@@ -1,0 +1,13 @@
+.routeOptions{
+    margin: 20px ;
+    width: 600px;
+}
+
+.routeOptions__options{
+    display: flex;
+    gap: 25px ;
+}
+
+.routeOptions__options-button{
+    cursor: pointer;
+}

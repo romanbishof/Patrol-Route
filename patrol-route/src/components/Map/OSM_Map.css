@@ -1,0 +1,8 @@
+.OSM_Map{
+    display: flex;
+    margin: 20px;
+}
+.OSM_Map-container{
+    width: 400px;
+    height: 400px;
+}

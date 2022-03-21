@@ -1,0 +1,46 @@
+﻿.panel-body, #eventProp .incident-widget-scroll,
+.incident.confirmed .incident-txt,
+.incident-rows .incident a.incident-action,
+.incident.confirmed a.incident-archive,
+.incident-widget-title select,
+#eventProp select,
+#eventProp .form-control,
+.incident-head-title .head-icon, .incident-head-title .head-text, .incident-head-title .head-delete,
+.dashboard .v3-tabs,
+.v3-tabs #dash-stats,
+#hotButtons ul.nav a,
+#mainMenu .list-group-item a,
+#mainMenu,
+#hotButtons,
+.dashboard .nav > li > a,
+#incidentsSortBy select, #dash-stats select,
+.v3-tabs #dash-stats .severityDDL a.dropdown-toggle,
+.v3-tabs-btns .severityDDL ul.dropdown-menu,
+.v3-tabs #dash-stats a,
+#openeventListDiv,
+.incident-rows .incident .incident-ico-width50,
+.incident-widget-body .v3-form .form-group,
+.incident-widget-body .v3-form .form-group h4,
+#pushMenu .list-group-item a,
+#feed-toggle,
+#updatesListTab,
+#taskListTab .task,
+#taskListTab .task h4,
+#mgsListDiv .message,
+#mgsListDiv .message h4,
+#mgsListDiv .msg-head-text 
+{
+    background-color: #011538 !important;
+    color: white !important;
+}
+
+.incident.confirmed .incident-txt, .incident-txt h4 {
+    color: white;
+}
+
+.highlight {
+    background-color: #0049c3;
+}
+.incident-widget-body .highlight-grey, .incident-widget-title, .incident-widget-scroll .btn-default, #pushMenu {
+    background-color: rgb(42, 59, 88);
+}

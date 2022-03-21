@@ -1,0 +1,721 @@
+﻿
+/*#main-container.main {
+    padding-left: 15% !important;
+}*/
+#main_container {
+    padding-left: 0px;
+}
+
+#wrapper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+#alramState {
+    margin: 0 !important;
+}
+
+.Msg-fixed-title {
+    position: unset !important;
+    width: 100% !important;
+}
+
+.msg-list-content-close, .msg-list-content-open {
+    margin-top: 0 !important;
+}
+
+#btnBack {
+    border-color: var(--main-color);
+}
+
+#breadCrumbs {
+    padding: 4px 45px 0px 0;
+    list-style: none;
+    border-top: none;
+    text-align: center !important;
+}
+
+    #breadCrumbs li {
+        display: inline-block;
+    }
+
+    #breadCrumbs > li + li:before {
+        font-family: 'Glyphicons Regular';
+        content: "\e224";
+        padding: 0 5px;
+        color: var(--main-color);
+        font-size: 10px;
+    }
+
+.rtl #breadCrumbs > li + li:before {
+    content: "\e225";
+}
+
+/*.btn-primary {
+    color: #fff;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}*/
+
+
+.incident-widget-body {
+    /*background-color: #cccaca !important;*/
+    background-color: unset !important;
+    /*padding-top: 20px;*/
+    padding: 10px;
+    border: 1px solid rgba(204,204,204,0.25);
+    border-radius: 5px;
+}
+.dark .incident-widget-body {
+    background-color: unset !important;
+}
+ .incident-widget-body .stats_widget_wrapper
+ {
+     padding:0;
+ }
+    .incident-widget-body .stats_widget_element {
+        border: none;
+        /*background: none;*/
+    }
+
+    .incident-widget-body #floorImgAndCamerasAndSensors, .incident-widget-body#cameraIntegrationpanel {
+        width: 100%;
+        height: 100%;
+        background-color: white !important;
+    }
+
+
+#ComposeMMessages {
+    margin: 30px auto;
+}
+
+
+.m-r-5 {
+    margin-right: 5px;
+}
+
+.m-r-10 {
+    margin-right: 10px;
+}
+
+.m-r-15 {
+    margin-right: 15px !important;
+}
+
+.m-l-5 {
+    margin-left: 5px;
+}
+
+.m-l-10 {
+    margin-left: 10px;
+}
+
+.m-l-15 {
+    margin-left: 15px;
+}
+
+.m-t-10 {
+    margin-top: 10px !important;
+}
+
+.m-t-20 {
+    margin-top: 20px !important;
+}
+
+.m-t-30 {
+    margin-top: 30px !important;
+}
+
+.m-t-40 {
+    margin-top: 40px !important;
+}
+
+.m-t-50 {
+    margin-top: 50px !important;
+}
+
+.m-t-60 {
+    margin-top: 60px !important;
+}
+
+.m-t-70 {
+    margin-top: 70px !important;
+}
+
+.m-t-80 {
+    margin-top: 80px !important;
+}
+
+.m-t-90 {
+    margin-top: 90px !important;
+}
+
+.m-t-100 {
+    margin-top: 100px !important;
+}
+
+.m-t-110 {
+    margin-top: 110px !important;
+}
+
+.m-t-120 {
+    margin-top: 120px !important;
+}
+
+.m-t-130 {
+    margin-top: 130px !important;
+}
+
+.m-t-140 {
+    margin-top: 140px !important;
+}
+
+.m-b-0 {
+    margin-bottom: 0!important;
+}
+
+.m-b-5 {
+    margin-bottom: 5px;
+}
+
+.m-b-10 {
+    margin-bottom: 10px;
+}
+
+.m-b-15 {
+    margin-bottom: 15px;
+}
+
+.m-b-20 {
+    margin-bottom: 20px;
+}
+
+.m-b-25 {
+    margin-bottom: 25px;
+}
+
+.m-b-30 {
+    margin-bottom: 30px !important;
+}
+
+.m-b-60 {
+    margin-bottom: 60px !important;
+}
+
+.m-t-0 {
+    margin-top: 0px !important;
+}
+
+
+
+
+
+
+.incident_details #eventPropForm {
+    margin: unset;
+}
+
+.dark .incident_details_form .form-group input[type=text], .dark .incident_details_form .form-group input[type=number], .dark .incident_details_form .form-group select, .dark .incident_details_form .form-group textarea, .dark .incident_details_form .form-group .chosen-container ul {
+    color: #eee;
+    border: 1px solid #eee;
+    background: unset;
+}
+
+    .dark .incident_details_form .form-group select option {
+        color: black;
+    }
+
+.incident_details_form .form-group input[type=text], .incident_details_form .form-group select, .incident_details_form .form-group textarea, .incident_details_form .form-group .chosen-container ul {
+    position: relative;
+    display: block;
+    padding: 4px 10px;
+    border-radius: 5px;
+    color: #333;
+    border: 1px solid #555;
+    background: none;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: unset;
+}
+
+
+.incident_details_form .form-group label {
+    position: relative;
+    display: block;
+    padding: 2px 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-size: 100%;
+}
+
+.incident-details-log {
+    background-color: unset;
+}
+
+.form-group .input-group-btn a .glyphicons, .form-group .input-group-btn button .glyphicons {
+    padding: 0px 0px;
+    font-size: 16px;
+}
+
+.incident_details .v3-box-invert-sm {
+    display: none;
+}
+
+.inc-details .save-incident-action-btn {
+    display: block !important;
+}
+
+.v3-form .form-group {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+
+.incident {
+    overflow-y: unset !important;
+    min-height: unset !important;
+}
+
+.incident-widget-body > .camerashowDiv > .cac-camera {
+    width: 100%;
+}
+
+#openeventListDiv {
+    height: 100%;
+    padding-top: 10px;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: unset;
+}
+
+.rtl .table-striped > tbody > tr {
+    text-align: right;
+}
+
+.table-striped > tbody > tr {
+    text-align: left;
+}
+
+#eventModal .incident-sop-divider {
+    margin-left: 48.9%;
+    overflow: hidden;
+}
+
+.rtl #eventModal .incident-sop-divider {
+    margin-right: 48.9%;
+    margin-left: 20px !important;
+}
+
+.incident a {
+    color: unset;
+}
+
+
+
+
+.view_panel.incident-widget.widge-enlarge {
+    position: fixed !important;
+    z-index: 99999 !important;
+    top: 40px !important;
+    left: 1% !important;
+    width: 98% !important;
+    height: 95% !important;
+    transition: all 0.5s;
+}
+
+
+#main-container.main .view_panel.incident-widget.widge-enlarge {
+    left: 11% !important;
+    width: 89% !important;
+}
+.rtl #main-container.main .view_panel.incident-widget.widge-enlarge {
+    left: 0% !important;
+ }
+
+
+#main-container.shelf.main .view_panel.incident-widget.widge-enlarge {
+    left: 11% !important;
+    width: 85% !important;
+}
+
+.rtl #main-container.shelf.main .view_panel.incident-widget.widge-enlarge {
+    left: 4% !important;
+}
+
+
+.btn-primary {
+    background-color: var(--main-color) !important;
+    border-color: var(--main-color) !important;
+}
+
+.btn-info {
+    background-color: #f5f5f540 !important;
+    border-color: #0a0a0a !important;
+    color: black;
+}
+
+.btn-default {
+    background-color: black !important;
+    color: white !important;
+}
+
+    .btn-default[disabled] {
+        background-color: #fff !important;
+        color: black !important;
+    }
+
+.btn-info:hover {
+    color: black;
+    border-color: black !important;
+}
+
+a[onclick]:not(.btn):not(.shelf_item_btn), a[data-popover]:not(.btn):not(.shelf_item_btn), a[ajax-href]:not(.btn):not(.shelf_item_btn), a[href]:not(.btn):not(.shelf_item_btn) {
+    color: var(--main-color);
+}
+
+.v3-box.new .v3-table a .glyphicons {
+    color: var(--main-color);
+}
+
+#inner-backdrop {
+    top: 40px !important;
+    margin: 0 0 0 55px !important;
+}
+
+    #inner-backdrop.main {
+        margin: 0 0 0 11% !important;
+    }
+
+    #inner-backdrop.shelf {
+        margin: 0 70px 0 55px !important;
+    }
+
+        #inner-backdrop.shelf.main {
+            margin: 0 70px 0 11% !important;
+        }
+
+.rtl #inner-backdrop {
+    top: 40px !important;
+    margin: 0 55px 0 0 !important;
+}
+
+    .rtl #inner-backdrop.main {
+        margin: 0 11% 0 0 !important;
+    }
+
+    .rtl #inner-backdrop.shelf {
+        margin: 0 55px 0 70px !important;
+    }
+
+        .rtl #inner-backdrop.shelf.main {
+            margin: 0 11% 0 70px !important;
+        }
+
+.rtl .main_panel_search .form-text {
+    right: 45px;
+}
+
+.has-error .incident_playbook_element_title {
+    color: #ff4949;
+    
+}
+
+
+.bootstrap-datetimepicker-widget td, .dark .bootstrap-datetimepicker-widget td {
+    background: unset;
+    border-right: unset;
+    border-bottom: unset;
+    color: black !important;
+    padding: 5px 0;
+}
+
+#divSelectListMessages {
+    margin-top: 35px;
+}
+
+#camerapanel {
+    margin-top: 20px;
+}
+
+.dark #calendarDiv tr td td.fc-axis {
+    background: #ffffff !important;
+    color: black !important;
+}
+
+.dark #calendarDiv tr td td.fc-widget-content {
+    /*background: #f5f5f5;*/
+    /*border-right: 1px solid #ddd !important;*/
+}
+.dark #calendarDiv table {
+    background:unset!important;
+}
+
+.dark #calendarDiv tr td {
+    /*background: #444;*/
+    border-bottom: 0;
+    border-right: none !important;
+}
+#calendarDiv tr td {
+    border-left: none !important;
+    border-right: none !important;
+   
+   
+}
+
+.dark .fc-past {
+    background-color: #ffffff !important;
+    opacity: 0.8;
+}
+
+#calendarDiv tr:nth-of-type(even) {
+    background: none !important;
+}
+
+
+
+#msgAccordion .msg-details .msg-address {
+    color: var(--main-color) !important;
+}
+
+
+.ui-state-default a {
+    color: var(--main-color) !important;
+}
+
+#msg-search-panel {
+    color: unset;
+    background: unset;
+}
+
+
+.sortableUiWrap .ui-state-focus {
+    background: unset !important;
+}
+
+.ui-focus-msg {
+    background: #f8f8f8 !important;
+}
+
+.incident-details-log {
+    margin: 15px 0 0 -15px;
+    border-radius: 5px;
+}
+
+.rtl .incident-details-log {
+    margin: 15px -15px 0 0;
+}
+
+.popover {
+    z-index: 9999;
+}
+
+.v3-search input {
+    border-radius: 0;
+    padding: 8px 12px;
+}
+
+.dark .v3-search input {
+    color: white;
+}
+
+.v3-title a.v3-title-btn, .v3-title a.v3-title-btn:active, .v3-title a.v3-title-btn:visited,
+.v3-title a.v3-edit, .v3-title a.v3-edit:active, .v3-title a.v3-edit:visited, .v3-title a.v3-edit-cancel,
+.v3-title a.v3-edit-cancel:active, .v3-title a.v3-edit-cancel:visited {
+    color: black;
+}
+
+.v3-search button {
+    border-radius: unset;
+}
+
+.v3-daterange {
+    background-color: #f5f5f540 !important;
+    border: none;
+}
+
+.calenderLeftMenu .checkbox {
+    margin-right: 5px !important;
+    margin-left: 5px !important;
+}
+
+#LegendList .col-xs-2 .checkbox {
+    float: unset;
+}
+
+#LegendList .col-xs-10 {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+#selectedDashboard {
+    color: black;
+    width: 70px;
+}
+
+.p-r-10 {
+    padding-right: 10px !important;
+}
+
+.p-l-10 {
+    padding-left: 10px !important;
+}
+
+.dark .v3-form .form-control[readonly].addressInputText {
+    background: #1e1e1f;
+}
+.dark .modal .v3-form .form-control[readonly].addressInputText {
+    background: #232323;
+}
+
+.v3-form .incident_details_form .form-control[readonly].addressInputText {
+    background: #e6e6e6;
+}
+.dark .v3-form .incident_details_form .form-control[readonly].addressInputText {
+    background: #100f0f;
+}
+
+
+.incident-widget-body .message {
+    background-color: #807f7f;
+}
+
+.dark .calendatMainView h2 {
+    color: white;
+}
+
+/*.v3-table {
+    overflow-x: initial;
+}*/
+
+.v3-table .table-striped td[data-sort-c]:after, .sortParent [data-sort-c]:after {
+    opacity: 0.6;
+}
+
+.v3-gauge-parent a {
+    color: var(--main-color);
+}
+
+.dark .v3-gauge-parent a:hover, .dark .v3-gauge-parent.selected a {
+    color: white;
+}
+
+.input-group input ~ .input-group-btn {
+}
+
+#eventOOOInclude p {
+    padding: 5px 0;
+}
+
+#dactivityList .clearfix input[type=button], #divSelectEdifictions input[type=button] {
+    background: none;
+}
+
+.msg-compose-result-entry {
+    color: black;
+    border: 1px solid #cccccc !important;
+}
+
+
+.modal-header button {
+    color: #0a0a0a;
+}
+
+.dark .modal-header button {
+    color: white;
+}
+
+.MultipleSelection li {
+    color: black;
+}
+
+.v3-box.new .v3-title-menu .form-control {
+    height: 33px;
+    border-radius: 0;
+    margin-top: -1px;
+}
+
+.v3-box.new .v3-title-menu .v3-search button {
+    height: 32px;
+}
+
+.dark .well {
+    color: black;
+    background-color: #909090;
+}
+
+.v3-form .input-group-addon {
+    border-radius: 5px;
+}
+
+.v3-filter.btn-group label {
+    /*padding: 1px 12px!important;*/
+}
+
+ 
+
+
+.dark #cac-cams-tree input {
+    color: white;
+}
+
+.incident-widget .tree-control, .incident-widget .map-control {
+    margin: 25px;
+}
+
+
+#cac-cams-tree #searchUl input {
+    padding: 12px 20px 12px 20px;
+    min-width: 100px;
+    border-radius: 0;
+}
+
+
+#titleCamerasTree {
+    display: none;
+    color: white;
+    text-align: center;
+}
+#cac-col-tree.col-xs-12 .octTree {
+    display: none;
+}
+#cac-col-tree.col-xs-12:hover .octTree {
+    display: block;
+}
+#cac-col-tree.col-xs-12:hover #titleCamerasTree {
+    display: none;
+}
+#cac-col-tree.col-xs-12 #titleCamerasTree {
+    display: block !important;
+}
+#cac-col-tree.col-xs-12 #cac-cams-tree{
+    padding:0px;
+}
+
+.v5 .in-process:after {	
+    content: url('/Images/v5/send_command_loader.svg');
+    margin-left: 15.5pt;
+    margin-right: 15.5pt;
+}
+
+#svgChart {
+    background: #f5f5f5;
+}
+
+.dark #svgChart {
+    background: #1e1e1f;
+}
+
+.incident-widget-body #svgChart {
+    background: #e6e6e6;
+}
+
+.dark .incident-widget-body #svgChart
+{
+    background:unset;
+}
+
+.incident-widget-body ol li div.checkbox {
+    margin-right: -40px;
+}

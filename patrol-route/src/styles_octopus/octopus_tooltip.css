@@ -1,0 +1,91 @@
+﻿.oct-tooltip {
+    position: relative;
+    /*display: inline-block;*/
+    border-bottom: 1px dotted black;
+}
+
+    .oct-tooltip .tooltiptext {
+        visibility: hidden;
+        min-width: 120px;
+        max-width: 360px;
+        display: block;
+        word-wrap:break-word;
+        background-color: #fff;
+        color: #000;
+        border:1px solid #b7b7b7;
+        /*text-align: center;*/
+        border-radius: 6px;
+        padding: 15px;
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+    }        
+        .oct-tooltip .tooltiptext.right {
+            top: -5px;
+            left: 105%;
+        }
+        .oct-tooltip .tooltiptext.right::after {
+            content: " ";
+            position: absolute;
+            top: 50%;
+            left: 100%; /* To the right of the tooltip */
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent transparent black;
+        }
+
+        .oct-tooltip .tooltiptext.left {
+            top: -5px;
+            right: 105%;
+        }
+        .oct-tooltip .tooltiptext.left::after {
+            content: " ";
+            position: absolute;
+            top: 50%;
+            right: 100%; /* To the left of the tooltip */
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent black transparent transparent;
+        }
+
+        .oct-tooltip .tooltiptext.top {
+            min-width: 120px;
+            max-width: 360px;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+        }
+        .oct-tooltip .tooltiptext.bottom::after {
+            content: " ";
+            position: absolute;
+            top: 100%; /* At the bottom of the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
+
+        .oct-tooltip .tooltiptext.bottom {
+            min-width: 120px;
+            max-width: 360px;
+            top: 100%;
+            left: 50%;
+            margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+        }
+            .oct-tooltip .tooltiptext.bottom::after {
+                content: " ";
+                position: absolute;
+                bottom: 100%; /* At the top of the tooltip */
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: transparent transparent black transparent;
+            }                    
+
+    .oct-tooltip:hover .tooltiptext {
+        visibility: visible;
+    }

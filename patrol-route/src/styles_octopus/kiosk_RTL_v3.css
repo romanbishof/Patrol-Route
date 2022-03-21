@@ -1,0 +1,56 @@
+﻿/* Kiosk - RTL fix */
+.kiosk-confirm-slide .checkbox {
+    padding-right: 0;
+    padding-left: 30px;
+    margin-left: 0;
+    margin-right: 15px;
+    
+}
+.kiosk-confirm-slide .checkbox label {
+    padding-left: 0;
+    padding-right: 40px;
+}
+.kiosk-confirm-slide .checkbox input[type="checkbox"]:checked + label::after,
+.kiosk-confirm-slide .checkbox input[type="radio"]:checked + label::after {
+    margin-right: 0;
+    margin-left: -2px;
+    padding-left: 0;
+    padding-right: 5px;
+}
+
+.kiosk-confirm-slide .checkbox label::before {
+    margin-right: 0;
+}
+
+.kiosk-confirm-slide .sig-clear {
+    right: auto;
+    right: initial;
+    left: 0;
+}
+
+.kiosk-form-slide .col-xs-5 {
+    margin-left: 0;
+    margin-right:65px;
+}
+
+.kiosk-form-slide .kiosk-form-side {
+    border-right: 0;
+    border-left: 1px solid #f9b89f;
+    padding-right: 0;
+    padding-left: 50px;
+}
+
+.kiosk-form-slide h3 {
+    margin: 30px 65px 0 15px;
+}
+
+@media (max-width: 991px) {
+    .kiosk-form-slide .col-xs-5 {
+        margin-right: 0;
+        margin-left: 20px;
+    }
+    .kiosk-form-slide .kiosk-form-side {
+        padding-right: 0;
+        padding-left: 20px;
+    }
+}

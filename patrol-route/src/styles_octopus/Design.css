@@ -1,0 +1,7326 @@
+﻿/*
+    Version 4
+    new svn
+ */
+
+/*#region Init*/
+
+ *, .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button
+{
+    /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+}
+
+ html
+{
+    height: 100%;
+}
+
+ body
+{
+    min-height: 100%;
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    overflow-x: hidden;
+}
+
+ html, body, ul:not(.ul), .wrapper
+{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+ .wrapper
+{
+    overflow-x: hidden;
+}
+
+ a
+{
+    outline: none;
+    text-decoration: none;
+}
+
+     a:hover
+    {
+        cursor: pointer;
+    }
+
+ ul
+{
+    list-style: none;
+}
+
+ iframe
+{
+    border: none;
+}
+
+.container
+{
+    width: 90%;
+    margin: 0 auto;
+}
+
+#gmsMenu
+{
+    background-color: #fff;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJmOTFjMyIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iNDglIiBzdG9wLWNvbG9yPSIjMWY3YmFkIiBzdG9wLW9wYWNpdHk9IjEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDM0ZjgxIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgPC9saW5lYXJHcmFkaWVudD4KCjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2hhdDApIiAvPgo8L3N2Zz4=);
+    background-image: -moz-linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-image: -o-linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-image: -webkit-linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-image: linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-size: cover;
+    height: 100%;
+}
+
+.main section
+{
+    display: block;
+    height: auto;
+}
+
+.clearfix:after
+{
+    content: " ";
+    visibility: hidden;
+    display: block;
+    height: 0.5em;
+    clear: both;
+}
+
+.floatRight
+{
+    float: right;
+}
+
+.floatLeft
+{
+    float: left;
+}
+
+.floatNone
+{
+    float: none;
+}
+
+.underline
+{
+    text-decoration: underline;
+}
+
+.link
+{
+    color: #1b95d1 !important;
+    text-decoration: underline;
+}
+
+.pointer:hover
+{
+    cursor: pointer;
+}
+
+.hidden
+{
+    display: none;
+}
+
+​[data-sort-c]
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.panelOverlay
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 998;
+    display: none;
+}
+
+ img
+{
+    border: none !important;
+    outline: none !important;
+}
+
+​
+/*#endregion*/
+/*#region Sections*/
+.main section#menuSection
+{
+    -moz-box-shadow: 0 4px 23px -2px #86C6E8;
+    -webkit-box-shadow: 0 4px 23px -2px #86C6E8;
+    box-shadow: 0 4px 23px -2px #86C6E8;
+}
+
+#soundMode
+{
+    position: absolute;
+}
+
+.main section#menuSection
+{
+    -moz-box-shadow: 0 8px 17px rgba(255,255,255,.31);
+    -webkit-box-shadow: 0 8px 17px rgba(255,255,255,.31);
+    box-shadow: 0 8px 17px rgba(255,255,255,.31);
+}
+
+
+/*#endregion*/
+
+/*#region Login*/
+
+#LoginBody
+{
+    background-color: #fff;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJmOTFjMyIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iNDglIiBzdG9wLWNvbG9yPSIjMWY3YmFkIiBzdG9wLW9wYWNpdHk9IjEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDM0ZjgxIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgPC9saW5lYXJHcmFkaWVudD4KCjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2hhdDApIiAvPgo8L3N2Zz4=);
+    background-image: -moz-linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-image: -o-linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-image: -webkit-linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-image: linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-size: cover;
+    height: 100%;
+}
+
+.loginHolder
+{
+    margin-top: 5% !important;
+}
+
+.logoHolder
+{
+    text-align: center;
+}
+
+#validation ul
+{
+    height: auto;
+}
+
+#loginForm
+{
+    height: 15em;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #e7d1bd;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2MxZGRlNSIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2YxZjVmOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+);
+    background-image: -moz-linear-gradient(bottom, #c1dde5 0%, #f1f5f9 100%);
+    background-image: -o-linear-gradient(bottom, #c1dde5 0%, #f1f5f9 100%);
+    background-image: -webkit-linear-gradient(bottom, #c1dde5 0%, #f1f5f9 100%);
+    background-image: linear-gradient(bottom, #c1dde5 0%, #f1f5f9 100%);
+    -moz-box-shadow: 0 2px 2px rgba(0,0,0,0.2), 0 1px 5px rgba(0,0,0,0.2), 0 0 0 12px rgba(255,255,255,0.4);
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.2), 0 1px 5px rgba(0,0,0,0.2), 0 0 0 12px rgba(255,255,255,0.4);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2), 0 1px 5px rgba(0,0,0,0.2), 0 0 0 12px rgba(255,255,255,0.4);
+    padding-top: 6%;
+}
+
+    #loginForm *
+    {
+        color: #000;
+    }
+
+    #loginForm .langImg
+    {
+        width: 1.3em;
+        background-size: contain !important;
+        height: 3em;
+    }
+
+        #loginForm .langImg[data-lang="EN"]
+        {
+            background: url(../Images/lang/en.png) no-repeat;
+        }
+
+        #loginForm .langImg[data-lang="HE"]
+        {
+            background: url(../Images/lang/he.png) no-repeat;
+        }
+
+        #loginForm .langImg[data-lang="ES"]
+        {
+            background: url(../Images/lang/es.png) no-repeat;
+        }
+
+        #loginForm .langImg[data-lang="FR"]
+        {
+            background: url(../Images/lang/fr.png) no-repeat;
+        }
+
+
+
+#LoginButton
+{
+    padding: 2% 13%;
+    color: #fff;
+}
+
+#LoginButtonRow
+{
+    margin-top: 5%;
+}
+
+#loginLogo
+{
+    max-width: 100%;
+    margin-top: 7%;
+}
+
+#siteseal
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/*#endregion*/
+
+/*#region Date and Time*/
+
+.ui-datepicker .ui-datepicker-title
+{
+    line-height: 1.5em !important;
+    font-size: 81% !important;
+    font-weight: normal !important;
+}
+
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next
+{
+    height: 1.5em !important;
+}
+
+.ui-widget-header
+{
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJmOTFjMyIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iNDglIiBzdG9wLWNvbG9yPSIjMWY3YmFkIiBzdG9wLW9wYWNpdHk9IjEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDM0ZjgxIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgPC9saW5lYXJHcmFkaWVudD4KCjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2hhdDApIiAvPgo8L3N2Zz4=);
+    background-image: -moz-linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-image: -o-linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-image: -webkit-linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    background-image: linear-gradient(bottom, #5e5e5e 0%, #373737 47.78%, #151515 100%);
+    border: none;
+}
+
+.ui-datepicker table
+{
+    font-size: 80%;
+}
+
+.ui-timepicker-div
+{
+    font-size: 84%;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current,
+.ui-datepicker .ui-datepicker-buttonpane button
+{
+    font-size: 80%;
+}
+
+
+button.ui-state-hover
+{
+    background: #fff !important;
+    color: #e35722 !important;
+    border: none;
+}
+
+/*#endregion*/
+
+/*#region Popup*/
+
+.ui-dialog
+{
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.41);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.41);
+    box-shadow: 0 1px 4px rgba(0,0,0,.41);
+}
+
+    .ui-dialog .ui-widget-header
+    {
+        border: none;
+        background-color: transparent !important;
+        background: none !important;
+    }
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+{
+    /*background: none !important;
+    background-color: #fff !important;*/
+}
+
+.popupContainer
+{
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+.ui-dialog .ui-state-default .ui-icon
+{
+    background: url(../Images/BTNs/Design/x.png) no-repeat;
+}
+
+.ui-dialog-title
+{
+    color: #000;
+    font-size: 100%;
+    font-weight: normal;
+}
+
+.ui-dialog label, .ui-dialog [type="submit"], .ui-dialog [type="button"]
+{
+    font-size: 100% !important;
+}
+
+#clipCB .ui-state-active, #clipCB .ui-widget-content .ui-state-active, #clipCB .ui-widget-header .ui-state-active, #sendOptions .ui-state-active, #sendOptions .ui-widget-content .ui-state-active, #sendOptions .ui-widget-header .ui-state-active
+{
+    background: #e35722 !important;
+    color: #fff !important;
+}
+
+#clipCB label, #sendOptions label
+{
+    font-weight: normal !important;
+}
+
+iframe[id$="-iframcamera"]
+{
+    width: 370px !important;
+    height: 350px !important;
+    position: absolute;
+    top: 18%;
+    left: 33%;
+    background: #fff;
+    padding: 2%;
+    -moz-box-shadow: 0px 0px 12px #888888;
+    -webkit-box-shadow: 0px 0px 12px #888888;
+    box-shadow: 0px 0px 12px #888888;
+    -moz-border-radius: 1.6em;
+    -webkit-border-radius: 1.6em;
+    border-radius: 1.6em;
+}
+
+/*#endregion*/
+
+/*#region Progress Bar*/
+
+.meter-bg
+{
+    height: 20px;
+    background: #555;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    padding: 0.5% 2% 0 2%;
+    -webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+    -moz-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+    box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+    vertical-align: middle;
+}
+
+.meter
+{
+    height: 15px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    margin: 0.5%;
+    text-indent: 5px;
+    line-height: 14px;
+}
+
+/*#endregion*/
+
+/*#region Custom Popup*/
+
+.popupNotificationOuter
+{
+    display: none;
+    position: absolute;
+    padding: 0.5% 0.5% 1.5% 0.5%;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #648CA4;
+    /*-moz-box-shadow: 0 0 7px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.8);
+    box-shadow: 0 0 7px rgba(0,0,0,0.6);*/
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSI4MCUiIHN0b3AtY29sb3I9IiNlNTNmMmMiIHN0b3Atb3BhY2l0eT0iMCIvPgo8c3RvcCBvZmZzZXQ9IjgwJSIgc3RvcC1jb2xvcj0iI2U1M2YyYyIgc3RvcC1vcGFjaXR5PSIwIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2Y1NTMzZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+);
+    background-image: -moz-linear-gradient(bottom, rgba(230,63,44,0) 79.74%, rgba(230,63,44,0) 80%, rgba(245,83,63,0) 100%);
+    background-image: -o-linear-gradient(bottom, rgba(230,63,44,0) 79.74%, rgba(230,63,44,0) 80%, rgba(245,83,63,0) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgba(230,63,44,0) 79.74%, rgba(230,63,44,0) 80%, rgba(245,83,63,0) 100%);
+    background-image: linear-gradient(bottom, rgba(230,63,44,0) 79.74%, rgba(230,63,44,0) 80%, rgba(245,83,63,0) 100%);
+    z-index: 99;
+    width: 15em;
+}
+
+    .popupNotificationOuter .inside
+    {
+        padding: 2% 2.5% 2.5%;
+        width: 94%;
+        height: 11em;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        -moz-background-clip: padding;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        background-color: #fff;
+    }
+
+    .popupNotificationOuter .blueButton, .popupNotificationOuter .redButton
+    {
+        padding: 3px 10px;
+        position: relative;
+        top: 1em;
+    }
+
+.popupTitle
+{
+    display: block;
+    width: 100%;
+    height: 2em;
+}
+
+    .popupTitle a
+    {
+        display: inline-block;
+        width: 3%;
+    }
+
+    .popupTitle h3
+    {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        color: #fff;
+    }
+
+/*#endregion*/
+
+/*#region User Image Holder*/
+
+.userImg
+{
+    width: 97.4%;
+    height: 9.7em;
+}
+
+/*#endregion*/
+
+/*#region Autocomplete*/
+
+ul.ui-autocomplete
+{
+    width: 250px;
+    background: #fff;
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    max-height: 300px;
+    z-index: 9999999;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 96% !important;
+}
+
+    ul.ui-autocomplete li.ui-menu-item
+    {
+        border-bottom: 1px solid rgba(0,0,0,.35);
+        height: 30px;
+        font-size: 85% !important;
+    }
+
+        ul.ui-autocomplete li.ui-menu-item img
+        {
+            width: 30px;
+            height: 30px;
+            -moz-border-radius: 100px;
+            -webkit-border-radius: 100px;
+            border-radius: 100px;
+        }
+
+/*#endregion*/
+
+/*#region Scrollbar*/
+
+/*::-webkit-scrollbar
+{
+    width: 10px;
+}*/
+
+/* Track */
+/*::-webkit-scrollbar-track
+{
+
+    background: #2c2c2c;
+}*/
+
+/* Handle */
+/*::-webkit-scrollbar-thumb
+{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background: #d3d3d3;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+    ::-webkit-scrollbar-thumb:window-inactive
+    {
+        background: #c1c1c1;
+    }*/
+
+/*#endregion*/
+
+/*#region Grid*/
+
+.span-full
+{
+    width: 100% !important;
+}
+
+.span-1-2
+{
+    width: 50% !important;
+}
+
+.span-1-3
+{
+    width: 33.333% !important;
+}
+
+.span-2-3
+{
+    width: 66.666% !important;
+}
+
+.span-1-4
+{
+    width: 25% !important;
+}
+
+.span-3-4
+{
+    width: 75% !important;
+}
+
+.span-1-5
+{
+    width: 20% !important;
+}
+
+.span-2-5
+{
+    width: 40% !important;
+}
+
+.span-3-5
+{
+    width: 60% !important;
+}
+
+.span-4-5
+{
+    width: 80% !important;
+}
+
+.span-1-6
+{
+    width: 16.666% !important;
+}
+
+.span-5-6
+{
+    width: 83.33% !important;
+}
+
+.span-1-7
+{
+    width: 14.28% !important;
+}
+
+.span-2-7
+{
+    width: 28.57% !important;
+}
+
+.span-3-7
+{
+    width: 42.855% !important;
+}
+
+.span-4-7
+{
+    width: 57.14% !important;
+}
+
+.span-5-7
+{
+    width: 71.425% !important;
+}
+
+.span-6-7
+{
+    width: 85.71% !important;
+}
+
+.span-1-10
+{
+    width: 10% !important;
+}
+
+.span-3-10
+{
+    width: 30% !important;
+}
+
+.span-7-10
+{
+    width: 70% !important;
+}
+
+.span-9-10
+{
+    width: 90% !important;
+}
+
+.row-1-2
+{
+    height: 50%;
+    max-height: 50%;
+    min-height: 50%;
+}
+
+.inCenter
+{
+    margin: 0 auto;
+    float: none !important;
+}
+
+.scroll
+{
+    overflow-y: auto;
+}
+
+.clear
+{
+    clear: both;
+}
+
+/*#endregion*/
+
+/*#region List*/
+
+.listHolder ul
+{
+    height: auto;
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    box-shadow: 0 1px 4px rgba(0,0,0,.35);
+}
+
+.listHolder li
+{
+    padding: 0.5%;
+    background-color: #fff;
+}
+
+    .listHolder li:nth-child(2n)
+    {
+        background-color: #f8f8f8;
+    }
+
+    .listHolder li a
+    {
+        color: #838383;
+    }
+
+
+
+/*#endregion*/
+
+/*#region Alarm*/
+
+#alarmbell_a
+{
+    line-height: 5em;
+}
+
+
+#alarmbell_span
+{
+    background: #fa623f;
+    border-color: #fa5a35;
+    background-image: -webkit-linear-gradient(top, #fc9f8a, #fa623f);
+    background-image: -moz-linear-gradient(top, #fc9f8a, #fa623f);
+    background-image: -o-linear-gradient(top, #fc9f8a, #fa623f);
+    background-image: linear-gradient(to bottom, #fc9f8a, #fa623f);
+    color: #fff;
+    padding: 0 5px;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.25);
+    border: 1px solid;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), 0 1px 1px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), 0 1px 1px rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), 0 1px 1px rgba(0, 0, 0, 0.08);
+    font-size: 80%;
+    font-weight: bold;
+    position: relative;
+    right: 1%;
+    bottom: 1.7em;
+}
+
+#alarmMoreDetails
+{
+    /*background: url(../Images/BTNs/Design/alarmTooltip.png) no-repeat;
+color: #fff;
+position: absolute;
+top: 24%;
+left: 38%;
+background-size: 100% 99%;
+padding: 0.5%;
+max-width: 35%;*/
+    opacity: .94;
+    border: 1px solid #b3292b;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #fff;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2IzMjEyMyIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2NkNGQ0ZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+);
+    background-image: -moz-linear-gradient(bottom, #b32123 0%, #cd4d4f 100%);
+    background-image: -o-linear-gradient(bottom, #b32123 0%, #cd4d4f 100%);
+    background-image: -webkit-linear-gradient(bottom, #b32123 0%, #cd4d4f 100%);
+    background-image: linear-gradient(bottom, #b32123 0%, #cd4d4f 100%);
+    position: absolute;
+    top: 24%;
+    left: 38%;
+    padding: 0.5%;
+}
+
+
+    #alarmMoreDetails a
+    {
+        color: #fff;
+        /*margin-left: 27%;*/
+    }
+
+        #alarmMoreDetails a:before
+        {
+            content: ' ';
+        }
+
+        #alarmMoreDetails a:not(:last-child):after
+        {
+            content: ',';
+        }
+
+/*#endregion*/
+
+/*#region Text*/
+
+.alignCenter
+{
+    text-align: center;
+}
+
+.alignLeft
+{
+    text-align: left;
+}
+
+.alignRight
+{
+    text-align: right;
+}
+
+.textHeader
+{
+    background: url(../Images/BTNs/Design/tabsBG.png) repeat;
+    background-size: contain;
+    color: #555555;
+}
+
+.asterisk:after
+{
+    content: " *";
+    color: #f00;
+}
+
+.blueHeader
+{
+    background-color: rgba(42,138,189,.6);
+    color: #fff;
+    padding: 1%;
+    margin: 0 0 2% 0;
+    clear: both;
+    float: none !important;
+}
+
+.nofloat
+{
+    float: none !important;
+}
+
+/*#endregion*/
+
+/*#region Menu*/
+
+.menuItem.itemHeader > .span-full
+{
+    background: url(../Images/BTNs/Menu/menuItem.png) no-repeat;
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+    box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+    color: #fff;
+    background-size: cover;
+    width: 100%;
+}
+
+    .menuItem.itemHeader:hover > .span-full, .menuItem.itemHeader:active > .span-full, .menuItem.itemHeader > .span-full.active
+    {
+        background: url(../Images/BTNs/Menu/menuItemHover.png) no-repeat;
+        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+        box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+        background-size: cover;
+        cursor: pointer;
+    }
+
+        .menuItem.itemHeader:hover > .span-full a, .menuItem.itemHeader:active > .span-full a, .menuItem.itemHeader > .span-full.active a
+        {
+            color: #000;
+        }
+
+            .menuItem.itemHeader:hover > .span-full a, .menuItem.itemHeader:hover > .span-full a label
+            {
+                cursor: pointer;
+            }
+
+.menuItem label
+{
+    vertical-align: super;
+}
+
+.menuItem a
+{
+    color: #fff;
+}
+
+.menuItem img
+{
+    width: 24px;
+    height: 24px;
+}
+
+.notificationBubble
+{
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #fff;
+}
+
+    .notificationBubble label
+    {
+        color: #ce4c1b;
+    }
+
+ul li.menuItem ul.collapse
+{
+    display: none;
+}
+
+.menuItem.itemHeader ul.collapse li .span-full
+{
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+    box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+}
+
+    .menuItem.itemHeader ul.collapse li .span-full:hover, .menuItem.itemHeader ul.collapse li .span-full:hover label
+    {
+        cursor: pointer;
+    }
+
+    .menuItem.itemHeader ul.collapse li .span-full label
+    {
+        color: #fff;
+    }
+
+.collapse .menuItem:hover .span-full
+{
+    font-weight: bold;
+}
+
+    .collapse .menuItem:hover .span-full label
+    {
+        color: #4AD3FF !important;
+    }
+
+[data-active="true"]
+{
+    font-weight: bold;
+}
+
+.menuNotification
+{
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #fff;
+    width: 75%;
+    text-align: center;
+    color: #000;
+}
+
+.user-menu a div
+{
+    color: #fff;
+}
+
+[data-open].active ul:not(.subList)
+{
+    display: block;
+}
+
+.menuItem *:hover + .subList, .subList:hover
+{
+    visibility: visible;
+    display: block;
+}
+
+.subList
+{
+    padding: 0 !important;
+    position: relative;
+    height: 10em;
+    visibility: hidden;
+    display: none;
+    z-index: 9;
+}
+
+    .subList li
+    {
+        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29) !important;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29) !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29) !important;
+        text-indent: 19%;
+        background-color: rgba(46, 123, 163, 0.95);
+    }
+
+    .subList a
+    {
+        color: #fff !important;
+        font-weight: normal !important;
+    }
+
+        .subList a:hover, .subList li:hover a
+        {
+            color: #81D5FF!important;
+            font-weight: bold !important;
+        }
+
+/*#endregion*/
+
+/*#region Date and Time*/
+
+#dateAndTime
+{
+    color: #fff;
+    font-size: 110%;
+}
+
+/*#endregion*/
+
+/*#region Company*/
+
+#companyLogo
+{
+    width: 100px;
+    height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    -moz-border-radius: 0.6em;
+    -webkit-border-radius: 0.6em;
+    border-radius: 0.6em;
+}
+
+#companyName
+{
+    color: #fff;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+/*#endregion*/
+
+/*#region Search Box*/
+
+.searchBox
+{
+    background: url(../Images/BTNs/Menu/search.png) no-repeat;
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+    box-shadow: 0 1px 2px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.29);
+    background-size: cover;
+    width: 100%;
+}
+
+    .searchBox input
+    {
+        width: 100%;
+        height: 2em;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        margin-left: 2%;
+        color: #fff;
+        font-size: 100%;
+        font-weight: normal;
+    }
+
+        .searchBox input::-webkit-input-placeholder
+        {
+            color: #fff;
+        }
+
+        .searchBox input:-moz-placeholder
+        {
+            color: #fff;
+            opacity: 1;
+        }
+
+        .searchBox input::-moz-placeholder
+        {
+            color: #fff;
+            opacity: 1;
+        }
+
+        .searchBox input:-ms-input-placeholder
+        {
+            color: #fff;
+        }
+
+/*#endregion*/
+
+/*#region Credit And Logout*/
+
+.logout
+{
+    border: none;
+    outline: none;
+    background: url(../Images/BTNs/Design/logout.png) no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    padding: 11%;
+}
+
+.credit
+{
+    color: #cedee2;
+}
+
+#creditLogo
+{
+    width: 3em;
+    margin-top: -0.5em;
+}
+
+
+/*#endregion*/
+
+/*#region Title And Hot Buttons*/
+
+#titleAndHotButtons
+{
+    background: url(../Images/BTNs/Design/TitleHotBtnBG.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.separator
+{
+    height: 100%;
+}
+
+.hotNav a
+{
+    padding: 0 1%;
+    position: relative;
+}
+
+.hotNav span:not(.notSep) img
+{
+    height: 2.9em;
+    width: 1px;
+}
+
+#titleAndHotButtons label
+{
+    color: #cedee2;
+    font-size: 110%;
+    line-height: 3.5em;
+    padding: 0 5%;
+}
+
+
+/*#endregion*/
+
+/*#region PhoneBook*/
+
+.searchInput
+{
+    margin: 1% !important;
+}
+
+/*#endregion*/
+
+/*#region Information*/
+
+.infoBox
+{
+    background-color: rgba(255,255,255,.82);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.11);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.11);
+    box-shadow: 0 1px 2px rgba(0,0,0,.11);
+    text-align: center;
+}
+
+    .infoBox .span-full
+    {
+        text-align: center;
+    }
+
+        .infoBox .span-full:first-child
+        {
+            font-size: 1.7em;
+            color: #7c8692;
+            font-weight: bold;
+        }
+
+        .infoBox .span-full label
+        {
+            color: #7c8692;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+/*#endregion*/
+
+/*#region GMS Body*/
+
+#bodyPageDiv
+{
+    padding: 1%;
+}
+
+/*#endregion*/
+
+/*#region Big Map*/
+
+.bigMap
+{
+    border: 14px solid #fff;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+[src="/Maps/map?v=13&showLegend=true"]
+{
+    width: 100% !important;
+}
+
+.legendBG
+{
+    background-color: #fff;
+}
+
+#showFilter, #showSearch, #goToHome, #findUser
+{
+    position: absolute;
+    right: -18%;
+    height: 2em;
+}
+
+#showFilter
+{
+    top: 5%;
+    z-index: 1000;
+}
+
+#showSearch
+{
+    top: 15%;
+    z-index: 999;
+}
+
+#goToHome
+{
+    top: 25%;
+    z-index: 998;
+}
+
+#findUser {
+    top: 35%;
+    z-index: 997;
+}
+
+#mapLegend, #mapSearch, #findUser_container
+{
+    margin-top: 10%;
+    display: none;
+    background-color: #fff;
+    margin-bottom: 8%;
+}
+
+#mapLegend {
+    font-size: 79%;
+    height: 300px;
+}
+
+#mapSearch {
+    height: 180px;
+}
+
+#showFilter img:hover, #showSearch img:hover, #goToHome img:hover, #findUser img:hover
+{
+    cursor: pointer;
+}
+
+#legendHeader
+{
+    background-color: #E8E8E8;
+    padding: 0.6% 0;
+    margin-top: 0.95%;
+    -webkit-border-top-right-radius: 4px;
+    border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.separetorLegend
+{
+    width: 80%;
+    border: 1px dashed rgba(132, 132, 132, 0.35);
+}
+
+.myOrganization
+{
+    z-index: 9999;
+}
+
+#openSearch
+{
+    z-index: -99;
+}
+
+.newWindow
+{
+    width: 15px !important;
+    height: 15px !important;
+}
+
+.cameraDivOnM img, .play_micOnMap, .end_micOnMap
+{
+    width: 52px;
+    height: 52px;
+}
+
+.play_micOnMap, .end_micOnMap
+{
+    padding: 1% 2% 8% 4%;
+}
+
+.DisplayName
+{
+    position: relative;
+    bottom: 2.7em;
+    font-weight: bold;
+    font-size: 130%;
+    color: #fff;
+}
+
+/*#endregion*/
+
+/*#region Maps*/
+
+.mapHolder
+{
+    height: 100%;
+    overflow: hidden;
+    border: none;
+    width: 96%;
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    box-shadow: 0 1px 4px rgba(0,0,0,.35);
+}
+
+#iframMap
+{
+    width: 95%;
+    height: 90%;
+    display: none;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    z-index: 102;
+}
+
+    #iframMap #iframMapSpan
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+#closeMap
+{
+    position: absolute;
+}
+
+    #closeMap:hover
+    {
+        cursor: pointer;
+    }
+
+.pointsAroundMe[data-on="off"]
+{
+    opacity: 0.8;
+}
+
+.pointsAroundMe, #mapFilter, .pointsOrRoute
+{
+    overflow: hidden;
+    color: rgb(86, 86, 86);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 1px 6px;
+    -webkit-border-bottom-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    -webkit-border-top-right-radius: 2px;
+    border-top-right-radius: 2px;
+    -webkit-background-clip: padding-box;
+    border-width: 1px 1px 1px 0px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-top-color: rgba(0, 0, 0, 0.14902);
+    border-right-color: rgba(0, 0, 0, 0.14902);
+    border-bottom-color: rgba(0, 0, 0, 0.14902);
+    -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    min-width: 38px;
+    background-color: rgb(255, 255, 255);
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+    position: absolute;
+    z-index: 99;
+}
+
+.pointsAroundMe
+{
+    top: 0.5%;
+    left: 50%;
+}
+
+#mapFilter
+{
+    top: 0.5%;
+    left: 20%;
+}
+
+.legendIcon
+{
+    width: 1em;
+    vertical-align: middle;
+}
+
+[aria-describedby="divCreateOrUpdateOutdoorCamera"] iframe
+{
+    height: 18em;
+}
+
+.myLoaction
+{
+    width: 1.5em;
+    margin-right: 4%;
+    position: relative;
+    top: 5%;
+}
+
+#pointOfInterestColorLegend
+{
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    background: #fff;
+    width: 18%;
+    float: left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+}
+
+.popupMap iframe
+{
+    height: 18em !important;
+    width: 30em !important;
+}
+
+
+/*#endregion*/
+
+/*#region Tabs*/
+
+#tabs
+{
+    padding: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+    #tabs ul
+    {
+        padding: 0;
+        border: none;
+        background: url(../Images/BTNs/Design/tabsBG.png) repeat;
+        background-size: contain;
+    }
+
+        #tabs ul li
+        {
+            -moz-border-radius: 0;
+            -webkit-border-radius: 0;
+            border-radius: 0;
+            padding: 0;
+            margin: 0;
+            background: transparent;
+        }
+
+            #tabs ul li a
+            {
+                font-size: 100%;
+                font-weight: normal;
+            }
+
+.ui-state-active a, .ui-state-hover a:hover
+{
+    color: #ce4c1b !important;
+    background-color: rgba(255,255,255,0.8);
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, .ui-widget-content .ui-state-hover
+{
+    border: 1px solid #ce4c1b;
+    color: #ce4c1b;
+}
+
+.ui-state-default a, .ui-state-default a:link
+{
+    color: #555555;
+}
+
+div.tabHolder
+{
+    border: 1px solid #d3d3d3;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.1), inset 0 0 0 1px rgba(255,255,255,.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1), inset 0 0 0 1px rgba(255,255,255,.5);
+    box-shadow: 0 1px 3px rgba(0,0,0,.1), inset 0 0 0 1px rgba(255,255,255,.5);
+    padding: 0 !important;
+}
+
+.tabHolder .tabsRow
+{
+    background-color: #fff;
+}
+
+    .tabHolder .tabsRow:nth-child(2n)
+    {
+        background-color: #f4f4f4;
+    }
+
+    .tabHolder .tabsRow img
+    {
+        width: 2.5em;
+        height: 2.5em;
+        padding: 6%;
+    }
+
+    .tabHolder .tabsRow a
+    {
+        line-height: 1.7em;
+        text-decoration: underline;
+        color: #ce4c1b;
+    }
+
+    .tabHolder .tabsRow label
+    {
+        font-size: 100% !important;
+    }
+
+
+/*#endregion*/
+
+/*#region Tables*/
+
+table
+{
+    width: 100% !important;
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    overflow-x: hidden !important;
+    table-layout: fixed;
+}
+
+.tableHolder
+{
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #fff;
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    overflow-x:hidden;
+}
+
+.tableHeader
+{
+    padding: 0;
+    border: none;
+    background: url(../Images/BTNs/Design/tabsBG.png) repeat;
+    background-size: cover;
+}
+
+.table-container
+{
+  background: url(../Images/BTNs/Design/tabsBG.png) repeat;
+  background-size: contain;
+  border: 1px solid #d9d9d9;
+}
+
+    .tableHeader th
+    {
+        padding: 0.5%;
+        color: #4c4c4c;
+        font-weight: normal;
+        font-size: 100% !important;
+    }
+
+
+.tableBody tr:nth-child(2n)
+{
+    background-color: #f8f8f8;
+}
+
+.tableBody tr td, .tableBody tr td a
+{
+    color: #4c4c4c;
+    text-indent:0.3%;
+}
+
+    .tableBody tr td a:hover
+    {
+        text-decoration: underline;
+    }
+
+.tableBody td img
+{
+    width: 2.5em;
+    height: 2.5em;
+    padding: 5px;
+}
+
+.tableBody td input[type="image"]
+{
+    width: 1.7em;
+    height: 1.7em;
+}
+
+.tableCellPadding tr td
+{
+    padding: 0.6%;
+}
+
+.fixed{
+  /*position:relative;*/
+  border:none;
+  z-index:999;
+  /*left: 1.4%;
+  width: 77.9% !important;
+    left: 0.8%;
+  width: 99.3% !important;*/
+}
+
+.table-container
+{
+  width:100%;
+}
+
+    .table-container table
+    {
+        width:99.1% !important;
+    }
+
+    .table-container table:nth-child(2)
+    {
+        /*position:relative;
+        top:2em;*/
+    }
+
+    .tableScroll thead
+    {
+        display:none;
+    }
+
+
+/*#endregion*/
+
+/*#region Form*/
+
+input[type="image"]
+{
+    outline: none;
+}
+
+input[type="text"]:not(#txtSearchVisitorHot), input[type="tel"], input[type="email"], input[type="password"], input[type="number"], textarea, select.span-full, input[type="search"]
+{
+    border: 1px solid #a9a9a9;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #f9f9f9;
+    -moz-box-shadow: inset 0 1px 3px rgba(0,0,1,.14);
+    -webkit-box-shadow: inset 0 1px 3px rgba(0,0,1,.14);
+    box-shadow: inset 0 1px 3px rgba(0,0,1,.14);
+    color: #000;
+    width: 100%;
+    text-indent: 0.5em;
+}
+
+fieldset
+{
+    border: none;
+    padding: 0;
+}
+
+input[type=checkbox].css-checkbox
+{
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+    input[type=checkbox].css-checkbox + label.css-label
+    {
+        height: 20px;
+        display: inline-block;
+        line-height: 20px;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+.css-label
+{
+    background-image: url(../Images/BTNs/Design/checkbox.png);
+    background-repeat: no-repeat;
+}
+
+.custom-file-input::before
+{
+    display: inline-block;
+    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+}
+
+.custom-file-input:hover::before
+{
+    border-color: black;
+}
+
+.custom-file-input:active::before
+{
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+/*#endregion*/
+
+/*#region Radio Buttons*/
+
+input[type=radio].css-radio
+{
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+    input[type=radio].css-radio + label.css-label-radio
+    {
+        height: 15px;
+        display: inline-block;
+        line-height: 13px;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+
+
+label.css-label-radio
+{
+    background-image: url(../Images/BTNs/Design/radio.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/*#endregion*/
+
+/*#region User Image Holder*/
+
+.userImageHolder
+{
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    background-color: #fff;
+    vertical-align: top;
+}
+
+/*#endregion*/
+
+/*#region Buttons*/
+
+.blueButton {
+    -moz-box-shadow: inset 0px 1px 0px 0px #fcc8b5;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #fcc8b5;
+    box-shadow: inset 0px 1px 0px 0px #fcc8b5;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f49a78), color-stop(1, #e35722));
+    background: -moz-linear-gradient(top, #f49a78 5%, #e35722 100%);
+    background: -webkit-linear-gradient(top, #f49a78 5%, #e35722 100%);
+    background: -o-linear-gradient(top, #f49a78 5%, #e35722 100%);
+    background: -ms-linear-gradient(top, #f49a78 5%, #e35722 100%);
+    background: linear-gradient(to bottom, #f49a78 5%, #e35722 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f49a78', endColorstr='#e35722',GradientType=0);
+    background-color: #f49a78;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 0px;
+    border: 1px solid #902902;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff !important;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #c76540;
+    outline: none;
+}
+
+.blueButton:hover {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d2734e), color-stop(1, #9b4726));
+    background: -moz-linear-gradient(top, #d2734e 20%, #9b4726 100%);
+    background: -webkit-linear-gradient(top, #d2734e 20%, #9b4726 100%);
+    background: -o-linear-gradient(top, #d2734e 20%, #9b4726 100%);
+    background: -ms-linear-gradient(top, #d2734e 20%, #9b4726 100%);
+    background: linear-gradient(to bottom, #d2734e 20%, #9b4726 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d2734e', endColorstr='#9b4726',GradientType=0);
+    background-color: #d2734e;
+    text-decoration: none;
+}
+
+.redButton
+{
+    -moz-box-shadow: inset 0px 1px 0px 0px #f5978e;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #f5978e;
+    box-shadow: inset 0px 1px 0px 0px #f5978e;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f));
+    background: -moz-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background: -webkit-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background: -o-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background: -ms-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background: linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f',GradientType=0);
+    background-color: #f24537;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 0;
+    border: 1px solid #6e120a;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff !important;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #810e05;
+    outline: none;
+}
+
+    .redButton:hover
+    {
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #db3e32), color-stop(1, #98261e));
+        background: -moz-linear-gradient(top, #db3e32 5%, #98261e 100%);
+        background: -webkit-linear-gradient(top, #db3e32 5%, #98261e 100%);
+        background: -o-linear-gradient(top, #db3e32 5%, #98261e 100%);
+        background: -ms-linear-gradient(top, #db3e32 5%, #98261e 100%);
+        background: linear-gradient(to bottom, #db3e32 5%, #98261e 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#db3e32', endColorstr='#98261e',GradientType=0);
+        background-color: #c62d1f;
+        text-decoration: none;
+    }
+
+.classicButton
+{
+    -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    box-shadow: inset 0px 1px 0px 0px #ffffff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+    background: -moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+    background-color: #f9f9f9;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #666666 !important;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #ffffff;
+    outline: none;
+}
+
+    .classicButton:hover
+    {
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
+        background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
+        background-color: #e9e9e9;
+    }
+
+table tr td .blueButton, table tr td .redButton
+{
+    padding: 0.4% 3%;
+    color: #fff;
+}
+
+table tr td .classicButton
+{
+    padding: 0.4% 3%;
+    color: #666666 !important;
+}
+
+.logoutBtn
+{
+    padding: 2% 22% !important;
+    margin-top: 8%;
+}
+
+.bottomNav
+{
+    position: fixed;
+}
+
+.bottonNavRight
+{
+    left: 82%;
+}
+
+.buttonMarginB
+{
+    margin-bottom: 3%;
+}
+
+
+.buttonMarginT
+{
+    margin-top: 3%;
+}
+
+/*#endregion*/
+
+/*#region Panel*/
+
+.panel
+{
+    display: none;
+    position: absolute;
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    background-color: #f8f8f8;
+    z-index: 999;
+}
+
+/*#endregion*/
+
+/*#region Main Screen Buttons*/
+
+.screenButton
+{
+    background-color: #2c2c2c;
+    min-height: 88px;
+    padding: 3%;
+}
+
+.screenButton:hover {
+    background-color: #e35722;
+}
+
+/*#endregion*/
+
+/*#region Mini Compose*/
+
+#div_ComposeMini
+{
+    border: 1px solid #d3d3d3;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.1), inset 0 0 0 1px rgba(255,255,255,.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1), inset 0 0 0 1px rgba(255,255,255,.5);
+    box-shadow: 0 1px 3px rgba(0,0,0,.1), inset 0 0 0 1px rgba(255,255,255,.5);
+    background-color: #fff;
+}
+
+#ComposeMMessages h1
+{
+    color: #838383;
+    font-weight: normal;
+}
+
+.imgUserInAutocomplete[src=""]
+{
+    display: none;
+}
+
+
+/*#endregion*/
+
+/*#region Order of Operation*/
+
+.sadapList
+{
+    height: auto;
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.35);
+    box-shadow: 0 1px 4px rgba(0,0,0,.35);
+}
+
+    .sadapList li
+    {
+        padding: 2%;
+        background-color: #fff;
+    }
+
+   
+
+        .sadapList li:nth-child(2n)
+        {
+            background-color: #f8f8f8;
+        }
+
+         .sadapList li.selectedFacility 
+    {
+        background-color:orange;
+    }
+
+        .sadapList li a
+        {
+            color: #838383;
+        }
+
+
+#sdp_ttl_oo h2
+{
+    margin: 0;
+}
+
+.operationItemdiv
+{
+    padding: 1% 0;
+    border-bottom: 1px solid #BDBBBB;
+}
+
+#panelAddOO
+{
+    max-height: 30em !important;
+}
+
+.oooSubItem
+{
+    margin-bottom: 0.5%;
+}
+
+/*#endregion*/
+
+/*#region Messages*/
+
+#MenuMessages li, #MenuMessages
+{
+    background-color: #7f6e68;
+}
+
+.messageHeader li
+{
+    background-color: #3c6aa1;
+    background: -webkit-gradient(linear,100% 50%,0% 50%,color-stop(0,#565656),color-stop(100%,#151515));
+    background: -webkit-linear-gradient(top,#565656 0,#151515 100%);
+    background: -moz-linear-gradient(top,#565656 0,#151515 100%);
+    background: -o-linear-gradient(top,#565656 0,#151515 100%);
+    background: linear-gradient(top,#565656 0,#151515 100%);
+    background: -ms-linear-gradient(top,#565656 0,#151515 100%);
+    color: #fff;
+    padding: 3%;
+}
+
+#msgMenu li a
+{
+    color: #989898;
+}
+
+#msgMenu li:hover:not(:first-child), #ContactList li:hover, #msgMenu .current
+{
+    background-color: #fafafa;
+}
+
+    #msgMenu li:hover a, #ContactList li:hover div a, #msgMenu .current a
+    {
+        color: #cfcfcf;
+    }
+
+#ContactList li
+{
+    padding: 3%;
+}
+
+    #ContactList li img
+    {
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;
+        border-radius: 100px;
+        width: 30px;
+        height: 30px;
+    }
+
+    #ContactList li .span-9-10 a
+    {
+        color: #fff;
+    }
+
+#messagesTitleInbox
+{
+    background-color: #d1673f;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2M5ZTBlZCIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+);
+    background-image: -moz-linear-gradient(bottom, #fff 0%, #fff 100%);
+    background-image: -o-linear-gradient(bottom, #fff 0%, #fff 100%);
+    background-image: -webkit-linear-gradient(bottom, #fff 0%, #fff 100%);
+    background-image: linear-gradient(bottom, #fff 0%, #fff 100%);
+    padding: 4%;
+}
+
+.msgTitle
+{
+    padding: 3%;
+    width: 90%;
+}
+
+    .msgTitle:hover, .msgTitle.current
+    {
+        background-color: #3c6aa1;
+        background: -webkit-gradient(linear,100% 50%,0% 50%,color-stop(0%,#f46f3c),color-stop(100%,#e35722));
+        background: -webkit-linear-gradient(top,#f46f3c 0,#e35722 100%);
+        background: -moz-linear-gradient(top,#f46f3c 0,#e35722 100%);
+        background: -o-linear-gradient(top,#f46f3c 0,#e35722 100%);
+        background: linear-gradient(top,#f46f3c 0,#e35722 100%);
+        background: -ms-linear-gradient(top,#f46f3c 0,#e35722 100%);
+    }
+
+        .msgTitle:hover label, .msgTitle.current label
+        {
+            color: #4f4f4f;
+        }
+
+    .msgTitle input[type="image"]
+    {
+        width: 30px;
+        height: 30px;
+    }
+
+    .msgTitle a .span-1-3:last-child
+    {
+        height: 1px;
+    }
+
+    .msgTitle a .span-1-3:first-child label
+    {
+        color: #717171;
+        font-size: 100% !important;
+    }
+
+    .msgTitle:hover a .span-1-3:first-child label
+    {
+        color: #fff;
+    }
+
+    .msgTitle a label
+    {
+        color: #717171;
+        font-size: 85% !important;
+    }
+
+    .msgTitle:hover a label
+    {
+        color: #f8c3b7;
+    }
+
+#msgContainer
+{
+    background-color: #fff;
+}
+
+.messageUserImage
+{
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    width: 3.5em;
+}
+
+.seperator
+{
+    height: 4em;
+    border-left: 1px solid #e6e6e6;
+}
+
+.messageBorder
+{
+    border-bottom: 1px solid #e6e6e6;
+    border-top: 1px solid #e6e6e6;
+    padding: 1% 0;
+}
+
+#composeFields .span-full
+{
+    margin-bottom: 5%;
+}
+
+#ActiveAlarmsList li
+{
+    border-bottom: 1px solid #B8B6B6;
+}
+
+/*#endregion*/
+
+/*#region Visitors*/
+
+#shoutOutTable table th
+{
+    text-decoration: underline;
+}
+
+    #shoutOutTable table th:hover
+    {
+        cursor: pointer;
+    }
+
+/*#endregion*/
+
+/*#region You Tube Popup*/
+
+#clipCB
+{
+    margin-bottom: 2%;
+}
+
+/*#endregion*/
+
+/*#region Pending User*/
+
+.pendingUserImage
+{
+    padding: 3% !important;
+    width: 6em !important;
+    height: 6em !important;
+}
+
+.pendingDetails
+{
+    background-color: #CDD6E1 !important;
+}
+
+/*#endregion*/
+
+/*#region Log*/
+
+#divscrollEventLog table
+{
+    overflow-x: hidden;
+    -ms-overflow-x: hidden;
+}
+
+#divPreview h3
+{
+    font-size: 80%;
+}
+
+#divPreview #userImg
+{
+    width: 100% !important;
+    height: auto !important;
+}
+
+/*#endregion*/
+
+/*#region Cameras And Sensors*/
+
+.SensorImage
+{
+    width: 2em !important;
+    height: 2.5em !important;
+}
+
+#divAddGropDigivod
+{
+    height: 100% !important;
+}
+
+
+/*#endregion*/
+
+/*#region User Details*/
+
+#userTarningEquipment table tr td
+{
+    vertical-align: top;
+}
+
+#userDetailsTable input[type="password"]
+{
+    outline: none !important;
+    border: none;
+    border-bottom: 1px dashed #000;
+    background-color: transparent;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+/*#userDetailsTable table
+{
+    width: 101% !important;
+}*/
+
+/*#endregion*/
+
+/*#region User Management*/
+
+#groupNameH3
+{
+    margin: -7.5% 0 0 0;
+}
+
+#userIndexScreen div[class^="groupDiv_"]
+{
+    width: 100%;
+}
+
+    #userIndexScreen div[class^="groupDiv_"] ul
+    {
+        overflow-x: hidden !important;
+    }
+
+/*#endregion*/
+
+/*#region Organiztion*/
+
+#organization
+{
+    margin-top: 4%;
+}
+
+#organiztionInnerNav
+{
+    margin-bottom: 2%;
+}
+
+
+
+.del
+{
+    position: relative;
+}
+
+.OemailItem:nth-of-type(1) .del
+{
+    display: none;
+}
+
+.addEmailToList:not(:last-child)
+{
+    display: none;
+}
+
+.OemailItem:not(:last-child) .addEmailToList
+{
+    display: none;
+}
+
+.OemailItem:last-child .addEmailToList
+{
+    position: relative;
+}
+
+#mapDivOrg iframe
+{
+    height: 20em;
+}
+
+/*#endregion*/
+
+/*#region Patrol and Scan Points*/
+
+.team
+{
+    margin-top: 5%;
+}
+
+    .team .container
+    {
+        background-color: #1b95d1;
+        padding: 6.5% 0;
+    }
+
+    .team a
+    {
+        color: #fff;
+    }
+
+#patrolAction
+{
+    margin-top: 4%;
+}
+
+#patrolInfo > .span-full
+{
+    margin-bottom: 3%;
+}
+
+.liscanpointli
+{
+    height: auto !important;
+}
+
+.deleteSchedualRow
+{
+
+}
+
+.deleteSchedualTime
+{
+
+    vertical-align: middle;
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+
+/*#endregion*/
+
+/*#region Facilities*/
+
+#facilities .ui-accordion-content
+{
+    padding: 0 !important;
+}
+
+#facilities ul li
+{
+    border-bottom: 1px solid rgba(160, 160, 160, 0.35) !important;
+    padding: 2.5%;
+}
+
+#facilitiesListDiv ul li a:hover
+{
+    text-decoration: underline;
+}
+
+.span-1-4:nth-child(5n) .facilityInfoFiles
+{
+    padding-top: 10%;
+}
+
+.facilityInfoFiles img
+{
+    position: relative;
+    top: 10%;
+}
+
+.emptyProperty, #facilityPropreties table tr:last-child td input
+{
+    border: none !important;
+    border-bottom: 1px dashed #000 !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    outline:none;
+}
+
+/*#endregion*/
+
+/*#region Weapon*/
+
+.closeCollpase
+{
+    width: 1.7em !important;
+    height: 1.7em !important;
+}
+
+/*#endregion*/
+
+/*#region Item by Type*/
+
+.imgsSpan_TestDocumentUrl img
+{
+    max-width: 9em;
+    max-height: 9em;
+}
+
+/*#endregion*/
+
+/*#region Task Management*/
+
+
+#selectLoc .mapHolder
+{
+    height: 15em;
+}
+
+/*#endregion*/
+
+/*#region Operational Competenty*/
+
+#divGroupAccordion .ui-accordion-content
+{
+    padding: 0%;
+    min-height: 5em;
+    height: auto !important;
+}
+
+#divGroupAccordion ul li, #selectGroupPanel ul li
+{
+    padding: 1% 0;
+    text-indent: 2%;
+}
+
+    #divGroupAccordion ul li:not(:last-child), #selectGroupPanel ul li:not(:last-child)
+    {
+        border-bottom: 1px #D7D7D7 solid;
+    }
+
+    #selectGroupPanel ul li:hover
+    {
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+[data-name-for-user-id]:hover
+{
+    cursor: pointer;
+}
+
+    [data-name-for-user-id]:hover span
+    {
+        text-decoration: underline;
+        color: #1b95d1;
+    }
+
+/*#endregion*/
+
+/*#region Loans Of Equipment*/
+
+#divEquipment input[type="text"]
+{
+    border: none;
+    background: none;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-bottom: 1px solid #D5CFCF;
+}
+
+/*#endregion*/
+
+/*#region Guard routes*/
+
+#groupTable tr td:nth-child(2)
+{
+    /*overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;*/
+}
+
+/*#endregion*/
+
+/*#region Veicle Log*/
+
+.middleCheckBox
+{
+    padding-top: 11%;
+}
+
+#veichleLog input[type="text"]
+{
+    outline: none !important;
+    border: none;
+    border-bottom: 1px dashed #000;
+    background-color: transparent;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+/*#endregion*/
+
+/*#region Visitor Vehicle*/
+
+.compagnionDiv
+{
+    border-bottom: 1px dashed rgba(0,0,0,.35);
+    margin-bottom: 3%;
+}
+
+
+
+/*#endregion*/
+
+/*#region Virtual Fence*/
+
+#virtualMap
+{
+    width: 100%;
+}
+
+/*#endregion*/
+
+/*#region Guard Location*/
+
+.mapGuardLocation
+{
+    width: 100%;
+    height: 44em !important;
+}
+
+.pointsOrRoute
+{
+    position: absolute;
+    top: 0.9%;
+    z-index: 99999;
+    right: 12%;
+}
+
+/*#endregion*/
+
+/*#region Event Management*/
+
+.eventImages
+{
+    max-width: 8em;
+    max-height: 8em;
+    margin-bottom: 2em;
+}
+
+/*#endregion*/
+
+/*#region Present reports*/
+
+.reportQuestion table tr td input[type="image"]
+{
+    width: 1.2em;
+    height: 1.2em;
+}
+
+/*#endregion*/
+
+
+
+/*#region Media Queries*/
+
+/*641px -> 1024px*/
+@media only screen and (min-width: 641px) and (max-width:1024px)
+{
+}
+
+/*1025px -> 1440px*/
+@media only screen and (min-width: 1025px) and (max-width: 1440px)
+{
+    /*#region Sections*/
+
+    .main section#dateAndTimeSection
+    {
+        margin-top: 5%;
+    }
+
+    .main section#companySection
+    {
+        margin-top: 13%;
+    }
+
+    .main section#searchSection
+    {
+        margin-top: 51%;
+    }
+
+    .main section#menuSection
+    {
+        margin-top: 69%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .main section#logoutAndCredit
+    {
+        position: fixed;
+        bottom: 0%;
+        width: 21%;
+    }
+
+    .main section#gmsBody
+    {
+        margin-top: 5.4%;
+    }
+
+    /*#endregion*/
+
+    /*#region PlaceHolder*/
+
+    ::-webkit-input-placeholder
+    {
+        font-size: 70%;
+    }
+
+    :-moz-placeholder
+    { /* Firefox 18- */
+        font-size: 80%;
+    }
+
+    ::-moz-placeholder
+    { /* Firefox 19+ */
+        font-size: 80%;
+    }
+
+    :-ms-input-placeholder
+    {
+        font-size: 80%;
+    }
+
+    /*#endregion*/
+
+    /*#region Popup*/
+
+    .ui-dialog-title
+    {
+        font-size: 80%;
+    }
+
+    .ui-dialog label, .ui-dialog [type="submit"], .ui-dialog [type="button"], .ui-dialog input, .ui-dialog select
+    {
+        font-size: 80% !important;
+    }
+
+    [aria-describedby="userGuidePopup"]
+    {
+        width: 36% !important;
+    }
+
+    [aria-describedby="divAddSenser"]
+    {
+        width: 30% !important;
+    }
+
+    [aria-describedby="divEditEdification"]
+    {
+        width: 39% !important;
+    }
+
+    [aria-describedby="divCreateOrUpdateOutdoorCamera"]
+    {
+        width: 70% !important;
+    }
+
+    [aria-describedby="addNewpanlContac"]
+    {
+        width: 38% !important;
+    }
+
+    [aria-describedby="div_SignificantLocations_Add"]
+    {
+        width: 47% !important;
+    }
+
+    [aria-describedby="divSmsTextsEditor"]
+    {
+        width: 35% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="visitorsDepartments"]
+    {
+        width: 35% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="dRemoteDial"]
+    {
+        width: 40% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="editUserGroupsPopup"]
+    {
+        width: 24% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="groupPanel"]
+    {
+        width: 25% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="mapDivOrg"]
+    {
+        width: 60% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="popapAddScanPointDiv"]
+    {
+        width: 57% !important;
+    }
+
+    [aria-describedby="divRadiosAndLoc_"]
+    {
+        width: 40% !important;
+    }
+
+    [aria-describedby="addManagedEquipment"], [aria-describedby="addManagedEquipmentItem"], [aria-describedby="divReportManagedEquipmnetTest"], [aria-describedby="editUser"]
+    {
+        width: 18% !important;
+    }
+
+    [aria-describedby="panelAddOO"]
+    {
+        width: 68% !important;
+    }
+
+    [aria-describedby="oooItemsListDiv"]
+    {
+        width: 50% !important;
+    }
+
+    [aria-describedby="divPreview"]
+    {
+        width: 60% !important;
+        height: 70% !important;
+        overflow-y: auto;
+    }
+
+    [aria-describedby="mng_ooo"]
+    {
+        width: 90% !important;
+    }
+
+    [aria-describedby="editRoleUsers"]
+    {
+        width: 30% !important;
+    }
+
+    [aria-describedby="divAddProvider"]
+    {
+        width: 17% !important;
+    }
+
+    [aria-describedby="sendPathToGard"]
+    {
+        width: 20% !important;
+    }
+
+    [aria-describedby="DivEditVisitorVehicle"]
+    {
+        width: 30% !important;
+        max-height: 40% !important;
+        overflow-y: auto;
+    }
+
+    [aria-describedby="editRolePermission"]
+    {
+        width: 500px !important;
+        height: 80% !important;
+        overflow-y: auto;
+    }
+
+    [aria-describedby="panelNewOrganizationScanPoint"]
+    {
+        width: 57% !important;
+    }
+
+    [aria-describedby="divAddFloor"]
+    {
+        height: 23em !important;
+    }
+
+    [aria-describedby="divFullReport"]
+    {
+        width: 50% !important;
+    }
+
+    [aria-describedby="panelDocumentationWeapon"]
+    {
+        width: 50% !important;
+        /*height: 31em !important;
+        overflow-y: auto;*/
+    }
+
+    /*#endregion*/
+
+    /*#region Title And Hot Buttons*/
+
+    #companyLogo
+    {
+        width: 80px;
+        height: 80px;
+    }
+
+    #titleAndHotButtons
+    {
+        height: 3em;
+    }
+
+        #titleAndHotButtons label
+        {
+            line-height: 2.7em;
+            font-size: 100%;
+        }
+
+    .hotNav a
+    {
+        bottom: 0.5em;
+    }
+
+        .hotNav a img
+        {
+            width: 2em;
+        }
+
+    .hotNav span:not(.notSep) img
+    {
+        height: 2.9em;
+    }
+
+    .quickNav img
+    {
+        width: 2em;
+        margin-top: -2%;
+    }
+
+    #dateAndTime
+    {
+        font-size: 100%;
+    }
+
+    #companyName
+    {
+        font-size: 100%;
+    }
+
+    #alramState
+    {
+        width: 73%;
+    }
+
+    .logout
+    {
+        padding: 3%;
+    }
+
+    .hotMap
+    {
+        width: 8.6% !important;
+        height: 8.6% !important;
+    }
+
+    /*#endregion*/
+
+    /*#region Information*/
+
+    .infoBox
+    {
+        height: 3.5em;
+    }
+
+        .infoBox .span-full label
+        {
+            font-size: 68% !important;
+        }
+
+    /*#endregion*/
+
+    /*#region Tables*/
+
+    .tableBody tr td, .tableBody tr td a, .tableHeader th
+    {
+        font-size: 100% !important;
+    }
+
+    /*#endregion*/
+
+    /*#region Search Box*/
+
+    .searchBox
+    {
+        padding: 1% 0;
+    }
+
+        .searchBox img
+        {
+            width: 1em;
+            margin-top: 18%;
+        }
+
+        .searchBox input
+        {
+            font-size: 100%;
+        }
+
+    /*#endregion*/
+
+    /*#region Quick Nav*/
+
+    .quickBtn
+    {
+        margin-bottom: 1.7%;
+    }
+
+        .quickBtn img, .quickBtn input
+        {
+            width: 3em;
+        }
+
+    /*#endregion*/
+
+    /*#region Menu*/
+
+    .menuItem.itemHeader > .span-full
+    {
+        padding: 2% 0;
+    }
+
+    .menuItem img
+    {
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+    .menuItem.itemHeader ul.collapse li .span-full
+    {
+        padding: 2% 0;
+    }
+
+    .menuItem label
+    {
+        font-size: 100%;
+    }
+
+    #menuSection
+    {
+        font-size: 100%;
+    }
+
+    .main section#menuSection > .span-full > ul:last-child
+    {
+        height: 23em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #creditLogo
+    {
+        width: 2.5em;
+    }
+
+
+    .subList
+    {
+        height: 10em;
+    }
+
+    /*#endregion*/
+
+    /*#region GMS Body*/
+
+    #bodyPageDiv
+    {
+        height: 32em;
+    }
+
+        #bodyPageDiv *
+        {
+            
+        }
+
+    /*#endregion*/
+
+    /*#region Tabs*/
+
+    .tabHolder
+    {
+        height: auto;
+    }
+
+        .tabHolder .tabsRow a
+        {
+            font-size: 100% !important;
+        }
+
+    .tabsRow
+    {
+        padding: 0.6% 0;
+    }
+
+    #tabs ul li a
+    {
+        font-size: 86% !important;
+    }
+
+    #divtabsLestEvent
+    {
+        height: 17.3em;
+    }
+
+    /*#endregion*/
+
+    /*#region Credits*/
+
+    .credit
+    {
+        font-size: 80%;
+    }
+
+    /*#endregion*/
+
+    /*#region Maps*/
+
+    .mapHolder#dashboard
+    {
+        height: 35.5em;
+    }
+
+
+    .pointsAroundMe, #mapFilter
+    {
+        font-size: 11px;
+        font-weight: 500;
+        height: 1.79em;
+    }
+
+    .pointsAroundMe
+    {
+        position: absolute;
+        top: 0.8%;
+        right: 41.7%;
+    }
+
+    #mapFilter
+    {
+        position: absolute;
+        top: 0.7%;
+        right: 24.7%;
+    }
+
+    #mapLegend
+    {
+        height: 24em;
+        font-size: 79%;
+    }
+
+    #mapSearch
+    {
+        height: 10em;
+        font-size: 79%;
+    }
+
+    #showFilter, #showSearch
+    {
+        right: -17.2%;
+        height: 2em;
+    }
+
+    #legendHeader
+    {
+        width: 86% !important;
+        margin-top: 1.42%;
+        height: 1.92em !important;
+    }
+
+    .myOrganization
+    {
+        position: absolute;
+        left: -3.3%;
+    }
+
+    /*#endregion*/
+
+    /*#region Form*/
+
+    input[type="text"]:not(#txtSearchVisitorHot), input[type="tel"], input[type="email"], input[type="password"], select.span-full, input[type="number"]
+    {
+        height: 2em;
+        font-size: 100%;
+    }
+
+    input[type="search"]
+    {
+        height: 2em;
+        font-size: 100% !important;
+    }
+
+    textarea
+    {
+        height: 3.5em;
+    }
+
+    .ui-widget
+    {
+        font-size: 100%;
+    }
+
+    /*#endregion*/
+
+    /*#region field with no Label*/
+
+    .noLabel
+    {
+        margin-top: 2.2%;
+    }
+
+    /*#endregion*/
+
+    /*#region Panel*/
+
+    .panel
+    {
+        top: 17%;
+        height: 39em;
+        overflow-y: auto;
+        font-size: 85%;
+    }
+
+    #divPhoneBook
+    {
+        width: 40%;
+        overflow-x: hidden;
+    }
+
+        #divPhoneBook .tableCellPadding tr td
+        {
+            padding: 1%;
+        }
+
+    #eventPanel
+    {
+        width: 20%;
+    }
+
+        #eventPanel .tableCellPadding tr td
+        {
+            padding: 3%;
+        }
+
+    /*#endregion*/
+
+    /*#region Buttons*/
+
+    .bottomNav
+    {
+        bottom: 1em;
+    }
+
+
+    .blueButton, .classicButton, .redButton
+    {
+
+    }
+
+    /*#endregion*/
+
+    /*#region Main Screen Buttons*/
+
+    .screenButton
+    {
+        height: 5em;
+    }
+
+        .screenButton a
+        {
+            color: #fff;
+        }
+
+        .screenButton .span-full:last-child
+        {
+            margin-top: 3%;
+        }
+
+    /*#endregion*/
+
+    /*#region User Image Holder*/
+
+    .userImageHolder
+    {
+        padding: 2% 2% 1% 3%;
+        width: 69%;
+    }
+
+    .noRotate
+    {
+        padding-bottom: 12% !important;
+    }
+
+    #imgName-imgB
+    {
+        max-height: 150px;
+        max-width: 150px;
+    }
+
+    /*#endregion*/
+
+    /*#region Mini Compose*/
+
+    #div_ComposeMini
+    {
+        margin-top: 2%;
+        height: 17.9em;
+    }
+
+    .ComposeMMessages_msg
+    {
+        margin-top: 1.7%;
+    }
+
+    .ComposeMMessages_Map
+    {
+        margin-top: 1.7%;
+    }
+
+        .ComposeMMessages_Map .container .mapHolder
+        {
+            height: 12em;
+        }
+
+        .ComposeMMessages_msg input, .ComposeMMessages_Map input
+        {
+            height: 2em !important;
+        }
+
+            .ComposeMMessages_msg input[type="button"], .ComposeMMessages_Map input[type="button"]
+            {
+                font-size: 110% !important;
+                padding: 1% 27%;
+            }
+
+
+    /*#endregion*/
+
+    /*#region Alarms*/
+
+    #GuardAlarmsTable
+    {
+        max-height: 34em;
+    }
+
+    /*#endregion*/
+
+    /*#region Alarms Details*/
+
+    #alarmDetails
+    {
+        margin-top: 4%;
+    }
+
+        #alarmDetails table tr td
+        {
+            padding: 0.6%;
+        }
+
+    #mapAlarmsDivIframe
+    {
+        width: 36em;
+        height: 31.9em;
+    }
+
+    /*#endregion*/
+
+    /*#region Main Visitors*/
+
+    #currentVisitors
+    {
+        max-height: 27em;
+        margin-top: 2%;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Visitors Authorzied*/
+
+    #authorziedTable
+    {
+        max-height: 27em;
+        margin-top: 1%;
+    }
+
+    /*#endregion*/
+
+    /*#region Visitors History*/
+
+    #HistoryTable
+    {
+        max-height: 27.5em;
+    }
+
+    /*#endregion*/
+
+    /*#region Shoutout Visitors*/
+
+    #shoutOutTable
+    {
+        max-height: 28.5em;
+        margin-top: 1%;
+    }
+
+    /*#endregion*/
+
+    /*#region Visitors Details*/
+
+    #visitorsDetails
+    {
+        margin-top: 4%;
+        width: 90%;
+    }
+
+    .visitorBlockPopuptext, .visitorBlockPopupshutOutResponsible
+    {
+        height: 1.2em !important;
+    }
+
+    .visitorBlockPopupSave
+    {
+        font-size: 80%;
+    }
+
+    /*#endregion*/
+
+    /*#region Vehicle*/
+
+    #tableVehicleHolder
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    #veichleLog
+    {
+        max-height: 27.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Contractors*/
+
+    #contractorHolder, #divEmploymentAgencyList
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Autohrized Users*/
+
+    #AuthorizedUsers
+    {
+        max-height: 25.5em;
+        overflow-y: auto;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Blocked Users*/
+
+    #blockedUsers
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Pending Users*/
+
+    #pendingTable
+    {
+        max-height: 34.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Security Team*/
+
+    #securityTeam
+    {
+        max-height: 34.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Guard Location*/
+
+    #iframMapLocRoute
+    {
+        height: 31em;
+    }
+
+    #btnCloseEditDateAndOpenSelectUser
+    {
+        margin-top: 2%;
+    }
+
+    #dllSpan
+    {
+        max-height: 21em;
+        overflow-y: auto;
+    }
+
+    #guardlocationtext
+    {
+        margin-bottom: 5%;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Legate*/
+
+    #legateTable
+    {
+        max-height: 34.5em;
+    }
+
+    /*#endregion*/
+
+    /*#region User Index*/
+
+    #userQuickNav
+    {
+        margin-top: 3%;
+    }
+
+    #groupTable
+    {
+        max-height: 24em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Edit User*/
+
+    #userImg.editUser
+    {
+        width: 11.6em;
+        height: 8.6em;
+    }
+
+    /*#endregion*/
+
+    /*#region Cameras And Sensors*/
+
+
+    #pointOfIntrest, #DivSensorsRules, #alertLogNoRules, #DivSensorsRules, #alertLogNoRules
+    {
+        max-height: 34em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #DivOutdoorCamerasList, #DivEdificationList, #DivDigivodDisplayList, #DivGropsList, #sensorsStructuresList, #insideSensor
+    {
+        max-height: 29.5em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #DivImgFloor img.imgFloor
+    {
+        height: 30em;
+    }
+
+    #DivImgFloor
+    {
+        width: 98%;
+    }
+
+    /*#endregion*/
+
+    /*#region Messages*/
+
+    #ContactList
+    {
+        height: 22.4em;
+        overflow-x: hidden;
+    }
+
+    #msgMenu li
+    {
+        padding: 5%;
+    }
+
+    #messagesTitleInbox ul:not(.messageHeader)
+    {
+        height: 27.5em;
+    }
+
+    .msgTitle
+    {
+        height: 44px;
+    }
+
+    #msgContainer
+    {
+        height: 28.55em;
+        padding: 3%;
+    }
+
+    #msgMap
+    {
+        margin-top: 3%;
+        height: 12.5em;
+    }
+
+    .attached
+    {
+        margin-top: 2%;
+    }
+
+    .Sentattached
+    {
+        margin-top: 4%;
+    }
+
+    #recipment
+    {
+        height: 14em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #btnResend
+    {
+        float: right;
+    }
+
+    #composeMap
+    {
+        height: 28em;
+    }
+
+    #composeUserList
+    {
+        height: 36em;
+    }
+
+    #composeViewAddress
+    {
+        margin-top: 17%;
+    }
+
+    #tbMessageText
+    {
+        height: 6em;
+    }
+
+    #composeFields
+    {
+        margin-top: 2%;
+    }
+
+    #messagesTitleInbox
+    {
+        overflow-y: hidden;
+        height: 26.8em;
+    }
+
+    /*#endregion*/
+
+    /*#region Order Of Operations*/
+
+    #ulListOperation
+    {
+        max-height: 31em;
+        overflow-y: auto;
+        overflow-x:hidden;
+    }
+
+    #saveOperation
+    {
+        width: 55%;
+    }
+
+    #listOfOperations
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    #mng_ooo_table_header
+    {
+        max-height: 31.5em;
+        overflow-y: auto;
+    }
+
+
+    /*#endregion*/
+
+    /*#region User Details*/
+
+    #userDetailsTable
+    {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+        #userDetailsTable tr td
+        {
+            padding-bottom: 2.1%;
+        }
+
+
+    #userTarningEquipment
+    {
+        max-height: 14.1em;
+        overflow-y: auto;
+    }
+
+    #btnnewpassword
+    {
+        width: 11% !important;
+        height: 70% !important;
+        margin-top: 4%;
+        margin-left: 4%;
+    }
+
+    /*#endregion*/
+
+    /*#region Organization*/
+
+    #organizationQuickNav
+    {
+        margin-top: 3%;
+    }
+
+    .delHolder > .del, .OemailItem:last-child .addEmailToList
+    {
+        top: 0.6em;
+    }
+
+    .OemailItem:last-child .addEmailToList
+    {
+        left: 0.5em;
+    }
+
+    .organizationDetails > .span-full
+    {
+        margin-bottom: 2%;
+    }
+
+    #organizationAddress
+    {
+        height: 15em;
+    }
+
+    .imgsSpan_orgImg img
+    {
+        max-width: 10em;
+        max-height: 10em;
+    }
+
+    #organizationImgHolder table tr td .classicButton
+    {
+        padding: 6px 24px;
+        font-size: 100% !important;
+    }
+
+    /*#endregion*/
+
+    /*#region Phonebook*/
+
+    #managePhoneBookHolder
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Bank Of points*/
+
+    #bankOfPoint
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region SignificantLocations*/
+
+    #SignificantLocations
+    {
+        height: 15em;
+    }
+
+    /*#endregion*/
+
+    /*#region Route List*/
+
+    #tableShowRouteList
+    {
+        max-height: 34.5em;
+    }
+
+    #Alert150
+    {
+        margin-bottom: 10%;
+    }
+
+    #gaurdRouteMap
+    {
+        width: 100%;
+        height: 36em;
+    }
+
+
+    .team .container
+    {
+        background-color: #1b95d1;
+        padding: 0.3% 0 0.3%;
+    }
+
+    #showRouteMap
+    {
+        height: 31em;
+    }
+
+    .sendRoute
+    {
+        height: 30em !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    /*#endregion*/
+
+    /*#region Guard routes*/
+
+    #groupTable tr td:nth-child(2)
+    {
+        width: 17em;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+    }
+
+    #teamList
+    {
+        max-height: 30em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    /*#endregion*/
+
+    /*#region Scan Points*/
+
+    #routeStat
+    {
+        max-height: 21em;
+        overflow-y: auto;
+    }
+
+    .GuardRoutsMap
+    {
+        height: 15em;
+    }
+
+    .scanPointsCollapsContainer
+    {
+        overflow-y: auto;
+        height: 32em;
+    }
+
+    #scanPointList
+    {
+        max-height: 31em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Security Management*/
+
+    #organizationTask
+    {
+        overflow-y: auto;
+        max-height: 34.5em;
+    }
+
+    /*#endregion*/
+
+    /*#region Weapon*/
+
+    #weaponTable
+    {
+        max-height: 32em;
+        overflow-y: auto;
+    }
+
+    #getDocumentWeaponHolder
+    {
+        max-height: 20em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Tasks*/
+
+    #taskTable
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    #selectLoc .mapHolder
+    {
+        height: 10em;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Loan of Equipment*/
+
+    #eqipmentTable
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Managed Equipment*/
+
+    #ManagedEquipmentTable
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    #provider
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Item By Type*/
+
+    #itemByType
+    {
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Weapon Tasks*/
+
+    #taskTableDiv
+    {
+        max-height: 35em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Weapon In Repair*/
+
+    #inventoryListHeader
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Regulation*/
+
+    #listFileDiv
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Event Management*/
+
+    #eventfields
+    {
+        height: 21em;
+        overflow-x: hidden;
+        margin-bottom: 8%;
+    }
+
+    .imgsSpan_EventImageUrlNew img
+    {
+        max-width: 100px;
+        max-height: 100px;
+        width: 100px;
+        height: 100px;
+    }
+
+    #EventImageUrlNew-UpdatePhoto, #EventImageUrlNew-UpdatePhotoinCamera
+    {
+        font-size: 80% !important;
+    }
+
+    [aria-describedby="divPreview"] #saveNewEvent
+    {
+        right: 14%;
+        position: relative;
+    }
+
+    [aria-describedby="divPreview"] .quickBtn .span-1-5
+    {
+        margin-right: 10%;
+    }
+
+    [aria-describedby="divPreview"] .mapHolder
+    {
+        width: 105% !important;
+        height: 28.7em !important;
+    }
+
+
+
+    /*#endregion*/
+
+    /*#region Facilities*/
+
+    #facilityPropreties
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+    .facilityInfoFiles
+    {
+        height: 160px;
+    }
+
+    /*#endregion*/
+
+    /*#region User Management*/
+    #userIndexScreen
+    {
+        overflow-x: hidden;
+    }
+
+        #userIndexScreen div[class^="groupDiv_"] ul
+        {
+            
+        }
+
+    .deleteGroup
+    {
+        position: relative;
+        bottom: 0.3em;
+        padding: 0.2em;
+    }
+
+    #managementInterface
+    {
+        font-size: 100% !important;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Reports*/
+
+    #computedReports
+    {
+        max-height: 26em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Logistic Mission*/
+
+    #LogisticMission
+    {
+        max-height: 23em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Virtual Fence*/
+
+    #virtualMap
+    {
+        height: 35em;
+        overflow: hidden;
+    }
+
+    /*#endregion*/
+
+    /*#region Global Search*/
+
+    #globalSearch
+    {
+        max-height: 34em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Log*/
+
+    #divscrollEventLog
+    {
+        max-height: 31em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Traning Table*/
+
+    #trainingManagementTableDiv
+    {
+        max-height: 32em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Event Reports*/
+
+    .eventReports
+    {
+        max-height: 27em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Alarm form Equipment*/
+
+    #equipmentAlarm
+    {
+        max-height: 33em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Operation Competency*/
+
+    #divTrainingTable
+    {
+        overflow-y: auto;
+        max-height: 31em;
+    }
+
+    #traningforUser
+    {
+        max-height: 20em;
+        overflow-y: auto;
+    }
+
+    #userInGroup
+    {
+        overflow-y: auto;
+        max-height: 31em;
+    }
+
+    /*#endregion*/
+
+    /*#region Present reports*/
+
+    #PresetreportCat, #reportList
+    {
+        max-height: 31em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Interface Users*/
+
+    #roleList, #userList
+    {
+        max-height: 33em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+}
+
+/*1441px -> 1600px*/
+@media only screen and (min-width: 1441px) and (max-width: 1600px)
+{
+    /*#region Sections*/
+
+    .main section#dateAndTimeSection
+    {
+        margin-top: 5%;
+    }
+
+    .main section#companySection
+    {
+        margin-top: 20%;
+    }
+
+    .main section#searchSection
+    {
+        margin-top: 63%;
+    }
+
+    .main section#menuSection
+    {
+        margin-top: 80%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .main section#logoutAndCredit
+    {
+        position: fixed;
+        bottom: 1%;
+        width: 21%;
+    }
+
+    .main section#gmsBody
+    {
+        margin-top: 5.4%;
+    }
+
+    /*#endregion*/
+
+    /*#region Popup*/
+
+    .ui-dialog-title
+    {
+        font-size: 100% !important;
+    }
+
+    .ui-dialog label, .ui-dialog [type="submit"], .ui-dialog [type="button"], .ui-dialog input, .ui-dialog select
+    {
+        font-size: 82% !important;
+    }
+
+    [aria-describedby="userGuidePopup"]
+    {
+        width: 34% !important;
+    }
+
+    [aria-describedby="divAddSenser"]
+    {
+        width: 27% !important;
+    }
+
+    [aria-describedby="divEditEdification"]
+    {
+        width: 39% !important;
+    }
+
+    [aria-describedby="divCreateOrUpdateOutdoorCamera"]
+    {
+        width: 70% !important;
+    }
+
+    [aria-describedby="addNewpanlContac"]
+    {
+        width: 38% !important;
+    }
+
+    [aria-describedby="div_SignificantLocations_Add"]
+    {
+        width: 47% !important;
+    }
+
+    [aria-describedby="divSmsTextsEditor"]
+    {
+        width: 35% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="visitorsDepartments"]
+    {
+        width: 35% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="dRemoteDial"]
+    {
+        width: 40% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="editUserGroupsPopup"]
+    {
+        width: 24% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="groupPanel"]
+    {
+        width: 25% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="mapDivOrg"]
+    {
+        width: 60% !important;
+        font-size: 92%;
+    }
+
+    [aria-describedby="popapAddScanPointDiv"]
+    {
+        width: 57% !important;
+    }
+
+    [aria-describedby="divRadiosAndLoc_"]
+    {
+        width: 40% !important;
+    }
+
+    [aria-describedby="addManagedEquipment"], [aria-describedby="addManagedEquipmentItem"], [aria-describedby="divReportManagedEquipmnetTest"], [aria-describedby="editUser"]
+    {
+        width: 18% !important;
+    }
+
+    [aria-describedby="panelAddOO"]
+    {
+        width: 68% !important;
+    }
+
+    [aria-describedby="oooItemsListDiv"]
+    {
+        width: 50% !important;
+    }
+
+    [aria-describedby="divPreview"]
+    {
+        width: 60% !important;
+        height: 70% !important;
+        overflow-y: auto;
+    }
+
+    [aria-describedby="mng_ooo"]
+    {
+        width: 90% !important;
+    }
+
+    [aria-describedby="editRoleUsers"]
+    {
+        width: 30% !important;
+    }
+
+    [aria-describedby="divAddProvider"]
+    {
+        width: 17% !important;
+    }
+
+    [aria-describedby="sendPathToGard"]
+    {
+        width: 20% !important;
+    }
+
+    [aria-describedby="DivEditVisitorVehicle"]
+    {
+        width: 30% !important;
+        max-height: 40% !important;
+        overflow-y: auto;
+    }
+
+    [aria-describedby="editRolePermission"]
+    {
+        width: 500px !important;
+        height: 80% !important;
+        overflow-y: auto;
+    }
+
+    [aria-describedby="panelNewOrganizationScanPoint"]
+    {
+        width: 57% !important;
+    }
+
+    [aria-describedby="divAddFloor"]
+    {
+        height: 23em !important;
+    }
+
+    [aria-describedby="divFullReport"]
+    {
+        width: 50% !important;
+    }
+
+    [aria-describedby="panelDocumentationWeapon"]
+    {
+        width: 50% !important;
+        /*height: 31em !important;
+        overflow-y: auto;*/
+    }
+
+    /*.popupNotificationOuter form
+    {
+        height: 11em;
+    }*/
+
+    /*#endregion*/
+
+    /*#region Title And Hot Buttons*/
+
+    #titleAndHotButtons
+    {
+        height: 3em;
+    }
+
+        #titleAndHotButtons label
+        {
+            line-height: 2.7em;
+            font-size: 100%;
+        }
+
+    .hotNav a
+    {
+        bottom: 0.5em;
+    }
+
+        .hotNav a img
+        {
+            width: 2em;
+        }
+
+    .hotNav span:not(.notSep) img
+    {
+        height: 3em;
+    }
+
+    .quickNav img
+    {
+        width: 2em;
+        margin-top: -2%;
+    }
+
+    #dateAndTime
+    {
+        font-size: 100%;
+    }
+
+    .hotMap
+    {
+        width: 7.4% !important;
+        height: 7.4% !important;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Information*/
+
+    .infoBox
+    {
+        height: 4em;
+    }
+
+    /*#endregion*/
+
+    /*#region Tables*/
+
+    .tableBody tr td, .tableBody tr td a, .tableHeader th
+    {
+        font-size: 100%;
+    }
+
+    /*#endregion*/
+
+    /*#region Search Box*/
+
+    .searchBox
+    {
+        padding: 1% 0;
+    }
+
+        .searchBox img
+        {
+            width: 1em;
+            margin-top: 18%;
+        }
+
+    /*#endregion*/
+
+    /*#region Menu*/
+
+    .menuItem.itemHeader > .span-full
+    {
+        padding: 2.5% 0;
+    }
+
+    .menuItem img
+    {
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+    .menuItem.itemHeader ul.collapse li .span-full
+    {
+        padding: 2% 0;
+    }
+
+    #menuSection
+    {
+        font-size: 100%;
+    }
+
+    .main section#menuSection > .span-full > ul:last-child
+    {
+        height: 26em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .subList
+    {
+        height: 9em;
+        z-index: 9;
+    }
+
+
+    /*#endregion*/
+
+    /*#region GMS Body*/
+
+    #bodyPageDiv
+    {
+        height: 39.5em;
+    }
+
+        #bodyPageDiv *
+        {
+        }
+
+    /*#endregion*/
+
+    /*#region Tabs*/
+
+    .tabHolder
+    {
+        height: auto;
+    }
+
+        .tabHolder .tabsRow a
+        {
+            font-size: 100% !important;
+        }
+
+    .tabsRow
+    {
+        padding: 0.35% 0;
+    }
+
+    #divtabsLestEvent
+    {
+        height: 18em;
+    }
+
+    /*#endregion*/
+
+    /*#region Quick Nav*/
+
+    .quickBtn
+    {
+        margin-bottom: 1.7%;
+    }
+
+    /*#endregion*/
+
+    /*#region Credits*/
+
+    .credit
+    {
+        font-size: 80%;
+    }
+
+    /*#endregion*/
+
+    /*#region Maps*/
+
+    .mapHolder#dashboard
+    {
+        height: 42.2em;
+    }
+
+    #mapLegend
+    {
+        height: 26em;
+        font-size: 84%;
+    }
+
+    #mapSearch
+    {
+        height: 10em;
+        font-size: 84%;
+    }
+
+    #legendHeader
+    {
+        width: 87% !important;
+        margin-top: 1.28%;
+        height: 1.85em !important;
+    }
+
+    #showFilter, #showSearch
+    {
+        right: -17.5%;
+        height: 2em;
+    }
+
+    .myOrganization
+    {
+        position: absolute;
+        left: -1.3%;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Form*/
+
+    input[type="text"]:not(#txtSearchVisitorHot), input[type="tel"], input[type="email"], input[type="number"], input[type="password"], select.span-full
+    {
+        height: 2em;
+        font-size: 100%;
+    }
+
+    textarea
+    {
+        height: 8em;
+    }
+
+    .ui-widget
+    {
+        font-size: 100%;
+    }
+
+    input[type="search"]
+    {
+        height: 1.8em;
+        font-size: 100%;
+    }
+
+    /*#endregion*/
+
+    /*#region Field With no Label*/
+
+    .noLabel
+    {
+        margin-top: 1.87%;
+    }
+
+    /*#endregion*/
+
+    /*#region Panel*/
+
+    .panel
+    {
+        top: 15.4%;
+        height: 49.8em;
+        overflow-y: auto;
+    }
+
+    #divPhoneBook
+    {
+        width: 36%;
+        overflow-x: hidden;
+    }
+
+    #eventPanel
+    {
+        width: 20%;
+    }
+
+        #eventPanel .tableCellPadding tr td
+        {
+            padding: 3%;
+        }
+
+    /*#endregion*/
+
+    /*#region Buttons*/
+
+    .bottomNav
+    {
+        bottom: 1em;
+    }
+
+    .blueButton, .classicButton, .redButton
+    {
+
+    }
+
+
+    /*#endregion*/
+
+    /*#region Main Screen Buttons*/
+
+    .screenButton
+    {
+        height: 5em;
+    }
+
+        .screenButton a
+        {
+            color: #fff;
+        }
+
+        .screenButton .span-full:last-child
+        {
+            margin-top: 3%;
+        }
+
+    /*#endregion*/
+
+    /*#region User Image Holder*/
+
+    .userImageHolder
+    {
+        padding: 2% 2% 1% 3%;
+        width: 68%;
+    }
+
+    .noRotate
+    {
+        padding-bottom: 12% !important;
+    }
+
+    #imgName-imgB
+    {
+        max-height: 200px;
+        max-width: 200px;
+    }
+
+    /*#endregion*/
+
+    /*#region Mini Compose*/
+
+    #div_ComposeMini
+    {
+        margin-top: 4%;
+        height: 23em;
+    }
+
+    .ComposeMMessages_msg
+    {
+        margin-top: 4.8%;
+    }
+
+    .ComposeMMessages_Map
+    {
+        margin-top: 4.7%;
+    }
+
+        .ComposeMMessages_Map .container .mapHolder
+        {
+            height: 15em;
+        }
+
+
+    /*#endregion*/
+
+    /*#region Alarms*/
+
+    #GuardAlarmsTable
+    {
+        max-height: 41em;
+    }
+
+    /*#endregion*/
+
+    /*#region Alarms Details*/
+
+    #alarmDetails
+    {
+        margin-top: 4%;
+    }
+
+        #alarmDetails table tr td
+        {
+            padding: 0.95%;
+        }
+
+    #mapAlarmsDivIframe
+    {
+        width: 40em;
+        height: 37.9em;
+    }
+
+    /*#endregion*/
+
+    /*#region Main Visitors*/
+
+    #currentVisitors
+    {
+        max-height: 39em;
+        margin-top: 2%;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Visitors Authorzied*/
+
+    #authorziedTable
+    {
+        max-height: 34em;
+        margin-top: 1%;
+    }
+
+    /*#endregion*/
+
+    /*#region Visitors History*/
+
+    #HistoryTable
+    {
+        max-height: 34.5em;
+    }
+
+    /*#endregion*/
+
+    /*#region Shoutout Visitors*/
+
+    #shoutOutTable
+    {
+        max-height: 35em;
+        margin-top: 2%;
+    }
+
+    /*#endregion*/
+
+    /*#region Visitors Details*/
+
+    #visitorsDetails
+    {
+        margin-top: 4%;
+        width: 93%;
+    }
+
+    /*#endregion*/
+
+    /*#region Vehicle*/
+
+    #tableVehicleHolder
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+    #veichleLog
+    {
+        max-height: 34em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Contractors*/
+
+    #contractorHolder, #divEmploymentAgencyList
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Autohrized Users*/
+
+    #AuthorizedUsers
+    {
+        max-height: 32em;
+        overflow-y: auto;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Blocked Users*/
+
+    #blockedUsers
+    {
+        max-height: 36.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Pending Users*/
+
+    #pendingTable
+    {
+        max-height: 41.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Security Team*/
+
+    #securityTeam
+    {
+        max-height: 41.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Guard Location*/
+
+    #iframMapLocRoute
+    {
+        height: 37em;
+    }
+
+    #btnCloseEditDateAndOpenSelectUser
+    {
+        margin-top: 2%;
+    }
+
+    #dllSpan
+    {
+        max-height: 26em;
+        overflow-y: auto;
+    }
+
+    #guardlocationtext
+    {
+        margin-bottom: 5%;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Legate*/
+
+    #legateTable
+    {
+        max-height: 41.5em;
+    }
+
+    /*#endregion*/
+
+    /*#region User Index*/
+
+    #userQuickNav
+    {
+        margin-top: 3%;
+    }
+
+    #groupTable
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Cameras And Sensors*/
+
+
+    #pointOfIntrest, #DivSensorsRules, #alertLogNoRules, #DivSensorsRules, #alertLogNoRules
+    {
+        max-height: 40em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #DivOutdoorCamerasList, #DivEdificationList, #DivDigivodDisplayList, #DivGropsList, #sensorsStructuresList, #insideSensor
+    {
+        max-height: 35.5em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #DivImgFloor img.imgFloor
+    {
+        height: 36em;
+    }
+
+    #DivImgFloor
+    {
+        width: 98%;
+    }
+
+    /*#endregion*/
+
+    /*#region Messages*/
+
+    #ContactList
+    {
+        height: 26.4em;
+        overflow-x: hidden;
+    }
+
+    #msgMenu li
+    {
+        padding: 5%;
+    }
+
+    #messagesTitleInbox ul:not(.messageHeader)
+    {
+        height: 32.6em;
+    }
+
+    .msgTitle
+    {
+        height: 44px;
+    }
+
+    #msgContainer
+    {
+        height: 33.8em;
+        padding: 3%;
+    }
+
+    #msgMap
+    {
+        margin-top: 3%;
+        height: 15em;
+    }
+
+    .attached
+    {
+        margin-top: 5%;
+    }
+
+    .Sentattached
+    {
+        margin-top: 4%;
+    }
+
+    #recipment
+    {
+        height: 14em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+
+    #btnResend
+    {
+        float: right;
+    }
+
+    #composeMap
+    {
+        height: 35em;
+    }
+
+    #composeUserList
+    {
+        height: 43em;
+    }
+
+    #composeViewAddress
+    {
+        margin-top: 17%;
+    }
+
+    #composeFields
+    {
+        margin-top: 2%;
+    }
+
+
+    #messagesTitleInbox
+    {
+        overflow-y: hidden;
+        height: 32em;
+    }
+
+    /*#endregion*/
+
+    /*#region Order Of Operations*/
+
+    #ulListOperation
+    {
+        max-height: 37em;
+        overflow-y: auto;
+        overflow-x:hidden;
+    }
+
+    #saveOperation
+    {
+        width: 55%;
+    }
+
+    #listOfOperations
+    {
+        max-height: 35em;
+        overflow-y: auto;
+    }
+
+    #mng_ooo_table_header
+    {
+        max-height: 38.5em;
+        overflow-y: auto;
+    }
+
+
+    /*#endregion*/
+
+    /*#region User Details*/
+
+    #userDetailsTable
+    {
+        overflow-y: auto;
+    }
+
+        #userDetailsTable tr td
+        {
+            padding-bottom: 2.6%;
+        }
+
+    #userTarningEquipment
+    {
+        max-height: 20.1em;
+        overflow-y: auto;
+    }
+
+    #btnnewpassword
+    {
+        width: 11% !important;
+        height: 70% !important;
+        margin-top: 4%;
+        margin-left: 4%;
+    }
+
+
+
+    /*#endregion*/
+
+    /*#region Edit User*/
+
+    #userImg.editUser
+    {
+        width: 13.6em;
+        height: 13.6em;
+    }
+
+    /*#endregion*/
+
+    /*#region Organization*/
+
+    #organizationQuickNav
+    {
+        margin-top: 3%;
+    }
+
+    .delHolder > .del, .OemailItem:last-child .addEmailToList
+    {
+        top: 0.6em;
+    }
+
+    .organizationDetails > .span-full
+    {
+        margin-bottom: 2%;
+    }
+
+    #organizationAddress
+    {
+        height: 15em;
+    }
+
+    .imgsSpan_orgImg img
+    {
+        max-width: 6em;
+        max-height: 6em;
+    }
+
+    /*#endregion*/
+
+    /*#region Phonebook*/
+
+    #managePhoneBookHolder
+    {
+        max-height: 36.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Bank Of points*/
+
+    #bankOfPoint
+    {
+        max-height: 36.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region SignificantLocations*/
+
+    #SignificantLocations
+    {
+        height: 15em;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Route List*/
+
+    #tableShowRouteList
+    {
+        max-height: 41em;
+    }
+
+    #gaurdRouteMap
+    {
+        width: 100%;
+        height: 43em;
+    }
+
+    .team .container
+    {
+        background-color: #1b95d1;
+        padding: 2% 0 1%;
+    }
+
+    #showRouteMap
+    {
+        height: 37em;
+    }
+
+    .sendRoute
+    {
+        height: 30em !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    /*#endregion*/
+
+    /*#region Guard routes*/
+
+    #groupTable tr td:nth-child(2)
+    {
+        width: 21em;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+    }
+
+    #teamList
+    {
+        max-height: 36em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    /*#endregion*/
+
+    /*#region Scan Points*/
+
+    #routeStat
+    {
+        max-height: 27em;
+        overflow-y: auto;
+    }
+
+    .GuardRoutsMap
+    {
+        height: 15em;
+    }
+
+    .scanPointsCollapsContainer
+    {
+        overflow-y: auto;
+        height: 35em;
+    }
+
+    #scanPointList
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Security Management*/
+
+    #organizationTask
+    {
+        overflow-y: auto;
+        max-height: 41em;
+    }
+
+    /*#endregion*/
+
+    /*#region Weapon*/
+
+    #weaponTable
+    {
+        max-height: 38em;
+        overflow-y: auto;
+    }
+
+    #getDocumentWeaponHolder
+    {
+        max-height: 25em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Tasks*/
+
+    #taskTable
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+    #selectLoc .mapHolder
+    {
+        height: 10em;
+    }
+
+    /*#endregion*/
+
+    /*#region Loan of Equipment*/
+
+    #eqipmentTable
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Managed Equipment*/
+
+    #ManagedEquipmentTable
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+
+    #provider
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Item By Type*/
+
+    #itemByType
+    {
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Weapon Tasks*/
+
+    #taskTableDiv
+    {
+        max-height: 41em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Weapon In Repair*/
+
+    #inventoryListHeader
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Regulation*/
+
+    #listFileDiv
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Event Management*/
+
+    #eventfields
+    {
+        height: 28em;
+        overflow-x: hidden;
+        margin-bottom: 8%;
+    }
+
+    .imgsSpan_EventImageUrlNew img
+    {
+        max-width: 100px;
+        max-height: 100px;
+        width: 100px;
+        height: 100px;
+    }
+
+    #EventImageUrlNew-UpdatePhoto, #EventImageUrlNew-UpdatePhotoinCamera
+    {
+        font-size: 80% !important;
+    }
+
+    [aria-describedby="divPreview"] #saveNewEvent
+    {
+        right: 14%;
+        position: relative;
+    }
+
+    [aria-describedby="divPreview"] .quickBtn .span-1-5
+    {
+        margin-right: 10%;
+    }
+
+
+    [aria-describedby="divPreview"] .mapHolder
+    {
+        width: 105% !important;
+        height: 33.2em !important;
+    }
+
+    /*#endregion*/
+
+    /*#region Facilities*/
+
+    #facilityPropreties
+    {
+        max-height: 41em;
+        overflow-y: auto;
+    }
+
+    .facilityInfoFiles
+    {
+        height: 160px;
+    }
+
+    /*#endregion*/
+
+    /*#region User Management*/
+    #userIndexScreen
+    {
+        overflow-x: hidden;
+    }
+
+        #userIndexScreen div[class^="groupDiv_"] ul
+        {
+            
+        }
+
+    .deleteGroup
+    {
+        position: relative;
+        bottom: 0.3em;
+        padding: 0.2em;
+    }
+
+    /*#endregion*/
+
+    /*#region Reports*/
+
+    #computedReports
+    {
+        max-height: 32em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Logistic Mission*/
+
+    #LogisticMission
+    {
+        max-height: 28.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Virtual Fence*/
+
+    #virtualMap
+    {
+        height: 42em;
+        overflow: hidden;
+    }
+
+    /*#endregion*/
+
+    /*#region Global Search*/
+
+    #globalSearch
+    {
+        max-height: 41em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Log*/
+
+    #divscrollEventLog
+    {
+        max-height: 37em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Traning Table*/
+
+    #trainingManagementTableDiv
+    {
+        max-height: 38em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Event Reports*/
+
+    .eventReports
+    {
+        max-height: 33.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Alarm form Equipment*/
+
+    #equipmentAlarm
+    {
+        max-height: 38.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Operation Competency*/
+
+    #divTrainingTable
+    {
+        overflow-y: auto;
+        max-height: 37em;
+    }
+
+    #traningforUser
+    {
+        max-height: 25em;
+        overflow-y: auto;
+    }
+
+    #userInGroup
+    {
+        overflow-y: auto;
+        max-height: 37em;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Present reports*/
+
+    #PresetreportCat, #reportList
+    {
+        max-height: 37em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Interface Users*/
+
+    #roleList, #userList
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+}
+
+/*1601px -> 1920*/
+@media only screen and (min-width: 1601px) and (max-width: 1920px)
+{
+    /*#region Sections*/
+
+    .main section#dateAndTimeSection
+    {
+        margin-top: 5%;
+    }
+
+    .main section#companySection
+    {
+        margin-top: 20%;
+    }
+
+    .main section#searchSection
+    {
+        margin-top: 55%;
+    }
+
+    .main section#menuSection
+    {
+        margin-top: 76%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .main section#logoutAndCredit
+    {
+        position: fixed;
+        bottom: 0.5%;
+        width: 21%;
+    }
+
+    .main section#gmsBody
+    {
+        margin-top: 5.4%;
+    }
+
+    /*#endregion*/
+
+    /*#region Search Box*/
+
+    .searchBox
+    {
+        padding: 3% 0;
+    }
+
+    /*#endregion*/
+
+    /*#region PopUp*/
+
+    [aria-describedby="userGuidePopup"]
+    {
+        width: 31% !important;
+    }
+
+    [aria-describedby="divAddSenser"]
+    {
+        width: 27% !important;
+    }
+
+    [aria-describedby="divEditEdification"]
+    {
+        width: 39% !important;
+    }
+
+    [aria-describedby="divCreateOrUpdateOutdoorCamera"]
+    {
+        width: 70% !important;
+        height: 65% !important;
+    }
+
+    [aria-describedby="addNewpanlContac"]
+    {
+        width: 38% !important;
+    }
+
+    [aria-describedby="div_SignificantLocations_Add"]
+    {
+        width: 47% !important;
+    }
+
+    [aria-describedby="divSmsTextsEditor"]
+    {
+        width: 35% !important;
+    }
+
+    [aria-describedby="visitorsDepartments"]
+    {
+        width: 35% !important;
+    }
+
+    [aria-describedby="dRemoteDial"]
+    {
+        width: 40% !important;
+    }
+
+    [aria-describedby="editUserGroupsPopup"]
+    {
+        width: 24% !important;
+    }
+
+    [aria-describedby="groupPanel"]
+    {
+        width: 25% !important;
+    }
+
+    [aria-describedby="mapDivOrg"]
+    {
+        width: 60% !important;
+    }
+
+    [aria-describedby="divPreview"]
+    {
+        width: 60% !important;
+        height: 70% !important;
+        overflow-y: auto;
+    }
+
+    [aria-describedby="panelNewOrganizationScanPoint"]
+    {
+        width: 57% !important;
+    }
+
+    [aria-describedby="newOrEditRoute"]
+    {
+        width: 25% !important;
+    }
+
+    [aria-describedby="popapAddScanPointDiv"]
+    {
+        width: 80% !important;
+    }
+
+    .popupNotificationOuter form
+    {
+        height: 11em;
+    }
+
+    [aria-describedby="divRadiosAndLoc_"]
+    {
+        width: 35% !important;
+    }
+
+    [aria-describedby="allTrainingForUser"]
+    {
+        width: 35% !important;
+    }
+
+    [aria-describedby="divAddGropDigivod"]
+    {
+        width: 30% !important;
+        height: 50% !important;
+    }
+
+    [aria-describedby="addManagedEquipment"], [aria-describedby="addManagedEquipmentItem"], [aria-describedby="divReportManagedEquipmnetTest"], [aria-describedby="editUser"]
+    {
+        width: 18% !important;
+    }
+
+    [aria-describedby="panelAddOO"]
+    {
+        width: 68% !important;
+    }
+
+    [aria-describedby="oooItemsListDiv"]
+    {
+        width: 50% !important;
+    }
+
+    [aria-describedby="mng_ooo"]
+    {
+        width: 90% !important;
+    }
+
+    [aria-describedby="editRoleUsers"]
+    {
+        width: 24% !important;
+    }
+
+    [aria-describedby="divAddProvider"]
+    {
+        width: 17% !important;
+    }
+
+    [aria-describedby="sendPathToGard"]
+    {
+        width: 20% !important;
+    }
+
+    [aria-describedby="editRolePermission"]
+    {
+    }
+
+    [aria-describedby="DivEditVisitorVehicle"]
+    {
+        width: 30% !important;
+        max-height: 40% !important;
+        overflow-y: auto;
+    }
+
+    [aria-describedby="editRolePermission"]
+    {
+        width: 500px !important;
+        height: 80% !important;
+        overflow-y: auto;
+    }
+
+    [aria-describedby="divAddFloor"]
+    {
+        height: 23em !important;
+    }
+
+    [aria-describedby="divFullReport"]
+    {
+        width: 50% !important;
+    }
+
+    [aria-describedby="panelDocumentationWeapon"]
+    {
+        width: 50% !important;
+        /*height: 31em !important;
+        overflow-y: auto;*/
+    }
+
+    /*#endregion*/
+
+    /*#region Menu*/
+    .main section#menuSection > .span-full > ul:last-child
+    {
+        height: 31em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .menuItem.itemHeader > .span-full
+    {
+        padding: 3% 0;
+    }
+
+    .menuItem.itemHeader ul.collapse li .span-full
+    {
+        padding: 3% 0;
+    }
+
+    .subList
+    {
+        height: 9em;
+        z-index: 9;
+    }
+
+    /*#endregion*/
+
+    /*#region Title And Hot Buttons*/
+
+    #titleAndHotButtons
+    {
+        height: 4em;
+    }
+
+    .hotNav span:not(.notSep) img
+    {
+        height: 3.9em;
+    }
+
+    .hotNav a
+    {
+        bottom: 0.5em;
+    }
+
+    .quickNav img
+    {
+        width: 2em;
+        margin-top: -2%;
+    }
+
+    .hotMap
+    {
+        width: 7.4% !important;
+        height: 7.4% !important;
+    }
+
+    /*#endregion*/
+
+    /*#region Information*/
+
+    .infoBox
+    {
+        height: 5em;
+    }
+
+        .infoBox .span-full:first-child
+        {
+            font-size: 2.5em;
+        }
+
+    /*#endregion*/
+
+    /*#region GMS Body*/
+
+    #bodyPageDiv
+    {
+        height: 48.5em;
+    }
+
+        #bodyPageDiv *
+        {
+        }
+
+        input, select, textarea {
+            font-size: 16px;
+        }
+    /*#endregion*/
+
+    /*#region Tabs*/
+
+    .tabHolder
+    {
+        height: auto;
+    }
+
+        .tabHolder .tabsRow a
+        {
+            font-size: 100% !important;
+        }
+
+    #divtabsLestEvent
+    {
+        height: 18.45em;
+    }
+
+    /*#endregion*/
+
+    /*#region Quick Nav*/
+
+    .quickBtn
+    {
+        margin-bottom: 1.7%;
+    }
+
+    /*#endregion*/
+
+    /*#region Tables*/
+
+    .tableBody tr td, .tableBody tr td a
+    {
+        font-size: 100% !important;
+    }
+
+    [data-action="true"]
+    {
+        width: 150px;
+    }
+
+        [data-action="true"] img
+        {
+            width: 25px !important;
+            height: 25px !important;
+            padding: 1.8% 0.8% !important;
+        }
+
+    /*#endregion*/
+
+    /*#region Maps*/
+
+    .mapHolder#dashboard
+    {
+        height: 49em;
+    }
+
+    .pointsAroundMe, #mapFilter
+    {
+        font-size: 11px;
+        font-weight: 500;
+        height: 1.79em;
+    }
+
+    #mapLegend
+    {
+        height: 21em;
+    }
+
+    #mapSearch
+    {
+        height: 10em;
+    }
+
+    /*.myOrganization
+    {
+        position: absolute;
+left: -11%;
+    }*/
+
+
+
+
+    /*#endregion*/
+
+    /*#region Form*/
+
+    input[type="text"]:not(#txtSearchVisitorHot), input[type="tel"], input[type="number"], input[type="email"], input[type="password"], select.span-full
+    {
+        height: 2em;
+        font-size: 100% !important;
+    }
+
+    textarea
+    {
+        height: 8em;
+    }
+
+    input[type="search"]
+    {
+        height: 1.95em;
+        font-size: 100%;
+    }
+
+    /*#endregion*/
+
+    /*#region Field With no Label*/
+
+    .noLabel
+    {
+        margin-top: 1.9%;
+    }
+
+    /*#endregion*/
+
+    /*#region Panel*/
+
+    .panel
+    {
+        top: 15.4%;
+        height: 49.8em;
+        overflow-y: auto;
+    }
+
+    #divPhoneBook
+    {
+        width: 36%;
+        overflow-x: hidden;
+    }
+
+        #divPhoneBook .tableCellPadding tr td
+        {
+            padding: 0.3%;
+        }
+
+    #eventPanel
+    {
+        width: 20%;
+    }
+
+        #eventPanel .tableCellPadding tr td
+        {
+            padding: 3%;
+        }
+
+    /*#endregion*/
+
+    /*#region Buttons*/
+
+    .bottomNav
+    {
+        bottom: 1em;
+    }
+
+    .blueButton, .redButton, .classicButton
+    {
+
+    }
+
+
+    table tr td .blueButton, table tr td .redButton, table tr td .classicButton
+    {
+        font-size: 91% !important;
+        padding: 0.4% 1.2%;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Main Screen Buttons*/
+
+    .screenButton
+    {
+        height: 5em;
+    }
+
+        .screenButton a
+        {
+            color: #fff;
+        }
+
+        .screenButton .span-full:last-child
+        {
+            margin-top: 3%;
+        }
+
+    /*#endregion*/
+
+    /*#region User Image Holder*/
+
+    .userImageHolder
+    {
+        padding: 2% 2% 1% 3%;
+        width: 66%;
+    }
+
+    .noRotate
+    {
+        padding-bottom: 12% !important;
+    }
+
+    #imgName-imgB
+    {
+        max-height: 200px;
+        max-width: 200px;
+    }
+
+    /*#endregion*/
+
+    /*#region Mini Compose*/
+
+    #div_ComposeMini
+    {
+        margin-top: 4%;
+        height: 28.5em;
+    }
+
+    .ComposeMMessages_msg
+    {
+        margin-top: 5.6%;
+    }
+
+    .ComposeMMessages_Map
+    {
+        margin-top: 5.7%;
+    }
+
+        .ComposeMMessages_Map .container .mapHolder
+        {
+            height: 15em;
+        }
+
+
+    /*#endregion*/
+
+    /*#region Alarms*/
+
+    #GuardAlarmsTable
+    {
+        max-height: 49em;
+    }
+
+    /*#endregion*/
+
+    /*#region Alarms Details*/
+
+    #alarmDetails
+    {
+        margin-top: 4%;
+    }
+
+        #alarmDetails table tr td
+        {
+            padding: 1.2%;
+        }
+
+    #mapAlarmsDivIframe
+    {
+        width: 44em;
+        height: 44em;
+    }
+
+    /*#endregion*/
+
+    /*#region Main Visitors*/
+
+    #currentVisitors
+    {
+        max-height: 47em;
+        margin-top: 2%;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Visitors Authorzied*/
+
+    #authorziedTable
+    {
+        max-height: 41em;
+        margin-top: 1%;
+    }
+
+    /*#endregion*/
+
+    /*#region Visitors History*/
+
+    #HistoryTable
+    {
+        max-height: 41.5em;
+    }
+
+    /*#endregion*/
+
+    /*#region Shoutout Visitors*/
+
+    #shoutOutTable
+    {
+        max-height: 40em;
+        margin-top: 2%;
+    }
+
+    /*#endregion*/
+
+    /*#region Visitors Details*/
+
+    #visitorsDetails
+    {
+        margin-top: 4%;
+        width: 90%;
+    }
+
+    /*#endregion*/
+
+    /*#region Vehicle*/
+
+    #tableVehicleHolder
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    #veichleLog
+    {
+        max-height: 41em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Contractors*/
+
+    #contractorHolder, #divEmploymentAgencyList
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Event Management*/
+
+    #eventfields
+    {
+        height: 32em;
+        overflow-x: hidden;
+    }
+
+    textarea[name="OrganizationEventDescription"]
+    {
+        height: 9em;
+    }
+
+    #saveNewEvent
+    {
+        width: 39%;
+    }
+
+    .imgsSpan_EventImageUrl img
+    {
+        max-width: 180px;
+        max-height: 180px;
+    }
+
+    #newEventForm .span-1-4:nth-child(2) .span-9-10
+    {
+        padding: 0 10%;
+    }
+
+    .newImg img
+    {
+        width: 60px;
+        height: 60px;
+    }
+
+    [aria-describedby="divPreview"] #saveNewEvent
+    {
+        right: 76%;
+        position: relative;
+    }
+
+    [aria-describedby="divPreview"] .mapHolder
+    {
+        width: 105% !important;
+        height: 35.2em !important;
+    }
+
+    /*#endregion*/
+
+    /*#region Order of Operation*/
+
+    .sadapList
+    {
+        max-height: 44em;
+    }
+
+    #checkboxList
+    {
+        height: 20em;
+        overflow-y: auto;
+    }
+
+    #sadapFormContainer
+    {
+        height: 40em;
+        overflow-y: auto;
+    }
+
+    #saveOperation
+    {
+        width: 55%;
+    }
+
+    #listOfOperations
+    {
+        max-height: 38em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Log*/
+
+    #divscrollEventLog
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Guard Location*/
+
+    #iframMapLocRoute
+    {
+        height: 44em;
+    }
+
+    #btnCloseEditDateAndOpenSelectUser
+    {
+        margin-top: 2%;
+    }
+
+    #dllSpan
+    {
+        max-height: 31em;
+        overflow-y: auto;
+    }
+
+    #guardlocationtext
+    {
+        margin-bottom: 5%;
+    }
+
+
+
+
+
+    /*#endregion*/
+
+    /*#region Messages*/
+
+    #ContactList
+    {
+        height: 30.8em;
+        overflow-x: hidden;
+    }
+
+    #msgMenu li
+    {
+        padding: 5%;
+    }
+
+    #messagesTitleInbox ul:not(.messageHeader)
+    {
+        height: 38.6em;
+    }
+
+    .msgTitle
+    {
+        height: 44px;
+    }
+
+    #msgContainer
+    {
+        height: 40.5em;
+        padding: 3%;
+    }
+
+    #msgMap
+    {
+        margin-top: 3%;
+        height: 13em;
+    }
+
+    .attached
+    {
+        margin-top: 17%;
+    }
+
+    .Sentattached
+    {
+        margin-top: 4%;
+    }
+
+    #recipment
+    {
+        height: 23em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+
+    #btnResend
+    {
+        float: right;
+    }
+
+    #composeMap
+    {
+        height: 40em;
+    }
+
+    #composeFields
+    {
+        margin-top: 2%;
+    }
+
+    #composeViewAddress
+    {
+        margin-top: 12%;
+    }
+
+
+    #messagesTitleInbox
+    {
+        overflow-y: hidden;
+        height: 38.5em;
+    }
+
+    /*#endregion*/
+
+    /*#region Order Of Operations*/
+
+    #ulListOperation
+    {
+        max-height: 44em;
+        overflow-y: auto;
+        overflow-x:hidden;
+    }
+
+    #mng_ooo_table_header
+    {
+        max-height: 46em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Autohrized Users*/
+
+    #AuthorizedUsers
+    {
+        max-height: 38.5em;
+        overflow-y: auto;
+    }
+
+
+    /*#endregion*/
+
+    /*#region Blocked Users*/
+
+    #blockedUsers
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Pending Users*/
+
+    #pendingTable
+    {
+        max-height: 49em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Security Team*/
+
+    #securityTeam
+    {
+        max-height: 49em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Legate*/
+    #legateTable
+    {
+        max-height: 49em;
+    }
+
+    /*#endregion*/
+
+    /*#region User Index*/
+
+    #userQuickNav
+    {
+        margin-top: 3%;
+    }
+
+    #groupTable
+    {
+        max-height: 35em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region User Details*/
+
+    #userDetailsTable
+    {
+        overflow-y: auto;
+    }
+
+        #userDetailsTable tr td
+        {
+            padding-bottom: 3.5%;
+        }
+
+    #userTarningEquipment
+    {
+        max-height: 26.8em;
+        overflow-y: auto;
+    }
+
+    #btnnewpassword
+    {
+        width: 11% !important;
+        height: 79% !important;
+        margin-top: 4%;
+        margin-left: 4%;
+    }
+
+    /*#endregion*/
+
+    /*#region Edit User*/
+
+    #userImg.editUser
+    {
+        width: 8.6em;
+        height: 8.6em;
+    }
+
+    /*#endregion*/
+
+    /*#region Cameras And Sensors*/
+
+    #pointOfIntrest, #DivSensorsRules, #alertLogNoRules, #DivSensorsRules, #alertLogNoRules
+    {
+        max-height: 45em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #DivOutdoorCamerasList, #DivEdificationList, #DivDigivodDisplayList, #DivGropsList, #sensorsStructuresList, #insideSensor
+    {
+        max-height: 41.5em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #DivImgFloor img.imgFloor
+    {
+        height: 42em;
+    }
+
+    .floorImage img
+    {
+        max-height: 8em;
+        max-width: 8em;
+    }
+
+    /*#endregion*/
+
+    /*#region Organization*/
+
+    #organizationQuickNav
+    {
+        margin-top: 3%;
+    }
+
+    .delHolder > .del, .OemailItem:last-child .addEmailToList
+    {
+        top: 0.6em;
+    }
+
+    .organizationDetails > .span-full
+    {
+        margin-bottom: 4%;
+    }
+
+    #organizationAddress
+    {
+        height: 15em;
+    }
+
+    .imgsSpan_orgImg img
+    {
+        max-width: 6em;
+        max-height: 6em;
+    }
+
+    /*#endregion*/
+
+    /*#region Phonebook*/
+
+    #managePhoneBookHolder
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Bank Of points*/
+
+    #bankOfPoint
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region SignificantLocations*/
+
+    #SignificantLocations
+    {
+        height: 15em;
+    }
+
+    /*#endregion*/
+
+    /*#region Route List*/
+
+    #tableShowRouteList
+    {
+        max-height: 49em;
+    }
+
+    #gaurdRouteMap
+    {
+        width: 100%;
+        height: 49em;
+    }
+
+    .team .container
+    {
+        background-color: #1b95d1;
+        padding: 4% 0 4%;
+    }
+
+    #showRouteMap
+    {
+        height: 43.5em;
+    }
+
+    #teamList
+    {
+        max-height: 44em;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .sendRoute
+    {
+        height: 30em !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    /*#endregion*/
+
+    /*#region Scan Points*/
+
+    #routeStat
+    {
+        max-height: 32em;
+        overflow-y: auto;
+    }
+
+    .GuardRoutsMap
+    {
+        height: 15em;
+    }
+
+    .scanPointsCollapsContainer
+    {
+        overflow-y: auto;
+        height: 40em;
+    }
+
+    #scanPointList
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Security Management*/
+
+    #organizationTask
+    {
+        max-height: 49em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Weapon*/
+
+    #weaponTable
+    {
+        max-height: 43em;
+        overflow-y: auto;
+    }
+
+    #getDocumentWeaponHolder
+    {
+        max-height: 30em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Tasks*/
+
+    #taskTable
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Loan of Equipment*/
+
+    #eqipmentTable
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Managed Equipment*/
+
+    #ManagedEquipmentTable
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    #provider
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Item By Type*/
+
+    #itemByType
+    {
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Weapon Tasks*/
+
+    #taskTableDiv
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Weapon In Repair*/
+
+    #inventoryListHeader
+    {
+        max-height: 49em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Regulation*/
+
+    #listFileDiv
+    {
+        max-height: 36em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Facilities*/
+
+    #facilityPropreties
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    .facilityInfoFiles
+    {
+        height: 160px;
+    }
+
+    /*#endregion*/
+
+    /*#region User Management*/
+    #userIndexScreen
+    {
+        overflow-x: hidden;
+    }
+
+        #userIndexScreen div[class^="groupDiv_"] ul
+        {
+            
+        }
+
+    .deleteGroup
+    {
+        position: relative;
+        bottom: 0.4em;
+    }
+    /*#endregion*/
+
+    /*#region Reports*/
+
+    #computedReports
+    {
+        max-height: 39em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Logistic Mission*/
+
+    #LogisticMission
+    {
+        max-height: 34.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Virtual Fence*/
+
+    #virtualMap
+    {
+        height: 49em;
+    }
+
+    /*#endregion*/
+
+    /*#region Global Search*/
+
+    #globalSearch
+    {
+        max-height: 49em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Traning Table*/
+
+    #trainingManagementTableDiv
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Event Reports*/
+
+    .eventReports
+    {
+        max-height: 37em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Alarm form Equipment*/
+
+    #equipmentAlarm
+    {
+        max-height: 43.5em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Operation Competency*/
+
+    #divTrainingTable
+    {
+        overflow-y: auto;
+        max-height: 44em;
+    }
+
+    #traningforUser
+    {
+        max-height: 27em;
+        overflow-y: auto;
+    }
+
+    #userInGroup
+    {
+        overflow-y: auto;
+        max-height: 44em;
+    }
+
+    /*#endregion*/
+
+    /*#region Present reports*/
+
+    #PresetreportCat, #reportList
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region Interface Users*/
+
+    #roleList, #userList
+    {
+        max-height: 44em;
+        overflow-y: auto;
+    }
+
+    /*#endregion*/
+}
+
+/*1921px -> up*/
+@media only screen and (min-width: 1921px)
+{
+}
+
+/*ipad*/
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5)
+{
+}
+
+/*#endregion*/
+
+
+form#newEventForm img {
+    max-height:200px;
+    max-width:200px;
+}
+
+/*New Tree styes*/
+.tree ul {    
+	padding-top: 20px; position: relative;	
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+.tree li {
+	float: left; text-align: center;
+	list-style-type: none;
+	position: relative;
+	padding: 20px 5px 0 5px;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+/*We will use ::before and ::after to draw the connectors*/
+
+.tree li::before, .tree li::after{
+	content: '';
+	position: absolute; top: 0; right: 50%;
+	border-top: 1px solid #ccc;
+	width: 50%; height: 20px;
+}
+.tree li::after{
+	right: auto; left: 50%;
+	border-left: 1px solid #ccc;
+}
+
+/*We need to remove left-right connectors from elements without 
+any siblings*/
+.tree li:only-child::after, .tree li:only-child::before {
+	display: none;
+}
+
+/*Remove space from the top of single children*/
+.tree li:only-child{ padding-top: 0;}
+
+/*Remove left connector from first child and 
+right connector from last child*/
+.tree li:first-child::before, .tree li:last-child::after{
+	border: 0 none;
+}
+/*Adding back the vertical connector to the last nodes*/
+.tree li:last-child::before{
+	border-right: 1px solid #ccc;
+	border-radius: 0 5px 0 0;
+	-webkit-border-radius: 0 5px 0 0;
+	-moz-border-radius: 0 5px 0 0;
+}
+.tree li:first-child::after{
+	border-radius: 5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	-moz-border-radius: 5px 0 0 0;
+}
+
+/*Time to add downward connectors from parents*/
+.tree ul ul::before{
+	content: '';
+	position: absolute; top: 0; left: 50%;
+	border-left: 1px solid #ccc;
+	width: 0; height: 20px;
+}
+
+.tree li div {
+    text-align: center;
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+	text-decoration: none;
+	color: #666;
+	font-family: arial, verdana, tahoma;
+	font-size: 14px;
+	display: inline-block;
+	
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+/*Time for some hover effects*/
+/*We will apply the hover effect the the lineage of the element also*/
+.tree li div:hover, .tree li div:hover+ul li div {
+	background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
+}
+/*Connector styles on hover*/
+.tree li div:hover+ul li::after, 
+.tree li div:hover+ul li::before, 
+.tree li div:hover+ul::before, 
+.tree li div:hover+ul ul::before{
+	border-color:  #94a0b4;
+}
+.tree .orgX {
+    color:#cd0200;
+}
+
+.tree .addCat .last {
+    padding: 3em;        
+}
+
+/* Lenel Tree Structure */
+
+#LenelPanelTree li {  
+    margin: 0px 0;    
+    list-style-type: none;  
+    position: relative;  
+    padding: 20px 5px 0px 5px;  
+}  
+  
+#LenelPanelTree li::before{  
+    content: '';  
+    position: absolute;   
+    top: 0;  
+    width: 1px;   
+    height: 100%;  
+    right: auto;   
+    left: -20px;  
+    border-left: 1px solid #ccc;  
+    bottom: 50px;  
+}  
+#LenelPanelTree li::after{  
+    content: '';  
+    position: absolute;   
+    top: 30px;   
+    width: 25px;   
+    height: 20px;  
+    right: auto;   
+    left: -20px;  
+    border-top: 1px solid #ccc;  
+}  
+#LenelPanelTree li a{  
+    display: inline-block;  
+    border: 1px solid #ccc;  
+    padding: 5px 10px;  
+    text-decoration: none;  
+    color: #666;      
+    font-family: 'Open Sans',sans-serif;  
+    font-size: 14px;  
+    font-weight :600;  
+    border-radius: 5px;  
+    -webkit-border-radius: 5px;  
+    -moz-border-radius: 5px;  
+}  
+  
+/*Remove connectors before root*/  
+#LenelPanelTree > ul > li::before, .tree > ul > li::after{  
+    border: 0;  
+}  
+/*Remove connectors after last child*/  
+#LenelPanelTree li:last-child::before{   
+      height: 30px;  
+}  
+  
+/*Time for some hover effects*/  
+/*We will apply the hover effect the the lineage of the element also*/  
+#LenelPanelTree li a:hover, .tree li a:hover+ul li a {  
+    background: #dd4814; color: #ffffff; border: 1px solid #dd4814;  
+}  
+/*Connector styles on hover*/  
+#LenelPanelTree li a:hover+ul li::after,   
+#LenelPanelTree li a:hover+ul li::before,   
+#LenelPanelTree li a:hover+ul::before,   
+#LenelPanelTree li a:hover+ul ul::before{  
+    border-color:  #dd4814;  
+}  
+#LenelPanelTree-checkbox{  
+    margin :4px !important;  
+}  
+  
+   
+#LenelPanelTree:before {  
+    border-left:  1px solid #ccc;  
+    bottom: 16px;  
+    content: "";  
+    display: block;  
+    left: 0;  
+    position: absolute;  
+    top: -21px;  
+    width: 1px;  
+    z-index: 1;  
+}  
+  
+#LenelPanelTree ul:after {  
+    border-top: 1px solid #ccc;  
+    content: "";  
+    height: 20px;  
+    left: -29px;  
+    position: absolute;  
+    right: auto;  
+    top: 37px;  
+    width: 34px;  
+}  
+*:before, *:after {  
+    box-sizing: border-box;  
+}  
+*:before, *:after {  
+    box-sizing: border-box;  
+}  
+#LenelPanelTree {  
+    overflow: auto;  
+    padding-left: 0px;  
+    position: relative;  
+}  
+
+/* endregion*/
+
+/* Fix Modals */
+
+#bodyPageDiv .modal-body, #bodyPageDiv .modal-body li, #bodyPageDiv .modal-body ul, #bodyPageDiv .modal-body div, #bodyPageDiv .modal-body a,
+ #bodyPageDiv .modal-body span, #bodyPageDiv .modal-body table, #bodyPageDiv .modal-body input, #bodyPageDiv .modal-body textarea, #bodyPageDiv .modal-body label
+{box-sizing:border-box!important;}
+
+.modal-body input[type="text"]:not(#txtSearchVisitorHot) {
+    border-radius:0;
+    border-color:#cccccc;
+    box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    background-color:#fff;
+    text-indent: initial;
+    height: auto;
+}
+
+.modal-body .dropdown-menu {
+    min-height:300px; 
+    overflow-y: auto;
+}
+
+#msg-compose-modal .modal-body .dropdown-menu li a {
+    max-width:500px;
+        white-space: initial;
+}
