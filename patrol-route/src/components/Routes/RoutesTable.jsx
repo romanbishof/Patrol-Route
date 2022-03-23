@@ -16,6 +16,8 @@ import { fromLonLat } from 'ol/proj';
 // import OSM from 'ol/source/OSM';
 // import { add } from 'ol/coordinate';
 import LineString from 'ol/geom/LineString';
+import Modify from 'ol/interaction/Modify';
+import { Vector } from 'ol/source'
 
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
@@ -34,12 +36,15 @@ function RoutesTable() {
 
   const handleEditRoute = (id) => {
     // getting specific route plan by id
-    let data = routes[0].RoutePlans.filter(routePlan => routePlan.Id === id)
-    console.log(data);
+    let _route = routes[0].RoutePlans.filter(routePlan => routePlan.Id === id)
+    console.log(_route);
+
+
+    
   }
 
   const handleShowRoute = (id) => {
-    
+
     let route = routes[0].RoutePlans.filter(routePlan => routePlan.Id === id)
     route = route[0];
     // console.log('id of route by click ', id);
@@ -57,68 +62,67 @@ function RoutesTable() {
       const item = route.CheckPoints[i];
       const lat = parseFloat(item.Latitude);
       const lon = parseFloat(item.Longitude);
-      
+
       // transforming the coordinates to specific format
       var pointTransform = fromLonLat([lon, lat], "EPSG:4326");
       coordinatesLineString.push(pointTransform);
     }
-    
-    if(checkRouteId !== id){
+
+    if (checkRouteId !== id) {
       // calling the function that adds layer of drawing on our existing map
       drawPolygonOnMap(coordinatesLineString, route.Id);
-    }else{
+    } else {
       // if the route alredy drawn --> we remove it
       removeLinePath()
       setCheckRouteId('')
     }
   }
 
-//function to draw Route on MAP 
-function drawPolygonOnMap(coordinates, routeId) {
-  setCheckRouteId(routeId)
-  removeLinePath();
-  // getting the Specific layer from all the Layer in our map
-  let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
-  
-  if (typeof _vector === 'undefined') {
-    return;
+  //function to draw Route on MAP 
+  function drawPolygonOnMap(coordinates, routeId) {
+    setCheckRouteId(routeId)
+    removeLinePath();
+    // getting the Specific layer from all the Layer in our map
+    let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
+
+    if (typeof _vector === 'undefined') {
+      return;
+    }
+    // getting our source of vector
+    let source = _vector.getSource();
+
+    //linestring 
+    var lineString = new LineString(coordinates);
+
+    //polygon
+    //var plygon = new PolygonGeom([coordinates])
+
+    // creating new feature for map
+    // adding line based on our coordinates
+    var feature = new Feature({
+      geometry: lineString,
+    });
+
+    // giving ID to our feature
+    feature.Id = routeId;
+
+    //console.log(feature);
+    source.addFeature(feature);
+    //console.log(_vector.getSource().getFeatures().length);
   }
-  // getting our source of vector
-  let source = _vector.getSource();
 
-  //linestring 
-  var lineString = new LineString(coordinates); 
+  // removing the route layer
+  function removeLinePath() {
 
-  //polygon
-  //var plygon = new PolygonGeom([coordinates])
-
-  // creating new feature for map
-  // adding line based on our coordinates
-  var feature = new Feature({
-    geometry: lineString,
-  });
-
-  // giving ID to our feature
-  feature.Id = routeId;
-
-  //console.log(feature);
-  source.addFeature(feature);
-  //console.log(_vector.getSource().getFeatures().length);
-}
-
-
-// removing the route layer
-function removeLinePath() {
-  
-  let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
-  if (typeof _vector === 'undefined') {
-    return;
+    let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
+    if (typeof _vector === 'undefined') {
+      return;
+    }
+    let source = _vector.getSource();
+    source.clear();
   }
-  let source = _vector.getSource();
-  source.clear();
-}
 
-return (
+  return (
     <div className='RoutesTable'>
 
       <TableContainer>
@@ -136,14 +140,13 @@ return (
               return (
                 <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
-                  <TableCell onClick={() => { handleShowRoute(route.Id);}} >{route.Id}</TableCell>
+                  <TableCell onClick={() => { handleShowRoute(route.Id); }} >{route.Id}</TableCell>
                   <button onClick={() => { handleEditRoute(route.Id); }}>Edit Route</button>
                   <button onClick={() => { handleDelete(route.Id); }}>Delete Route</button>
                 </TableRow>
               )
-
-
-            })}
+            })
+            }
           </TableBody>
         </Table>
       </TableContainer>
@@ -151,11 +154,10 @@ return (
         <Link to='/patrol-route'>
           <button>Add Route</button>
         </Link>
-
       </div>
 
     </div>
-)
+  )
 }
 
 export default RoutesTable
