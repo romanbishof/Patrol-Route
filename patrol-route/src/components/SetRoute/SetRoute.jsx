@@ -84,7 +84,7 @@ function SetRoute() {
                         console.log(route);
                         return(
                             <TableRow key={index}>
-                                <TableCell>{index}</TableCell>
+                                <TableCell>{index+1}</TableCell>
                                 <TableCell>{route.Latitude}</TableCell>
                                 <TableCell>{route.Longitude}</TableCell>
                                 <TableCell>{route.WaitforSeconds}</TableCell>

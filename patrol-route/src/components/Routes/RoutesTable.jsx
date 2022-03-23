@@ -21,7 +21,7 @@ function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
   const [watchRoute, setWatchRoute] = useState(false)
   const [routePlan, setRoutePlan] = useState('')
-
+  const [showRoute, setShowRoute] = useState(false)
   //map = routes[1].map;
   const dispatch = useDispatch();
   useEffect(async () => {
@@ -42,7 +42,7 @@ function RoutesTable() {
   }
 
   const handleShowRoute = (id) => {
-    setWatchRoute(!watchRoute)
+    
     let route = routes[0].RoutePlans.filter(routePlan => routePlan.Id === id)
     route = route[0];
 
@@ -52,45 +52,62 @@ function RoutesTable() {
     }
 
     // getting coordinates to draw new map
-    var coordinatesPolygon = new Array();
+    var coordinatesLineString = new Array();
+
     // gooing over our jason file to get the coordinates points
     for (let i = 0; i < route.CheckPoints.length; i++) {
       const item = route.CheckPoints[i];
       const lat = parseFloat(item.Latitude);
       const lon = parseFloat(item.Longitude);
+      
       // transforming the coordinates to specific format
       var pointTransform = fromLonLat([lon, lat], "EPSG:4326");
-      coordinatesPolygon.push(pointTransform);
+      coordinatesLineString.push(pointTransform);
     }
-
-    drawPolygonOnMap(coordinatesPolygon, route.Id);
-
+    // calling the function that adds layer of drawing on our existing map
+    drawPolygonOnMap(coordinatesLineString, route.Id);
+    
     setRoutePlan(route);
   }
 
+//function to draw Route on MAP 
 function drawPolygonOnMap(coordinates, routeId) {
 
+  // getting the Specific layer from all the Layer in our map
   let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
+  
   if (typeof _vector === 'undefined') {
     return;
   }
-
+  // getting oure source of vector
   let source = _vector.getSource();
+
   //linestring 
-  var lineString = new LineString(coordinates);  
+  var lineString = new LineString(coordinates); 
+
   //polygon
   //var plygon = new PolygonGeom([coordinates])
+
+  // creating new feature for map
+  // adding line based on our coordinates
   var feature = new Feature({
     geometry: lineString,
   });
 
+  // giving ID to our feature
   feature.Id = routeId;
 
   //console.log(feature);
   source.addFeature(feature);
   //console.log(_vector.getSource().getFeatures().length);
+
+  if(showRoute){
+    removeLinePath();
+  }
+
 }
 
+// removing the route layer
 function removeLinePath() {
   
   let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
@@ -99,45 +116,10 @@ function removeLinePath() {
   }
   let source = _vector.getSource();
   source.clear();
+  
 }
 
 return (
-  watchRoute ?
-    <div>
-      <h3> Route {routePlan.Id}</h3>
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Point Number</TableCell>
-              <TableCell>Laitude</TableCell>
-              <TableCell>Longitde</TableCell>
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {
-              //console.log(routePlan);
-              routePlan.CheckPoints.map((routePoint, index) => {
-                return (
-                  <TableRow key={index}>
-                    <TableCell>{index}</TableCell>
-                    <TableCell>{routePoint.Latitude}</TableCell>
-                    <TableCell>{routePoint.Longitude}</TableCell>
-                    <TableCell>{routePoint.WaitforSeconds}</TableCell>
-                    <TableCell>
-                      <button>delete</button>
-                    </TableCell>
-                  </TableRow>
-                )
-              })
-            }
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <button onClick={() => { setWatchRoute(!watchRoute); removeLinePath(); }}> back</button>
-    </div>
-    :
     <div className='RoutesTable'>
 
       <TableContainer>
@@ -155,9 +137,9 @@ return (
               return (
                 <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
-                  <TableCell onClick={() => handleShowRoute(route.Id)} >{route.Id}</TableCell>
-                  <button onClick={() => { handleEditRoute(route.Id) }}>Edit Route</button>
-                  <button onClick={() => { handleDelete(route.Id) }}>Delete Route</button>
+                  <TableCell onClick={() => { handleShowRoute(route.Id); setShowRoute(!showRoute) }} >{route.Id}</TableCell>
+                  <button onClick={() => { handleEditRoute(route.Id); }}>Edit Route</button>
+                  <button onClick={() => { handleDelete(route.Id); }}>Delete Route</button>
                 </TableRow>
               )
 

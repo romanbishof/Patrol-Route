@@ -37,28 +37,6 @@ function OSM_Map() {
           projection: 'EPSG:4326',          
         }),
       });
-        // initialMap.addInteraction(
-        //   new Draw({
-        //     type: 'Point',
-        //     source: source
-        //   })
-        // )
-
-        // getting coordinates by clicking the map
-        // initialMap.on("click", (e) => {
-        //   let template = {
-
-        //     Id: '',
-        //     Name: '',
-        //     Latitude: e.coordinate[1].toString(),
-        //     Longitude: e.coordinate[0].toString(),
-        //     WaitforSeconds: 1000,
-        //     Devices: []
-        //   }
-
-          // dispatch(setRoutePoint(template))
-          
-        // } )
         dispatch(setMapState(window.map))
 
     }, []);
