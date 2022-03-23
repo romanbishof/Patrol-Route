@@ -2,7 +2,6 @@ import { Map, View } from 'ol';
 import { Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import React, { useEffect, useRef, useState } from 'react'
 import { OSM, Vector as VectorSource } from 'ol/source'
-import Draw from 'ol/interaction/Draw'
 import './OSM_Map.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { setMapState, setRoutePoint } from '../../redux/patroslSlice';
@@ -12,7 +11,6 @@ import { setMapState, setRoutePoint } from '../../redux/patroslSlice';
 function OSM_Map() {
     const dispatch = useDispatch();
     const patrols = useSelector( (state) => state.patrols)
-    
     const raster = new TileLayer({
       source: new OSM(),
     })

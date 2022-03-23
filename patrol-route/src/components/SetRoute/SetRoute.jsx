@@ -14,7 +14,7 @@ function SetRoute() {
     const [routePoint, setRoutePoints] = useState([])
     const [waitforSeconds, setWaitforSeconds] = useState('')
     const dispatch = useDispatch();
-    let map = patrols[1].map
+    // let map = patrols[1].map
     let draw
 
     const hendleSaveRoute = () => {
@@ -30,21 +30,22 @@ function SetRoute() {
         dispatch(postRoutesAsync(newRoute))
 
         // remove the option to draw on the map
-        map.removeInteraction(draw)
+        window.map.removeInteraction(draw)
         
     }
 
     useEffect(()=>{
         // adding option to draw on the map
-        map.addInteraction(
+        window.map.addInteraction(
             draw = new Draw({
                 type: "LineString",
                 source: new VectorSource(),
+                
             })
         )
 
         // get coordinates of the map by click
-        map.on("click", (e) => {
+        window.map.on("click", (e) => {
             let template = {
                 Id: '',
                 Name: '',

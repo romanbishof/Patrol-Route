@@ -4,25 +4,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { deleteRoute, deleteRouteAsync, getRoutesAsync } from '../../redux/patroslSlice'
 //import ol from 'ol'
-import VectorSource from 'ol/source/Vector'
-import VectorLayer from 'ol/layer/Vector'
+// import VectorSource from 'ol/source/Vector'
+// import VectorLayer from 'ol/layer/Vector'
 import Feature from 'ol/Feature';
-import PolygonGeom from 'ol/geom/Polygon';
+// import PolygonGeom from 'ol/geom/Polygon';
 import { fromLonLat } from 'ol/proj';
-import * as olStyle from 'ol/style';
-import Tile from 'ol/layer/Tile';
-import View from 'ol/View';
-import Map from 'ol/Map';
-import OSM from 'ol/source/OSM';
-import { add } from 'ol/coordinate';
+// import * as olStyle from 'ol/style';
+// import Tile from 'ol/layer/Tile';
+// import View from 'ol/View';
+// import Map from 'ol/Map';
+// import OSM from 'ol/source/OSM';
+// import { add } from 'ol/coordinate';
 import LineString from 'ol/geom/LineString';
 
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
-  const [watchRoute, setWatchRoute] = useState(false)
-  const [routePlan, setRoutePlan] = useState('')
-  const [showRoute, setShowRoute] = useState(false)
-  //map = routes[1].map;
+  const [checkRouteId, setCheckRouteId] = useState('')
   const dispatch = useDispatch();
   useEffect(async () => {
     dispatch(getRoutesAsync())
@@ -45,6 +42,7 @@ function RoutesTable() {
     
     let route = routes[0].RoutePlans.filter(routePlan => routePlan.Id === id)
     route = route[0];
+    // console.log('id of route by click ', id);
 
     if (typeof route === 'undefined') {
       console.log('route is undefinded');
@@ -64,22 +62,28 @@ function RoutesTable() {
       var pointTransform = fromLonLat([lon, lat], "EPSG:4326");
       coordinatesLineString.push(pointTransform);
     }
-    // calling the function that adds layer of drawing on our existing map
-    drawPolygonOnMap(coordinatesLineString, route.Id);
     
-    setRoutePlan(route);
+    if(checkRouteId !== id){
+      // calling the function that adds layer of drawing on our existing map
+      drawPolygonOnMap(coordinatesLineString, route.Id);
+    }else{
+      // if the route alredy drawn --> we remove it
+      removeLinePath()
+      setCheckRouteId('')
+    }
   }
 
 //function to draw Route on MAP 
 function drawPolygonOnMap(coordinates, routeId) {
-
+  setCheckRouteId(routeId)
+  removeLinePath();
   // getting the Specific layer from all the Layer in our map
   let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
   
   if (typeof _vector === 'undefined') {
     return;
   }
-  // getting oure source of vector
+  // getting our source of vector
   let source = _vector.getSource();
 
   //linestring 
@@ -100,12 +104,8 @@ function drawPolygonOnMap(coordinates, routeId) {
   //console.log(feature);
   source.addFeature(feature);
   //console.log(_vector.getSource().getFeatures().length);
-
-  if(showRoute){
-    removeLinePath();
-  }
-
 }
+
 
 // removing the route layer
 function removeLinePath() {
@@ -116,7 +116,6 @@ function removeLinePath() {
   }
   let source = _vector.getSource();
   source.clear();
-  
 }
 
 return (
@@ -137,7 +136,7 @@ return (
               return (
                 <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
-                  <TableCell onClick={() => { handleShowRoute(route.Id); setShowRoute(!showRoute) }} >{route.Id}</TableCell>
+                  <TableCell onClick={() => { handleShowRoute(route.Id);}} >{route.Id}</TableCell>
                   <button onClick={() => { handleEditRoute(route.Id); }}>Edit Route</button>
                   <button onClick={() => { handleDelete(route.Id); }}>Delete Route</button>
                 </TableRow>
