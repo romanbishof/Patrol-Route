@@ -19,23 +19,23 @@ function OSM_Map() {
 
     const source = new VectorSource({wrapX: false});
     const vector = new VectorLayer({
-      source: source,
+      source: source,      
     });
+
+    vector.id = 'PolygonLayer'
     
     const mapElement = useRef();
 
     useEffect(() => {
       // initialaiting map
-      const initialMap = new Map({
+      window.map = new Map({
         target: mapElement.current,
         layers: [raster, vector],
         view: new View({
           center: [patrols[0].Home.Longitude, patrols[0].Home.Latitude],
           zoom: 17,
-          projection: 'EPSG:4326',
-          
+          projection: 'EPSG:4326',          
         }),
-
       });
         // initialMap.addInteraction(
         //   new Draw({
@@ -59,7 +59,7 @@ function OSM_Map() {
           // dispatch(setRoutePoint(template))
           
         // } )
-        dispatch(setMapState(initialMap))
+        dispatch(setMapState(window.map))
 
     }, []);
     

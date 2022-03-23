@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
 
+window.map = {};
 
 ReactDOM.render(
   <React.StrictMode>

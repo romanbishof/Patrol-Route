@@ -7,7 +7,6 @@ import VectorSource from 'ol/source/Vector'
 import { postRoutesAsync, setRoutePlans } from '../../redux/patroslSlice'
 import { singleClick } from 'ol/events/condition'
 
-
 function SetRoute() {
 
     const patrols = useSelector((state) => state.patrols)
@@ -26,7 +25,7 @@ function SetRoute() {
             StartAt: '',
             CheckPoints: routePoint
         } 
-        
+                
         dispatch(setRoutePlans(newRoute))
         dispatch(postRoutesAsync(newRoute))
 
