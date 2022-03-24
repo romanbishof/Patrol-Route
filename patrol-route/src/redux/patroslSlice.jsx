@@ -3,19 +3,19 @@ import axios from "axios"
 
 export const getRoutesAsync = createAsyncThunk("routes/getRoutesAsync",
 async () => {
-    let res = await axios.get(`http://localhost:8000/routes`)
+    let res = await axios.get(`http://localhost:9090/routes`)
     let routes = res.data
     return routes
 })
 
 export const postRoutesAsync = createAsyncThunk('routes/postRoutesAsync',
 async (newRoute) => {
-    await axios.post(`http://localhost:8000/routes`, newRoute)
+    await axios.post(`http://localhost:9090/routes`, newRoute)
 })
 
 export const deleteRouteAsync = createAsyncThunk('routes/deleteRouteAsync',
 async (routeName) => {
-    await axios.delete(`http://localhost:8000/routes/${routeName}`)
+    await axios.delete(`http://localhost:9090/routes/${routeName}`)
 })
 
 const initialState = [
