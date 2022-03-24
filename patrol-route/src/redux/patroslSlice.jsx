@@ -47,7 +47,6 @@ const patrolSlice = createSlice({
         },
         deleteRoute: (state, action) => {
             let routes = state[0].RoutePlans.filter( routePlan => routePlan.Name !== action.payload)
-            console.log(routes);
             state[0].RoutePlans = routes
         },
     },
@@ -62,6 +61,9 @@ const patrolSlice = createSlice({
             } catch (error) {
                 console.log(error);
             }
+        },
+        [postRoutesAsync.pending]: (state, action) => {
+            console.log('updating last update file time');
         },
         [postRoutesAsync.fulfilled]: (state, action) => {
             console.log('routes added');

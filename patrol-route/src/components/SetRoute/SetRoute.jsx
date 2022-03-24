@@ -15,7 +15,7 @@ function SetRoute() {
     const [waitforSeconds, setWaitforSeconds] = useState('')
     const [camera, setCamera] = useState(false)
     const [xenon, setXenon] = useState(false)
-
+    const [ date, setDate ] = useState('')
     const dispatch = useDispatch();
 
     const hendleSaveRoute = () => {
@@ -24,7 +24,7 @@ function SetRoute() {
             Id: uuidv4(),
             Name:routeName,
             OrgId: '',
-            StartAt: '',
+            StartAt: date,
             CheckPoints: routePoint
         } 
                 
@@ -32,6 +32,7 @@ function SetRoute() {
         dispatch(postRoutesAsync(newRoute))
         // remove the option to draw on the map
         // window.map.removeInteraction(draw)
+        
     }
 
     useEffect(()=>{
@@ -61,8 +62,6 @@ function SetRoute() {
             let points = routePoint
             points.push(template)
             setRoutePoints(points)
-            console.log(points);
-            console.log('route points',routePoint);
         })
 
     }, [])
@@ -71,8 +70,10 @@ function SetRoute() {
 
     <div>
         <p>Route
-            <input type="text" placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)}/>    
+            <input type="text" required placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)}/>    
         </p>
+        <label>choose starting date</label>
+        <input type="datetime-local" required onChange={(e) => {setDate(e.target.value)}}/>
         <h2>enter points</h2>
         <TableContainer >
             <Table sx={{maxWidth: 650}}>

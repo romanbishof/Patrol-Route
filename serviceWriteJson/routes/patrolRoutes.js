@@ -124,6 +124,12 @@ import jfile from 'jsonfile'
 
 const router = express.Router();
 
+const updateDate = (obj) => {
+    let date = new Date() 
+    obj.LastUpdate = date.toLocaleString()
+    return obj
+}
+
 // all routes to API starting with /users witch we set in index.js file
 router.get('/', (req, resp) => {
     let data = jfile.readFileSync('../data.json')
@@ -134,23 +140,21 @@ router.post('/', (req, resp) => {
     
     let data = jfile.readFileSync('../data.json');
     let reqData = req.body
-    
     data[0].RoutePlans.push(reqData)
-
+    data[0] = updateDate(data[0])
     jfile.writeFileSync('../data.json',data)
     resp.send(data);
 })
 
 router.delete('/:routeName', (req, resp) => {
-
+    
     let data = jfile.readFileSync('../data.json')
+    data[0] = updateDate(data[0])
     const { routeName } = req.params
     let route = data[0].RoutePlans.filter(routePlan => routePlan.Name !== routeName)
     data[0].RoutePlans = route
     jfile.writeFileSync('../data.json', data)
-
     resp.send('the route was deleted, heres new route:/n',data)
-    
 })
 
 
