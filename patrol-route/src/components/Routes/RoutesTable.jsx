@@ -1,7 +1,7 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { deleteRoute, deleteRouteAsync, getRoutesAsync } from '../../redux/patroslSlice'
 //import ol from 'ol'
 // import VectorSource from 'ol/source/Vector'
@@ -22,12 +22,15 @@ import { Vector } from 'ol/source'
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
   const [checkRouteId, setCheckRouteId] = useState('')
+  const [ open, setOpen ] = useState(false)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(async () => {
     dispatch(getRoutesAsync())
   }, [dispatch])
 
   const handleDelete = (routeName) => {
+
     dispatch(deleteRoute(routeName));
     dispatch(deleteRouteAsync(routeName));
     removeLinePath();
@@ -140,7 +143,23 @@ function RoutesTable() {
                   <Link to='/edit-route'>
                     <button onClick={() => { handleEditRoute(route.Name); }}>Edit Route</button>
                   </Link>
-                  <button onClick={() => { handleDelete(route.Name); }}>Delete Route</button>
+                  {/* <button onClick={() => { handleDelete(route.Name); }}>Delete Route</button> */}
+                  {/* <Button  onClick={() => {}>Delete</Button> */}
+                  <Button onClick={() => {setOpen(true)}}>Delete</Button>
+                  <Dialog
+                    open={open}
+                    onClose={() => {setOpen(false)}}
+                  >
+                    <DialogContent>
+                      <DialogContentText>
+                        Are you sure you want to delete this Route?
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={() => {handleDelete(route.Name)}}>Yes</Button>
+                      <Button onClick={() => {setOpen(false)}}>Cancel</Button>
+                    </DialogActions>
+                  </Dialog>
                 </TableRow>
               )
             })
@@ -149,9 +168,10 @@ function RoutesTable() {
         </Table>
       </TableContainer>
       <div className="RoutesTable__options">
-        <Link to='/patrol-route' >
-          <button onClick={removeLinePath}>Add Route</button>
-        </Link>
+        {/* <Link to='/patrol-route' > */}
+          {/* <button onClick={removeLinePath}>Add Route</button> */}
+          <Button onClick={() => {removeLinePath(); navigate('/patrol-route')}} variant='contained'>Add Route</Button>
+        {/* </Link> */}
       </div>
 
     </div>
