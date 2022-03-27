@@ -59,9 +59,8 @@ function SetRoute() {
                     xenon ? "e47f1d52-b035-45dd-b35b-c55511d80f9f" : null
                 ]
             }
-            let points = routePoint
-            points.push(template)
-            setRoutePoints(points)
+            // updating state of component
+            setRoutePoints(oldpoints => [... oldpoints, template])
         })
 
     }, [])
