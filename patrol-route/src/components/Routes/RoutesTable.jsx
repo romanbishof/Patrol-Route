@@ -30,7 +30,7 @@ function RoutesTable() {
   }, [dispatch])
 
   const handleDelete = (routeName) => {
-
+    setOpen(false)
     dispatch(deleteRoute(routeName));
     dispatch(deleteRouteAsync(routeName));
     removeLinePath();
@@ -149,9 +149,10 @@ function RoutesTable() {
                   <Dialog
                     open={open}
                     onClose={() => {setOpen(false)}}
+                    aria-describedby='alert-delete'
                   >
                     <DialogContent>
-                      <DialogContentText>
+                      <DialogContentText id="alert-delete">
                         Are you sure you want to delete this Route?
                       </DialogContentText>
                     </DialogContent>
