@@ -1,4 +1,4 @@
-import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
@@ -22,7 +22,7 @@ import { Vector } from 'ol/source'
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
   const [checkRouteId, setCheckRouteId] = useState('')
-  const [ open, setOpen ] = useState(false)
+  const [open, setOpen] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(async () => {
@@ -40,7 +40,7 @@ function RoutesTable() {
     // getting specific route plan by id
     let route = routes[0].RoutePlans.filter(routePlan => routePlan.Name === routeName)
     // console.log(route);
-    navigate(`/edit-route/:route`, {state: {route: route[0]}})
+    navigate(`/edit-route/:route`, { state: { route: route[0] } })
     removeLinePath();
   }
 
@@ -125,54 +125,53 @@ function RoutesTable() {
 
   return (
     <div className='RoutesTable'>
+      <Box width={950} sx={{ padding: 5 }}>
+        <TableContainer>
+          <Table size='medium' sx={{ maxWidth: 605, padding: 5 }}>
+            <TableHead>
+              <TableRow>
+                <TableCell>Route number</TableCell>
+                <TableCell>Route Name</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {routes[0].RoutePlans.map((route, index) => {
 
-      <TableContainer>
-        <Table sx={{ maxWidth: 605 }}>
-          <TableHead>
-            <TableCell>Routes</TableCell>
-            <TableRow>
-              <TableCell>Route number</TableCell>
-              <TableCell>Route Name</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {routes[0].RoutePlans.map((route, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell onClick={() => { handleShowRoute(route.Name); }} >{route.Name}</TableCell>
+                    <Stack spacing={1} direction='row' justifyContent='center'>
+                      <Button variant='outlined' onClick={() => { handleEditRoute(route.Name); }}>Edit Route</Button>
+                      <Button variant='outlined' onClick={() => { setOpen(true) }}>Delete</Button>
+                    </Stack>
 
-              return (
-                <TableRow key={index}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell onClick={() => { handleShowRoute(route.Name); }} >{route.Name}</TableCell>
-                    <button onClick={() => { handleEditRoute(route.Name); }}>Edit Route</button>
-                  <Button onClick={() => {setOpen(true)}}>Delete</Button>
-                  <Dialog
-                    open={open}
-                    onClose={() => {setOpen(false)}}
-                    aria-describedby='alert-delete'
-                  >
-                    <DialogContent>
-                      <DialogContentText id="alert-delete">
-                        Are you sure you want to delete this Route?
-                      </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={() => {handleDelete(route.Name)}}>Yes</Button>
-                      <Button onClick={() => {setOpen(false)}}>Cancel</Button>
-                    </DialogActions>
-                  </Dialog>
-                </TableRow>
-              )
-            })
-            }
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <div className="RoutesTable__options">
-        {/* <Link to='/patrol-route' > */}
-          {/* <button onClick={removeLinePath}>Add Route</button> */}
-          <Button onClick={() => {removeLinePath(); navigate('/patrol-route')}} variant='contained'>Add Route</Button>
-        {/* </Link> */}
-      </div>
-
+                    <Dialog
+                      open={open}
+                      onClose={() => { setOpen(false) }}
+                      aria-describedby='alert-delete'
+                    >
+                      <DialogContent>
+                        <DialogContentText id="alert-delete">
+                          Are you sure you want to delete this Route?
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={() => { handleDelete(route.Name) }}>Yes</Button>
+                        <Button onClick={() => { setOpen(false) }}>Cancel</Button>
+                      </DialogActions>
+                    </Dialog>
+                  </TableRow>
+                )
+              })
+              }
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <div className="RoutesTable__options">
+          <Button onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
+        </div>
+      </Box>
     </div>
   )
 }
