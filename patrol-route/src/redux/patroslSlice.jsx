@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit"
 import axios from "axios"
 
 export const getRoutesAsync = createAsyncThunk("routes/getRoutesAsync",
@@ -16,6 +16,11 @@ async (newRoute) => {
 export const deleteRouteAsync = createAsyncThunk('routes/deleteRouteAsync',
 async (routeName) => {
     await axios.delete(`http://localhost:9090/routes/${routeName}`)
+})
+
+export const updateRouteAsync = createAsyncThunk('route/updateRouteAsync',
+async (updateRoute) => {
+    await axios.put(`http://localhost:9090/routes`, updateRoute)
 })
 
 const initialState = [
@@ -49,6 +54,10 @@ const patrolSlice = createSlice({
             let routes = state[0].RoutePlans.filter( routePlan => routePlan.Name !== action.payload)
             state[0].RoutePlans = routes
         },
+        updateRoute: (state, action) => {
+            let index = state[0].RoutePlans.findIndex(route => route.Id === action.payload.Id)
+            state[0].RoutePlans[index] = action.payload
+        }
     },
     // using the http protocols logic
     extraReducers: {
@@ -70,10 +79,13 @@ const patrolSlice = createSlice({
         },
         [deleteRouteAsync.fulfilled]: (state, action) => {
             console.log('route deleted');
+        },
+        [updateRouteAsync.fulfilled]: (state, action) => {
+            console.log('updated route');
         }
     },
 })
 
-export const {setRoutePlans, setMapState, deleteRoute} = patrolSlice.actions;
+export const {setRoutePlans, setMapState, deleteRoute, updateRoute} = patrolSlice.actions;
 
 export default patrolSlice.reducer;

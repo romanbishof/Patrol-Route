@@ -157,6 +157,17 @@ router.delete('/:routeName', (req, resp) => {
     resp.send('the route was deleted, heres new route:/n',data)
 })
 
+router.put('/', (req, resp) => {
 
+    let data = jfile.readFileSync('../data.json')
+    data[0] = updateDate(data[0])
+    let updateRoute = req.body
+    console.log(updateRoute);
+    let index = data[0].RoutePlans.findIndex(route => route.Id === updateRoute.Id)
+    data[0].RoutePlans[index] = updateRoute
+    jfile.writeFileSync('../data.json', data)
+    resp.status(200).send('Data updated: /n', data)
+    
+})
 
 export default router;

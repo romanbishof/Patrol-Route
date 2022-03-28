@@ -105,13 +105,14 @@ function SetRoute() {
 
             <h2>enter points</h2>
             <TableContainer >
-                <Table sx={{maxWidth: 650}}>
+                <Table sx={{maxWidth: 1250}}>
                     <TableHead>
-                        <TableRow>
+                        <TableRow sx={{width: 900}}>
                             <TableCell>Point Number</TableCell>
                             <TableCell>Laitude</TableCell>
                             <TableCell>Longitde</TableCell>
-                            <TableCell>Action</TableCell>
+                            <TableCell>Interval time</TableCell>
+                            <TableCell>Devices</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

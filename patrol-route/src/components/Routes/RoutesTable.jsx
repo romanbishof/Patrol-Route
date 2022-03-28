@@ -38,8 +38,10 @@ function RoutesTable() {
 
   const handleEditRoute = (routeName) => {
     // getting specific route plan by id
-    let _route = routes[0].RoutePlans.filter(routePlan => routePlan.Name === routeName)
-    console.log(_route);
+    let route = routes[0].RoutePlans.filter(routePlan => routePlan.Name === routeName)
+    // console.log(route);
+    navigate(`/edit-route/:route`, {state: {route: route[0]}})
+    removeLinePath();
   }
 
   const handleShowRoute = (routeName) => {
@@ -140,11 +142,7 @@ function RoutesTable() {
                 <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell onClick={() => { handleShowRoute(route.Name); }} >{route.Name}</TableCell>
-                  <Link to='/edit-route'>
                     <button onClick={() => { handleEditRoute(route.Name); }}>Edit Route</button>
-                  </Link>
-                  {/* <button onClick={() => { handleDelete(route.Name); }}>Delete Route</button> */}
-                  {/* <Button  onClick={() => {}>Delete</Button> */}
                   <Button onClick={() => {setOpen(true)}}>Delete</Button>
                   <Dialog
                     open={open}

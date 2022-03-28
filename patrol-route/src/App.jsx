@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<RoutesTable/>}></Route>
           <Route path='/patrol-route' element={<SetRoute/>}></Route>
-          <Route path='/edit-route' element={<EditRoute />}></Route>
+          <Route path='/edit-route/:route' element={<EditRoute />}></Route>
         </Routes>
         <OSM_Map/>
       </div>
