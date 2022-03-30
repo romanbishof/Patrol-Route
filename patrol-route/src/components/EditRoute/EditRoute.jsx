@@ -28,7 +28,7 @@ function EditRoute() {
     }
 
     const handleXenonChange = (e, id) => {
-        route.forEach(point => {
+        route.CheckPoints.forEach(point => {
             if (point.Id === id) {
                 if (e.target.value === 'No Xenon') {
                     point.Devices[1] = ''
@@ -107,12 +107,13 @@ function EditRoute() {
                                         <TableCell>{rout.Longitude}</TableCell>
                                         <TableCell>{rout.WaitforSeconds}</TableCell>
                                         <TableCell>
+                                            <Stack spacing={2}>
                                             <FormControl fullWidth>
                                                 <InputLabel id='CameraLabelId'>Camera</InputLabel>
                                                 <Select
                                                     labelId='CameLabelId'
                                                     label='Camera'
-                                                    defaultValue=''
+                                                    defaultValue={`${rout.Devices[0]}`}
                                                     onChange={(e) => { handleCameraChange(e, rout.Id) }}
                                                 >
                                                     <MenuItem value='No Camera'>No Camera</MenuItem>
@@ -127,13 +128,14 @@ function EditRoute() {
                                                 <Select
                                                     labelId='XenonLabelId'
                                                     label='Xenon'
-                                                    defaultValue=''
-                                                    onChange={(e) => { handleXenonChange(e, route.Id) }}
+                                                    defaultValue={`${rout.Devices[1]}`}
+                                                    onChange={(e) => { handleXenonChange(e, rout.Id) }}
                                                 >
                                                     <MenuItem value='No Xenon'>No Xenon</MenuItem>
                                                     <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
                                                 </Select>
                                             </FormControl>
+                                            </Stack>
                                         </TableCell>
                                     </TableRow>
                                 )
