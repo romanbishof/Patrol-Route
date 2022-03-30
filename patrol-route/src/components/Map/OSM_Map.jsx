@@ -2,9 +2,9 @@ import { Map, View } from 'ol';
 import { Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import React, { useEffect, useRef, useState } from 'react'
 import { OSM, Vector as VectorSource } from 'ol/source'
+import {get} from 'ol/proj';
 import './OSM_Map.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setMapState, setRoutePoint } from '../../redux/patroslSlice';
 
 
 
@@ -23,6 +23,9 @@ function OSM_Map() {
     vector.id = 'PolygonLayer'
     
     const mapElement = useRef();
+    const extent = get('EPSG:4326').getExtent().slice();
+    extent[0] += extent[0];
+    extent[2] += extent[2];
 
     useEffect(() => {
       // initialaiting map
@@ -33,16 +36,16 @@ function OSM_Map() {
           center: [patrols[0].Home.Longitude, patrols[0].Home.Latitude],
           zoom: 17,
           projection: 'EPSG:4326',          
+          extent
         }),
       });
-        dispatch(setMapState(window.map))
 
     }, []);
     
   return (
     <div className='OSM_Map'>
         <div ref={mapElement} className="OSM_Map-container">
-          
+          <div className="popup"></div>
         </div>
     </div>
   )

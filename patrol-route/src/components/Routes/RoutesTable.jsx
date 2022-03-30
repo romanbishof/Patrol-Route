@@ -1,23 +1,12 @@
-import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { deleteRoute, deleteRouteAsync, getRoutesAsync } from '../../redux/patroslSlice'
-//import ol from 'ol'
-// import VectorSource from 'ol/source/Vector'
-// import VectorLayer from 'ol/layer/Vector'
 import Feature from 'ol/Feature';
-// import PolygonGeom from 'ol/geom/Polygon';
 import { fromLonLat } from 'ol/proj';
-// import * as olStyle from 'ol/style';
-// import Tile from 'ol/layer/Tile';
-// import View from 'ol/View';
-// import Map from 'ol/Map';
-// import OSM from 'ol/source/OSM';
-// import { add } from 'ol/coordinate';
 import LineString from 'ol/geom/LineString';
-import Modify from 'ol/interaction/Modify';
-import { Vector } from 'ol/source'
+
 
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
