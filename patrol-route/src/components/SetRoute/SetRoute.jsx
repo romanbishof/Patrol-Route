@@ -24,6 +24,14 @@ function SetRoute() {
     const [xenon, setXenon] = useState('No Xenon')
     const [devices, setDevices] = useState([])
     const [coordinates, setCoordinates] = useState()
+    const rawCamera = [
+        'c968288d-5f85-40b7-8b38-5ae9a3fc5670',
+        'd0fbdcd9-1886-4d78-8e14-f3b7a6eb57db',
+        'c34129c4-fbcd-4644-b225-43f2be700224'
+    ]
+    const rawXenon = [
+        '38242558-4403-4cf9-8d38-bf209880836f'
+    ]
 
     const hendleSaveRoute = (e) => {
         e.preventDefault();
@@ -51,7 +59,8 @@ function SetRoute() {
         routePoint.forEach(point => {
             if (point.Id === Id) {
                 if (e.target.value === 'No Camera') {
-                    point.Devices[0] = ''
+                    // point.Devices[0] = ''
+                    console.log('user dident select camera');
                 } else {
                     point.Devices[0] = e.target.value
                 }
@@ -63,11 +72,38 @@ function SetRoute() {
     const handleXenonChange = (e, Id) => {
         routePoint.forEach(point => {
             if (point.Id === Id) {
-                if (e.target.value === 'No Xenon') {
-                    point.Devices[1] = ''
-                } else {
-                    point.Devices[1] = e.target.value
+
+                // if (e.target.value === 'No Xenon') {
+                //     // point.Devices[1] = ''
+                //     console.log('user dident select xenon');
+                // } else if( point.lenght === 0){
+                //     point.Devices.push(e.target.value)
+                //     // point.Devices[1] = e.target.value
+                //     console.log(point.Devices);
+                // }else{
+                //     const index = point.Devices.indexOf(e.target.value)
+                //     console.log(index);
+                //     if (index > -1) {
+                //         console.log('thers is xenon need to remove it');
+                //         point.Devices.splice(index,1)
+                //     }else{
+                //         console.log('');
+                //     }
+                // }
+                // console.log(point.Devices.length);
+                if (point.Devices.length > 0) {
+                    console.log("there is some thing in array");
+                    console.log(point.Devices.includes(e.target.value));
                 }
+                if (e.target.value !== 'No Xenon' && !point.Devices.includes(e.target.value)) {
+                    point.Devices.push(e.target.value)
+                }
+                if (e.target.value === 'No Xenon') {
+                    let obj = point.Devices.filter(elem => !rawXenon.includes(elem))
+                    point.Devices=obj
+                }
+                console.log(point.Devices);
+
             }
         })
     }
@@ -76,7 +112,15 @@ function SetRoute() {
         console.log(e.target.value);
         setInterval(e.target.value)
     }
-    const handleDevices = () => {
+    const handleSaveTemplate = () => {
+
+        if (camera !== 'No Camera') {
+            devices.push(camera)
+        }
+
+        if (xenon !== 'No Xenon') {
+            devices.push(xenon)
+        }
 
         let templatePoint = {
             Id: uuidv4(),
@@ -90,18 +134,39 @@ function SetRoute() {
         setRoutePoints(oldpoints => [...oldpoints, templatePoint])
         setCamera('No Camera');
         setXenon('No Xenon');
+        setDevices([])
 
+        clearPopupOverLay()
+        // const _overlays = window.map.getOverlays()
+        // // _overlays.forEach((item)=> console.log(item))
+        // _overlays.removeAt(0)
+    }
+
+    const clearPopupOverLay = () => {
         const _overlays = window.map.getOverlays()
-        
-        // _overlays.forEach((item)=> console.log(item))
         _overlays.removeAt(0)
     }
+
     const handleCamera = (e) => {
-        if (e.target.value === 'No Camera') {
-            console.log('user dident choose camera');
+        // if (e.target.value === 'No Camera') {
+        //     console.log('user dident choose camera');
+        // } else {
+        //     setCamera(e.target.value)
+        // }
+        let newDevice = devices
+        if (devices.length !== 0 && devices.includes(e.target.value)) {
+            const index = newDevice.indexOf(e.target.value)
+            if (index > -1) {
+                newDevice.splice(index, 1, e.target.value)
+                setDevices(newDevice)
+                console.log(devices);
+            }
         } else {
             setCamera(e.target.value)
+            setDevices(item => [...item, camera])
         }
+
+
     }
 
     const handleXenon = (e) => {
@@ -109,7 +174,11 @@ function SetRoute() {
             console.log('user dident choose xenon');
         } else {
             setXenon(e.target.value)
+            console.log(xenon);
         }
+
+
+
     }
 
     useEffect(() => {
@@ -125,7 +194,7 @@ function SetRoute() {
 
         const overlay = new Overlay({
             element: popup.current,
-            autoPan:true,
+            autoPan: true,
             id: 'popupMenu'
         })
         // get coordinates of the map by click
@@ -176,6 +245,8 @@ function SetRoute() {
                             {
                                 routePoint.map((route, index) => {
 
+                                    let _defaultCameraValue = !route.Devices.length ? 'No Camera' : route.Devices.filter(elem => rawCamera.includes(elem))
+                                    let _defaultXenonValue = !route.Devices.length ? 'No Xenon' : route.Devices.filter(elem => rawXenon.includes(elem))
                                     return (
                                         <TableRow key={index} >
                                             <TableCell>{route.Name}</TableCell>
@@ -191,12 +262,12 @@ function SetRoute() {
                                             </TableCell>
                                             <TableCell width={220}>
                                                 <Stack spacing={1} >
-                                                    <FormControl required={true} fullWidth>
-                                                        <InputLabel id='CameraLabelId'>Camera</InputLabel>
+                                                    <FormControl fullWidth>
+                                                        <InputLabel id='TableCameraLabelId'>Camera</InputLabel>
                                                         <Select
-                                                            labelId='CameLabelId'
-                                                            label='Camera'
-                                                            defaultValue=''
+                                                            labelId='TableCameLabelId'
+                                                            label='TableCamera'
+                                                            defaultValue={_defaultCameraValue}
                                                             onChange={(e) => { handleCameraChange(e, route.Id) }}
                                                         >
                                                             <MenuItem value='No Camera'>No Camera</MenuItem>
@@ -206,12 +277,12 @@ function SetRoute() {
 
                                                         </Select>
                                                     </FormControl>
-                                                    <FormControl required={true} fullWidth>
-                                                        <InputLabel id='XenonLabelId'>Xenon</InputLabel>
+                                                    <FormControl fullWidth>
+                                                        <InputLabel id='TableXenonLabelId'>Xenon</InputLabel>
                                                         <Select
-                                                            labelId='XenonLabelId'
-                                                            label='Xenon'
-                                                            defaultValue=''
+                                                            labelId='TableXenonLabelId'
+                                                            label='TableXenon'
+                                                            defaultValue={_defaultXenonValue}
                                                             onChange={(e) => { handleXenonChange(e, route.Id) }}
                                                         >
                                                             <MenuItem value='No Xenon'>No Xenon</MenuItem>
@@ -231,52 +302,56 @@ function SetRoute() {
                 </TableContainer>
                 <Stack direction='row' spacing={3} >
                     <Button type='submit' variant='contained'>Save Route</Button>
-                    <Button variant='contained' onClick={() => { navigate('/') }}>Back</Button>
+                    <Button variant='contained' onClick={() => { navigate('/'); clearPopupOverLay(); }}>Back</Button>
                 </Stack>
 
             </Box>
             <div ref={popup} id='popup'>
 
                 <Paper elevation={6}
-                component='form'>
+                    component='form'>
 
-                        <CardHeader title='Choose Devices' />
-                        <CardContent>
-                            <Stack spacing={2} direction={'column'}>
-                                <FormControl required={true} fullWidth>
-                                    <InputLabel id='CameraLabelId'>Camera</InputLabel>
-                                    <Select
-                                        labelId='CameLabelId'
-                                        label='Camera'
-                                        defaultValue=''
-                                        // onChange={(e) => { handleCameraChange(e, route.Id) }}
-                                        onChange={handleCamera}
-                                    >
-                                        <MenuItem value='No Camera'>No Camera</MenuItem>
-                                        <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
-                                        <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
-                                        <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
+                    <CardHeader title='Choose Devices' />
+                    <CardContent>
+                        <Stack spacing={2} direction={'column'}>
+                            <FormControl required={true} fullWidth>
+                                <InputLabel id='CameraLabelId'>Camera</InputLabel>
+                                <Select
+                                    labelId='CameLabelId'
+                                    label='Camera'
+                                    value={camera}
+                                    onChange={(e) => { setCamera(e.target.value) }}
+                                >
+                                    <MenuItem value='No Camera'>No Camera</MenuItem>
+                                    <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
+                                    <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
+                                    <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
 
-                                    </Select>
-                                </FormControl>
-                                <FormControl required={true} fullWidth>
-                                    <InputLabel id='XenonLabelId'>Xenon</InputLabel>
-                                    <Select
-                                        labelId='XenonLabelId'
-                                        label='Xenon'
-                                        defaultValue=''
-                                        // onChange={(e) => { handleXenonChange(e, route.Id) }}
-                                        onChange={handleXenon}
-                                    >
-                                        <MenuItem value='No Xenon'>No Xenon</MenuItem>
-                                        <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                </Select>
+                            </FormControl>
+                            <FormControl required={true} fullWidth>
+                                <InputLabel id='XenonLabelId'>Xenon</InputLabel>
+                                <Select
+                                    labelId='XenonLabelId'
+                                    label='Xenon'
+                                    value={xenon}
+                                    onChange={(e) => { setXenon(e.target.value) }}
+                                >
+                                    <MenuItem value='No Xenon'>No Xenon</MenuItem>
+                                    <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <TextField
+                                required={true}
+                                value={interval}
+                                label='Seconds'
+                                onChange={handleIntervalTime}
+                            />
 
-                                <Button variant='contained' onClick={handleDevices}>Save / Close</Button>
-                            </Stack>
+                            <Button variant='contained' onClick={handleSaveTemplate}>Save / Close</Button>
+                        </Stack>
 
-                        </CardContent>
+                    </CardContent>
                 </Paper>
 
             </div>
