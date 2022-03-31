@@ -58,13 +58,18 @@ function SetRoute() {
 
         routePoint.forEach(point => {
             if (point.Id === Id) {
-                if (e.target.value === 'No Camera') {
-                    // point.Devices[0] = ''
-                    console.log('user dident select camera');
-                } else {
-                    point.Devices[0] = e.target.value
+
+                if(e.target.value !== 'No Camera' && !point.Devices.includes(e.target.value)){
+                    let _obj = point.Devices.filter(elem => !rawCamera.includes(elem))
+                    point.Devices = _obj
+                    point.Devices.push(e.target.value)
                 }
 
+                if(e.target.value === 'No Camera'){
+                    let _obj = point.Devices.filter(elem => !rawCamera.includes(elem))
+                    point.Devices = _obj
+                }
+                console.log(point.Devices);
             }
         })
     }
@@ -72,29 +77,10 @@ function SetRoute() {
     const handleXenonChange = (e, Id) => {
         routePoint.forEach(point => {
             if (point.Id === Id) {
-
-                // if (e.target.value === 'No Xenon') {
-                //     // point.Devices[1] = ''
-                //     console.log('user dident select xenon');
-                // } else if( point.lenght === 0){
-                //     point.Devices.push(e.target.value)
-                //     // point.Devices[1] = e.target.value
-                //     console.log(point.Devices);
-                // }else{
-                //     const index = point.Devices.indexOf(e.target.value)
-                //     console.log(index);
-                //     if (index > -1) {
-                //         console.log('thers is xenon need to remove it');
-                //         point.Devices.splice(index,1)
-                //     }else{
-                //         console.log('');
-                //     }
+                // if (point.Devices.length > 0) {
+                //     console.log("there is some thing in array");
+                //     console.log(point.Devices.includes(e.target.value));
                 // }
-                // console.log(point.Devices.length);
-                if (point.Devices.length > 0) {
-                    console.log("there is some thing in array");
-                    console.log(point.Devices.includes(e.target.value));
-                }
                 if (e.target.value !== 'No Xenon' && !point.Devices.includes(e.target.value)) {
                     point.Devices.push(e.target.value)
                 }
@@ -102,9 +88,8 @@ function SetRoute() {
                     let obj = point.Devices.filter(elem => !rawXenon.includes(elem))
                     point.Devices=obj
                 }
-                console.log(point.Devices);
-
             }
+            console.log(point.Devices);
         })
     }
 
@@ -137,22 +122,15 @@ function SetRoute() {
         setDevices([])
 
         clearPopupOverLay()
-        // const _overlays = window.map.getOverlays()
         // // _overlays.forEach((item)=> console.log(item))
-        // _overlays.removeAt(0)
     }
 
     const clearPopupOverLay = () => {
         const _overlays = window.map.getOverlays()
-        _overlays.removeAt(0)
+        _overlays.clear()
     }
 
     const handleCamera = (e) => {
-        // if (e.target.value === 'No Camera') {
-        //     console.log('user dident choose camera');
-        // } else {
-        //     setCamera(e.target.value)
-        // }
         let newDevice = devices
         if (devices.length !== 0 && devices.includes(e.target.value)) {
             const index = newDevice.indexOf(e.target.value)
@@ -165,54 +143,23 @@ function SetRoute() {
             setCamera(e.target.value)
             setDevices(item => [...item, camera])
         }
-
-
     }
 
-    const handleXenon = (e) => {
-        if (e.target.value === 'No Xenon') {
-            console.log('user dident choose xenon');
-        } else {
-            setXenon(e.target.value)
-            console.log(xenon);
-        }
-
-
-
-    }
 
     useEffect(() => {
-        // adding option to draw on the map
-        // window.map.addInteraction(
-        //     draw = new Draw({
-        //         type: "LineString",
-        //         source: new VectorSource(),
-
-        //     })
-        // )
-        // window.map.addInteraction(draw)
-
+ 
         const overlay = new Overlay({
             element: popup.current,
             autoPan: true,
             id: 'popupMenu'
         })
+
         // get coordinates of the map by click
         window.map.on("click", (e) => {
 
             overlay.setPosition(e.coordinate);
             window.map.addOverlay(overlay)
             setCoordinates(e.coordinate)
-            // let template = {
-            //     Id: uuidv4(),
-            //     Name: `Point No. ${pointNumber}`,
-            //     Latitude: e.coordinate[1].toString(),
-            //     Longitude: e.coordinate[0].toString(),
-            //     WaitforSeconds: interval,
-            //     Devices: []
-            // }
-            // // updating state of component
-            // setRoutePoints(oldpoints => [...oldpoints, template])
         })
 
     }, [])
