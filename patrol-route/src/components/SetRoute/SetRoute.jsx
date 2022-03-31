@@ -59,13 +59,13 @@ function SetRoute() {
         routePoint.forEach(point => {
             if (point.Id === Id) {
 
-                if(e.target.value !== 'No Camera' && !point.Devices.includes(e.target.value)){
+                if (e.target.value !== 'No Camera' && !point.Devices.includes(e.target.value)) {
                     let _obj = point.Devices.filter(elem => !rawCamera.includes(elem))
                     point.Devices = _obj
                     point.Devices.push(e.target.value)
                 }
 
-                if(e.target.value === 'No Camera'){
+                if (e.target.value === 'No Camera') {
                     let _obj = point.Devices.filter(elem => !rawCamera.includes(elem))
                     point.Devices = _obj
                 }
@@ -77,16 +77,13 @@ function SetRoute() {
     const handleXenonChange = (e, Id) => {
         routePoint.forEach(point => {
             if (point.Id === Id) {
-                // if (point.Devices.length > 0) {
-                //     console.log("there is some thing in array");
-                //     console.log(point.Devices.includes(e.target.value));
-                // }
+
                 if (e.target.value !== 'No Xenon' && !point.Devices.includes(e.target.value)) {
                     point.Devices.push(e.target.value)
                 }
                 if (e.target.value === 'No Xenon') {
                     let obj = point.Devices.filter(elem => !rawXenon.includes(elem))
-                    point.Devices=obj
+                    point.Devices = obj
                 }
             }
             console.log(point.Devices);
@@ -94,7 +91,6 @@ function SetRoute() {
     }
 
     const handleIntervalTime = (e) => {
-        console.log(e.target.value);
         setInterval(e.target.value)
     }
     const handleSaveTemplate = () => {
@@ -130,24 +126,8 @@ function SetRoute() {
         _overlays.clear()
     }
 
-    const handleCamera = (e) => {
-        let newDevice = devices
-        if (devices.length !== 0 && devices.includes(e.target.value)) {
-            const index = newDevice.indexOf(e.target.value)
-            if (index > -1) {
-                newDevice.splice(index, 1, e.target.value)
-                setDevices(newDevice)
-                console.log(devices);
-            }
-        } else {
-            setCamera(e.target.value)
-            setDevices(item => [...item, camera])
-        }
-    }
-
-
     useEffect(() => {
- 
+
         const overlay = new Overlay({
             element: popup.current,
             autoPan: true,
