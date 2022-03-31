@@ -15,6 +15,15 @@ function EditRoute() {
     const dispatch = useDispatch();
     const route = location.state.route
 
+    const rawCamera = [
+        'c968288d-5f85-40b7-8b38-5ae9a3fc5670',
+        'd0fbdcd9-1886-4d78-8e14-f3b7a6eb57db',
+        'c34129c4-fbcd-4644-b225-43f2be700224'
+    ]
+    const rawXenon = [
+        '38242558-4403-4cf9-8d38-bf209880836f'
+    ]
+
     const handleCameraChange = (e, id) => {
         route.CheckPoints.forEach(point => {
             if (point.Id === id) {
@@ -75,7 +84,7 @@ function EditRoute() {
             let coordinate = fromLonLat([coor[0], coor[1]], "EPSG:4326")
             return coordinate
         })
-        
+
         drawPolygonOnMap(coordinates, route.Name)
 
     }, [])
@@ -100,6 +109,9 @@ function EditRoute() {
                         <TableBody>
                             {route.CheckPoints.map((rout) => {
 
+                                let _defaultCameraValue = !rout.Devices.length ? 'No Camera' : rout.Devices.filter(elem => rawCamera.includes(elem))
+                                let _defaultXenonValue = !rout.Devices.length ? 'No Xenon' : rout.Devices.filter(elem => rawXenon.includes(elem))
+                                
                                 return (
                                     <TableRow key={rout.Id}>
                                         <TableCell>{rout.Name}</TableCell>
@@ -108,33 +120,33 @@ function EditRoute() {
                                         <TableCell>{rout.WaitforSeconds}</TableCell>
                                         <TableCell>
                                             <Stack spacing={2}>
-                                            <FormControl fullWidth>
-                                                <InputLabel id='CameraLabelId'>Camera</InputLabel>
-                                                <Select
-                                                    labelId='CameLabelId'
-                                                    label='Camera'
-                                                    defaultValue={`${rout.Devices[0]}`}
-                                                    onChange={(e) => { handleCameraChange(e, rout.Id) }}
-                                                >
-                                                    <MenuItem value='No Camera'>No Camera</MenuItem>
-                                                    <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
-                                                    <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
-                                                    <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
+                                                <FormControl fullWidth>
+                                                    <InputLabel id='TableCameraLabelId'>Camera</InputLabel>
+                                                    <Select
+                                                        labelId='TableCameLabelId'
+                                                        label='TableCamera'
+                                                        defaultValue={_defaultCameraValue}
+                                                        onChange={(e) => { handleCameraChange(e, rout.Id) }}
+                                                    >
+                                                        <MenuItem value='No Camera'>No Camera</MenuItem>
+                                                        <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
+                                                        <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
+                                                        <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
 
-                                                </Select>
-                                            </FormControl>
-                                            <FormControl fullWidth>
-                                                <InputLabel id='XenonLabelId'>Xenon</InputLabel>
-                                                <Select
-                                                    labelId='XenonLabelId'
-                                                    label='Xenon'
-                                                    defaultValue={`${rout.Devices[1]}`}
-                                                    onChange={(e) => { handleXenonChange(e, rout.Id) }}
-                                                >
-                                                    <MenuItem value='No Xenon'>No Xenon</MenuItem>
-                                                    <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
-                                                </Select>
-                                            </FormControl>
+                                                    </Select>
+                                                </FormControl>
+                                                <FormControl fullWidth>
+                                                    <InputLabel id='TableXenonLabelId'>Xenon</InputLabel>
+                                                    <Select
+                                                        labelId='TableXenonLabelId'
+                                                        label='TableXenon'
+                                                        defaultValue={_defaultXenonValue}
+                                                        onChange={(e) => { handleXenonChange(e, rout.Id) }}
+                                                    >
+                                                        <MenuItem value='No Xenon'>No Xenon</MenuItem>
+                                                        <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
+                                                    </Select>
+                                                </FormControl>
                                             </Stack>
                                         </TableCell>
                                     </TableRow>
