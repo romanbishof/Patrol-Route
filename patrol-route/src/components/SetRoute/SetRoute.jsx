@@ -6,7 +6,7 @@ import { postRoutesAsync, setRoutePlans } from '../../redux/patroslSlice'
 import { v4 as uuidv4 } from 'uuid'
 import { fromLonLat } from 'ol/proj'
 import Overlay from 'ol/Overlay';
-
+import moment from 'moment'
 
 function SetRoute() {
 
@@ -35,6 +35,7 @@ function SetRoute() {
 
     const hendleSaveRoute = (e) => {
         e.preventDefault();
+
         // send route to service
         let newRoute = {
             Id: uuidv4(),
@@ -155,7 +156,7 @@ function SetRoute() {
                 autoComplete='off'
             >
                 <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField required={true} id='RouteName' label placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
-                <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input type="datetime-local" required={true} onChange={(e) => { setDate(e.target.value) }} />} />
+                <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
 
                 <TableContainer >
                     <Table sx={{ maxWidth: 800 }}>

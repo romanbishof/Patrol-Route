@@ -19,6 +19,7 @@
     "generate-schema": "^2.6.0",
     "jsonfile": "^6.1.0",
     "jsonschema": "^1.4.0",
+    "moment": "^2.29.1",
     "mongoose": "^6.2.7",
     "nodemon": "^2.0.15"
   }
