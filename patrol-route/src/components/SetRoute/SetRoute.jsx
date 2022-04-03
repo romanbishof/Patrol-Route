@@ -52,6 +52,9 @@ function SetRoute() {
 
         // navigate to our home table page
         navigate('/')
+        // let ovl = window.map.
+        // console.log(window.map.removeOverlay('popupMenu'))
+        // let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer')
 
     }
 
@@ -102,6 +105,8 @@ function SetRoute() {
             devices.push(xenon)
         }
 
+        
+
         let templatePoint = {
             Id: uuidv4(),
             Name: `Point No. ${pointNumber}`,
@@ -114,10 +119,12 @@ function SetRoute() {
         setRoutePoints(oldpoints => [...oldpoints, templatePoint])
         setCamera('No Camera');
         setXenon('No Xenon');
+        setInterval(10)
         setDevices([])
 
         clearPopupOverLay()
-        // // _overlays.forEach((item)=> console.log(item))
+        const _overlays = window.map.getOverlays()
+        _overlays.forEach((item)=> console.log(item))
     }
 
     const clearPopupOverLay = () => {
@@ -134,8 +141,8 @@ function SetRoute() {
         })
 
         // get coordinates of the map by click
-        window.map.on("click", (e) => {
-
+        window.map.on("singleclick", (e) => {
+            
             overlay.setPosition(e.coordinate);
             window.map.addOverlay(overlay)
             setCoordinates(e.coordinate)
