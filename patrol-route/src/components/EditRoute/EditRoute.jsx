@@ -1,11 +1,15 @@
-import { Box, Button, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Box, Button, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material'
 import { Feature } from 'ol';
 import { LineString, Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';
+import Icon from 'ol/style/Icon';
+import Stroke from 'ol/style/Stroke';
+import Style from 'ol/style/Style';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { updateRoute, updateRouteAsync } from '../../redux/patroslSlice';
+import arrowImage from './arrow.png'
 
 function EditRoute() {
 
@@ -55,6 +59,14 @@ function EditRoute() {
         })
     }
 
+    const handleWaitforSeconds = (e, id) => {
+        route.CheckPoints.forEach(point => {
+            if(point.Id === id){
+                point.WaitforSeconds = e.target.value
+            }
+        })
+    }
+
     const handleSaveChange = () => {
 
         dispatch(updateRoute(route));
@@ -64,6 +76,43 @@ function EditRoute() {
 
     }
 
+    const styleFunction = (feature) => {
+
+
+        var geometry = feature.getGeometry();
+    
+        let styles = [
+          new Style({
+            // linestring
+            stroke: new Stroke({
+              color: '#fc8100',
+              width: 2
+            })
+          })
+        ]
+    
+        // iterate over each segment to add arrow at the end
+        geometry.forEachSegment((start, end) => {
+          let dx = end[0] - start[0]
+          let dy = end[1] - start[1]
+          let rotation = Math.atan2(dy, dx)
+    
+          // arrow
+          styles.push(new Style({
+            geometry: new Point(end),
+            image: new Icon({
+              src: arrowImage,
+              color: '#fc8100',
+              anchor: [0.75, 0.5],
+              rotateWithView: true,
+              rotation: -rotation
+            })
+          }))
+        })
+        
+        return styles;
+      }
+
     const drawPolygonOnMap = (coordinates, routeName) => {
         let lineString = new LineString(coordinates)
         let feature = new Feature({
@@ -71,6 +120,7 @@ function EditRoute() {
         })
         feature.Name = routeName
         let vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
+        vector.setStyle(styleFunction(feature))
         let source = vector.getSource();
         source.addFeature(feature)
     }
@@ -124,7 +174,13 @@ function EditRoute() {
                                         <TableCell>{rout.Name}</TableCell>
                                         <TableCell>{rout.Latitude}</TableCell>
                                         <TableCell>{rout.Longitude}</TableCell>
-                                        <TableCell>{rout.WaitforSeconds}</TableCell>
+                                        <TableCell>
+                                            <TextField
+                                            defaultValue={rout.WaitforSeconds}
+                                            label='Seconds'
+                                            onChange={(e) => {handleWaitforSeconds(e, rout.Id)}}
+                                            />
+                                        </TableCell>
                                         <TableCell>
                                             <Stack spacing={2}>
                                                 <FormControl fullWidth>

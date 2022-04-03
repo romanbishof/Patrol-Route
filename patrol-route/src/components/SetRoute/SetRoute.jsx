@@ -6,8 +6,14 @@ import { postRoutesAsync, setRoutePlans } from '../../redux/patroslSlice'
 import { v4 as uuidv4 } from 'uuid'
 import { fromLonLat } from 'ol/proj'
 import Overlay from 'ol/Overlay';
-import {unByKey} from 'ol/Observable';
+import { unByKey } from 'ol/Observable';
 import moment from 'moment'
+import { LineString, Point } from 'ol/geom'
+import { Feature } from 'ol'
+import Style from 'ol/style/Style'
+import Icon from 'ol/style/Icon'
+import locationImage from './location.png'
+import { Vector } from 'ol/layer'
 
 function SetRoute() {
 
@@ -17,9 +23,12 @@ function SetRoute() {
     const [date, setDate] = useState('')
     const [pointNumber, setPointNumber] = useState(1)
     const [interval, setInterval] = useState(10)
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const popup = useRef();
+    const location = useRef();
 
     const [camera, setCamera] = useState('No Camera')
     const [xenon, setXenon] = useState('No Xenon')
@@ -49,7 +58,7 @@ function SetRoute() {
         dispatch(setRoutePlans(newRoute))
         dispatch(postRoutesAsync(newRoute))
         // remove the option to draw on the map
-        
+
         // navigate to our home table page
         navigate('/')
 
@@ -118,14 +127,14 @@ function SetRoute() {
         setDevices([])
 
         clearPopupOverLay()
-        
+
     }
 
     const clearPopupOverLay = () => {
         const _overlays = window.map.getOverlays()
         _overlays.clear()
     }
-    
+
     useEffect(() => {
 
         const overlay = new Overlay({
@@ -141,6 +150,7 @@ function SetRoute() {
             window.map.addOverlay(overlay)
             setCoordinates(e.coordinate)
         })
+
         // unmounting component by key that the event returns --> unsubscribe
         return () => {
             unByKey(key)
@@ -158,7 +168,7 @@ function SetRoute() {
                 onSubmit={hendleSaveRoute}
                 autoComplete='off'
             >
-                <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField required={true} id='RouteName' label placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
+                <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
                 <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
 
                 <TableContainer >
@@ -178,6 +188,7 @@ function SetRoute() {
 
                                     let _defaultCameraValue = !route.Devices.length ? 'No Camera' : route.Devices.filter(elem => rawCamera.includes(elem))
                                     let _defaultXenonValue = !route.Devices.length ? 'No Xenon' : route.Devices.filter(elem => rawXenon.includes(elem))
+                                    
                                     return (
                                         <TableRow key={index} >
                                             <TableCell>{route.Name}</TableCell>
@@ -186,7 +197,7 @@ function SetRoute() {
                                             <TableCell>
                                                 <TextField
                                                     required={true}
-                                                    defaultValue={interval}
+                                                    defaultValue={route.WaitforSeconds}
                                                     label='Seconds'
                                                     onChange={handleIntervalTime}
                                                 />

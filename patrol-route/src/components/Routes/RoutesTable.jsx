@@ -105,7 +105,7 @@ function RoutesTable() {
         })
       }))
     })
-    
+
     return styles;
   }
   //function to draw Route on MAP 
@@ -167,35 +167,37 @@ function RoutesTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {routes[0].RoutePlans.map((route, index) => {
+              {
+                routes[0].RoutePlans.map((route, index) => {
 
-                return (
-                  <TableRow key={index}>
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell onClick={() => { handleShowRoute(route.Name); }} >{route.Name}</TableCell>
-                    <Stack spacing={1} direction='row' justifyContent='center'>
-                      <Button variant='outlined' onClick={() => { handleEditRoute(route.Name); }}>Edit Route</Button>
-                      <Button variant='outlined' onClick={() => { setOpen(true) }}>Delete</Button>
-                    </Stack>
-
-                    <Dialog
-                      open={open}
-                      onClose={() => { setOpen(false) }}
-                      aria-describedby='alert-delete'
-                    >
-                      <DialogContent>
-                        <DialogContentText id="alert-delete">
-                          Are you sure you want to delete this Route?
-                        </DialogContentText>
-                      </DialogContent>
-                      <DialogActions>
-                        <Button onClick={() => { handleDelete(route.Name) }}>Yes</Button>
-                        <Button onClick={() => { setOpen(false) }}>Cancel</Button>
-                      </DialogActions>
-                    </Dialog>
-                  </TableRow>
-                )
-              })
+                  return (
+                    <TableRow key={index}>
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell onClick={() => { handleShowRoute(route.Name); }} >{route.Name}</TableCell>
+                      <TableCell>
+                        <Stack spacing={1} direction='row' justifyContent='center'>
+                          <Button variant='outlined' onClick={() => { handleEditRoute(route.Name); }}>Edit Route</Button>
+                          <Button variant='outlined' onClick={() => { setOpen(true) }}>Delete</Button>
+                        </Stack>
+                      </TableCell>
+                      <Dialog
+                        open={open}
+                        onClose={() => { setOpen(false) }}
+                        aria-describedby='alert-delete'
+                      >
+                        <DialogContent>
+                          <DialogContentText id="alert-delete">
+                            Are you sure you want to delete this Route?
+                          </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={() => { handleDelete(route.Name) }}>Yes</Button>
+                          <Button onClick={() => { setOpen(false) }}>Cancel</Button>
+                        </DialogActions>
+                      </Dialog>
+                    </TableRow>
+                  )
+                })
               }
             </TableBody>
           </Table>
