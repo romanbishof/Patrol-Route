@@ -70,7 +70,6 @@ function SetRoute() {
                     let _obj = point.Devices.filter(elem => !rawCamera.includes(elem))
                     point.Devices = _obj
                 }
-                console.log(point.Devices);
             }
         })
     }
@@ -87,7 +86,6 @@ function SetRoute() {
                     point.Devices = obj
                 }
             }
-            console.log(point.Devices);
         })
     }
 

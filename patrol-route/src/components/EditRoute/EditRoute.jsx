@@ -27,10 +27,15 @@ function EditRoute() {
     const handleCameraChange = (e, id) => {
         route.CheckPoints.forEach(point => {
             if (point.Id === id) {
+                if (e.target.value !== 'No Camera' && !point.Devices.includes(e.target.value)) {
+                    let _obj = point.Devices.filter(elem => !rawCamera.includes(elem))
+                    point.Devices = _obj
+                    point.Devices.push(e.target.value)
+                }
+
                 if (e.target.value === 'No Camera') {
-                    point.Devices[0] = ''
-                } else {
-                    point.Devices[0] = e.target.value
+                    let _obj = point.Devices.filter(elem => !rawCamera.includes(elem))
+                    point.Devices = _obj
                 }
             }
         })
@@ -39,10 +44,12 @@ function EditRoute() {
     const handleXenonChange = (e, id) => {
         route.CheckPoints.forEach(point => {
             if (point.Id === id) {
+                if (e.target.value !== 'No Xenon' && !point.Devices.includes(e.target.value)) {
+                    point.Devices.push(e.target.value)
+                }
                 if (e.target.value === 'No Xenon') {
-                    point.Devices[1] = ''
-                } else {
-                    point.Devices[1] = e.target.value
+                    let obj = point.Devices.filter(elem => !rawXenon.includes(elem))
+                    point.Devices = obj
                 }
             }
         })
