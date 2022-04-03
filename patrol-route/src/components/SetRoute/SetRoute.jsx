@@ -6,6 +6,7 @@ import { postRoutesAsync, setRoutePlans } from '../../redux/patroslSlice'
 import { v4 as uuidv4 } from 'uuid'
 import { fromLonLat } from 'ol/proj'
 import Overlay from 'ol/Overlay';
+import {unByKey} from 'ol/Observable';
 import moment from 'moment'
 
 function SetRoute() {
@@ -48,13 +49,9 @@ function SetRoute() {
         dispatch(setRoutePlans(newRoute))
         dispatch(postRoutesAsync(newRoute))
         // remove the option to draw on the map
-        // window.map.removeInteraction(draw)
-
+        
         // navigate to our home table page
         navigate('/')
-        // let ovl = window.map.
-        // console.log(window.map.removeOverlay('popupMenu'))
-        // let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer')
 
     }
 
@@ -105,8 +102,6 @@ function SetRoute() {
             devices.push(xenon)
         }
 
-        
-
         let templatePoint = {
             Id: uuidv4(),
             Name: `Point No. ${pointNumber}`,
@@ -123,15 +118,14 @@ function SetRoute() {
         setDevices([])
 
         clearPopupOverLay()
-        const _overlays = window.map.getOverlays()
-        _overlays.forEach((item)=> console.log(item))
+        
     }
 
     const clearPopupOverLay = () => {
         const _overlays = window.map.getOverlays()
         _overlays.clear()
     }
-
+    
     useEffect(() => {
 
         const overlay = new Overlay({
@@ -141,12 +135,16 @@ function SetRoute() {
         })
 
         // get coordinates of the map by click
-        window.map.on("singleclick", (e) => {
-            
+        let key = window.map.on("click", (e) => {
+
             overlay.setPosition(e.coordinate);
             window.map.addOverlay(overlay)
             setCoordinates(e.coordinate)
         })
+        // unmounting component by key that the event returns
+        return () => {
+            unByKey(key)
+        }
 
     }, [])
 
