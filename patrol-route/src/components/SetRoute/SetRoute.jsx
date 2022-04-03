@@ -141,7 +141,7 @@ function SetRoute() {
             window.map.addOverlay(overlay)
             setCoordinates(e.coordinate)
         })
-        // unmounting component by key that the event returns
+        // unmounting component by key that the event returns --> unsubscribe
         return () => {
             unByKey(key)
         }

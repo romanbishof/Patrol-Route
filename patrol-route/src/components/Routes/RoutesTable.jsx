@@ -6,7 +6,11 @@ import { deleteRoute, deleteRouteAsync, getRoutesAsync } from '../../redux/patro
 import Feature from 'ol/Feature';
 import { fromLonLat } from 'ol/proj';
 import LineString from 'ol/geom/LineString';
-
+import Style from 'ol/style/Style'
+import Icon from 'ol/style/Icon';
+import { Point } from 'ol/geom'
+import arrowImage from './arrow.png'
+import Stroke from 'ol/style/Stroke'
 
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
@@ -68,6 +72,42 @@ function RoutesTable() {
     }
   }
 
+  const styleFunction = (feature) => {
+
+
+    var geometry = feature.getGeometry();
+
+    let styles = [
+      new Style({
+        // linestring
+        stroke: new Stroke({
+          color: '#fc8100',
+          width: 2
+        })
+      })
+    ]
+
+    // iterate over each segment to add arrow at the end
+    geometry.forEachSegment((start, end) => {
+      let dx = end[0] - start[0]
+      let dy = end[1] - start[1]
+      let rotation = Math.atan2(dy, dx)
+
+      // arrow
+      styles.push(new Style({
+        geometry: new Point(end),
+        image: new Icon({
+          src: arrowImage,
+          color: '#fc8100',
+          anchor: [0.75, 0.5],
+          rotateWithView: true,
+          rotation: -rotation
+        })
+      }))
+    })
+    
+    return styles;
+  }
   //function to draw Route on MAP 
   function drawPolygonOnMap(coordinates, routeName) {
     setCheckRouteId(routeName)
@@ -82,7 +122,7 @@ function RoutesTable() {
     let source = _vector.getSource();
 
     //linestring 
-    var lineString = new LineString(coordinates);
+    let lineString = new LineString(coordinates);
 
     //polygon
     //var plygon = new PolygonGeom([coordinates])
@@ -92,6 +132,9 @@ function RoutesTable() {
     var feature = new Feature({
       geometry: lineString,
     });
+
+
+    _vector.setStyle(styleFunction(feature))
 
     // giving ID to our feature
     feature.Name = routeName;
