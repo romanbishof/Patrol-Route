@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogContentText, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -11,6 +11,7 @@ import Icon from 'ol/style/Icon';
 import { Point } from 'ol/geom'
 import arrowImage from './arrow.png'
 import Stroke from 'ol/style/Stroke'
+import EditIcon from '@mui/icons-material/Edit';
 
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
@@ -21,6 +22,14 @@ function RoutesTable() {
   useEffect(async () => {
     dispatch(getRoutesAsync())
   }, [dispatch])
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#d85728',
+      }
+    }
+  })
 
   const handleDelete = (routeName) => {
     setOpen(false)
@@ -157,13 +166,19 @@ function RoutesTable() {
 
   return (
     <div className='RoutesTable'>
-      <Box width={950} sx={{ padding: 5 }}>
-        <TableContainer>
-          <Table size='medium' sx={{ maxWidth: 605, padding: 5 }}>
+      <ThemeProvider theme={theme}>
+      <Box sx={{ 
+        display: 'flex',
+        padding: 5,
+        width:'100%',
+        overflow: 'hidden' }}>
+        <TableContainer sx={{maxHeight: 500}}>
+          <Table stickyHeader size='medium' sx={{ maxWidth: 550, padding: 5,fontSize: 15 }}>
             <TableHead>
               <TableRow>
-                <TableCell>Route number</TableCell>
-                <TableCell>Route Name</TableCell>
+                <TableCell>Id</TableCell>
+                <TableCell >Route Name</TableCell>
+                <TableCell align='center' >Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -173,11 +188,12 @@ function RoutesTable() {
                   return (
                     <TableRow key={index}>
                       <TableCell>{index + 1}</TableCell>
-                      <TableCell onClick={() => { handleShowRoute(route.Name); }} >{route.Name}</TableCell>
+                      <TableCell sx={{cursor: 'pointer'}} onClick={() => { handleShowRoute(route.Name); }} >{route.Name}</TableCell>
                       <TableCell>
-                        <Stack spacing={1} direction='row' justifyContent='center'>
-                          <Button variant='outlined' onClick={() => { handleEditRoute(route.Name); }}>Edit Route</Button>
-                          <Button variant='outlined' onClick={() => { setOpen(true) }}>Delete</Button>
+                        <Stack spacing={3} direction='row' justifyContent='center'>
+                          <EditIcon sx={{cursor: 'pointer'}} onClick={() => { handleEditRoute(route.Name); }}/>
+                          {/* <Button variant='outlined' onClick={() => { handleEditRoute(route.Name); }}>Edit Route</Button> */}
+                          <Button variant='contained' color='primary'  size='small' onClick={() => { setOpen(true) }}>Remove</Button>
                         </Stack>
                       </TableCell>
                       <Dialog
@@ -202,10 +218,11 @@ function RoutesTable() {
             </TableBody>
           </Table>
         </TableContainer>
-        <div className="RoutesTable__options">
-          <Button onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
+        <div className="RoutesTable__button">
+          <Button  onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
         </div>
       </Box>
+      </ThemeProvider>
     </div>
   )
 }

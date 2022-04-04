@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material'
+import { Box, Button, createTheme, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider } from '@mui/material'
 import { Feature } from 'ol';
 import { LineString, Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';
@@ -18,6 +18,14 @@ function EditRoute() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const route = location.state.route
+
+    const theme = createTheme({
+        palette: {
+          primary: {
+            main: '#d85728',
+          }
+        }
+      })
 
     const rawCamera = [
         'c968288d-5f85-40b7-8b38-5ae9a3fc5670',
@@ -61,7 +69,7 @@ function EditRoute() {
 
     const handleWaitforSeconds = (e, id) => {
         route.CheckPoints.forEach(point => {
-            if(point.Id === id){
+            if (point.Id === id) {
                 point.WaitforSeconds = e.target.value
             }
         })
@@ -80,38 +88,38 @@ function EditRoute() {
 
 
         var geometry = feature.getGeometry();
-    
+
         let styles = [
-          new Style({
-            // linestring
-            stroke: new Stroke({
-              color: '#fc8100',
-              width: 2
+            new Style({
+                // linestring
+                stroke: new Stroke({
+                    color: '#fc8100',
+                    width: 2
+                })
             })
-          })
         ]
-    
+
         // iterate over each segment to add arrow at the end
         geometry.forEachSegment((start, end) => {
-          let dx = end[0] - start[0]
-          let dy = end[1] - start[1]
-          let rotation = Math.atan2(dy, dx)
-    
-          // arrow
-          styles.push(new Style({
-            geometry: new Point(end),
-            image: new Icon({
-              src: arrowImage,
-              color: '#fc8100',
-              anchor: [0.75, 0.5],
-              rotateWithView: true,
-              rotation: -rotation
-            })
-          }))
+            let dx = end[0] - start[0]
+            let dy = end[1] - start[1]
+            let rotation = Math.atan2(dy, dx)
+
+            // arrow
+            styles.push(new Style({
+                geometry: new Point(end),
+                image: new Icon({
+                    src: arrowImage,
+                    color: '#fc8100',
+                    anchor: [0.75, 0.5],
+                    rotateWithView: true,
+                    rotation: -rotation
+                })
+            }))
         })
-        
+
         return styles;
-      }
+    }
 
     const drawPolygonOnMap = (coordinates, routeName) => {
         let lineString = new LineString(coordinates)
@@ -148,81 +156,83 @@ function EditRoute() {
 
     return (
         <div>
-            <Box sx={{ padding: 5 }}
-                width={950}
-            >
+            <ThemeProvider theme={theme}>
+                <Box sx={{ padding: 5 }}
+                    width={950}
+                >
 
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Route Point</TableCell>
-                                <TableCell>Longitude</TableCell>
-                                <TableCell>Latitude</TableCell>
-                                <TableCell>Interval Time</TableCell>
-                                <TableCell>Devices</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {route.CheckPoints.map((rout) => {
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Route Point</TableCell>
+                                    <TableCell>Longitude</TableCell>
+                                    <TableCell>Latitude</TableCell>
+                                    <TableCell>Interval Time</TableCell>
+                                    <TableCell>Devices</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {route.CheckPoints.map((rout) => {
 
-                                let _defaultCameraValue = !rout.Devices.length ? 'No Camera' : rout.Devices.filter(elem => rawCamera.includes(elem))
-                                let _defaultXenonValue = !rout.Devices.length ? 'No Xenon' : rout.Devices.filter(elem => rawXenon.includes(elem))
-                                
-                                return (
-                                    <TableRow key={rout.Id}>
-                                        <TableCell>{rout.Name}</TableCell>
-                                        <TableCell>{rout.Latitude}</TableCell>
-                                        <TableCell>{rout.Longitude}</TableCell>
-                                        <TableCell>
-                                            <TextField
-                                            defaultValue={rout.WaitforSeconds}
-                                            label='Seconds'
-                                            onChange={(e) => {handleWaitforSeconds(e, rout.Id)}}
-                                            />
-                                        </TableCell>
-                                        <TableCell>
-                                            <Stack spacing={2}>
-                                                <FormControl fullWidth>
-                                                    <InputLabel id='TableCameraLabelId'>Camera</InputLabel>
-                                                    <Select
-                                                        labelId='TableCameLabelId'
-                                                        label='TableCamera'
-                                                        defaultValue={_defaultCameraValue}
-                                                        onChange={(e) => { handleCameraChange(e, rout.Id) }}
-                                                    >
-                                                        <MenuItem value='No Camera'>No Camera</MenuItem>
-                                                        <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
-                                                        <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
-                                                        <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
+                                    let _defaultCameraValue = !rout.Devices.length ? 'No Camera' : rout.Devices.filter(elem => rawCamera.includes(elem))
+                                    let _defaultXenonValue = !rout.Devices.length ? 'No Xenon' : rout.Devices.filter(elem => rawXenon.includes(elem))
 
-                                                    </Select>
-                                                </FormControl>
-                                                <FormControl fullWidth>
-                                                    <InputLabel id='TableXenonLabelId'>Xenon</InputLabel>
-                                                    <Select
-                                                        labelId='TableXenonLabelId'
-                                                        label='TableXenon'
-                                                        defaultValue={_defaultXenonValue}
-                                                        onChange={(e) => { handleXenonChange(e, rout.Id) }}
-                                                    >
-                                                        <MenuItem value='No Xenon'>No Xenon</MenuItem>
-                                                        <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
-                                                    </Select>
-                                                </FormControl>
-                                            </Stack>
-                                        </TableCell>
-                                    </TableRow>
-                                )
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <Stack direction='row' spacing={5}>
-                    <Button variant='contained' onClick={handleSaveChange}>Save</Button>
-                    <Button variant='contained' onClick={() => { navigate('/'); removeRouteFromMap() }}>Back/ Cancle</Button>
-                </Stack>
-            </Box>
+                                    return (
+                                        <TableRow key={rout.Id}>
+                                            <TableCell>{rout.Name}</TableCell>
+                                            <TableCell>{rout.Latitude}</TableCell>
+                                            <TableCell>{rout.Longitude}</TableCell>
+                                            <TableCell>
+                                                <TextField
+                                                    defaultValue={rout.WaitforSeconds}
+                                                    label='Seconds'
+                                                    onChange={(e) => { handleWaitforSeconds(e, rout.Id) }}
+                                                />
+                                            </TableCell>
+                                            <TableCell>
+                                                <Stack spacing={2}>
+                                                    <FormControl fullWidth>
+                                                        <InputLabel id='TableCameraLabelId'>Camera</InputLabel>
+                                                        <Select
+                                                            labelId='TableCameLabelId'
+                                                            label='TableCamera'
+                                                            defaultValue={_defaultCameraValue}
+                                                            onChange={(e) => { handleCameraChange(e, rout.Id) }}
+                                                        >
+                                                            <MenuItem value='No Camera'>No Camera</MenuItem>
+                                                            <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
+                                                            <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
+                                                            <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
+
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormControl fullWidth>
+                                                        <InputLabel id='TableXenonLabelId'>Xenon</InputLabel>
+                                                        <Select
+                                                            labelId='TableXenonLabelId'
+                                                            label='TableXenon'
+                                                            defaultValue={_defaultXenonValue}
+                                                            onChange={(e) => { handleXenonChange(e, rout.Id) }}
+                                                        >
+                                                            <MenuItem value='No Xenon'>No Xenon</MenuItem>
+                                                            <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
+                                                        </Select>
+                                                    </FormControl>
+                                                </Stack>
+                                            </TableCell>
+                                        </TableRow>
+                                    )
+                                })}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <Stack direction='row' spacing={5}>
+                        <Button variant='contained' onClick={handleSaveChange}>Save</Button>
+                        <Button variant='contained' onClick={() => { navigate('/'); removeRouteFromMap() }}>Back/ Cancle</Button>
+                    </Stack>
+                </Box>
+            </ThemeProvider>
         </div>
     )
 }
