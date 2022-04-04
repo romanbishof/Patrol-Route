@@ -18,6 +18,7 @@ function EditRoute() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const route = location.state.route
+    
 
     const theme = createTheme({
         palette: {
@@ -68,8 +69,10 @@ function EditRoute() {
     }
 
     const handleWaitforSeconds = (e, id) => {
+        let reg = /^[1-9]+[0-9]*$/
+
         route.CheckPoints.forEach(point => {
-            if (point.Id === id) {
+            if (point.Id === id && reg.test(e.target.value)) {
                 point.WaitforSeconds = e.target.value
             }
         })

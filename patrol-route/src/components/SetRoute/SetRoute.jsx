@@ -1,19 +1,12 @@
-import { Box, Button, Card, CardContent, CardHeader, createTheme, FormControl, FormControlLabel, InputLabel, MenuItem, Paper, Select, Slider, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, CardHeader, createTheme, FormControl, FormControlLabel, InputLabel, MenuItem, Paper, Popover, Select, Slider, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { postRoutesAsync, setRoutePlans } from '../../redux/patroslSlice'
 import { v4 as uuidv4 } from 'uuid'
-import { fromLonLat } from 'ol/proj'
 import Overlay from 'ol/Overlay';
 import { unByKey } from 'ol/Observable';
 import moment from 'moment'
-import { LineString, Point } from 'ol/geom'
-import { Feature } from 'ol'
-import Style from 'ol/style/Style'
-import Icon from 'ol/style/Icon'
-import locationImage from './location.png'
-import { Vector } from 'ol/layer'
 
 function SetRoute() {
 
@@ -23,6 +16,11 @@ function SetRoute() {
     const [date, setDate] = useState('')
     const [pointNumber, setPointNumber] = useState(1)
     const [interval, setInterval] = useState(10)
+    const [errorInterval, setErrorInterval] = useState(false)
+    const [open, setOpen] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null)
+
+    const submit = open ? 'simple-popover' : undefined
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -49,25 +47,39 @@ function SetRoute() {
         '38242558-4403-4cf9-8d38-bf209880836f'
     ]
 
+    // const intervalError = reg.test(interval)
+
     const hendleSaveRoute = (e) => {
         e.preventDefault();
+        console.log(e.target);
 
-        // send route to service
-        let newRoute = {
-            Id: uuidv4(),
-            Name: routeName,
-            OrgId: 8,
-            StartAt: date,
-            CheckPoints: routePoint
+        
+        
+        setAnchorEl(e.target.querySelector('button:first-of-type'))
+        if (routePoint.length > 1) {
+
+
+            // send route to service
+            let newRoute = {
+                Id: uuidv4(),
+                Name: routeName,
+                OrgId: 8,
+                StartAt: date,
+                CheckPoints: routePoint
+            }
+
+            dispatch(setRoutePlans(newRoute))
+            dispatch(postRoutesAsync(newRoute))
+            // remove the option to draw on the map
+
+            // navigate to our home table page
+            navigate('/')
+        } else {
+            setOpen(true)
+            setTimeout(() => {
+                setOpen(false)
+            }, 1900);
         }
-
-        dispatch(setRoutePlans(newRoute))
-        dispatch(postRoutesAsync(newRoute))
-        // remove the option to draw on the map
-
-        // navigate to our home table page
-        navigate('/')
-
     }
 
     const handleCameraChange = (e, Id) => {
@@ -105,7 +117,19 @@ function SetRoute() {
     }
 
     const handleIntervalTime = (e) => {
-        setInterval(e.target.value)
+        let reg = /^[1-9]+[0-9]*$/
+
+        // valiation to enter only numbers
+        if (reg.test(e.target.value)) {
+            setErrorInterval(!errorInterval)
+            setInterval(e.target.value)
+        }
+        else {
+            setErrorInterval(!errorInterval)
+        }
+
+
+
     }
     const handleSaveTemplate = () => {
 
@@ -141,12 +165,6 @@ function SetRoute() {
         _overlays.clear()
     }
 
-    const addMarker = (coordinate) => {
-        let vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer')
-        let source = vector.getSource()
-        console.log(coordinate);
-
-    }
 
     useEffect(() => {
 
@@ -162,7 +180,6 @@ function SetRoute() {
             overlay.setPosition(e.coordinate);
             window.map.addOverlay(overlay)
             setCoordinates(e.coordinate)
-            addMarker(e.coordinate)
         })
 
         // unmounting component by key that the event returns --> unsubscribe
@@ -182,7 +199,7 @@ function SetRoute() {
                     onSubmit={hendleSaveRoute}
                     autoComplete='off'
                     sx={{
-                        
+
                         overflow: 'hidden',
                         padding: 5,
                         width: '100%'
@@ -263,7 +280,18 @@ function SetRoute() {
 
                     </TableContainer>
                     <Stack direction='row' spacing={3} >
-                        <Button type='submit' variant='contained'>Save Route</Button>
+                        <Button aria-describedby={submit} type='submit' variant='contained'>Save Route</Button>
+                        <Popover
+                            id={submit}
+                            open={open}
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                        >
+                            <Typography sx={{p:2}}>Please select at least one point</Typography>
+                        </Popover>
                         <Button variant='contained' onClick={() => { navigate('/'); clearPopupOverLay(); }}>Back</Button>
                     </Stack>
 
@@ -305,12 +333,12 @@ function SetRoute() {
                                     </Select>
                                 </FormControl>
                                 <TextField
-                                    required={true}
+                                    size='small'
                                     value={interval}
                                     label='Seconds'
                                     onChange={handleIntervalTime}
+                                    helperText='Enter only Numbers'
                                 />
-
                                 <Button variant='contained' onClick={handleSaveTemplate}>Save / Close</Button>
                             </Stack>
 
