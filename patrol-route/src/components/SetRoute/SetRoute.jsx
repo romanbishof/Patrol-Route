@@ -67,6 +67,7 @@ function SetRoute() {
                 StartAt: date,
                 CheckPoints: routePoint
             }
+            setPointNumber(1)
 
             dispatch(setRoutePlans(newRoute))
             dispatch(postRoutesAsync(newRoute))
@@ -155,6 +156,7 @@ function SetRoute() {
         setXenon('No Xenon');
         setInterval(10)
         setDevices([])
+        setPointNumber(pointNumber+1)
 
         clearPopupOverLay()
 

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 function OSM_Map() {
-    const dispatch = useDispatch();
+    
     const patrols = useSelector( (state) => state.patrols)
     const raster = new TileLayer({
       source: new OSM(),

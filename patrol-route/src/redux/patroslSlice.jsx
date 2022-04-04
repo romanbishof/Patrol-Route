@@ -35,7 +35,6 @@ const initialState = [
         IntervalInMinutes: 60,
         RoutePlans: []
     },
-    {map: ''}
 ]
 
 
@@ -46,9 +45,6 @@ const patrolSlice = createSlice({
         setRoutePlans: (state, action) => {
             state[0].RoutePlans.push(action.payload)
             
-        },
-        setMapState: (state, action) => {
-            state[1].map = action.payload
         },
         deleteRoute: (state, action) => {
             let routes = state[0].RoutePlans.filter( routePlan => routePlan.Name !== action.payload)
@@ -86,6 +82,6 @@ const patrolSlice = createSlice({
     },
 })
 
-export const {setRoutePlans, setMapState, deleteRoute, updateRoute} = patrolSlice.actions;
+export const {setRoutePlans, deleteRoute, updateRoute} = patrolSlice.actions;
 
 export default patrolSlice.reducer;

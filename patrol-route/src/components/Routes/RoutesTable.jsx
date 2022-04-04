@@ -1,4 +1,4 @@
-import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogContentText, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from '@mui/material'
+import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -19,6 +19,7 @@ function RoutesTable() {
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(async () => {
     dispatch(getRoutesAsync())
   }, [dispatch])
@@ -117,6 +118,11 @@ function RoutesTable() {
 
     return styles;
   }
+
+  const handleSecurityLevel = (e) => {
+    console.log(e.target.value);
+  }
+
   //function to draw Route on MAP 
   function drawPolygonOnMap(coordinates, routeName) {
     setCheckRouteId(routeName)
@@ -167,61 +173,76 @@ function RoutesTable() {
   return (
     <div className='RoutesTable'>
       <ThemeProvider theme={theme}>
-      <Box sx={{ 
-        display: 'flex',
-        padding: 5,
-        width:'100%',
-        overflow: 'hidden' }}>
-        <TableContainer sx={{maxHeight: 500}}>
-          <Table stickyHeader size='medium' sx={{ maxWidth: 550, padding: 5,fontSize: 15 }}>
-            <TableHead>
-              <TableRow>
-                <TableCell>Id</TableCell>
-                <TableCell >Route Name</TableCell>
-                <TableCell align='center' >Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {
-                routes[0].RoutePlans.map((route, index) => {
+        <Box sx={{
+          display: 'flex',
+          padding: 5,
+          width: '100%',
+          overflow: 'hidden'
+        }}>
+          <TableContainer sx={{ maxHeight: 550 }}>
+            <Table stickyHeader size='medium' sx={{ maxWidth: 550, padding: 5, fontSize: 15 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Id</TableCell>
+                  <TableCell >Route Name</TableCell>
+                  <TableCell align='center' >Actions</TableCell>
+                  {/* <TableCell>Security Level</TableCell> */}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {
+                  routes[0].RoutePlans.map((route, index) => {
 
-                  return (
-                    <TableRow key={index}>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell sx={{cursor: 'pointer'}} onClick={() => { handleShowRoute(route.Name); }} >{route.Name}</TableCell>
-                      <TableCell>
-                        <Stack spacing={3} direction='row' justifyContent='center'>
-                          <EditIcon sx={{cursor: 'pointer'}} onClick={() => { handleEditRoute(route.Name); }}/>
-                          {/* <Button variant='outlined' onClick={() => { handleEditRoute(route.Name); }}>Edit Route</Button> */}
-                          <Button variant='contained' color='primary'  size='small' onClick={() => { setOpen(true) }}>Remove</Button>
-                        </Stack>
-                      </TableCell>
-                      <Dialog
-                        open={open}
-                        onClose={() => { setOpen(false) }}
-                        aria-describedby='alert-delete'
-                      >
-                        <DialogContent>
-                          <DialogContentText id="alert-delete">
-                            Are you sure you want to delete this Route?
-                          </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                          <Button onClick={() => { handleDelete(route.Name) }}>Yes</Button>
-                          <Button onClick={() => { setOpen(false) }}>Cancel</Button>
-                        </DialogActions>
-                      </Dialog>
-                    </TableRow>
-                  )
-                })
-              }
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <div className="RoutesTable__button">
-          <Button  onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
-        </div>
-      </Box>
+                    return (
+                      <TableRow key={index}>
+                        <TableCell>{index + 1}</TableCell>
+                        <TableCell sx={{ cursor: 'pointer' }} onClick={() => { handleShowRoute(route.Name); }} >{route.Name}</TableCell>
+                        <TableCell>
+                          <Stack spacing={3} direction='row' justifyContent='center'>
+                            <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Name); }} />
+                            <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true) }}>Remove</Button>
+                          </Stack>
+                        </TableCell>
+                        <Dialog
+                          open={open}
+                          onClose={() => { setOpen(false) }}
+                          aria-describedby='alert-delete'
+                        >
+                          <DialogContent>
+                            <DialogContentText id="alert-delete">
+                              Are you sure you want to delete this Route?
+                            </DialogContentText>
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={() => { handleDelete(route.Name) }}>Yes</Button>
+                            <Button onClick={() => { setOpen(false) }}>Cancel</Button>
+                          </DialogActions>
+                        </Dialog>
+                        {/* <TableCell>
+                          <FormControl fullWidth>
+                            <InputLabel id='TableSecurityLevelId'>Security Level</InputLabel>
+                            <Select
+                              labelId='TableSecurityLevelId'
+                              label='TableSecurityLevel'
+                              defaultValue={180}
+                              onChange={handleSecurityLevel}>
+                              <MenuItem value={180}>L1</MenuItem>
+                              <MenuItem value={120}>L2</MenuItem>
+                              <MenuItem value={60}>L3</MenuItem>
+                            </Select>
+                          </FormControl>
+                        </TableCell> */}
+                      </TableRow>
+                    )
+                  })
+                }
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <div className="RoutesTable__button">
+            <Button onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
+          </div>
+        </Box>
       </ThemeProvider>
     </div>
   )
