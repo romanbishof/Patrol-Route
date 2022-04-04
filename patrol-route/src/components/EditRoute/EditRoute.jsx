@@ -229,7 +229,7 @@ function EditRoute() {
                     </TableContainer>
                     <Stack direction='row' spacing={5}>
                         <Button variant='contained' onClick={handleSaveChange}>Save</Button>
-                        <Button variant='contained' onClick={() => { navigate('/'); removeRouteFromMap() }}>Back/ Cancle</Button>
+                        <Button variant='contained' onClick={() => { navigate('/'); removeRouteFromMap() }}>Back/ Cancel</Button>
                     </Stack>
                 </Box>
             </ThemeProvider>

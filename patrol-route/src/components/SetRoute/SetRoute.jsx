@@ -182,7 +182,7 @@ function SetRoute() {
                     onSubmit={hendleSaveRoute}
                     autoComplete='off'
                     sx={{
-                        display: 'flex',
+                        
                         overflow: 'hidden',
                         padding: 5,
                         width: '100%'
