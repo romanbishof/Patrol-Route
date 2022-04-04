@@ -56,7 +56,7 @@ function SetRoute() {
         
         
         setAnchorEl(e.target.querySelector('button:first-of-type'))
-        if (routePoint.length > 1) {
+        if (routePoint.length >= 1) {
 
 
             // send route to service
