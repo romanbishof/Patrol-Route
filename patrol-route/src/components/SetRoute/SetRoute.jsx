@@ -7,6 +7,11 @@ import { v4 as uuidv4 } from 'uuid'
 import Overlay from 'ol/Overlay';
 import { unByKey } from 'ol/Observable';
 import moment from 'moment'
+import { Vector } from 'ol/layer'
+import Style from 'ol/style/Style'
+import Icon from 'ol/style/Icon'
+import { Feature } from 'ol'
+import { Point } from 'ol/geom'
 
 function SetRoute() {
 
@@ -53,8 +58,8 @@ function SetRoute() {
         e.preventDefault();
         console.log(e.target);
 
-        
-        
+
+
         setAnchorEl(e.target.querySelector('button:first-of-type'))
         if (routePoint.length >= 1) {
 
@@ -156,7 +161,7 @@ function SetRoute() {
         setXenon('No Xenon');
         setInterval(10)
         setDevices([])
-        setPointNumber(pointNumber+1)
+        setPointNumber(pointNumber + 1)
 
         clearPopupOverLay()
 
@@ -166,6 +171,8 @@ function SetRoute() {
         const _overlays = window.map.getOverlays()
         _overlays.clear()
     }
+
+
 
 
     useEffect(() => {
@@ -184,6 +191,8 @@ function SetRoute() {
             setCoordinates(e.coordinate)
         })
 
+
+
         // unmounting component by key that the event returns --> unsubscribe
         return () => {
             unByKey(key)
@@ -192,166 +201,181 @@ function SetRoute() {
     }, [])
 
 
-    return (
-        <ThemeProvider theme={theme}>
-            <div className='setRoute'>
+    useEffect(() => {
+        let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer')
+        let source = _vector.getSource();
 
-                <Box
-                    component='form'
-                    onSubmit={hendleSaveRoute}
-                    autoComplete='off'
-                    sx={{
+        // _vector.setStyle(style)
 
-                        overflow: 'hidden',
-                        padding: 5,
-                        width: '100%'
-                    }}
-                >
-                    <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
-                    <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
+        
+        window.map.on('click', (e) => {
+            
+                console.log(e.coordinate);
 
-                    <TableContainer >
-                        <Table size='medium' sx={{ maxWidth: 750, padding: 5, fontSize: 15 }}>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Point Number</TableCell>
-                                    <TableCell>Laitude</TableCell>
-                                    <TableCell>Longitde</TableCell>
-                                    <TableCell>Interval time (sec)</TableCell>
-                                    <TableCell>Devices</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {
-                                    routePoint.map((route, index) => {
+            })
+        }, [])
 
-                                        let _defaultCameraValue = !route.Devices.length ? 'No Camera' : route.Devices.filter(elem => rawCamera.includes(elem))
-                                        let _defaultXenonValue = !route.Devices.length ? 'No Xenon' : route.Devices.filter(elem => rawXenon.includes(elem))
 
-                                        return (
-                                            <TableRow key={index} >
-                                                <TableCell>{route.Name}</TableCell>
-                                                <TableCell>{route.Latitude}</TableCell>
-                                                <TableCell>{route.Longitude}</TableCell>
-                                                <TableCell>
-                                                    <TextField
-                                                        required={true}
-                                                        defaultValue={route.WaitforSeconds}
-                                                        label='Seconds'
-                                                        onChange={handleIntervalTime}
-                                                    />
-                                                </TableCell>
-                                                <TableCell width={220}>
-                                                    <Stack spacing={1} >
-                                                        <FormControl fullWidth>
-                                                            <InputLabel id='TableCameraLabelId'>Camera</InputLabel>
-                                                            <Select
-                                                                labelId='TableCameLabelId'
-                                                                label='TableCamera'
-                                                                defaultValue={_defaultCameraValue}
-                                                                onChange={(e) => { handleCameraChange(e, route.Id) }}
-                                                            >
-                                                                <MenuItem value='No Camera'>No Camera</MenuItem>
-                                                                <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
-                                                                <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
-                                                                <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
+        return (
+            <ThemeProvider theme={theme}>
+                <div className='setRoute'>
 
-                                                            </Select>
-                                                        </FormControl>
-                                                        <FormControl fullWidth>
-                                                            <InputLabel id='TableXenonLabelId'>Xenon</InputLabel>
-                                                            <Select
-                                                                labelId='TableXenonLabelId'
-                                                                label='TableXenon'
-                                                                defaultValue={_defaultXenonValue}
-                                                                onChange={(e) => { handleXenonChange(e, route.Id) }}
-                                                            >
-                                                                <MenuItem value='No Xenon'>No Xenon</MenuItem>
-                                                                <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
-                                                            </Select>
-                                                        </FormControl>
-                                                    </Stack>
-                                                </TableCell>
-                                            </TableRow>
-                                        )
-                                    })
-                                }
+                    <Box
+                        component='form'
+                        onSubmit={hendleSaveRoute}
+                        autoComplete='off'
+                        sx={{
 
-                            </TableBody>
-                        </Table>
+                            overflow: 'hidden',
+                            padding: 5,
+                            width: '100%'
+                        }}
+                    >
+                        <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
+                        <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
 
-                    </TableContainer>
-                    <Stack direction='row' spacing={3} >
-                        <Button aria-describedby={submit} type='submit' variant='contained'>Save Route</Button>
-                        <Popover
-                            id={submit}
-                            open={open}
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                        >
-                            <Typography sx={{p:2}}>Please select at least one point</Typography>
-                        </Popover>
-                        <Button variant='contained' onClick={() => { navigate('/'); clearPopupOverLay(); }}>Back</Button>
-                    </Stack>
+                        <TableContainer >
+                            <Table size='medium' sx={{ maxWidth: 750, padding: 5, fontSize: 15 }}>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Point Number</TableCell>
+                                        <TableCell>Laitude</TableCell>
+                                        <TableCell>Longitde</TableCell>
+                                        <TableCell>Interval time (sec)</TableCell>
+                                        <TableCell>Devices</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {
+                                        routePoint.map((route, index) => {
 
-                </Box>
+                                            let _defaultCameraValue = !route.Devices.length ? 'No Camera' : route.Devices.filter(elem => rawCamera.includes(elem))
+                                            let _defaultXenonValue = !route.Devices.length ? 'No Xenon' : route.Devices.filter(elem => rawXenon.includes(elem))
 
-                <div ref={popup} id='popup'>
+                                            return (
+                                                <TableRow key={index} >
+                                                    <TableCell>{route.Name}</TableCell>
+                                                    <TableCell>{route.Latitude}</TableCell>
+                                                    <TableCell>{route.Longitude}</TableCell>
+                                                    <TableCell>
+                                                        <TextField
+                                                            required={true}
+                                                            defaultValue={route.WaitforSeconds}
+                                                            label='Seconds'
+                                                            onChange={handleIntervalTime}
+                                                        />
+                                                    </TableCell>
+                                                    <TableCell width={220}>
+                                                        <Stack spacing={1} >
+                                                            <FormControl fullWidth>
+                                                                <InputLabel id='TableCameraLabelId'>Camera</InputLabel>
+                                                                <Select
+                                                                    labelId='TableCameLabelId'
+                                                                    label='TableCamera'
+                                                                    defaultValue={_defaultCameraValue}
+                                                                    onChange={(e) => { handleCameraChange(e, route.Id) }}
+                                                                >
+                                                                    <MenuItem value='No Camera'>No Camera</MenuItem>
+                                                                    <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
+                                                                    <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
+                                                                    <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
 
-                    <Paper elevation={6}
-                        component='form'>
+                                                                </Select>
+                                                            </FormControl>
+                                                            <FormControl fullWidth>
+                                                                <InputLabel id='TableXenonLabelId'>Xenon</InputLabel>
+                                                                <Select
+                                                                    labelId='TableXenonLabelId'
+                                                                    label='TableXenon'
+                                                                    defaultValue={_defaultXenonValue}
+                                                                    onChange={(e) => { handleXenonChange(e, route.Id) }}
+                                                                >
+                                                                    <MenuItem value='No Xenon'>No Xenon</MenuItem>
+                                                                    <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
+                                                                </Select>
+                                                            </FormControl>
+                                                        </Stack>
+                                                    </TableCell>
+                                                </TableRow>
+                                            )
+                                        })
+                                    }
 
-                        <CardHeader title='Choose Devices' />
-                        <CardContent>
-                            <Stack spacing={2} direction={'column'}>
-                                <FormControl required={true} fullWidth>
-                                    <InputLabel id='CameraLabelId'>Camera</InputLabel>
-                                    <Select
-                                        labelId='CameLabelId'
-                                        label='Camera'
-                                        value={camera}
-                                        onChange={(e) => { setCamera(e.target.value) }}
-                                    >
-                                        <MenuItem value='No Camera'>No Camera</MenuItem>
-                                        <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
-                                        <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
-                                        <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
+                                </TableBody>
+                            </Table>
 
-                                    </Select>
-                                </FormControl>
-                                <FormControl required={true} fullWidth>
-                                    <InputLabel id='XenonLabelId'>Xenon</InputLabel>
-                                    <Select
-                                        labelId='XenonLabelId'
-                                        label='Xenon'
-                                        value={xenon}
-                                        onChange={(e) => { setXenon(e.target.value) }}
-                                    >
-                                        <MenuItem value='No Xenon'>No Xenon</MenuItem>
-                                        <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <TextField
-                                    size='small'
-                                    value={interval}
-                                    label='Seconds'
-                                    onChange={handleIntervalTime}
-                                    helperText='Enter only Numbers'
-                                />
-                                <Button variant='contained' onClick={handleSaveTemplate}>Save / Close</Button>
-                            </Stack>
+                        </TableContainer>
+                        <Stack direction='row' spacing={3} >
+                            <Button aria-describedby={submit} type='submit' variant='contained'>Save Route</Button>
+                            <Popover
+                                id={submit}
+                                open={open}
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                            >
+                                <Typography sx={{ p: 2 }}>Please select at least one point</Typography>
+                            </Popover>
+                            <Button variant='contained' onClick={() => { navigate('/'); clearPopupOverLay(); }}>Back</Button>
+                        </Stack>
 
-                        </CardContent>
-                    </Paper>
+                    </Box>
+
+                    <div ref={popup} id='popup'>
+
+                        <Paper elevation={6}
+                            component='form'>
+
+                            <CardHeader title='Choose Devices' />
+                            <CardContent>
+                                <Stack spacing={2} direction={'column'}>
+                                    <FormControl required={true} fullWidth>
+                                        <InputLabel id='CameraLabelId'>Camera</InputLabel>
+                                        <Select
+                                            labelId='CameLabelId'
+                                            label='Camera'
+                                            value={camera}
+                                            onChange={(e) => { setCamera(e.target.value) }}
+                                        >
+                                            <MenuItem value='No Camera'>No Camera</MenuItem>
+                                            <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
+                                            <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
+                                            <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
+
+                                        </Select>
+                                    </FormControl>
+                                    <FormControl required={true} fullWidth>
+                                        <InputLabel id='XenonLabelId'>Xenon</InputLabel>
+                                        <Select
+                                            labelId='XenonLabelId'
+                                            label='Xenon'
+                                            value={xenon}
+                                            onChange={(e) => { setXenon(e.target.value) }}
+                                        >
+                                            <MenuItem value='No Xenon'>No Xenon</MenuItem>
+                                            <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    <TextField
+                                        size='small'
+                                        value={interval}
+                                        label='Seconds'
+                                        onChange={handleIntervalTime}
+                                        helperText='Enter only Numbers'
+                                    />
+                                    <Button variant='contained' onClick={handleSaveTemplate}>Save / Close</Button>
+                                </Stack>
+
+                            </CardContent>
+                        </Paper>
+
+                    </div>
 
                 </div>
-
-            </div>
-        </ThemeProvider>
-    )
-}
+            </ThemeProvider>
+        )
+    }
 
 export default SetRoute

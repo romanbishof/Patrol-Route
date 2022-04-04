@@ -119,9 +119,9 @@ function RoutesTable() {
     return styles;
   }
 
-  const handleSecurityLevel = (e) => {
-    console.log(e.target.value);
-  }
+  // const handleSecurityLevel = (e) => {
+  //   console.log(e.target.value);
+  // }
 
   //function to draw Route on MAP 
   function drawPolygonOnMap(coordinates, routeName) {
