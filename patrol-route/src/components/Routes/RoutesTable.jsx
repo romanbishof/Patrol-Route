@@ -12,6 +12,7 @@ import { Point } from 'ol/geom'
 import arrowImage from './arrow.png'
 import Stroke from 'ol/style/Stroke'
 import EditIcon from '@mui/icons-material/Edit';
+import './RoutesTable.css'
 
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
@@ -173,52 +174,47 @@ function RoutesTable() {
   return (
     <div className='RoutesTable'>
       <ThemeProvider theme={theme}>
-        <Box sx={{
-          display: 'flex',
-          padding: 5,
-          width: '100%',
-          overflow: 'hidden'
-        }}>
-          <TableContainer sx={{ maxHeight: 550 }}>
-            <Table stickyHeader size='medium' sx={{ maxWidth: 550, padding: 5, fontSize: 15 }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Id</TableCell>
-                  <TableCell >Route Name</TableCell>
-                  <TableCell align='center' >Actions</TableCell>
-                  {/* <TableCell>Security Level</TableCell> */}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {
-                  routes[0].RoutePlans.map((route, index) => {
 
-                    return (
-                      <TableRow key={index}>
-                        <TableCell>{index + 1}</TableCell>
-                        <TableCell sx={{ cursor: 'pointer' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
-                        <TableCell>
-                          <Stack spacing={3} direction='row' justifyContent='center'>
-                            <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
-                            <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true) }}>Remove</Button>
-                          </Stack>
-                        </TableCell>
-                        <Dialog
-                          open={open}
-                          onClose={() => { setOpen(false) }}
-                          aria-describedby='alert-delete'
-                        >
-                          <DialogContent>
-                            <DialogContentText id="alert-delete">
-                              Are you sure you want to delete this Route?
-                            </DialogContentText>
-                          </DialogContent>
-                          <DialogActions>
-                            <Button onClick={() => { handleDelete(route.Id) }}>Yes</Button>
-                            <Button onClick={() => { setOpen(false) }}>Cancel</Button>
-                          </DialogActions>
-                        </Dialog>
-                        {/* <TableCell>
+        <TableContainer>
+          <Table stickyHeader className='RoutesTable__table'>
+            <TableHead>
+              <TableRow>
+                <TableCell>Id</TableCell>
+                <TableCell >Route Name</TableCell>
+                <TableCell align='center' >Actions</TableCell>
+                {/* <TableCell>Security Level</TableCell> */}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {
+                routes[0].RoutePlans.map((route, index) => {
+
+                  return (
+                    <TableRow key={index}>
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell sx={{ cursor: 'pointer' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
+                      <TableCell>
+                        <Stack spacing={3} direction='row' justifyContent='center'>
+                          <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
+                          <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true) }}>Remove</Button>
+                        </Stack>
+                      </TableCell>
+                      <Dialog
+                        open={open}
+                        onClose={() => { setOpen(false) }}
+                        aria-describedby='alert-delete'
+                      >
+                        <DialogContent>
+                          <DialogContentText id="alert-delete">
+                            Are you sure you want to delete this Route?
+                          </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={() => { handleDelete(route.Id) }}>Yes</Button>
+                          <Button onClick={() => { setOpen(false) }}>Cancel</Button>
+                        </DialogActions>
+                      </Dialog>
+                      {/* <TableCell>
                           <FormControl fullWidth>
                             <InputLabel id='TableSecurityLevelId'>Security Level</InputLabel>
                             <Select
@@ -232,17 +228,17 @@ function RoutesTable() {
                             </Select>
                           </FormControl>
                         </TableCell> */}
-                      </TableRow>
-                    )
-                  })
-                }
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <div className="RoutesTable__button">
-            <Button onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
-          </div>
-        </Box>
+                    </TableRow>
+                  )
+                })
+              }
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <div className="RoutesTable__button">
+          <Button onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
+        </div>
+
       </ThemeProvider>
     </div>
   )

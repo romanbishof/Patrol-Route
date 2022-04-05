@@ -16,6 +16,7 @@ import { LineString, Point } from 'ol/geom'
 import Stroke from 'ol/style/Stroke'
 import { fromLonLat } from 'ol/proj'
 import markerImg from './marker.png'
+import './SetRoute.css'
 
 function SetRoute() {
 
@@ -238,24 +239,36 @@ function SetRoute() {
 
 
     return (
-        <ThemeProvider theme={theme}>
-            <div className='setRoute'>
+        <div className='setRoute'>
+            <ThemeProvider theme={theme} >
+
 
                 <Box
                     component='form'
                     onSubmit={hendleSaveRoute}
                     autoComplete='off'
-                    sx={{
-
-                        overflow: 'hidden',
-                        padding: 5,
-                        width: '100%'
-                    }}
                 >
-                    <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
-                    <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
+                    <Stack spacing={3} direction='row' className='setRoute__box-textAndDateInput'>
+                        <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
+                        <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input style={{height: "41px"}} type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
 
-                    <TableContainer >
+                        <Button aria-describedby={submit} type='submit' variant='contained'>Save Route</Button>
+                        <Popover
+                            id={submit}
+                            open={open}
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                        >
+                            <Typography sx={{ p: 2 }}>Please select at least one point</Typography>
+                        </Popover>
+                        <Button variant='contained' onClick={() => { navigate('/'); clearPopupOverLay(); }}>Back</Button>
+
+                    </Stack>
+
+                    <TableContainer className='seRoute__box-tableContainer'>
                         <Table size='medium' sx={{ maxWidth: 750, padding: 5, fontSize: 15 }}>
                             <TableHead>
                                 <TableRow>
@@ -326,22 +339,6 @@ function SetRoute() {
                         </Table>
 
                     </TableContainer>
-                    <Stack direction='row' spacing={3} >
-                        <Button aria-describedby={submit} type='submit' variant='contained'>Save Route</Button>
-                        <Popover
-                            id={submit}
-                            open={open}
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                        >
-                            <Typography sx={{ p: 2 }}>Please select at least one point</Typography>
-                        </Popover>
-                        <Button variant='contained' onClick={() => { navigate('/'); clearPopupOverLay(); }}>Back</Button>
-                    </Stack>
-
                 </Box>
 
                 <div ref={popup} id='popup'>
@@ -394,8 +391,9 @@ function SetRoute() {
 
                 </div>
 
-            </div>
-        </ThemeProvider>
+
+            </ThemeProvider>
+        </div>
     )
 }
 
