@@ -32,24 +32,24 @@ function RoutesTable() {
     }
   })
 
-  const handleDelete = (routeName) => {
+  const handleDelete = (routeId) => {
     setOpen(false)
-    dispatch(deleteRoute(routeName));
-    dispatch(deleteRouteAsync(routeName));
+    dispatch(deleteRoute(routeId));
+    dispatch(deleteRouteAsync(routeId));
     removeLinePath();
   }
 
-  const handleEditRoute = (routeName) => {
+  const handleEditRoute = (routeId) => {
     // getting specific route plan by id
-    let route = routes[0].RoutePlans.filter(routePlan => routePlan.Name === routeName)
+    let route = routes[0].RoutePlans.filter(routePlan => routePlan.Id === routeId)
     // console.log(route);
     navigate(`/edit-route/:route`, { state: { route: route[0] } })
     removeLinePath();
   }
 
-  const handleShowRoute = (routeName) => {
+  const handleShowRoute = (routeId) => {
 
-    let route = routes[0].RoutePlans.filter(routePlan => routePlan.Name === routeName)
+    let route = routes[0].RoutePlans.filter(routePlan => routePlan.Id === routeId)
     route = route[0];
     // console.log('id of route by click ', id);
 
@@ -72,9 +72,9 @@ function RoutesTable() {
       coordinatesLineString.push(pointTransform);
     }
 
-    if (checkRouteId !== routeName) {
+    if (checkRouteId !== routeId) {
       // calling the function that adds layer of drawing on our existing map
-      drawPolygonOnMap(coordinatesLineString, route.Name);
+      drawPolygonOnMap(coordinatesLineString, route.Id);
     } else {
       // if the route alredy drawn --> we remove it
       removeLinePath()
@@ -124,8 +124,8 @@ function RoutesTable() {
   // }
 
   //function to draw Route on MAP 
-  function drawPolygonOnMap(coordinates, routeName) {
-    setCheckRouteId(routeName)
+  function drawPolygonOnMap(coordinates, routeId) {
+    setCheckRouteId(routeId)
     removeLinePath();
     // getting the Specific layer from all the Layer in our map
     let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
@@ -152,7 +152,7 @@ function RoutesTable() {
     _vector.setStyle(styleFunction(feature))
 
     // giving ID to our feature
-    feature.Name = routeName;
+    feature.Id = routeId;
 
     //console.log(feature);
     source.addFeature(feature);
@@ -196,10 +196,10 @@ function RoutesTable() {
                     return (
                       <TableRow key={index}>
                         <TableCell>{index + 1}</TableCell>
-                        <TableCell sx={{ cursor: 'pointer' }} onClick={() => { handleShowRoute(route.Name); }} >{route.Name}</TableCell>
+                        <TableCell sx={{ cursor: 'pointer' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
                         <TableCell>
                           <Stack spacing={3} direction='row' justifyContent='center'>
-                            <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Name); }} />
+                            <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
                             <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true) }}>Remove</Button>
                           </Stack>
                         </TableCell>
@@ -214,7 +214,7 @@ function RoutesTable() {
                             </DialogContentText>
                           </DialogContent>
                           <DialogActions>
-                            <Button onClick={() => { handleDelete(route.Name) }}>Yes</Button>
+                            <Button onClick={() => { handleDelete(route.Id) }}>Yes</Button>
                             <Button onClick={() => { setOpen(false) }}>Cancel</Button>
                           </DialogActions>
                         </Dialog>

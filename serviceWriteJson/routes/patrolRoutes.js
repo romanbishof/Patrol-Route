@@ -26,12 +26,12 @@ router.post('/', (req, resp) => {
     resp.send(data);
 })
 
-router.delete('/:routeName', (req, resp) => {
+router.delete('/:routeId', (req, resp) => {
     
     let data = jfile.readFileSync('../data.json')
     data[0] = updateDate(data[0])
-    const { routeName } = req.params
-    let route = data[0].RoutePlans.filter(routePlan => routePlan.Name !== routeName)
+    const { routeId } = req.params
+    let route = data[0].RoutePlans.filter(routePlan => routePlan.Id !== routeId)
     data[0].RoutePlans = route
     jfile.writeFileSync('../data.json', data)
     resp.send('the route was deleted, heres new route:/n',data)

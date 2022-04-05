@@ -18,15 +18,15 @@ function EditRoute() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const route = location.state.route
-    
+
 
     const theme = createTheme({
         palette: {
-          primary: {
-            main: '#d85728',
-          }
+            primary: {
+                main: '#d85728',
+            }
         }
-      })
+    })
 
     const rawCamera = [
         'c968288d-5f85-40b7-8b38-5ae9a3fc5670',
@@ -177,9 +177,9 @@ function EditRoute() {
                             </TableHead>
                             <TableBody>
                                 {route.CheckPoints.map((rout) => {
-
-                                    let _defaultCameraValue = !rout.Devices.length ? 'No Camera' : rout.Devices.filter(elem => rawCamera.includes(elem))
-                                    let _defaultXenonValue = !rout.Devices.length ? 'No Xenon' : rout.Devices.filter(elem => rawXenon.includes(elem))
+                                    
+                                    let _defaultCameraValue = !rout.Devices.some(elem => rawCamera.includes(elem)) ? 'No Camera' : rout.Devices.filter(elem => rawCamera.includes(elem))
+                                    let _defaultXenonValue = !rout.Devices.some(elem => rawXenon.includes(elem)) ? 'No Xenon' : rout.Devices.filter(elem => rawXenon.includes(elem))
 
                                     return (
                                         <TableRow key={rout.Id}>

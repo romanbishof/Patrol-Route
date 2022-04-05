@@ -14,8 +14,8 @@ async (newRoute) => {
 })
 
 export const deleteRouteAsync = createAsyncThunk('routes/deleteRouteAsync',
-async (routeName) => {
-    await axios.delete(`http://localhost:9090/routes/${routeName}`)
+async (routeId) => {
+    await axios.delete(`http://localhost:9090/routes/${routeId}`)
 })
 
 export const updateRouteAsync = createAsyncThunk('route/updateRouteAsync',
@@ -47,7 +47,7 @@ const patrolSlice = createSlice({
             
         },
         deleteRoute: (state, action) => {
-            let routes = state[0].RoutePlans.filter( routePlan => routePlan.Name !== action.payload)
+            let routes = state[0].RoutePlans.filter( routePlan => routePlan.Id !== action.payload)
             state[0].RoutePlans = routes
         },
         updateRoute: (state, action) => {
