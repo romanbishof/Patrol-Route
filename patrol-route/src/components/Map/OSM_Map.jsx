@@ -3,8 +3,10 @@ import { Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import React, { useEffect, useRef, useState } from 'react'
 import { OSM, Vector as VectorSource } from 'ol/source'
 import {get} from 'ol/proj';
+import {defaults as defaultControls, MousePosition} from 'ol/control';
 import './OSM_Map.css'
 import { useDispatch, useSelector } from 'react-redux';
+import { createStringXY } from 'ol/coordinate';
 
 
 
@@ -12,7 +14,7 @@ function OSM_Map() {
     
     const patrols = useSelector( (state) => state.patrols)
     const raster = new TileLayer({
-      source: new OSM(),
+      source: new OSM({url:'http://NNPCFE/MapTiles/{z}/{x}/{y}.png'}),
     })
 
     const source = new VectorSource({wrapX: false});
@@ -23,10 +25,16 @@ function OSM_Map() {
     vector.id = 'PolygonLayer'
     
     const mapElement = useRef();
-    const extent = get('EPSG:4326').getExtent().slice();
-    extent[0] += extent[0];
-    extent[2] += extent[2];
 
+    const mousePositionControl = new MousePosition({
+      coordinateFormat: createStringXY(4),
+      projection: 'EPSG:4326',
+      // comment the following two lines to have the mouse position
+      // be placed within the map.
+      className: 'custom-mouse-position',
+      target: document.getElementById('mouse-position'),
+    });
+    
     useEffect(() => {
       // initialaiting map
       window.map = new Map({
@@ -36,8 +44,8 @@ function OSM_Map() {
           center: [patrols[0].Home.Longitude, patrols[0].Home.Latitude],
           zoom: 17,
           projection: 'EPSG:4326',          
-          extent
         }),
+        controls: [mousePositionControl],
       });
 
     }, []);
@@ -45,7 +53,8 @@ function OSM_Map() {
   return (
     <div className='OSM_Map'>
         <div ref={mapElement} className="OSM_Map-container">
-          <div className="popup"></div>
+          {/* <div className="popup"></div> */}
+
         </div>
     </div>
   )
