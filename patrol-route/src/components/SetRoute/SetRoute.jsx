@@ -14,8 +14,9 @@ import Icon from 'ol/style/Icon'
 import { Feature } from 'ol'
 import { LineString, Point } from 'ol/geom'
 import Stroke from 'ol/style/Stroke'
-import { fromLonLat } from 'ol/proj'
+import { fromLonLat, transform } from 'ol/proj'
 import markerImg from './marker.png'
+import arrowImg from '../../images/arrow.png'
 import './SetRoute.css'
 
 function SetRoute() {
@@ -48,6 +49,7 @@ function SetRoute() {
     const [xenon, setXenon] = useState('No Xenon')
     const [devices, setDevices] = useState([])
     const [coordinates, setCoordinates] = useState()
+    const [lineString, setLineString] = useState([])
 
     const rawCamera = [
         'c968288d-5f85-40b7-8b38-5ae9a3fc5670',
@@ -58,7 +60,9 @@ function SetRoute() {
         '38242558-4403-4cf9-8d38-bf209880836f'
     ]
 
-    // const intervalError = reg.test(interval)
+    // declaring globar vector source to easely handle features
+    let vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
+    let vectorSource = vector.getSource();
 
     const hendleSaveRoute = (e) => {
         e.preventDefault();
@@ -79,7 +83,6 @@ function SetRoute() {
 
             dispatch(setRoutePlans(newRoute))
             dispatch(postRoutesAsync(newRoute))
-            // remove the option to draw on the map
 
             // navigate to our home table page
             navigate('/')
@@ -175,6 +178,78 @@ function SetRoute() {
         window.map.removeOverlay(_overlay)
     }
 
+    const addMarker = (coordinates) => {
+        // adding new feature to specific coordinates
+        var marker = new Feature(new Point(coordinates));
+        var zIndex = 1;
+        marker.setStyle(new Style({
+            image: new Icon(({
+                anchor: [0.5, 36],
+                anchorXUnits: "fraction",
+                anchorYUnits: "pixels",
+                opacity: 1,
+                // size: [20,20],
+                scale: 0.1,
+                anchorOrigin: 'bottom-right',
+                offset: [-3,0],
+                src: markerImg,
+                zIndex: zIndex,
+            })),
+            zIndex: zIndex
+        }));
+        vectorSource.addFeature(marker);
+    }
+
+    const styleFunction = (feature) => {
+
+        var geometry = feature.getGeometry();
+        
+        let styles = [
+            new Style({
+                // linestring
+                stroke: new Stroke({
+                    color: '#fc8100',
+                    width: 2
+                })
+            })
+        ]
+
+        // iterate over each segment to add arrow at the end
+        geometry.forEachSegment((start, end) => {
+            let dx = end[0] - start[0]
+            let dy = end[1] - start[1]
+            let rotation = Math.atan2(dy, dx)
+
+            // arrow
+            styles.push(new Style({
+                geometry: new Point(end),
+                image: new Icon({
+                    src: arrowImg,
+                    color: '#fc8100',
+                    anchor: [0.75, 0.5],
+                    rotateWithView: true,
+                    rotation: -rotation
+                })
+            }))
+        })
+
+        return styles;
+    }
+
+    const drawPolygonOnMap = () => {
+        // 
+        let _lineString = new LineString(lineString)
+        
+        let feature = new Feature({
+            geometry: _lineString,
+        })
+        
+        feature.Name = routeName
+        vector.setStyle(styleFunction(feature))
+        let source = vector.getSource();
+        source.addFeature(feature)
+    }
+
 
     useEffect(() => {
 
@@ -190,9 +265,8 @@ function SetRoute() {
             overlay.setPosition(e.coordinate);
             window.map.addOverlay(overlay)
             setCoordinates(e.coordinate)
+
         })
-
-
 
         // unmounting component by key that the event returns --> unsubscribe
         return () => {
@@ -204,34 +278,47 @@ function SetRoute() {
 
     useEffect(() => {
 
-        let elem = document.createElement('img');
-        elem.src = markerImg
-        elem.style.maxHeight = '50px'
-        elem.style.maxWidth = '50px'
-        elem.id = pointNumber
+        // let elem = document.createElement('img');
+        // elem.src = markerImg
+        // elem.style.maxHeight = '50px'
+        // elem.style.maxWidth = '50px'
+        // elem.id = pointNumber
 
 
-        let markerOverlay = new Overlay({
-            element: elem,
-            positioning: 'bottom-center',
-            id: 'markerOverlay',
-            offset: [-1.33, 5],
-            stopEvent: false
-        })
+        // let markerOverlay = new Overlay({
+        //     element: elem,
+        //     positioning: 'bottom-center',
+        //     id: 'markerOverlay',
+        //     offset: [-1.33, 5],
+        //     stopEvent: false
+        // })
 
-        let key = window.map.on('click', (e) => {
+        // let key = window.map.on('click', (e) => {
 
-            let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer')
-            // let source = _vector.getSource();
+        //     let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer')
+        //     // let source = _vector.getSource();
 
-            markerOverlay.setPosition(e.coordinate)
-            window.map.addOverlay(markerOverlay)
+        //     markerOverlay.setPosition(e.coordinate)
+        //     window.map.addOverlay(markerOverlay)
 
-        })
+        // })
 
+        // return () => {
+        //     const _overlay = window.map.getOverlayById('markerOverlay')
+        //     window.map.removeOverlay(_overlay)
+        //     unByKey(key)
+        // }
+
+        let key = window.map.on('click', function (evt) {
+            // adding new coordinates to global line string to draw line sting as we click on map
+            lineString.push(evt.coordinate)
+            drawPolygonOnMap()
+            addMarker(evt.coordinate);
+        });
+
+        // unmounting component by key that the event returns --> unsubscribe
         return () => {
-            const _overlay = window.map.getOverlayById('markerOverlay')
-            window.map.removeOverlay(_overlay)
+            vectorSource.clear()
             unByKey(key)
         }
 
@@ -250,7 +337,7 @@ function SetRoute() {
                 >
                     <Stack spacing={3} direction='row' className='setRoute__box-textAndDateInput'>
                         <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
-                        <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input style={{height: "41px"}} type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
+                        <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
 
                         <Button aria-describedby={submit} type='submit' variant='contained'>Save Route</Button>
                         <Popover
