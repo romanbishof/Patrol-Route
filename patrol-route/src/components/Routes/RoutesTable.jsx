@@ -17,6 +17,7 @@ import './RoutesTable.css'
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
   const [checkRouteId, setCheckRouteId] = useState('')
+  const [routeId, setRouteId] = useState('')
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ function RoutesTable() {
     }
   })
 
-  const handleDelete = (routeId) => {
+  const handleDelete = () => {
     setOpen(false)
     dispatch(deleteRoute(routeId));
     dispatch(deleteRouteAsync(routeId));
@@ -188,7 +189,7 @@ function RoutesTable() {
             <TableBody>
               {
                 routes[0].RoutePlans.map((route, index) => {
-
+                  
                   return (
                     <TableRow key={index}>
                       <TableCell>{index + 1}</TableCell>
@@ -196,12 +197,12 @@ function RoutesTable() {
                       <TableCell>
                         <Stack spacing={3} direction='row' justifyContent='center'>
                           <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
-                          <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true) }}>Remove</Button>
+                          <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true); setRouteId(route.Id)}}>Remove</Button>
                         </Stack>
                       </TableCell>
                       <Dialog
                         open={open}
-                        onClose={() => { setOpen(false) }}
+                        onClose={() => { setOpen(false);}}
                         aria-describedby='alert-delete'
                       >
                         <DialogContent>
@@ -210,7 +211,7 @@ function RoutesTable() {
                           </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                          <Button onClick={() => { handleDelete(route.Id) }}>Yes</Button>
+                          <Button onClick={handleDelete}>Yes</Button>
                           <Button onClick={() => { setOpen(false) }}>Cancel</Button>
                         </DialogActions>
                       </Dialog>
