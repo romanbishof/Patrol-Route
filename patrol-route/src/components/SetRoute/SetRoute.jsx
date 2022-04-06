@@ -64,12 +64,13 @@ function SetRoute() {
     let vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
     let vectorSource = vector.getSource();
 
+    // save RoutePlan and sent to service as Json file
     const hendleSaveRoute = (e) => {
         e.preventDefault();
 
+        // popup nutification anchored to save button if no point selected
         setAnchorEl(e.target.querySelector('button:first-of-type'))
         if (routePoint.length >= 1) {
-
 
             // send route to service
             let newRoute = {
@@ -85,8 +86,10 @@ function SetRoute() {
             dispatch(postRoutesAsync(newRoute))
 
             // navigate to our home table page
+            clearLineString();
             navigate('/')
         } else {
+            // time out for popup nutification if no point selected
             setOpen(true)
             setTimeout(() => {
                 setOpen(false)
@@ -169,8 +172,19 @@ function SetRoute() {
         setDevices([])
         setPointNumber(pointNumber + 1)
 
+        // adding new coordinates to global line string to draw line sting as we click on map
+        lineString.push([coordinates[0],coordinates[1]])
+        addMarker([coordinates[0],coordinates[1]]);
+        drawPolygonOnMap()
+        const _overlay = window.map.getOverlayById('markerOverlay')
+            window.map.removeOverlay(_overlay)
+
         clearPopupOverLay()
 
+    }
+
+    const clearLineString = () => {
+        vectorSource.clear()
     }
 
     const clearPopupOverLay = () => {
@@ -191,7 +205,7 @@ function SetRoute() {
                 // size: [20,20],
                 scale: 0.1,
                 anchorOrigin: 'bottom-right',
-                offset: [-3,0],
+                offset: [-3, 0],
                 src: markerImg,
                 zIndex: zIndex,
             })),
@@ -203,7 +217,7 @@ function SetRoute() {
     const styleFunction = (feature) => {
 
         var geometry = feature.getGeometry();
-        
+
         let styles = [
             new Style({
                 // linestring
@@ -239,11 +253,11 @@ function SetRoute() {
     const drawPolygonOnMap = () => {
         // 
         let _lineString = new LineString(lineString)
-        
+
         let feature = new Feature({
             geometry: _lineString,
         })
-        
+
         feature.Name = routeName
         vector.setStyle(styleFunction(feature))
         let source = vector.getSource();
@@ -278,49 +292,43 @@ function SetRoute() {
 
     useEffect(() => {
 
-        // let elem = document.createElement('img');
-        // elem.src = markerImg
-        // elem.style.maxHeight = '50px'
-        // elem.style.maxWidth = '50px'
-        // elem.id = pointNumber
+        let elem = document.createElement('img');
+        elem.src = markerImg
+        elem.style.maxHeight = '52px'
+        elem.style.maxWidth = '52px'
+        elem.id = pointNumber
 
 
-        // let markerOverlay = new Overlay({
-        //     element: elem,
-        //     positioning: 'bottom-center',
-        //     id: 'markerOverlay',
-        //     offset: [-1.33, 5],
-        //     stopEvent: false
-        // })
+        let markerOverlay = new Overlay({
+            element: elem,
+            positioning: 'bottom-center',
+            id: 'markerOverlay',
+            offset: [-1.33, 4],
+            stopEvent: false
+        })
 
-        // let key = window.map.on('click', (e) => {
+        let key = window.map.on('click', (e) => {
 
-        //     let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer')
-        //     // let source = _vector.getSource();
+            let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer')
+            // let source = _vector.getSource();
 
-        //     markerOverlay.setPosition(e.coordinate)
-        //     window.map.addOverlay(markerOverlay)
+            markerOverlay.setPosition(e.coordinate)
+            window.map.addOverlay(markerOverlay)
 
-        // })
+        })
 
-        // return () => {
-        //     const _overlay = window.map.getOverlayById('markerOverlay')
-        //     window.map.removeOverlay(_overlay)
-        //     unByKey(key)
-        // }
-
-        let key = window.map.on('click', function (evt) {
-            // adding new coordinates to global line string to draw line sting as we click on map
-            lineString.push(evt.coordinate)
-            drawPolygonOnMap()
-            addMarker(evt.coordinate);
-        });
-
-        // unmounting component by key that the event returns --> unsubscribe
         return () => {
-            vectorSource.clear()
+            const _overlay = window.map.getOverlayById('markerOverlay')
+            window.map.removeOverlay(_overlay)
             unByKey(key)
         }
+
+
+        // unmounting component by key that the event returns --> unsubscribe
+        // return () => {
+        //     vectorSource.clear()
+        //     unByKey(key)
+        // }
 
     }, [])
 
@@ -351,7 +359,7 @@ function SetRoute() {
                         >
                             <Typography sx={{ p: 2 }}>Please select at least one point</Typography>
                         </Popover>
-                        <Button variant='contained' onClick={() => { navigate('/'); clearPopupOverLay(); }}>Back</Button>
+                        <Button variant='contained' onClick={() => { navigate('/'); clearPopupOverLay(); clearLineString(); }}>Back</Button>
 
                     </Stack>
 
