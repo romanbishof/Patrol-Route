@@ -1,8 +1,8 @@
-import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from '@mui/material'
+import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { deleteRoute, deleteRouteAsync, getDevicesAsync, getRoutesAsync } from '../../redux/patroslSlice'
+import { deleteRoute, deleteRouteAsync, getDevicesAsync, getRoutesAsync, updateRoute, updateRouteAsync } from '../../redux/patroslSlice'
 import Feature from 'ol/Feature';
 import { fromLonLat } from 'ol/proj';
 import LineString from 'ol/geom/LineString';
@@ -33,6 +33,28 @@ function RoutesTable() {
       }
     }
   })
+
+  const handleRouteActive = (e, _routeId) => {
+
+    // console.log(_routeId);
+    routes.forEach(obj => {
+      if('Jetty' in obj){
+        let newRoutePlan
+        obj.RoutePlans.forEach(routePlan =>{ 
+          // routePlan.Id === _routeId
+          // ? {...routePlan, IsActive: e.target.checked} : {...routePlan}
+          if(routePlan.Id === _routeId){
+            newRoutePlan = {...routePlan, IsActive: e.target.checked}
+          }
+          
+        })
+
+        dispatch(updateRoute(newRoutePlan));
+        dispatch(updateRouteAsync(newRoutePlan));
+      }
+    })
+    // dispatch(updateRoute(newRoutePlan))
+  }
 
   const handleDelete = () => {
     setOpen(false)
@@ -184,6 +206,7 @@ function RoutesTable() {
                 <TableCell >Route Name</TableCell>
                 <TableCell align='center' >Actions</TableCell>
                 {/* <TableCell>Security Level</TableCell> */}
+                <TableCell>Active Route</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -229,6 +252,12 @@ function RoutesTable() {
                             </Select>
                           </FormControl>
                         </TableCell> */}
+                      <TableCell>
+                        <Switch
+                          checked={route.IsActive}
+                          onChange={(e)=> {handleRouteActive(e, route.Id)}}
+                        />
+                      </TableCell>
                     </TableRow>
                   )
                 })

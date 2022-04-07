@@ -104,6 +104,7 @@ function SetRoute() {
                 Name: routeName,
                 OrgId: 8,
                 StartAt: date,
+                IsActive: false,
                 CheckPoints: routePoint
             }
             setPointNumber(1)
