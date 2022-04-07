@@ -2,7 +2,7 @@ import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogC
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { deleteRoute, deleteRouteAsync, getRoutesAsync } from '../../redux/patroslSlice'
+import { deleteRoute, deleteRouteAsync, getDevicesAsync, getRoutesAsync } from '../../redux/patroslSlice'
 import Feature from 'ol/Feature';
 import { fromLonLat } from 'ol/proj';
 import LineString from 'ol/geom/LineString';
@@ -189,7 +189,7 @@ function RoutesTable() {
             <TableBody>
               {
                 routes[0].RoutePlans.map((route, index) => {
-                  
+
                   return (
                     <TableRow key={index}>
                       <TableCell>{index + 1}</TableCell>
@@ -197,12 +197,12 @@ function RoutesTable() {
                       <TableCell>
                         <Stack spacing={3} direction='row' justifyContent='center'>
                           <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
-                          <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true); setRouteId(route.Id)}}>Remove</Button>
+                          <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true); setRouteId(route.Id) }}>Remove</Button>
                         </Stack>
                       </TableCell>
                       <Dialog
                         open={open}
-                        onClose={() => { setOpen(false);}}
+                        onClose={() => { setOpen(false); }}
                         aria-describedby='alert-delete'
                       >
                         <DialogContent>

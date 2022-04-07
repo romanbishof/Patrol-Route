@@ -9,12 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createStringXY } from 'ol/coordinate';
 
 
-
 function OSM_Map() {
     
     const patrols = useSelector( (state) => state.patrols)
     const raster = new TileLayer({
-      source: new OSM({url:'http://NNPCFE/MapTiles/{z}/{x}/{y}.png'}),
+      source: new OSM({url:`http://NNPCFE/MapTiles/{z}/{x}/{y}.png`}),
     })
 
     const source = new VectorSource({wrapX: false});

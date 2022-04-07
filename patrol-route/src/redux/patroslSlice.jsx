@@ -1,27 +1,54 @@
+import { keys } from "@mui/system"
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit"
 import axios from "axios"
 
+export const getDevicesAsync = createAsyncThunk('routes/getDevicesAsynv',
+    async () => {
+        const componentsTypes = {
+            "componentTypes": [118, 117]
+        }
+        let res = await axios.post(`http://nnpcbe:89/IntegrationUI.svc/GetComponentDeviceStatuses`, componentsTypes, {
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+            .catch((error) => {
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            })
+        let components = res.data
+        return components
+    })
+
 export const getRoutesAsync = createAsyncThunk("routes/getRoutesAsync",
-async () => {
-    let res = await axios.get(`http://localhost:9090/routes`)
-    let routes = res.data
-    return routes
-})
+    async () => {
+        let res = await axios.get(`http://localhost:9090/routes`)
+        let routes = res.data
+        return routes
+    })
 
 export const postRoutesAsync = createAsyncThunk('routes/postRoutesAsync',
-async (newRoute) => {
-    await axios.post(`http://localhost:9090/routes`, newRoute)
-})
+    async (newRoute) => {
+        await axios.post(`http://localhost:9090/routes`, newRoute)
+    })
 
 export const deleteRouteAsync = createAsyncThunk('routes/deleteRouteAsync',
-async (routeId) => {
-    await axios.delete(`http://localhost:9090/routes/${routeId}`)
-})
+    async (routeId) => {
+        await axios.delete(`http://localhost:9090/routes/${routeId}`)
+    })
 
 export const updateRouteAsync = createAsyncThunk('route/updateRouteAsync',
-async (updateRoute) => {
-    await axios.put(`http://localhost:9090/routes`, updateRoute)
-})
+    async (updateRoute) => {
+        await axios.put(`http://localhost:9090/routes`, updateRoute)
+    })
 
 const initialState = [
     {
@@ -44,10 +71,10 @@ const patrolSlice = createSlice({
     reducers: {
         setRoutePlans: (state, action) => {
             state[0].RoutePlans.push(action.payload)
-            
+
         },
         deleteRoute: (state, action) => {
-            let routes = state[0].RoutePlans.filter( routePlan => routePlan.Id !== action.payload)
+            let routes = state[0].RoutePlans.filter(routePlan => routePlan.Id !== action.payload)
             state[0].RoutePlans = routes
         },
         updateRoute: (state, action) => {
@@ -78,10 +105,41 @@ const patrolSlice = createSlice({
         },
         [updateRouteAsync.fulfilled]: (state, action) => {
             console.log('updated route');
+        },
+        [getDevicesAsync.fulfilled]: (state, action) => {
+            let rawCamera = []
+            let rawXenon = []
+            action.payload.forEach(obj => {
+                if(obj.Component.ComponentName === 'Surveillance EO'){
+                    obj.Devices.forEach(devicesObj => {
+
+                        rawCamera.push({
+                            DeviceId: devicesObj.DeviceId,
+                            DeviceName: devicesObj.DeviceName
+                        })
+                    })
+                    state.push({
+                        rawCamera: rawCamera
+                    })
+                }
+
+                if (obj.Component.ComponentName === 'Xenon') {
+                    obj.Devices.forEach(devicesObj => {
+
+                        rawXenon.push({
+                            DeviceId: devicesObj.DeviceId,
+                            DeviceName: devicesObj.DeviceName
+                        })
+                    })
+                    state.push({
+                        rawXenon: rawXenon
+                    })
+                }
+            })
         }
     },
 })
 
-export const {setRoutePlans, deleteRoute, updateRoute} = patrolSlice.actions;
+export const { setRoutePlans, deleteRoute, updateRoute } = patrolSlice.actions;
 
 export default patrolSlice.reducer;

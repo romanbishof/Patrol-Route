@@ -6,7 +6,11 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
 
+// declaring global variable
 window.map = {};
+window.hostName = window.location.hostname;
+window.rawCamera = []
+window.rawXenon = []
 
 ReactDOM.render(
   <React.StrictMode>

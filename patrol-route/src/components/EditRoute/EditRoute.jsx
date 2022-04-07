@@ -13,7 +13,7 @@ import arrowImage from './arrow.png'
 
 function EditRoute() {
 
-    // const routes = useSelector((state) => state.patrols[0])
+    const state = useSelector((state) => state.patrols)
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -28,26 +28,52 @@ function EditRoute() {
         }
     })
 
-    const rawCamera = [
-        'c968288d-5f85-40b7-8b38-5ae9a3fc5670',
-        'd0fbdcd9-1886-4d78-8e14-f3b7a6eb57db',
-        'c34129c4-fbcd-4644-b225-43f2be700224'
-    ]
-    const rawXenon = [
-        '38242558-4403-4cf9-8d38-bf209880836f'
-    ]
+    const rawCameraGUID = window.rawCamera.map(cameraObj => cameraObj.DeviceId)
+    const rawXenonGUID = window.rawXenon.map(xenonObj => xenonObj.DeviceId)
+
+    if (window.rawCamera.length === 0) {
+        window.rawCamera.push({
+            DeviceId: 'No Camera',
+            DeviceName: 'No Camera'
+        })
+        state.forEach(obj => {
+            if ('rawCamera' in obj) {
+
+                obj.rawCamera.forEach(_camera => {
+
+                    window.rawCamera.push(_camera)
+                })
+            }
+        })
+    }
+
+    if (window.rawXenon.length === 0) {
+        window.rawXenon.push({
+            DeviceId: 'No Xenon',
+            DeviceName: 'No Xenon'
+        })
+        state.forEach(obj => {
+            if ('rawXenon' in obj) {
+
+                obj.rawXenon.forEach(_xenon => {
+
+                    window.rawXenon.push(_xenon)
+                })
+            }
+        })
+    }
 
     const handleCameraChange = (e, id) => {
         route.CheckPoints.forEach(point => {
             if (point.Id === id) {
                 if (e.target.value !== 'No Camera' && !point.Devices.includes(e.target.value)) {
-                    let _obj = point.Devices.filter(elem => !rawCamera.includes(elem))
+                    let _obj = point.Devices.filter(elem => !rawCameraGUID.includes(elem))
                     point.Devices = _obj
                     point.Devices.push(e.target.value)
                 }
 
                 if (e.target.value === 'No Camera') {
-                    let _obj = point.Devices.filter(elem => !rawCamera.includes(elem))
+                    let _obj = point.Devices.filter(elem => !rawCameraGUID.includes(elem))
                     point.Devices = _obj
                 }
             }
@@ -61,7 +87,7 @@ function EditRoute() {
                     point.Devices.push(e.target.value)
                 }
                 if (e.target.value === 'No Xenon') {
-                    let obj = point.Devices.filter(elem => !rawXenon.includes(elem))
+                    let obj = point.Devices.filter(elem => !rawXenonGUID.includes(elem))
                     point.Devices = obj
                 }
             }
@@ -177,9 +203,9 @@ function EditRoute() {
                             </TableHead>
                             <TableBody>
                                 {route.CheckPoints.map((rout) => {
-                                    
-                                    let _defaultCameraValue = !rout.Devices.some(elem => rawCamera.includes(elem)) ? 'No Camera' : rout.Devices.filter(elem => rawCamera.includes(elem))
-                                    let _defaultXenonValue = !rout.Devices.some(elem => rawXenon.includes(elem)) ? 'No Xenon' : rout.Devices.filter(elem => rawXenon.includes(elem))
+
+                                    let _defaultCameraValue = !rout.Devices.some(elem => rawCameraGUID.includes(elem)) ? 'No Camera' : rout.Devices.filter(elem => rawCameraGUID.includes(elem))
+                                    let _defaultXenonValue = !rout.Devices.some(elem => rawXenonGUID.includes(elem)) ? 'No Xenon' : rout.Devices.filter(elem => rawXenonGUID.includes(elem))
 
                                     return (
                                         <TableRow key={rout.Id}>
@@ -203,10 +229,23 @@ function EditRoute() {
                                                             defaultValue={_defaultCameraValue}
                                                             onChange={(e) => { handleCameraChange(e, rout.Id) }}
                                                         >
-                                                            <MenuItem value='No Camera'>No Camera</MenuItem>
+                                                            {/* <MenuItem value='No Camera'>No Camera</MenuItem>
                                                             <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
                                                             <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
-                                                            <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem>
+                                                            <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem> */}
+                                                            {
+                                                                window.rawCamera.map((camera) => {
+
+                                                                    return (
+                                                                        <MenuItem
+                                                                            value={camera.DeviceId}
+                                                                            key={camera.DeviceId}
+                                                                        >
+                                                                            {camera.DeviceName}
+                                                                        </MenuItem>
+                                                                    )
+                                                                })
+                                                            }
 
                                                         </Select>
                                                     </FormControl>
@@ -218,8 +257,21 @@ function EditRoute() {
                                                             defaultValue={_defaultXenonValue}
                                                             onChange={(e) => { handleXenonChange(e, rout.Id) }}
                                                         >
-                                                            <MenuItem value='No Xenon'>No Xenon</MenuItem>
-                                                            <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem>
+                                                            {/* <MenuItem value='No Xenon'>No Xenon</MenuItem>
+                                                            <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem> */}
+                                                            {
+                                                                window.rawXenon.map((_xenon) => {
+
+                                                                    return (
+                                                                        <MenuItem
+                                                                            value={_xenon.DeviceId}
+                                                                            key={_xenon.DeviceId}
+                                                                        >
+                                                                            {_xenon.DeviceName}
+                                                                        </MenuItem>
+                                                                    )
+                                                                })
+                                                            }
                                                         </Select>
                                                     </FormControl>
                                                 </Stack>
