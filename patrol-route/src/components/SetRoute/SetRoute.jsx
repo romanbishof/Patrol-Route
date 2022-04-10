@@ -15,7 +15,7 @@ import { Feature } from 'ol'
 import { LineString, Point } from 'ol/geom'
 import Stroke from 'ol/style/Stroke'
 import { fromLonLat, transform } from 'ol/proj'
-import markerImg from './marker.png'
+import markerImg from '../../images/marker.png'
 import arrowImg from '../../images/arrow.png'
 import './SetRoute.css'
 
@@ -333,9 +333,6 @@ function SetRoute() {
         })
 
         let key = window.map.on('click', (e) => {
-
-            let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer')
-            // let source = _vector.getSource();
 
             markerOverlay.setPosition(e.coordinate)
             window.map.addOverlay(markerOverlay)

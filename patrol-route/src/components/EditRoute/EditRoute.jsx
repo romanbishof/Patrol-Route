@@ -9,7 +9,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { updateRoute, updateRouteAsync } from '../../redux/patroslSlice';
-import arrowImage from './arrow.png'
+import arrowImage from '../../images/arrow.png'
+import markerImg from '../../images/marker.png'
 
 function EditRoute() {
 
@@ -115,7 +116,6 @@ function EditRoute() {
 
     const styleFunction = (feature) => {
 
-
         var geometry = feature.getGeometry();
 
         let styles = [
@@ -156,6 +156,7 @@ function EditRoute() {
             geometry: lineString,
         })
         feature.Name = routeName
+        addMarker(coordinates)
         let vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
         vector.setStyle(styleFunction(feature))
         let source = vector.getSource();
@@ -170,6 +171,32 @@ function EditRoute() {
         let source = _vector.getSource();
         source.clear();
     }
+
+    const addMarker = (coordinates) => {
+        let vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
+        let vectorSource = vector.getSource();
+        // adding new feature to specific coordinates
+        coordinates.forEach(point => {
+          var marker = new Feature(new Point(point));
+          var zIndex = 1;
+          marker.setStyle(new Style({
+            image: new Icon(({
+              anchor: [0.5, 36],
+              anchorXUnits: "fraction",
+              anchorYUnits: "pixels",
+              opacity: 1,
+              // size: [20,20],
+              scale: 0.1,
+              anchorOrigin: 'bottom-right',
+              offset: [-3, 0],
+              src: markerImg,
+              zIndex: zIndex,
+            })),
+            zIndex: zIndex
+          }));
+          vectorSource.addFeature(marker);
+        })
+      }
 
     useEffect(() => {
         // let vector = route

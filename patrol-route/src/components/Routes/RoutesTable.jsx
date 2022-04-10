@@ -9,7 +9,8 @@ import LineString from 'ol/geom/LineString';
 import Style from 'ol/style/Style'
 import Icon from 'ol/style/Icon';
 import { Point } from 'ol/geom'
-import arrowImage from './arrow.png'
+import arrowImage from '../../images/arrow.png'
+import markerImg from '../../images/marker.png'
 import Stroke from 'ol/style/Stroke'
 import EditIcon from '@mui/icons-material/Edit';
 import './RoutesTable.css'
@@ -38,15 +39,15 @@ function RoutesTable() {
 
     // console.log(_routeId);
     routes.forEach(obj => {
-      if('Jetty' in obj){
+      if ('Jetty' in obj) {
         let newRoutePlan
-        obj.RoutePlans.forEach(routePlan =>{ 
+        obj.RoutePlans.forEach(routePlan => {
           // routePlan.Id === _routeId
           // ? {...routePlan, IsActive: e.target.checked} : {...routePlan}
-          if(routePlan.Id === _routeId){
-            newRoutePlan = {...routePlan, IsActive: e.target.checked}
+          if (routePlan.Id === _routeId) {
+            newRoutePlan = { ...routePlan, IsActive: e.target.checked }
           }
-          
+
         })
 
         dispatch(updateRoute(newRoutePlan));
@@ -90,7 +91,7 @@ function RoutesTable() {
       const item = route.CheckPoints[i];
       const lat = parseFloat(item.Latitude);
       const lon = parseFloat(item.Longitude);
-
+      // addMarker([lon,lat])
       // transforming the coordinates to specific format
       var pointTransform = fromLonLat([lon, lat], "EPSG:4326");
       coordinatesLineString.push(pointTransform);
@@ -134,6 +135,7 @@ function RoutesTable() {
           src: arrowImage,
           color: '#fc8100',
           anchor: [0.75, 0.5],
+          scale: 1,
           rotateWithView: true,
           rotation: -rotation
         })
@@ -146,6 +148,32 @@ function RoutesTable() {
   // const handleSecurityLevel = (e) => {
   //   console.log(e.target.value);
   // }
+
+  const addMarker = (coordinates) => {
+    let vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
+    let vectorSource = vector.getSource();
+    // adding new feature to specific coordinates
+    coordinates.forEach(point => {
+      var marker = new Feature(new Point(point));
+      var zIndex = 1;
+      marker.setStyle(new Style({
+        image: new Icon(({
+          anchor: [0.5, 36],
+          anchorXUnits: "fraction",
+          anchorYUnits: "pixels",
+          opacity: 1,
+          // size: [20,20],
+          scale: 0.1,
+          anchorOrigin: 'bottom-right',
+          offset: [-3, 0],
+          src: markerImg,
+          zIndex: zIndex,
+        })),
+        zIndex: zIndex
+      }));
+      vectorSource.addFeature(marker);
+    })
+  }
 
   //function to draw Route on MAP 
   function drawPolygonOnMap(coordinates, routeId) {
@@ -177,7 +205,7 @@ function RoutesTable() {
 
     // giving ID to our feature
     feature.Id = routeId;
-
+    addMarker(coordinates)
     //console.log(feature);
     source.addFeature(feature);
     //console.log(_vector.getSource().getFeatures().length);
@@ -255,7 +283,7 @@ function RoutesTable() {
                       <TableCell>
                         <Switch
                           checked={route.IsActive}
-                          onChange={(e)=> {handleRouteActive(e, route.Id)}}
+                          onChange={(e) => { handleRouteActive(e, route.Id) }}
                         />
                       </TableCell>
                     </TableRow>
