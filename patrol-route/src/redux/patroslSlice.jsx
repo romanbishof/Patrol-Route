@@ -29,24 +29,24 @@ export const getDevicesAsync = createAsyncThunk('routes/getDevicesAsynv',
 
 export const getRoutesAsync = createAsyncThunk("routes/getRoutesAsync",
     async () => {
-        let res = await axios.get(`http://localhost:9090/routes`)
+        let res = await axios.get(process.env.REACT_APP_API_JSON_FILE)
         let routes = res.data
         return routes
     })
 
 export const postRoutesAsync = createAsyncThunk('routes/postRoutesAsync',
     async (newRoute) => {
-        await axios.post(`http://localhost:9090/routes`, newRoute)
+        await axios.post(process.env.REACT_APP_API_JSON_FILE, newRoute)
     })
 
 export const deleteRouteAsync = createAsyncThunk('routes/deleteRouteAsync',
     async (routeId) => {
-        await axios.delete(`http://localhost:9090/routes/${routeId}`)
+        await axios.delete(`${process.env.REACT_APP_API_JSON_FILE}/${routeId}`)
     })
 
 export const updateRouteAsync = createAsyncThunk('route/updateRouteAsync',
     async (updateRoute) => {
-        await axios.put(`http://localhost:9090/routes`, updateRoute)
+        await axios.put(process.env.REACT_APP_API_JSON_FILE, updateRoute)
     })
 
 const initialState = [

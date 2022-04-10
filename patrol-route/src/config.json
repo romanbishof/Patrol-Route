@@ -1,0 +1,20 @@
+{
+    "Development": {
+        "HostName": "localhost",
+        "API": "http://localhost:9090/routes",
+        "MapUrl": "http://nnpcfe/MapTiles/{z}/{x}/{y}.png",
+        "DevicesApi": "http://nnpcbe:89/IntegrationUI.svc/GetComponentDeviceStatuses"
+    },
+    "TEST": {
+        "HostName": "nnpcfe",
+        "API": "http://nnpcbe:9090/routes",
+        "MapUrl": "http://nnpcfe/MapTiles/{z}/{x}/{y}.png",
+        "DevicesApi": "http://nnpcbe:89/IntegrationUI.svc/GetComponentDeviceStatuses"
+    },
+    "Production_APA": {
+        "HostName": "APA-FE-SRV01",
+        "API": "http://APA-BE-SRV01:9090/routes",
+        "MapUrl": "http://APA-FE-SRV01/MapTiles/{z}/{x}/{y}.png",
+        "DevicesApi": "http://APA-BE-SRV01:89/IntegrationUI.svc/GetComponentDeviceStatuses"
+    }
+}
