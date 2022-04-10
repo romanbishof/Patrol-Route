@@ -6,7 +6,7 @@ export const getDevicesAsync = createAsyncThunk('routes/getDevicesAsynv',
         const componentsTypes = {
             "componentTypes": [118, 117]
         }
-        let res = await axios.post(`http://nnpcbe:89/IntegrationUI.svc/GetComponentDeviceStatuses`, componentsTypes, {
+        let res = await axios.post(process.env.REACT_APP_DEVICES_API, componentsTypes, {
             headers: {
                 "Access-Control-Allow-Origin": "*"
             }
