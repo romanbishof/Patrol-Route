@@ -1,4 +1,3 @@
-import { keys } from "@mui/system"
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit"
 import axios from "axios"
 
@@ -110,7 +109,7 @@ const patrolSlice = createSlice({
             let rawCamera = []
             let rawXenon = []
             action.payload.forEach(obj => {
-                if(obj.Component.ComponentName === 'Surveillance EO'){
+                if(obj.Component.ComponentName === 'Surveillance EO' || obj.Component.ComponentName === 'Octopus GenericPTZEx'){
                     obj.Devices.forEach(devicesObj => {
 
                         rawCamera.push({
@@ -123,7 +122,7 @@ const patrolSlice = createSlice({
                     })
                 }
 
-                if (obj.Component.ComponentName === 'Xenon') {
+                if (obj.Component.ComponentName === 'Xenon' || obj.Component.ComponentName === 'Fransis SearchLight') {
                     obj.Devices.forEach(devicesObj => {
 
                         rawXenon.push({

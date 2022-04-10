@@ -347,14 +347,6 @@ function SetRoute() {
             window.map.removeOverlay(_overlay)
             unByKey(key)
         }
-
-
-        // unmounting component by key that the event returns --> unsubscribe
-        // return () => {
-        //     vectorSource.clear()
-        //     unByKey(key)
-        // }
-
     }, [])
 
 
@@ -429,11 +421,6 @@ function SetRoute() {
                                                                 defaultValue={_defaultCameraValue}
                                                                 onChange={(e) => { handleCameraChange(e, route.Id) }}
                                                             >
-                                                                {/* <MenuItem value='No Camera'>No Camera</MenuItem>
-                                                                <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
-                                                                <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
-                                                                <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem> */}
-
                                                                 {
                                                                     window.rawCamera.map((camera) => {
 
@@ -458,8 +445,6 @@ function SetRoute() {
                                                                 defaultValue={_defaultXenonValue}
                                                                 onChange={(e) => { handleXenonChange(e, route.Id) }}
                                                             >
-                                                                {/* <MenuItem value='No Xenon'>No Xenon</MenuItem>
-                                                                <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem> */}
                                                                 {
                                                                     window.rawXenon.map((_xenon) => {
 
@@ -504,10 +489,6 @@ function SetRoute() {
                                         value={camera}
                                         onChange={(e) => { setCamera(e.target.value) }}
                                     >
-                                        {/* <MenuItem value='No Camera'>No Camera</MenuItem>
-                                        <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
-                                        <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
-                                        <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem> */}
 
                                         {
                                             window.rawCamera.map((camera) => {
@@ -533,8 +514,6 @@ function SetRoute() {
                                         value={xenon}
                                         onChange={(e) => { setXenon(e.target.value) }}
                                     >
-                                        {/* <MenuItem value='No Xenon'>No Xenon</MenuItem>
-                                        <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem> */}
                                         {
                                             window.rawXenon.map((_xenon) => {
 
