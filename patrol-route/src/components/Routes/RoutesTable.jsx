@@ -1,4 +1,4 @@
-import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from '@mui/material'
+import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -136,8 +136,8 @@ function RoutesTable() {
           src: arrowImg,
           color: '#A349A4',
           anchor: [0.75, 0.5],
-          scale: 0.2,
-          offset:[40,-15],
+          scale: 0.1,
+          offset: [40, -15],
           rotateWithView: true,
           rotation: -rotation
         })
@@ -146,6 +146,8 @@ function RoutesTable() {
 
     return styles;
   }
+
+
 
   // const handleSecurityLevel = (e) => {
   //   console.log(e.target.value);
@@ -227,16 +229,25 @@ function RoutesTable() {
   return (
     <div className='RoutesTable'>
       <ThemeProvider theme={theme}>
+        <div className='RoutesTable__title'>
+          <Typography variant='h3'>
+            Patrol route Table
+          </Typography>
+
+          <div id='RoutesTable__AddButton' className="RoutesTable__button">
+            <Button onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
+          </div>
+        </div>
 
         <TableContainer>
           <Table stickyHeader className='RoutesTable__table'>
             <TableHead>
               <TableRow>
-                <TableCell>Id</TableCell>
-                <TableCell >Route Name</TableCell>
-                <TableCell align='center' >Actions</TableCell>
+                <TableCell sx={{ width: '50px', fontSize: '17px', fontWeight: 'bold' }}>Id</TableCell>
+                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold'}}>Route Name</TableCell>
+                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' , textAlign:'center'}}>Actions</TableCell>
                 {/* <TableCell>Security Level</TableCell> */}
-                <TableCell>Active Route</TableCell>
+                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold'}}>Active Route</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -244,9 +255,9 @@ function RoutesTable() {
                 routes[0].RoutePlans.map((route, index) => {
 
                   return (
-                    <TableRow className='RoutesTable__tableList' key={index}>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell className='RoutesTable__tableList-showRoute' sx={{ cursor: 'pointer' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
+                    <TableRow className='RoutesTable__tableList' key={index} hover={true}>
+                      <TableCell sx={{ width: '50px', fontSize: '17px' }}>{index + 1}.</TableCell>
+                      <TableCell sx={{ cursor: 'pointer',  width: '100px', fontSize: '17px' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
                       <TableCell>
                         <Stack spacing={3} direction='row' justifyContent='center'>
                           <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
@@ -296,10 +307,6 @@ function RoutesTable() {
             </TableBody>
           </Table>
         </TableContainer>
-        <div id='RoutesTable__AddButton' className="RoutesTable__button">
-          <Button onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
-        </div>
-
       </ThemeProvider>
     </div>
   )

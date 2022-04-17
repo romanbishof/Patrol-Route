@@ -1,8 +1,5 @@
 .RoutesTable{
     width: 100%;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
 }
 
 .RoutesTable__table{
@@ -13,5 +10,15 @@
     width: 120px;
     font-weight: bold;
     font-family: Arial;
-    
+}
+
+.RoutesTable__title{
+    margin: 20px 50px 0px 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.RoutesTable__table-tableHeader{
+    font-weight: 700;
 }

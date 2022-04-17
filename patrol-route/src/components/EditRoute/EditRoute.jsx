@@ -1,4 +1,4 @@
-import { Box, Button, createTheme, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider } from '@mui/material'
+import { Box, Button, createTheme, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
 import { Feature } from 'ol';
 import { LineString, Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';
@@ -141,7 +141,7 @@ function EditRoute() {
                     src: arrowImage,
                     color: '#A349A4',
                     anchor: [0.75, 0.5],
-                    scale: 0.2,
+                    scale: 0.1,
                     offset: [40, -15],
                     rotateWithView: true,
                     rotation: -rotation
@@ -213,25 +213,30 @@ function EditRoute() {
     }, [])
 
     return (
-        <div>
+        <div className='editRoute'>
             <ThemeProvider theme={theme}>
                 <Box sx={{ padding: 5 }}
                     width={950}
                 >
-                    <Stack direction='row' spacing={5}>
-                        <Button variant='contained' onClick={handleSaveChange}>Save</Button>
-                        <Button variant='contained' onClick={() => { navigate('/'); removeRouteFromMap() }}>Back/ Cancel</Button>
+                    <Stack direction='row' justifyContent='space-between'>
+                        <Typography variant='h3'>Edit Select Route</Typography>
+                        <Stack direction='row' spacing={5}>
+
+                            <Button variant='contained' onClick={handleSaveChange}>Save</Button>
+                            <Button variant='contained' onClick={() => { navigate('/'); removeRouteFromMap() }}>Back/ Cancel</Button>
+                        </Stack>
                     </Stack>
 
                     <TableContainer>
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Route Point</TableCell>
-                                    <TableCell>Longitude</TableCell>
-                                    <TableCell>Latitude</TableCell>
-                                    <TableCell>Interval Time</TableCell>
-                                    <TableCell>Devices</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Point No`</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Longitude</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Latitude</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Interval</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Camera</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Xenon</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -241,74 +246,81 @@ function EditRoute() {
                                     let _defaultXenonValue = !rout.Devices.some(elem => rawXenonGUID.includes(elem)) ? 'No Xenon' : rout.Devices.filter(elem => rawXenonGUID.includes(elem))
 
                                     return (
-                                        <TableRow key={rout.Id}>
-                                            <TableCell>{rout.Name}</TableCell>
-                                            <TableCell>{rout.Latitude}</TableCell>
-                                            <TableCell>{rout.Longitude}</TableCell>
+                                        <TableRow key={rout.Id} hover={true}>
+                                            <TableCell sx={{ width: '50px', fontSize: '16px' }}>{rout.Name}</TableCell>
+                                            <TableCell sx={{ width: '100px', fontSize: '17px' }}>{rout.Latitude}</TableCell>
+                                            <TableCell sx={{ width: '100px', fontSize: '17px' }}>{rout.Longitude}</TableCell>
                                             <TableCell>
                                                 <TextField
+                                                    className='editRoute__inputIntervalField'
+                                                    sx={{ width: '66px', fontSize: '17px' }}
+                                                    type='number'
+                                                    size='small'
                                                     defaultValue={rout.WaitforSeconds}
-                                                    label='Seconds'
+                                                    label='Seconds(10-180)'
                                                     onChange={(e) => { handleIntervalTime(e, rout.Id) }}
                                                 />
                                             </TableCell>
-                                            <TableCell>
-                                                <Stack spacing={2}>
-                                                    <FormControl fullWidth>
-                                                        <InputLabel id='TableCameraLabelId'>Camera</InputLabel>
-                                                        <Select
-                                                            labelId='TableCameLabelId'
-                                                            label='TableCamera'
-                                                            defaultValue={_defaultCameraValue}
-                                                            onChange={(e) => { handleCameraChange(e, rout.Id) }}
-                                                        >
-                                                            {/* <MenuItem value='No Camera'>No Camera</MenuItem>
+                                            <TableCell sx={{ width: '100px', fontSize: '17px' }}>
+                                                <FormControl>
+                                                    <InputLabel id='TableCameraLabelId'>Camera</InputLabel>
+                                                    <Select
+                                                        sx={{ width: '130px', }}
+                                                        labelId='TableCameLabelId'
+                                                        label='TableCamera'
+                                                        defaultValue={_defaultCameraValue}
+                                                        onChange={(e) => { handleCameraChange(e, rout.Id) }}
+                                                    >
+                                                        {/* <MenuItem value='No Camera'>No Camera</MenuItem>
                                                             <MenuItem value='c968288d-5f85-40b7-8b38-5ae9a3fc5670'>APA-MEO-001 46.3</MenuItem>
                                                             <MenuItem value='d0fbdcd9-1886-4d78-8e14-f3b7a6eb57db'>APA-WT1-SEO 46.4</MenuItem>
                                                             <MenuItem value='c34129c4-fbcd-4644-b225-43f2be700224'>APA-WT2-SEO 46.5</MenuItem> */}
-                                                            {
-                                                                window.rawCamera.map((camera) => {
+                                                        {
+                                                            window.rawCamera.map((camera) => {
 
-                                                                    return (
-                                                                        <MenuItem
-                                                                            value={camera.DeviceId}
-                                                                            key={camera.DeviceId}
-                                                                        >
-                                                                            {camera.DeviceName}
-                                                                        </MenuItem>
-                                                                    )
-                                                                })
-                                                            }
+                                                                return (
+                                                                    <MenuItem
+                                                                        value={camera.DeviceId}
+                                                                        key={camera.DeviceId}
+                                                                    >
+                                                                        {camera.DeviceName}
+                                                                    </MenuItem>
+                                                                )
+                                                            })
+                                                        }
 
-                                                        </Select>
-                                                    </FormControl>
-                                                    <FormControl fullWidth>
-                                                        <InputLabel id='TableXenonLabelId'>Xenon</InputLabel>
-                                                        <Select
-                                                            labelId='TableXenonLabelId'
-                                                            label='TableXenon'
-                                                            defaultValue={_defaultXenonValue}
-                                                            onChange={(e) => { handleXenonChange(e, rout.Id) }}
-                                                        >
-                                                            {/* <MenuItem value='No Xenon'>No Xenon</MenuItem>
-                                                            <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem> */}
-                                                            {
-                                                                window.rawXenon.map((_xenon) => {
-
-                                                                    return (
-                                                                        <MenuItem
-                                                                            value={_xenon.DeviceId}
-                                                                            key={_xenon.DeviceId}
-                                                                        >
-                                                                            {_xenon.DeviceName}
-                                                                        </MenuItem>
-                                                                    )
-                                                                })
-                                                            }
-                                                        </Select>
-                                                    </FormControl>
-                                                </Stack>
+                                                    </Select>
+                                                </FormControl>
                                             </TableCell>
+                                            <TableCell>
+                                                <FormControl fullWidth>
+                                                    <InputLabel id='TableXenonLabelId'>Xenon</InputLabel>
+                                                    <Select
+                                                        sx={{ width: '130px', }}
+                                                        labelId='TableXenonLabelId'
+                                                        label='TableXenon'
+                                                        defaultValue={_defaultXenonValue}
+                                                        onChange={(e) => { handleXenonChange(e, rout.Id) }}
+                                                    >
+                                                        {/* <MenuItem value='No Xenon'>No Xenon</MenuItem>
+                                                            <MenuItem value='38242558-4403-4cf9-8d38-bf209880836f'>APA-XEN-001</MenuItem> */}
+                                                        {
+                                                            window.rawXenon.map((_xenon) => {
+
+                                                                return (
+                                                                    <MenuItem
+                                                                        value={_xenon.DeviceId}
+                                                                        key={_xenon.DeviceId}
+                                                                    >
+                                                                        {_xenon.DeviceName}
+                                                                    </MenuItem>
+                                                                )
+                                                            })
+                                                        }
+                                                    </Select>
+                                                </FormControl>
+                                            </TableCell>
+
                                         </TableRow>
                                     )
                                 })}

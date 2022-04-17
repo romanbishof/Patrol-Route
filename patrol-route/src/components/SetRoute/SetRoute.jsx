@@ -159,7 +159,7 @@ function SetRoute() {
     const handleIntervalTime = (e) => {
         let reg = /^[1-9]+[0-9]*$/
 
-        
+
         // valiation to enter only numbers
         if (reg.test(e.target.value)) {
 
@@ -266,7 +266,7 @@ function SetRoute() {
                     src: arrowImg,
                     color: '#A349A4',
                     anchor: [0.75, 0.5],
-                    scale: 0.2,
+                    scale: 0.1,
                     offset: [40, -15],
                     rotateWithView: true,
                     rotation: -rotation
@@ -353,8 +353,6 @@ function SetRoute() {
     return (
         <div id='setRoute' className='setRoute'>
             <ThemeProvider theme={theme} >
-
-
                 <Box
                     component='form'
                     onSubmit={hendleSaveRoute}
@@ -380,15 +378,16 @@ function SetRoute() {
 
                     </Stack>
 
-                    <TableContainer className='seRoute__box-tableContainer'>
-                        <Table size='medium' sx={{ maxWidth: 750, padding: 5, fontSize: 15 }}>
+                    <TableContainer>
+                        <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Point Number</TableCell>
-                                    <TableCell>Laitude</TableCell>
-                                    <TableCell>Longitde</TableCell>
-                                    <TableCell>Interval time (sec)</TableCell>
-                                    <TableCell>Devices</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Point No`</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Laitude</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Longitde</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Interval</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Camera</TableCell>
+                                    <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Xenon</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -399,13 +398,14 @@ function SetRoute() {
                                         let _defaultXenonValue = !route.Devices.some(elem => rawXenonGUID.includes(elem)) ? 'No Xenon' : route.Devices.filter(elem => rawXenonGUID.includes(elem))
 
                                         return (
-                                            <TableRow key={index} >
-                                                <TableCell>{route.Name}</TableCell>
-                                                <TableCell>{route.Latitude}</TableCell>
-                                                <TableCell>{route.Longitude}</TableCell>
+                                            <TableRow key={index} hover={true}>
+                                                <TableCell sx={{ width: '100px', fontSize: '16px' }}>{route.Name}</TableCell>
+                                                <TableCell sx={{ width: '100px', fontSize: '17px' }}>{route.Latitude}</TableCell>
+                                                <TableCell sx={{ width: '100px', fontSize: '17px' }}>{route.Longitude}</TableCell>
                                                 <TableCell>
                                                     <TextField
                                                         className='setRoute__inputIntervalField'
+                                                        sx={{ width: '66px' }}
                                                         type='number'
                                                         size='small'
                                                         required={true}
@@ -415,56 +415,58 @@ function SetRoute() {
                                                     />
 
                                                 </TableCell>
-                                                <TableCell width={220}>
-                                                    <Stack spacing={1} >
-                                                        <FormControl fullWidth>
-                                                            <InputLabel id='TableCameraLabelId'>Camera</InputLabel>
-                                                            <Select
-                                                                labelId='TableCameLabelId'
-                                                                label='TableCamera'
-                                                                defaultValue={_defaultCameraValue}
-                                                                onChange={(e) => { handleCameraChange(e, route.Id) }}
-                                                            >
-                                                                {
-                                                                    window.rawCamera.map((camera) => {
+                                                <TableCell sx={{ width: '100px', fontSize: '17px' }}>
+                                                    <FormControl fullWidth>
+                                                        <InputLabel id='TableCameraLabelId'>Camera</InputLabel>
+                                                        <Select
+                                                            sx={{ width: '130px', }}
+                                                            labelId='TableCameLabelId'
+                                                            label='TableCamera'
+                                                            defaultValue={_defaultCameraValue}
+                                                            onChange={(e) => { handleCameraChange(e, route.Id) }}
+                                                        >
+                                                            {
+                                                                window.rawCamera.map((camera) => {
 
-                                                                        return (
-                                                                            <MenuItem
-                                                                                value={camera.DeviceId}
-                                                                                key={camera.DeviceId}
-                                                                            >
-                                                                                {camera.DeviceName}
-                                                                            </MenuItem>
-                                                                        )
-                                                                    })
-                                                                }
+                                                                    return (
+                                                                        <MenuItem
+                                                                            value={camera.DeviceId}
+                                                                            key={camera.DeviceId}
+                                                                        >
+                                                                            {camera.DeviceName}
+                                                                        </MenuItem>
+                                                                    )
+                                                                })
+                                                            }
 
-                                                            </Select>
-                                                        </FormControl>
-                                                        <FormControl fullWidth>
-                                                            <InputLabel id='TableXenonLabelId'>Xenon</InputLabel>
-                                                            <Select
-                                                                labelId='TableXenonLabelId'
-                                                                label='TableXenon'
-                                                                defaultValue={_defaultXenonValue}
-                                                                onChange={(e) => { handleXenonChange(e, route.Id) }}
-                                                            >
-                                                                {
-                                                                    window.rawXenon.map((_xenon) => {
+                                                        </Select>
+                                                    </FormControl>
+                                                </TableCell>
+                                                <TableCell sx={{ width: '100px', fontSize: '17px' }}>
+                                                    <FormControl fullWidth>
+                                                        <InputLabel id='TableXenonLabelId'>Xenon</InputLabel>
+                                                        <Select
+                                                            sx={{ width: '130px', }}
+                                                            labelId='TableXenonLabelId'
+                                                            label='TableXenon'
+                                                            defaultValue={_defaultXenonValue}
+                                                            onChange={(e) => { handleXenonChange(e, route.Id) }}
+                                                        >
+                                                            {
+                                                                window.rawXenon.map((_xenon) => {
 
-                                                                        return (
-                                                                            <MenuItem
-                                                                                value={_xenon.DeviceId}
-                                                                                key={_xenon.DeviceId}
-                                                                            >
-                                                                                {_xenon.DeviceName}
-                                                                            </MenuItem>
-                                                                        )
-                                                                    })
-                                                                }
-                                                            </Select>
-                                                        </FormControl>
-                                                    </Stack>
+                                                                    return (
+                                                                        <MenuItem
+                                                                            value={_xenon.DeviceId}
+                                                                            key={_xenon.DeviceId}
+                                                                        >
+                                                                            {_xenon.DeviceName}
+                                                                        </MenuItem>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </Select>
+                                                    </FormControl>
                                                 </TableCell>
                                             </TableRow>
                                         )
