@@ -51,7 +51,7 @@ function OSM_Map() {
 
   return (
     <div className='OSM_Map'>
-      <div ref={mapElement} className="OSM_Map-container">
+      <div id='OSM' ref={mapElement} className="OSM_Map-container">
         {/* <div className="popup"></div> */}
 
       </div>

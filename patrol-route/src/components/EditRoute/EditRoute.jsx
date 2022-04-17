@@ -9,7 +9,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { updateRoute, updateRouteAsync } from '../../redux/patroslSlice';
-import arrowImage from '../../images/arrow.png'
+import arrowImage from '../../images/arrow2.png'
 import markerImg from '../../images/marker.png'
 
 function EditRoute() {
@@ -95,7 +95,7 @@ function EditRoute() {
         })
     }
 
-    const handleWaitforSeconds = (e, id) => {
+    const handleIntervalTime = (e, id) => {
         let reg = /^[1-9]+[0-9]*$/
 
         route.CheckPoints.forEach(point => {
@@ -122,8 +122,8 @@ function EditRoute() {
             new Style({
                 // linestring
                 stroke: new Stroke({
-                    color: '#fc8100',
-                    width: 2
+                    color: '#A349A4',
+                    width: 3
                 })
             })
         ]
@@ -139,8 +139,10 @@ function EditRoute() {
                 geometry: new Point(end),
                 image: new Icon({
                     src: arrowImage,
-                    color: '#fc8100',
+                    color: '#A349A4',
                     anchor: [0.75, 0.5],
+                    scale: 0.2,
+                    offset: [40, -15],
                     rotateWithView: true,
                     rotation: -rotation
                 })
@@ -177,26 +179,26 @@ function EditRoute() {
         let vectorSource = vector.getSource();
         // adding new feature to specific coordinates
         coordinates.forEach(point => {
-          var marker = new Feature(new Point(point));
-          var zIndex = 1;
-          marker.setStyle(new Style({
-            image: new Icon(({
-              anchor: [0.5, 36],
-              anchorXUnits: "fraction",
-              anchorYUnits: "pixels",
-              opacity: 1,
-              // size: [20,20],
-              scale: 0.1,
-              anchorOrigin: 'bottom-right',
-              offset: [-3, 0],
-              src: markerImg,
-              zIndex: zIndex,
-            })),
-            zIndex: zIndex
-          }));
-          vectorSource.addFeature(marker);
+            var marker = new Feature(new Point(point));
+            var zIndex = 1;
+            marker.setStyle(new Style({
+                image: new Icon(({
+                    anchor: [0.5, 36],
+                    anchorXUnits: "fraction",
+                    anchorYUnits: "pixels",
+                    opacity: 1,
+                    // size: [20,20],
+                    scale: 0.1,
+                    anchorOrigin: 'bottom-right',
+                    offset: [-3, 0],
+                    src: markerImg,
+                    zIndex: zIndex,
+                })),
+                zIndex: zIndex
+            }));
+            vectorSource.addFeature(marker);
         })
-      }
+    }
 
     useEffect(() => {
         // let vector = route
@@ -216,6 +218,10 @@ function EditRoute() {
                 <Box sx={{ padding: 5 }}
                     width={950}
                 >
+                    <Stack direction='row' spacing={5}>
+                        <Button variant='contained' onClick={handleSaveChange}>Save</Button>
+                        <Button variant='contained' onClick={() => { navigate('/'); removeRouteFromMap() }}>Back/ Cancel</Button>
+                    </Stack>
 
                     <TableContainer>
                         <Table>
@@ -243,7 +249,7 @@ function EditRoute() {
                                                 <TextField
                                                     defaultValue={rout.WaitforSeconds}
                                                     label='Seconds'
-                                                    onChange={(e) => { handleWaitforSeconds(e, rout.Id) }}
+                                                    onChange={(e) => { handleIntervalTime(e, rout.Id) }}
                                                 />
                                             </TableCell>
                                             <TableCell>
@@ -309,10 +315,6 @@ function EditRoute() {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <Stack direction='row' spacing={5}>
-                        <Button variant='contained' onClick={handleSaveChange}>Save</Button>
-                        <Button variant='contained' onClick={() => { navigate('/'); removeRouteFromMap() }}>Back/ Cancel</Button>
-                    </Stack>
                 </Box>
             </ThemeProvider>
         </div>

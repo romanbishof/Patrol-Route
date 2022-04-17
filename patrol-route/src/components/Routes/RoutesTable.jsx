@@ -10,6 +10,7 @@ import Style from 'ol/style/Style'
 import Icon from 'ol/style/Icon';
 import { Point } from 'ol/geom'
 import arrowImage from '../../images/arrow.png'
+import arrowImg from '../../images/arrow2.png'
 import markerImg from '../../images/marker.png'
 import Stroke from 'ol/style/Stroke'
 import EditIcon from '@mui/icons-material/Edit';
@@ -116,8 +117,8 @@ function RoutesTable() {
       new Style({
         // linestring
         stroke: new Stroke({
-          color: '#fc8100',
-          width: 2
+          color: '#A349A4',
+          width: 3
         })
       })
     ]
@@ -132,10 +133,11 @@ function RoutesTable() {
       styles.push(new Style({
         geometry: new Point(end),
         image: new Icon({
-          src: arrowImage,
-          color: '#fc8100',
+          src: arrowImg,
+          color: '#A349A4',
           anchor: [0.75, 0.5],
-          scale: 1,
+          scale: 0.2,
+          offset:[40,-15],
           rotateWithView: true,
           rotation: -rotation
         })
@@ -165,7 +167,7 @@ function RoutesTable() {
           // size: [20,20],
           scale: 0.1,
           anchorOrigin: 'bottom-right',
-          offset: [-3, 0],
+          offset: [0, 0],
           src: markerImg,
           zIndex: zIndex,
         })),
@@ -242,9 +244,9 @@ function RoutesTable() {
                 routes[0].RoutePlans.map((route, index) => {
 
                   return (
-                    <TableRow key={index}>
+                    <TableRow className='RoutesTable__tableList' key={index}>
                       <TableCell>{index + 1}</TableCell>
-                      <TableCell sx={{ cursor: 'pointer' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
+                      <TableCell className='RoutesTable__tableList-showRoute' sx={{ cursor: 'pointer' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
                       <TableCell>
                         <Stack spacing={3} direction='row' justifyContent='center'>
                           <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
@@ -282,6 +284,7 @@ function RoutesTable() {
                         </TableCell> */}
                       <TableCell>
                         <Switch
+                          id={`RoutesTable_switch_${index}`}
                           checked={route.IsActive}
                           onChange={(e) => { handleRouteActive(e, route.Id) }}
                         />
@@ -293,7 +296,7 @@ function RoutesTable() {
             </TableBody>
           </Table>
         </TableContainer>
-        <div className="RoutesTable__button">
+        <div id='RoutesTable__AddButton' className="RoutesTable__button">
           <Button onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
         </div>
 

@@ -7,17 +7,15 @@ import { v4 as uuidv4 } from 'uuid'
 import Overlay from 'ol/Overlay';
 import { unByKey } from 'ol/Observable';
 import moment from 'moment'
-import { Vector } from 'ol/layer'
-import { Vector as VectorSource } from 'ol/source'
 import Style from 'ol/style/Style'
 import Icon from 'ol/style/Icon'
 import { Feature } from 'ol'
 import { LineString, Point } from 'ol/geom'
 import Stroke from 'ol/style/Stroke'
-import { fromLonLat, transform } from 'ol/proj'
 import markerImg from '../../images/marker.png'
-import arrowImg from '../../images/arrow.png'
+import arrowImg from '../../images/arrow2.png'
 import './SetRoute.css'
+import { createStringXY, format } from 'ol/coordinate'
 
 function SetRoute() {
 
@@ -161,18 +159,18 @@ function SetRoute() {
     const handleIntervalTime = (e) => {
         let reg = /^[1-9]+[0-9]*$/
 
+        
         // valiation to enter only numbers
         if (reg.test(e.target.value)) {
-            setErrorInterval(!errorInterval)
+
+            setErrorInterval(false)
             setInterval(e.target.value)
         }
         else {
-            setErrorInterval(!errorInterval)
+            setErrorInterval(true)
         }
-
-
-
     }
+
     const handleSaveTemplate = () => {
 
         if (camera !== 'No Camera') {
@@ -249,8 +247,8 @@ function SetRoute() {
             new Style({
                 // linestring
                 stroke: new Stroke({
-                    color: '#fc8100',
-                    width: 2
+                    color: '#A349A4',
+                    width: 3
                 })
             })
         ]
@@ -266,8 +264,10 @@ function SetRoute() {
                 geometry: new Point(end),
                 image: new Icon({
                     src: arrowImg,
-                    color: '#fc8100',
+                    color: '#A349A4',
                     anchor: [0.75, 0.5],
+                    scale: 0.2,
+                    offset: [40, -15],
                     rotateWithView: true,
                     rotation: -rotation
                 })
@@ -304,7 +304,10 @@ function SetRoute() {
 
             overlay.setPosition(e.coordinate);
             window.map.addOverlay(overlay)
-            setCoordinates(e.coordinate)
+            let _template = '{x},{y}'
+            let out = format(e.coordinate, _template, 4)
+            let splitOut = out.split(",")
+            setCoordinates([parseFloat(splitOut[0]), parseFloat(splitOut[1])])
 
         })
 
@@ -348,7 +351,7 @@ function SetRoute() {
 
 
     return (
-        <div className='setRoute'>
+        <div id='setRoute' className='setRoute'>
             <ThemeProvider theme={theme} >
 
 
@@ -359,7 +362,7 @@ function SetRoute() {
                 >
                     <Stack spacing={3} direction='row' className='setRoute__box-textAndDateInput'>
                         <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
-                        <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
+                        <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
 
                         <Button aria-describedby={submit} type='submit' variant='contained'>Save Route</Button>
                         <Popover
@@ -402,11 +405,15 @@ function SetRoute() {
                                                 <TableCell>{route.Longitude}</TableCell>
                                                 <TableCell>
                                                     <TextField
+                                                        className='setRoute__inputIntervalField'
+                                                        type='number'
+                                                        size='small'
                                                         required={true}
                                                         defaultValue={route.WaitforSeconds}
-                                                        label='Seconds'
+                                                        label='Seconds(10-180)'
                                                         onChange={handleIntervalTime}
                                                     />
+
                                                 </TableCell>
                                                 <TableCell width={220}>
                                                     <Stack spacing={1} >
@@ -481,6 +488,7 @@ function SetRoute() {
                                 <FormControl required={true} fullWidth>
                                     <InputLabel id='CameraLabelId'>Camera</InputLabel>
                                     <Select
+                                        id='CameraSelectId'
                                         labelId='CameLabelId'
                                         label='Camera'
                                         value={camera}
@@ -527,9 +535,12 @@ function SetRoute() {
                                     </Select>
                                 </FormControl>
                                 <TextField
+                                    className='setRoute__inputIntervalField'
+                                    type='number'
+                                    inputProps={{ maxLength: 1000 }}
                                     size='small'
                                     value={interval}
-                                    label='Seconds'
+                                    label='Seconds(10-180)'
                                     onChange={handleIntervalTime}
                                     helperText='Enter only Numbers'
                                 />
