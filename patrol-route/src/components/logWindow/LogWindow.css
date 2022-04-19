@@ -1,0 +1,7 @@
+.logWindow{
+    border: 1px solid #d85728;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}

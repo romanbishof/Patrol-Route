@@ -25,7 +25,7 @@ function SetRoute() {
     const [date, setDate] = useState('')
     const [pointNumber, setPointNumber] = useState(1)
     const [interval, setInterval] = useState(10)
-    const [errorInterval, setErrorInterval] = useState(false)
+    // const [errorInterval, setErrorInterval] = useState(false)
     const [open, setOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null)
 
@@ -374,7 +374,7 @@ function SetRoute() {
                 >
                     <Stack spacing={3} direction='row' className='setRoute__box-textAndDateInput'>
                         <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
-                        <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:MM')) }} />} />
+                        <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }} />} />
 
                         <Button aria-describedby={submit} type='submit' variant='contained'>Save Route</Button>
                         <Popover

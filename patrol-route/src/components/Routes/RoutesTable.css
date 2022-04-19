@@ -22,3 +22,9 @@
 .RoutesTable__table-tableHeader{
     font-weight: 700;
 }
+
+.RoutesTable__logWindow{
+    /* margin-top: 350px; */
+    padding: 0px 50px 0px 50px;
+    /* padding-left: 7px; */
+}

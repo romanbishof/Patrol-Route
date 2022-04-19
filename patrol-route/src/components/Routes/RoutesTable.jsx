@@ -15,6 +15,7 @@ import markerImg from '../../images/marker.png'
 import Stroke from 'ol/style/Stroke'
 import EditIcon from '@mui/icons-material/Edit';
 import './RoutesTable.css'
+import LogWindow from '../logWindow/LogWindow'
 
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
@@ -244,10 +245,11 @@ function RoutesTable() {
             <TableHead>
               <TableRow>
                 <TableCell sx={{ width: '50px', fontSize: '17px', fontWeight: 'bold' }}>Id</TableCell>
-                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold'}}>Route Name</TableCell>
-                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' , textAlign:'center'}}>Actions</TableCell>
+                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Route Name</TableCell>
+                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Start time</TableCell>
+                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold', textAlign: 'center' }}>Actions</TableCell>
                 {/* <TableCell>Security Level</TableCell> */}
-                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold'}}>Active Route</TableCell>
+                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Active Route</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -257,7 +259,9 @@ function RoutesTable() {
                   return (
                     <TableRow className='RoutesTable__tableList' key={index} hover={true}>
                       <TableCell sx={{ width: '50px', fontSize: '17px' }}>{index + 1}.</TableCell>
-                      <TableCell sx={{ cursor: 'pointer',  width: '100px', fontSize: '17px' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
+                      <TableCell sx={{ cursor: 'pointer', width: '100px', fontSize: '17px' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
+                      <TableCell sx={{ cursor: 'pointer', width: '100px', fontSize: '15px' }}>{route.StartAt}</TableCell>
+
                       <TableCell>
                         <Stack spacing={3} direction='row' justifyContent='center'>
                           <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
@@ -307,6 +311,11 @@ function RoutesTable() {
             </TableBody>
           </Table>
         </TableContainer>
+        <div className="RoutesTable__logWindow">
+          <LogWindow />
+        </div>
+
+
       </ThemeProvider>
     </div>
   )

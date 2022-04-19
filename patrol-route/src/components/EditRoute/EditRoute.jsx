@@ -5,12 +5,13 @@ import { fromLonLat } from 'ol/proj';
 import Icon from 'ol/style/Icon';
 import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { updateRoute, updateRouteAsync } from '../../redux/patroslSlice';
 import arrowImage from '../../images/arrow2.png'
 import markerImg from '../../images/marker.png'
+import moment from 'moment'
 import './EditRoute.css'
 
 function EditRoute() {
@@ -20,7 +21,8 @@ function EditRoute() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const route = location.state.route
-
+    const [routeName, setRouteName] = useState(route.Name)
+    const [date, setDate] = useState(route.StartAt)
 
     const theme = createTheme({
         palette: {
@@ -107,7 +109,8 @@ function EditRoute() {
     }
 
     const handleSaveChange = () => {
-
+        route.Name = routeName
+        route.StartAt = date
         dispatch(updateRoute(route));
         dispatch(updateRouteAsync(route));
         removeRouteFromMap()
@@ -217,12 +220,19 @@ function EditRoute() {
         <div className='editRoute'>
             <ThemeProvider theme={theme}>
                 <div className="editRoute__Title">
-                    <Typography variant='h3'>Edit Select Route</Typography>
+                    <Typography variant='h3'>Edit Selected Route</Typography>
 
                     <div className="editRoute__buttons">
                         <Button variant='contained' onClick={handleSaveChange}>Save</Button>
                         <Button variant='contained' onClick={() => { navigate('/'); removeRouteFromMap() }}>Cancel</Button>
                     </div>
+                </div>
+                <div className="editRoute__NameAndDate">
+                    <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' id='RouteName' placeholder='Enter Route name...' defaultValue={routeName} onChange={(e) => {setRouteName(e.target.value)}}/>} />
+                    <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }}/>} />
+                    {console.log(new Date())}
+                    {console.log('my date from json: ', date)}
+
                 </div>
 
 
@@ -230,12 +240,12 @@ function EditRoute() {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Point No`</TableCell>
-                                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Longitude</TableCell>
-                                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Latitude</TableCell>
-                                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Interval</TableCell>
-                                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Camera</TableCell>
-                                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Xenon</TableCell>
+                                <TableCell sx={{ width: '100px', fontSize: '16px', fontWeight: 'bold' }}>Point No`</TableCell>
+                                <TableCell sx={{ width: '100px', fontSize: '16px', fontWeight: 'bold' }}>Longitude</TableCell>
+                                <TableCell sx={{ width: '100px', fontSize: '16px', fontWeight: 'bold' }}>Latitude</TableCell>
+                                <TableCell sx={{ width: '100px', fontSize: '16px', fontWeight: 'bold' }}>Interval</TableCell>
+                                <TableCell sx={{ width: '100px', fontSize: '16px', fontWeight: 'bold' }}>Camera</TableCell>
+                                <TableCell sx={{ width: '100px', fontSize: '16px', fontWeight: 'bold' }}>Xenon</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
