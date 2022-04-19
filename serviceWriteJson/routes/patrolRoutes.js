@@ -6,7 +6,7 @@ const router = express.Router();
 
 const updateDate = (obj) => {
     let date = new Date() 
-    obj.LastUpdate = moment(date).format('DD-MM-YYYY HH:MM')
+    obj.LastUpdate = moment(date).format('DD-MM-YYYY HH:mm')
     return obj
 }
 
