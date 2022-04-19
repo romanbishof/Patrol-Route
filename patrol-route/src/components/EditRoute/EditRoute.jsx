@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { updateRoute, updateRouteAsync } from '../../redux/patroslSlice';
 import arrowImage from '../../images/arrow2.png'
 import markerImg from '../../images/marker.png'
+import './EditRoute.css'
 
 function EditRoute() {
 

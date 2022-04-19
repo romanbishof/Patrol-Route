@@ -157,18 +157,32 @@ function SetRoute() {
     }
 
     const handleIntervalTime = (e) => {
-        let reg = /^[1-9]+[0-9]*$/
-
+        // let reg = /^[1-9]+[0-9]*$/
+        // reg.test(e.target.value)
 
         // valiation to enter only numbers
-        if (reg.test(e.target.value)) {
+        if ((e.target.value >= 0) && (e.target.value.length <= 3)) {
 
-            setErrorInterval(false)
+            // setErrorInterval(false)
             setInterval(e.target.value)
         }
-        else {
-            setErrorInterval(true)
-        }
+        // else {
+        //     setErrorInterval(true)
+        // }
+    }
+
+    const handleIntervalTimeChange = (e, Id) => {
+        routePoint.forEach(point => {
+            if(point.Id === Id){
+
+                if ((e.target.value > 0) && (e.target.value.length <= 3)) {
+                    
+                    point.WaitforSeconds = e.target.value
+                    console.log(point);
+                }
+            }
+        })
+        
     }
 
     const handleSaveTemplate = () => {
@@ -411,7 +425,7 @@ function SetRoute() {
                                                         required={true}
                                                         defaultValue={route.WaitforSeconds}
                                                         label='Seconds(10-180)'
-                                                        onChange={handleIntervalTime}
+                                                        onChange={(e) => { handleIntervalTimeChange(e, route.Id) }}
                                                     />
 
                                                 </TableCell>
