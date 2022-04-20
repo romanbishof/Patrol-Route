@@ -1,6 +1,7 @@
 import express from 'express';
 import jfile from 'jsonfile'
 import moment from 'moment'
+import fs from 'fs'
 
 const router = express.Router();
 
@@ -14,6 +15,27 @@ const updateDate = (obj) => {
 router.get('/', (req, resp) => {
     let data = jfile.readFileSync('../data.json')
     resp.send(data[0])
+})
+
+router.get('/log', (req, resp) => {
+
+    let file = fs.readFileSync('../Trace.octolog').toString('utf8')
+    let arrayOfStings = file.split(/\r\n/)
+
+    const regex = new RegExp()
+    let matchResult = arrayOfStings.map((row) => row.match(/\{.+\}/));   
+    
+    let result = [];
+
+    for (let i = 0; i < matchResult.length; i++) {        
+
+        if (matchResult[i] === null){
+            continue;
+        }
+        result.push(matchResult[i][0]);        
+    }
+
+    resp.send(result)
 })
 
 router.post('/', (req, resp) => {

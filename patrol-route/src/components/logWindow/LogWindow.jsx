@@ -1,9 +1,29 @@
 import React from 'react'
 import './LogWindow.css'
-function LogWindow() {
+import { Typography } from '@mui/material'
+
+
+function LogWindow({ log }) {
+  
   return (
     <div className='logWindow'>
-        log window
+
+
+      { 
+        log === null ? ''
+        
+        : 
+
+        log.Messages.map((msg, index) => {
+
+          return (
+            <div className='logWindow__msg' key={index}>
+              <Typography variant='p'>{msg}</Typography>
+            </div>
+          )
+        })
+      }
+
     </div>
   )
 }

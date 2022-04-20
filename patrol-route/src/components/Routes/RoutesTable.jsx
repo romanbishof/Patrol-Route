@@ -2,7 +2,7 @@ import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogC
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { deleteRoute, deleteRouteAsync, getDevicesAsync, getRoutesAsync, updateRoute, updateRouteAsync } from '../../redux/patroslSlice'
+import { deleteRoute, deleteRouteAsync, getDevicesAsync, getHistoryLogAsync, getRoutesAsync, updateRoute, updateRouteAsync } from '../../redux/patroslSlice'
 import Feature from 'ol/Feature';
 import { fromLonLat } from 'ol/proj';
 import LineString from 'ol/geom/LineString';
@@ -16,17 +16,20 @@ import Stroke from 'ol/style/Stroke'
 import EditIcon from '@mui/icons-material/Edit';
 import './RoutesTable.css'
 import LogWindow from '../logWindow/LogWindow'
+import axios from 'axios'
 
 function RoutesTable() {
   const routes = useSelector((state) => state.patrols)
   const [checkRouteId, setCheckRouteId] = useState('')
   const [routeId, setRouteId] = useState('')
   const [open, setOpen] = useState(false)
+  const [log, setLog] = useState(null)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(async () => {
     dispatch(getRoutesAsync())
+    // dispatch(getHistoryLogAsync())
   }, [dispatch])
 
   const theme = createTheme({
@@ -227,12 +230,22 @@ function RoutesTable() {
     source.clear();
   }
 
+  const handleReloadHistory = async() => {
+    let res = await axios.get(process.env.REACT_APP_API_LOG_FILR)
+    let data = res.data
+    let result = data.map(item =>
+      JSON.parse(item)
+    )
+    // let result = JSON.parse(resData[resData.length])
+    setLog(result[result.length - 1])
+  }
+
   return (
     <div className='RoutesTable'>
       <ThemeProvider theme={theme}>
         <div className='RoutesTable__title'>
           <Typography variant='h3'>
-            Patrol route Table
+            Patrol route
           </Typography>
 
           <div id='RoutesTable__AddButton' className="RoutesTable__button">
@@ -240,7 +253,7 @@ function RoutesTable() {
           </div>
         </div>
 
-        <TableContainer>
+        <TableContainer sx={{maxHeight: 450}}>
           <Table stickyHeader className='RoutesTable__table'>
             <TableHead>
               <TableRow>
@@ -252,12 +265,12 @@ function RoutesTable() {
                 <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Active Route</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className='RoutesTable__tableList' >
               {
                 routes[0].RoutePlans.map((route, index) => {
 
                   return (
-                    <TableRow className='RoutesTable__tableList' key={index} hover={true}>
+                    <TableRow key={index} hover={true}>
                       <TableCell sx={{ width: '50px', fontSize: '17px' }}>{index + 1}.</TableCell>
                       <TableCell sx={{ cursor: 'pointer', width: '100px', fontSize: '17px' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
                       <TableCell sx={{ cursor: 'pointer', width: '100px', fontSize: '15px' }}>{route.StartAt}</TableCell>
@@ -312,7 +325,15 @@ function RoutesTable() {
           </Table>
         </TableContainer>
         <div className="RoutesTable__logWindow">
-          <LogWindow />
+
+          <div className="RoutesTable__logWindow-wrapper">
+
+            <h3 className='RoutesTable__logWindow-title'>Log</h3>
+            <Button variant='contained' onClick={handleReloadHistory}>Reload History</Button>
+          </div>
+
+          <LogWindow log={log}/>
+
         </div>
 
 

@@ -27,6 +27,17 @@ export const getDevicesAsync = createAsyncThunk('routes/getDevicesAsynv',
         return components
     })
 
+export const getHistoryLogAsync = createAsyncThunk('routes/getHistoryLog',
+    async () => {
+        let res = await axios.get(process.env.REACT_APP_API_LOG_FILR)
+        let data = res.data
+        let result = data.map(item =>
+            JSON.parse(item)
+        )
+        return result
+    }
+)
+
 export const getRoutesAsync = createAsyncThunk("routes/getRoutesAsync",
     async () => {
         let res = await axios.get(process.env.REACT_APP_API_JSON_FILE)
@@ -54,8 +65,8 @@ const initialState = [
         Jetty: "Apapa",
         LastUpdate: "12-05-2021 15:00",
         Home: {
-            Latitude: 6.41096,
-            Longitude: 3.39447
+            Latitude: 6.454467,
+            Longitude: 3.37155
         },
         SecurityLevel: 2,
         IntervalInMinutes: 60,
@@ -109,7 +120,7 @@ const patrolSlice = createSlice({
             let rawCamera = []
             let rawXenon = []
             action.payload.forEach(obj => {
-                if(obj.Component.ComponentName === 'Surveillance EO' || obj.Component.ComponentName === 'Octopus GenericPTZEx'){
+                if (obj.Component.ComponentName === 'Surveillance EO' || obj.Component.ComponentName === 'Octopus GenericPTZEx') {
                     obj.Devices.forEach(devicesObj => {
 
                         rawCamera.push({
@@ -135,6 +146,17 @@ const patrolSlice = createSlice({
                     })
                 }
             })
+        },
+        [getHistoryLogAsync.fulfilled]: (state, action) => {
+            // current(state).forEach(obj => {
+            //     if ('historyLog' in obj) {
+            //         state.
+            //     }
+            // })
+            // state.push({
+            //     historyLog: action.payload[action.payload.length - 1]
+            // })
+            console.log(action.payload);
         }
     },
 })
