@@ -23,17 +23,12 @@
     font-weight: 700;
 }
 
-.RoutesTable__tableList{
-    width: 100%;
-    /* max-height: 100px; */
-}
-
 .RoutesTable__logWindow{
-    position: absolute;
-    padding: 0px 50px 0px 50px;
-    width: 900px;
+    /* position: absolute; */
+    padding: 0px 50px 20px 50px;
+    /* width: 900px; */
     overflow: hidden;
-    bottom: 20px;
+    /* bottom: 20px; */
 }
 
 .RoutesTable__logWindow-wrapper{
