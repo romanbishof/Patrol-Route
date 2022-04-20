@@ -265,7 +265,7 @@ function RoutesTable() {
                 <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Active Route</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody sx={{maxHeight: 450}}>
+            <TableBody sx={{maxHeight: 350}}>
               {
                 routes[0].RoutePlans.map((route, index) => {
 

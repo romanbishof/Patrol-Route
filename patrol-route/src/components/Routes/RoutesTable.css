@@ -24,11 +24,12 @@
 }
 
 .RoutesTable__logWindow{
-    /* position: absolute; */
-    padding: 0px 50px 20px 50px;
+    position: absolute;
+    padding: 0px 50px 0px 50px;
     /* width: 900px; */
+    width: 47%;
     overflow: hidden;
-    /* bottom: 20px; */
+    bottom: 20px;
 }
 
 .RoutesTable__logWindow-wrapper{
