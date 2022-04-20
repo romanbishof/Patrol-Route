@@ -20,6 +20,7 @@ router.get('/', (req, resp) => {
 router.get('/log', (req, resp) => {
 
     let file = fs.readFileSync('../Trace.octolog').toString('utf8')
+    // let file = fs.readFileSync('../../../SERVERLOGS/SERVICES/Patrol/log/Trace.octolog').toString('utf8')
     let arrayOfStings = file.split(/\r\n/)
 
     const regex = new RegExp()
