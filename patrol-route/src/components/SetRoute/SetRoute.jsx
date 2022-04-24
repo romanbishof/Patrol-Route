@@ -22,10 +22,10 @@ function SetRoute() {
     const state = useSelector((state) => state.patrols)
     const [routeName, setRouteName] = useState('')
     const [routePoint, setRoutePoints] = useState([])
-    const [date, setDate] = useState('')
+    const [startAt, setStartAt] = useState('')
+    const [endAt, setEndAt] = useState('')
     const [pointNumber, setPointNumber] = useState(1)
     const [interval, setInterval] = useState(10)
-    // const [errorInterval, setErrorInterval] = useState(false)
     const [open, setOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null)
 
@@ -101,7 +101,8 @@ function SetRoute() {
                 Id: uuidv4(),
                 Name: routeName,
                 OrgId: 8,
-                StartAt: date,
+                StartAt: startAt,
+                EndAt: endAt,
                 IsActive: false,
                 CheckPoints: routePoint
             }
@@ -173,16 +174,16 @@ function SetRoute() {
 
     const handleIntervalTimeChange = (e, Id) => {
         routePoint.forEach(point => {
-            if(point.Id === Id){
+            if (point.Id === Id) {
 
                 if ((e.target.value > 0) && (e.target.value.length <= 3)) {
-                    
+
                     point.WaitforSeconds = e.target.value
                     console.log(point);
                 }
             }
         })
-        
+
     }
 
     const handleSaveTemplate = () => {
@@ -372,25 +373,42 @@ function SetRoute() {
                     onSubmit={hendleSaveRoute}
                     autoComplete='off'
                 >
-                    <Stack spacing={3} direction='row' className='setRoute__box-textAndDateInput'>
-                        <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} />
-                        <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }} />} />
+                    <div className='setRoute__box-textAndDateInput'>
+                        {/* <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} /> */}
+                        {/* <FormControlLabel label='Starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setStartAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }} />} /> */}
+                        {/* <FormControlLabel label='End Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setEndAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }} />} /> */}
+                        <div className="setRoute__box-textAndDateInput_input">
+                            <h4>Route Name</h4>
+                            <TextField size='small' required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />
+                        </div>
 
-                        <Button aria-describedby={submit} type='submit' variant='contained'>Save Route</Button>
-                        <Popover
-                            id={submit}
-                            open={open}
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                        >
-                            <Typography sx={{ p: 2 }}>Please select at least one point</Typography>
-                        </Popover>
-                        <Button variant='contained' onClick={() => { navigate('/'); clearPopupOverLay(); clearLineString(); }}>Back</Button>
+                        <div className="setRoute__box-textAndDateInput_input">
+                            <h4>Start Date</h4>
+                            <input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setStartAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }} />
+                        </div>
 
-                    </Stack>
+                        <div className="setRoute__box-textAndDateInput_input">
+                            <h4>End Date</h4>
+                            <input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setEndAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }} />
+                        </div>
+
+                        <div className="setRoute__box-buttonActions">
+                            <Button aria-describedby={submit} type='submit' variant='contained'>Save Route</Button>
+                            <Popover
+                                id={submit}
+                                open={open}
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                            >
+                                <Typography sx={{ p: 2 }}>Please select at least one point</Typography>
+                            </Popover>
+                            <Button variant='contained' onClick={() => { navigate('/'); clearPopupOverLay(); clearLineString(); }}>Back</Button>
+                        </div>
+
+                    </div>
 
                     <TableContainer>
                         <Table>

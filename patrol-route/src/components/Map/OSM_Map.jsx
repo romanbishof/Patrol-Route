@@ -11,7 +11,7 @@ import { createStringXY } from 'ol/coordinate';
 
 function OSM_Map() {
 
-  const patrols = useSelector((state) => state.patrols)
+  // const patrols = useSelector((state) => state.patrols)
   const raster = new TileLayer({
     source: new OSM({ url: process.env.REACT_APP_API_MAP }),
   })
@@ -40,7 +40,8 @@ function OSM_Map() {
       target: mapElement.current,
       layers: [raster, vector],
       view: new View({
-        center: [patrols[0].Home.Longitude, patrols[0].Home.Latitude],
+        // center: [patrols[0].Home.Longitude, patrols[0].Home.Latitude],
+        center: [parseFloat(process.env.REACT_APP_APA_HOME_LON), parseFloat(process.env.REACT_APP_APA_HOME_LAT)],
         zoom: 17,
         projection: 'EPSG:4326',
       }),
@@ -49,6 +50,7 @@ function OSM_Map() {
 
   }, []);
 
+  
   return (
     <div className='OSM_Map'>
       <div id='OSM' ref={mapElement} className="OSM_Map-container">

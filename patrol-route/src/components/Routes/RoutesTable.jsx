@@ -9,11 +9,12 @@ import LineString from 'ol/geom/LineString';
 import Style from 'ol/style/Style'
 import Icon from 'ol/style/Icon';
 import { Point } from 'ol/geom'
-import arrowImage from '../../images/arrow.png'
 import arrowImg from '../../images/arrow2.png'
 import markerImg from '../../images/marker.png'
 import Stroke from 'ol/style/Stroke'
 import EditIcon from '@mui/icons-material/Edit';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteIcon from '@mui/icons-material/Delete';
 import './RoutesTable.css'
 import LogWindow from '../logWindow/LogWindow'
 import axios from 'axios'
@@ -151,8 +152,6 @@ function RoutesTable() {
     return styles;
   }
 
-
-
   // const handleSecurityLevel = (e) => {
   //   console.log(e.target.value);
   // }
@@ -230,13 +229,13 @@ function RoutesTable() {
     source.clear();
   }
 
-  const handleReloadHistory = async() => {
+  const handleReloadHistory = async () => {
     let res = await axios.get(process.env.REACT_APP_API_LOG_FILR)
     let data = res.data
     let result = data.map(item =>
       JSON.parse(item)
     )
-    // let result = JSON.parse(resData[resData.length])
+
     setLog(result[result.length - 1])
   }
 
@@ -253,7 +252,7 @@ function RoutesTable() {
           </div>
         </div>
 
-        <TableContainer >
+        <TableContainer sx={{ height: '400px', minHeight: '48%', maxHeight: '48%' }}>
           <Table stickyHeader className='RoutesTable__table'>
             <TableHead>
               <TableRow>
@@ -265,21 +264,26 @@ function RoutesTable() {
                 <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Active Route</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody sx={{maxHeight: 350}}>
-              {
+            <TableBody>
+              { 
+                routes[0].RoutePlans === undefined ?  <TableRow></TableRow>: 
                 routes[0].RoutePlans.map((route, index) => {
 
                   return (
                     <TableRow key={index} hover={true}>
                       <TableCell sx={{ width: '50px', fontSize: '17px' }}>{index + 1}.</TableCell>
-                      <TableCell sx={{ cursor: 'pointer', width: '100px', fontSize: '17px' }} onClick={() => { handleShowRoute(route.Id); }} >{route.Name}</TableCell>
-                      <TableCell sx={{ cursor: 'pointer', width: '100px', fontSize: '15px' }}>{route.StartAt}</TableCell>
+                      <TableCell sx={{ width: '80px', fontSize: '17px' }}>{route.Name}</TableCell>
+                      <TableCell sx={{ width: '100px', fontSize: '15px' }}>{route.StartAt}</TableCell>
 
                       <TableCell>
-                        <Stack spacing={3} direction='row' justifyContent='center'>
+                        <div className='RoutesTable__actionBlock'>
+
+                          <VisibilityIcon sx={{ cursor: 'pointer' }} onClick={() => { handleShowRoute(route.Id); }} />
                           <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
-                          <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true); setRouteId(route.Id) }}>Remove</Button>
-                        </Stack>
+                          <DeleteIcon sx={{ cursor: 'pointer' }} onClick={() => { setOpen(true); setRouteId(route.Id) }} />
+                          {/* <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true); setRouteId(route.Id) }}>Remove</Button> */}
+                          
+                        </div>
                       </TableCell>
                       <Dialog
                         open={open}
@@ -332,7 +336,7 @@ function RoutesTable() {
             <Button variant='contained' onClick={handleReloadHistory}>Reload History</Button>
           </div>
 
-          <LogWindow log={log}/>
+          <LogWindow log={log} />
 
         </div>
 

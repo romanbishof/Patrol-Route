@@ -62,15 +62,15 @@ export const updateRouteAsync = createAsyncThunk('route/updateRouteAsync',
 
 const initialState = [
     {
-        Jetty: "Apapa",
-        LastUpdate: "12-05-2021 15:00",
-        Home: {
-            Latitude: 6.454467,
-            Longitude: 3.37155
-        },
-        SecurityLevel: 2,
-        IntervalInMinutes: 60,
-        RoutePlans: []
+        // Jetty: "Apapa",
+        // LastUpdate: "12-05-2021 15:00",
+        // Home: {
+        //     Latitude: 6.454467,
+        //     Longitude: 3.37155
+        // },
+        // SecurityLevel: 2,
+        // IntervalInMinutes: 60,
+        // RoutePlans: []
     },
 ]
 
@@ -98,6 +98,7 @@ const patrolSlice = createSlice({
             console.log('fetching data');
         },
         [getRoutesAsync.fulfilled]: (state, action) => {
+            
             try {
                 state[0] = action.payload
             } catch (error) {

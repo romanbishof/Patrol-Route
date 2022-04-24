@@ -23,11 +23,19 @@
     font-weight: 700;
 }
 
+.RoutesTable__actionBlock{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
 .RoutesTable__logWindow{
-    position: absolute;
+    /* position: absolute; */
     padding: 0px 50px 0px 50px;
     /* width: 900px; */
-    width: 47%;
+    /* width: 47%; */
     overflow: hidden;
     bottom: 20px;
 }
