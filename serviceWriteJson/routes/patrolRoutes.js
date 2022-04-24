@@ -43,7 +43,7 @@ router.get('/log', (req, resp) => {
 router.post('/test', (req, resp) => {
     let testRouteFile = req.body
     jfile.writeFileSync('../testRoute.json', testRouteFile)
-    resp.status(200).send('test initialized', testRouteFile)
+    resp.send('test file saved')
 })
 
 // save new route

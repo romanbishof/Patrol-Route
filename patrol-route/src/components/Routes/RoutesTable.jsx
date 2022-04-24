@@ -1,92 +1,124 @@
-import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { deleteRoute, deleteRouteAsync, getDevicesAsync, getHistoryLogAsync, getRoutesAsync, updateRoute, updateRouteAsync } from '../../redux/patroslSlice'
-import Feature from 'ol/Feature';
-import { fromLonLat } from 'ol/proj';
-import LineString from 'ol/geom/LineString';
-import Style from 'ol/style/Style'
-import Icon from 'ol/style/Icon';
-import { Point } from 'ol/geom'
-import arrowImg from '../../images/arrow2.png'
-import markerImg from '../../images/marker.png'
-import Stroke from 'ol/style/Stroke'
-import EditIcon from '@mui/icons-material/Edit';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import DeleteIcon from '@mui/icons-material/Delete';
-import BugReportIcon from '@mui/icons-material/BugReport';
-import './RoutesTable.css'
-import LogWindow from '../logWindow/LogWindow'
-import axios from 'axios'
+import {
+  Box,
+  Button,
+  createTheme,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  Switch,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  ThemeProvider,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  deleteRoute,
+  deleteRouteAsync,
+  getDevicesAsync,
+  getHistoryLogAsync,
+  getRoutesAsync,
+  updateRoute,
+  updateRouteAsync,
+} from "../../redux/patroslSlice";
+import Feature from "ol/Feature";
+import { fromLonLat } from "ol/proj";
+import LineString from "ol/geom/LineString";
+import Style from "ol/style/Style";
+import Icon from "ol/style/Icon";
+import { Point } from "ol/geom";
+import arrowImg from "../../images/arrow2.png";
+import markerImg from "../../images/marker.png";
+import Stroke from "ol/style/Stroke";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteIcon from "@mui/icons-material/Delete";
+import BugReportIcon from "@mui/icons-material/BugReport";
+import "./RoutesTable.css";
+import LogWindow from "../logWindow/LogWindow";
+import axios from "axios";
 
 function RoutesTable() {
-  const routes = useSelector((state) => state.patrols)
-  const [checkRouteId, setCheckRouteId] = useState('')
-  const [routeId, setRouteId] = useState('')
-  const [open, setOpen] = useState(false)
-  const [log, setLog] = useState(null)
+  const routes = useSelector((state) => state.patrols);
+  const [checkRouteId, setCheckRouteId] = useState("");
+  const [routeId, setRouteId] = useState("");
+  const [open, setOpen] = useState(false);
+  const [log, setLog] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(async () => {
-    dispatch(getRoutesAsync())
+    dispatch(getRoutesAsync());
     // dispatch(getHistoryLogAsync())
-  }, [dispatch])
+  }, [dispatch]);
 
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#d85728',
-      }
-    }
-  })
+        main: "#d85728",
+      },
+    },
+  });
 
   const handleRouteActive = (e, _routeId) => {
-
     // console.log(_routeId);
-    routes.forEach(obj => {
-      if ('Jetty' in obj) {
-        let newRoutePlan
-        obj.RoutePlans.forEach(routePlan => {
+    routes.forEach((obj) => {
+      if ("Jetty" in obj) {
+        let newRoutePlan;
+        obj.RoutePlans.forEach((routePlan) => {
           // routePlan.Id === _routeId
           // ? {...routePlan, IsActive: e.target.checked} : {...routePlan}
           if (routePlan.Id === _routeId) {
-            newRoutePlan = { ...routePlan, IsActive: e.target.checked }
+            newRoutePlan = { ...routePlan, IsActive: e.target.checked };
           }
-
-        })
+        });
 
         dispatch(updateRoute(newRoutePlan));
         dispatch(updateRouteAsync(newRoutePlan));
       }
-    })
+    });
     // dispatch(updateRoute(newRoutePlan))
-  }
+  };
 
   const handleDelete = () => {
-    setOpen(false)
+    setOpen(false);
     dispatch(deleteRoute(routeId));
     dispatch(deleteRouteAsync(routeId));
     removeLinePath();
-  }
+  };
 
   const handleEditRoute = (routeId) => {
     // getting specific route plan by id
-    let route = routes[0].RoutePlans.filter(routePlan => routePlan.Id === routeId)
+    let route = routes[0].RoutePlans.filter(
+      (routePlan) => routePlan.Id === routeId
+    );
     // console.log(route);
-    navigate(`/edit-route/:route`, { state: { route: route[0] } })
+    navigate(`/edit-route/:route`, { state: { route: route[0] } });
     removeLinePath();
-  }
+  };
 
   const handleShowRoute = (routeId) => {
-
-    let route = routes[0].RoutePlans.filter(routePlan => routePlan.Id === routeId)
+    let route = routes[0].RoutePlans.filter(
+      (routePlan) => routePlan.Id === routeId
+    );
     route = route[0];
     // console.log('id of route by click ', id);
 
-    if (typeof route === 'undefined') {
-      console.log('route is undefinded');
+    if (typeof route === "undefined") {
+      console.log("route is undefinded");
       return;
     }
 
@@ -109,94 +141,98 @@ function RoutesTable() {
       drawPolygonOnMap(coordinatesLineString, route.Id);
     } else {
       // if the route alredy drawn --> we remove it
-      removeLinePath()
-      setCheckRouteId('')
+      removeLinePath();
+      setCheckRouteId("");
     }
-  }
+  };
 
   const styleFunction = (feature) => {
-
-
     var geometry = feature.getGeometry();
 
     let styles = [
       new Style({
         // linestring
         stroke: new Stroke({
-          color: '#A349A4',
-          width: 3
-        })
-      })
-    ]
+          color: "#A349A4",
+          width: 3,
+        }),
+      }),
+    ];
 
     // iterate over each segment to add arrow at the end
     geometry.forEachSegment((start, end) => {
-      let dx = end[0] - start[0]
-      let dy = end[1] - start[1]
-      let rotation = Math.atan2(dy, dx)
+      let dx = end[0] - start[0];
+      let dy = end[1] - start[1];
+      let rotation = Math.atan2(dy, dx);
 
       // arrow
-      styles.push(new Style({
-        geometry: new Point(end),
-        image: new Icon({
-          src: arrowImg,
-          color: '#A349A4',
-          anchor: [0.75, 0.5],
-          scale: 0.1,
-          offset: [40, -15],
-          rotateWithView: true,
-          rotation: -rotation
+      styles.push(
+        new Style({
+          geometry: new Point(end),
+          image: new Icon({
+            src: arrowImg,
+            color: "#A349A4",
+            anchor: [0.75, 0.5],
+            scale: 0.1,
+            offset: [40, -15],
+            rotateWithView: true,
+            rotation: -rotation,
+          }),
         })
-      }))
-    })
+      );
+    });
 
     return styles;
-  }
+  };
 
   // const handleSecurityLevel = (e) => {
   //   console.log(e.target.value);
   // }
 
   const addMarker = (coordinates) => {
-    let vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
+    let vector = window.map.getAllLayers().find((i) => i.id === "PolygonLayer");
     let vectorSource = vector.getSource();
     // adding new feature to specific coordinates
-    coordinates.forEach(point => {
+    coordinates.forEach((point) => {
       var marker = new Feature(new Point(point));
       var zIndex = 1;
-      marker.setStyle(new Style({
-        image: new Icon(({
-          anchor: [0.5, 36],
-          anchorXUnits: "fraction",
-          anchorYUnits: "pixels",
-          opacity: 1,
-          // size: [20,20],
-          scale: 0.1,
-          anchorOrigin: 'bottom-right',
-          offset: [0, 0],
-          src: markerImg,
+      marker.setStyle(
+        new Style({
+          image: new Icon({
+            anchor: [0.5, 36],
+            anchorXUnits: "fraction",
+            anchorYUnits: "pixels",
+            opacity: 1,
+            // size: [20,20],
+            scale: 0.1,
+            anchorOrigin: "bottom-right",
+            offset: [0, 0],
+            src: markerImg,
+            zIndex: zIndex,
+          }),
           zIndex: zIndex,
-        })),
-        zIndex: zIndex
-      }));
+        })
+      );
       vectorSource.addFeature(marker);
-    })
-  }
+    });
+  };
 
-  //function to draw Route on MAP 
+  //function to draw Route on MAP
   function drawPolygonOnMap(coordinates, routeId) {
-    setCheckRouteId(routeId)
+    setCheckRouteId(routeId);
     removeLinePath();
     // getting the Specific layer from all the Layer in our map
-    let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
+    let _vector = window.map
+      .getAllLayers()
+      .find((i) => i.id === "PolygonLayer");
 
-    if (typeof _vector === 'undefined') {
+    if (typeof _vector === "undefined") {
       return;
     }
     // getting our source of vector
     let source = _vector.getSource();
 
-    //linestring 
+    //linestring
     let lineString = new LineString(coordinates);
 
     //polygon
@@ -208,12 +244,11 @@ function RoutesTable() {
       geometry: lineString,
     });
 
-
-    _vector.setStyle(styleFunction(feature))
+    _vector.setStyle(styleFunction(feature));
 
     // giving ID to our feature
     feature.Id = routeId;
-    addMarker(coordinates)
+    addMarker(coordinates);
     //console.log(feature);
     source.addFeature(feature);
     //console.log(_vector.getSource().getFeatures().length);
@@ -221,9 +256,10 @@ function RoutesTable() {
 
   // removing the route layer
   function removeLinePath() {
-
-    let _vector = window.map.getAllLayers().find(i => i.id === 'PolygonLayer');
-    if (typeof _vector === 'undefined') {
+    let _vector = window.map
+      .getAllLayers()
+      .find((i) => i.id === "PolygonLayer");
+    if (typeof _vector === "undefined") {
       return;
     }
     let source = _vector.getSource();
@@ -231,72 +267,139 @@ function RoutesTable() {
   }
 
   const handleReloadHistory = async () => {
-    let res = await axios.get(process.env.REACT_APP_API_LOG_FILR)
-    let data = res.data
-    let result = data.map(item =>
-      JSON.parse(item)
-    )
+    let res = await axios.get(process.env.REACT_APP_API_LOG_FILR);
+    let data = res.data;
+    let result = data.map((item) => JSON.parse(item));
 
-    setLog(result[result.length - 1])
-  }
+    setLog(result[result.length - 1]);
+  };
 
   const handleTestRoute = async (route) => {
-
-    let testRoute = {...route, IsActive: true}
-    await axios.post(process.env.REACT_APP_TEST, testRoute)
-    console.log(testRoute);
-  }
+    let testRoute = { ...route, IsActive: true };
+    await axios.post(process.env.REACT_APP_TEST, testRoute);
+  };
 
   return (
-    <div className='RoutesTable'>
+    <div className="RoutesTable">
       <ThemeProvider theme={theme}>
-        <div className='RoutesTable__title'>
-          <Typography variant='h3'>
-            Patrol route
-          </Typography>
+        <div className="RoutesTable__title">
+          <Typography variant="h3">Patrol route</Typography>
 
-          <div id='RoutesTable__AddButton' className="RoutesTable__button">
-            <Button onClick={() => { removeLinePath(); navigate('/patrol-route') }} variant='contained'>Add Route</Button>
+          <div id="RoutesTable__AddButton" className="RoutesTable__button">
+            <Button
+              onClick={() => {
+                removeLinePath();
+                navigate("/patrol-route");
+              }}
+              variant="contained"
+            >
+              Add Route
+            </Button>
           </div>
         </div>
 
-        <TableContainer sx={{ height: '400px', minHeight: '48%', maxHeight: '48%' }}>
-          <Table stickyHeader className='RoutesTable__table'>
+        <TableContainer
+          sx={{ height: "400px", minHeight: "48%", maxHeight: "48%" }}
+        >
+          <Table stickyHeader className="RoutesTable__table">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ width: '50px', fontSize: '17px', fontWeight: 'bold' }}>Id</TableCell>
-                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Route Name</TableCell>
-                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Start time</TableCell>
-                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold', textAlign: 'center' }}>Actions</TableCell>
+                <TableCell
+                  sx={{ width: "50px", fontSize: "17px", fontWeight: "bold" }}
+                >
+                  Id
+                </TableCell>
+                <TableCell
+                  sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
+                >
+                  Route Name
+                </TableCell>
+                <TableCell
+                  sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
+                >
+                  Start time
+                </TableCell>
+                <TableCell
+                  sx={{
+                    width: "100px",
+                    fontSize: "17px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                  }}
+                >
+                  Actions
+                </TableCell>
                 {/* <TableCell>Security Level</TableCell> */}
-                <TableCell sx={{ width: '100px', fontSize: '17px', fontWeight: 'bold' }}>Active Route</TableCell>
+                <TableCell
+                  sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
+                >
+                  Active Route
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              { 
-                routes[0].RoutePlans === undefined ?  <TableRow></TableRow>: 
+              {routes[0].RoutePlans === undefined ? (
+                <TableRow></TableRow>
+              ) : (
                 routes[0].RoutePlans.map((route, index) => {
-
                   return (
                     <TableRow key={index} hover={true}>
-                      <TableCell sx={{ width: '50px', fontSize: '17px' }}>{index + 1}.</TableCell>
-                      <TableCell sx={{ width: '80px', fontSize: '17px' }}>{route.Name}</TableCell>
-                      <TableCell sx={{ width: '110px', fontSize: '15px' }}>{route.StartAt}</TableCell>
+                      <TableCell sx={{ width: "50px", fontSize: "17px" }}>
+                        {index + 1}.
+                      </TableCell>
+                      <TableCell sx={{ width: "80px", fontSize: "17px" }}>
+                        {route.Name}
+                      </TableCell>
+                      <TableCell sx={{ width: "110px", fontSize: "15px" }}>
+                        {route.StartAt}
+                      </TableCell>
 
                       <TableCell>
-                        <div className='RoutesTable__actionBlock'>
+                        <div className="RoutesTable__actionBlock">
+                          <Tooltip title="Show route" arrow>
+                            <VisibilityIcon
+                              sx={{ cursor: "pointer" }}
+                              onClick={() => {
+                                handleShowRoute(route.Id);
+                              }}
+                            />
+                          </Tooltip>
 
-                          <VisibilityIcon sx={{ cursor: 'pointer' }} onClick={() => { handleShowRoute(route.Id); }} />
-                          <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
-                          <DeleteIcon sx={{ cursor: 'pointer' }} onClick={() => { setOpen(true); setRouteId(route.Id) }} />
-                          {/* <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true); setRouteId(route.Id) }}>Remove</Button> */}
-                          <BugReportIcon sx={{ cursor: 'pointer' }}  onClick={()=> {handleTestRoute(route)}}/>
+                          <Tooltip title="Edit" arrow>
+                            <EditIcon
+                              sx={{ cursor: "pointer" }}
+                              onClick={() => {
+                                handleEditRoute(route.Id);
+                              }}
+                            />
+                          </Tooltip>
+
+                          <Tooltip title="Delete" arrow>
+                            <DeleteIcon
+                              sx={{ cursor: "pointer" }}
+                              onClick={() => {
+                                setOpen(true);
+                                setRouteId(route.Id);
+                              }}
+                            />
+                          </Tooltip>
+
+                          <Tooltip title="Test Route" arrow>
+                            <BugReportIcon
+                              sx={{ cursor: "pointer" }}
+                              onClick={() => {
+                                handleTestRoute(route);
+                              }}
+                            />
+                          </Tooltip>
                         </div>
                       </TableCell>
                       <Dialog
                         open={open}
-                        onClose={() => { setOpen(false); }}
-                        aria-describedby='alert-delete'
+                        onClose={() => {
+                          setOpen(false);
+                        }}
+                        aria-describedby="alert-delete"
                       >
                         <DialogContent>
                           <DialogContentText id="alert-delete">
@@ -305,7 +408,13 @@ function RoutesTable() {
                         </DialogContent>
                         <DialogActions>
                           <Button onClick={handleDelete}>Yes</Button>
-                          <Button onClick={() => { setOpen(false) }}>Cancel</Button>
+                          <Button
+                            onClick={() => {
+                              setOpen(false);
+                            }}
+                          >
+                            Cancel
+                          </Button>
                         </DialogActions>
                       </Dialog>
                       {/* <TableCell>
@@ -326,32 +435,31 @@ function RoutesTable() {
                         <Switch
                           id={`RoutesTable_switch_${index}`}
                           checked={route.IsActive}
-                          onChange={(e) => { handleRouteActive(e, route.Id) }}
+                          onChange={(e) => {
+                            handleRouteActive(e, route.Id);
+                          }}
                         />
                       </TableCell>
                     </TableRow>
-                  )
+                  );
                 })
-              }
+              )}
             </TableBody>
           </Table>
         </TableContainer>
         <div className="RoutesTable__logWindow">
-
           <div className="RoutesTable__logWindow-wrapper">
-
-            <h3 className='RoutesTable__logWindow-title'>Log</h3>
-            <Button variant='contained' onClick={handleReloadHistory}>Reload History</Button>
+            <h3 className="RoutesTable__logWindow-title">Log</h3>
+            <Button variant="contained" onClick={handleReloadHistory}>
+              Reload History
+            </Button>
           </div>
 
           <LogWindow log={log} />
-
         </div>
-
-
       </ThemeProvider>
     </div>
-  )
+  );
 }
 
-export default RoutesTable
+export default RoutesTable;
