@@ -11,7 +11,7 @@ const updateDate = (obj) => {
     return obj
 }
 
-// all routes to API starting with /users witch we set in index.js file
+// all routes to API starting with /routes witch we set in index.js file
 router.get('/', (req, resp) => {
     let data = jfile.readFileSync('../data.json')
     resp.send(data[0])
@@ -39,6 +39,14 @@ router.get('/log', (req, resp) => {
     resp.send(result)
 })
 
+// save test file
+router.post('/test', (req, resp) => {
+    let testRouteFile = req.body
+    jfile.writeFileSync('../testRoute.json', testRouteFile)
+    resp.status(200).send('test initialized', testRouteFile)
+})
+
+// save new route
 router.post('/', (req, resp) => {
     
     let data = jfile.readFileSync('../data.json');

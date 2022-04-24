@@ -15,6 +15,7 @@ import Stroke from 'ol/style/Stroke'
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from '@mui/icons-material/Delete';
+import BugReportIcon from '@mui/icons-material/BugReport';
 import './RoutesTable.css'
 import LogWindow from '../logWindow/LogWindow'
 import axios from 'axios'
@@ -239,6 +240,13 @@ function RoutesTable() {
     setLog(result[result.length - 1])
   }
 
+  const handleTestRoute = async (route) => {
+
+    let testRoute = {...route, IsActive: true}
+    await axios.post(process.env.REACT_APP_TEST, testRoute)
+    console.log(testRoute);
+  }
+
   return (
     <div className='RoutesTable'>
       <ThemeProvider theme={theme}>
@@ -273,7 +281,7 @@ function RoutesTable() {
                     <TableRow key={index} hover={true}>
                       <TableCell sx={{ width: '50px', fontSize: '17px' }}>{index + 1}.</TableCell>
                       <TableCell sx={{ width: '80px', fontSize: '17px' }}>{route.Name}</TableCell>
-                      <TableCell sx={{ width: '100px', fontSize: '15px' }}>{route.StartAt}</TableCell>
+                      <TableCell sx={{ width: '110px', fontSize: '15px' }}>{route.StartAt}</TableCell>
 
                       <TableCell>
                         <div className='RoutesTable__actionBlock'>
@@ -282,7 +290,7 @@ function RoutesTable() {
                           <EditIcon sx={{ cursor: 'pointer' }} onClick={() => { handleEditRoute(route.Id); }} />
                           <DeleteIcon sx={{ cursor: 'pointer' }} onClick={() => { setOpen(true); setRouteId(route.Id) }} />
                           {/* <Button variant='contained' color='primary' size='small' onClick={() => { setOpen(true); setRouteId(route.Id) }}>Remove</Button> */}
-                          
+                          <BugReportIcon sx={{ cursor: 'pointer' }}  onClick={()=> {handleTestRoute(route)}}/>
                         </div>
                       </TableCell>
                       <Dialog
