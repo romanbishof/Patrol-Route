@@ -5,11 +5,10 @@ import { Typography } from "@mui/material";
 function LogWindow({ log }) {
   const [logHistory, setLogHistory] = useState([]);
   if (log !== null) {
-    console.log(log);
     log.forEach((obj) => {
       obj.Messages.forEach((msg) => {
         if (!logHistory.includes(msg)) {
-          logHistory.push(msg);
+          logHistory.unshift(msg);
         }
       });
     });
