@@ -22,7 +22,8 @@ function EditRoute() {
     const dispatch = useDispatch();
     const route = location.state.route
     const [routeName, setRouteName] = useState(route.Name)
-    const [date, setDate] = useState(route.StartAt)
+    const [startAt, setStartAt] = useState(route.StartAt)
+    const [endAt, setEndAt] = useState(route.EndAt)
 
     const theme = createTheme({
         palette: {
@@ -110,7 +111,8 @@ function EditRoute() {
 
     const handleSaveChange = () => {
         route.Name = routeName
-        route.StartAt = date
+        route.StartAt = startAt
+        route.EndAt = endAt
         dispatch(updateRoute(route));
         dispatch(updateRouteAsync(route));
         removeRouteFromMap()
@@ -221,17 +223,33 @@ function EditRoute() {
             <ThemeProvider theme={theme}>
                 <div className="editRoute__Title">
                     <Typography variant='h3'>Edit Selected Route</Typography>
+                </div>
+                <div className="editRoute__NameAndDate">
+                    {/* <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' id='RouteName' placeholder='Enter Route name...' defaultValue={routeName} onChange={(e) => {setRouteName(e.target.value)}}/>} />
+                    <FormControlLabel label='Starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setStartAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }}/>} />
+                    <FormControlLabel label='End Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setStartAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }}/>} /> */}
+
+                    <div className="editRoute__inputBox">
+                        <h3>Route Name</h3>
+                        <TextField size='small' id='RouteName' placeholder='Enter Route name...' defaultValue={routeName} onChange={(e) => {setRouteName(e.target.value)}}/>
+                    </div>
+
+                    <div className="editRoute__inputBox">
+                        <h3>Starting Date</h3>
+                        <input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setStartAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }}/>
+                    </div>
+
+                    <div className="editRoute__inputBox">
+                        <h3>End Date</h3>
+                        <input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setEndAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }}/>
+                    </div>
 
                     <div className="editRoute__buttons">
                         <Button variant='contained' onClick={handleSaveChange}>Save</Button>
                         <Button variant='contained' onClick={() => { navigate('/'); removeRouteFromMap() }}>Cancel</Button>
                     </div>
-                </div>
-                <div className="editRoute__NameAndDate">
-                    <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' id='RouteName' placeholder='Enter Route name...' defaultValue={routeName} onChange={(e) => {setRouteName(e.target.value)}}/>} />
-                    <FormControlLabel label='Choose starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setDate(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }}/>} />
-                    {console.log(new Date())}
-                    {console.log('my date from json: ', date)}
+                    {/* {console.log(new Date())}
+                    {console.log('my date from json: ', date)} */}
 
                 </div>
 
