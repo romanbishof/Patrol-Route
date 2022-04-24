@@ -270,8 +270,8 @@ function RoutesTable() {
     let res = await axios.get(process.env.REACT_APP_API_LOG_FILR);
     let data = res.data;
     let result = data.map((item) => JSON.parse(item));
-
-    setLog(result[result.length - 1]);
+    setLog(result);
+    // setLog(result[result.length - 1]);
   };
 
   const handleTestRoute = async (route) => {
@@ -384,14 +384,17 @@ function RoutesTable() {
                             />
                           </Tooltip>
 
-                          <Tooltip title="Test Route" arrow>
-                            <BugReportIcon
-                              sx={{ cursor: "pointer" }}
-                              onClick={() => {
-                                handleTestRoute(route);
-                              }}
-                            />
-                          </Tooltip>
+                          {/* <Tooltip title="Test Route" arrow> */}
+                          <Button
+                            variant="contained"
+                            size="small"
+                            onClick={() => {
+                              handleTestRoute(route);
+                            }}
+                          >
+                            TEST
+                          </Button>
+                          {/* </Tooltip> */}
                         </div>
                       </TableCell>
                       <Dialog
