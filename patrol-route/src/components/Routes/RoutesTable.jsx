@@ -9,6 +9,7 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  Paper,
   Select,
   Stack,
   Switch,
@@ -52,7 +53,7 @@ import LogWindow from "../logWindow/LogWindow";
 import axios from "axios";
 
 function RoutesTable() {
-  const routes = useSelector((state) => state.patrols);
+  let routes = useSelector((state) => state.patrols);
   const [checkRouteId, setCheckRouteId] = useState("");
   const [routeId, setRouteId] = useState("");
   const [open, setOpen] = useState(false);
@@ -301,23 +302,33 @@ function RoutesTable() {
         <TableContainer
           sx={{ height: "400px", minHeight: "48%", maxHeight: "48%" }}
         >
-          <Table stickyHeader className="RoutesTable__table">
+          <Table
+            stickyHeader={true}
+            aria-label="sticky table"
+            size="small"
+            className="RoutesTable__table"
+          >
             <TableHead>
               <TableRow>
                 <TableCell
-                  sx={{ width: "50px", fontSize: "17px", fontWeight: "bold" }}
+                  sx={{ width: "1%", fontSize: "17px", fontWeight: "bold" }}
                 >
                   Id
                 </TableCell>
                 <TableCell
                   sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
                 >
-                  Route Name
+                  Route
                 </TableCell>
                 <TableCell
                   sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
                 >
-                  Start time
+                  Start Date
+                </TableCell>
+                <TableCell
+                  sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
+                >
+                  End Date
                 </TableCell>
                 <TableCell
                   sx={{
@@ -331,9 +342,9 @@ function RoutesTable() {
                 </TableCell>
                 {/* <TableCell>Security Level</TableCell> */}
                 <TableCell
-                  sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
+                  sx={{ width: "10%", fontSize: "17px", fontWeight: "bold" }}
                 >
-                  Active Route
+                  Active
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -344,14 +355,17 @@ function RoutesTable() {
                 routes[0].RoutePlans.map((route, index) => {
                   return (
                     <TableRow key={index} hover={true}>
-                      <TableCell sx={{ width: "50px", fontSize: "17px" }}>
+                      <TableCell width="1%" sx={{ fontSize: "17px" }}>
                         {index + 1}.
                       </TableCell>
-                      <TableCell sx={{ width: "80px", fontSize: "17px" }}>
+                      <TableCell width="13%" sx={{ fontSize: "17px" }}>
                         {route.Name}
                       </TableCell>
-                      <TableCell sx={{ width: "110px", fontSize: "15px" }}>
+                      <TableCell width="22%" sx={{ fontSize: "15px" }}>
                         {route.StartAt}
+                      </TableCell>
+                      <TableCell width="22%" sx={{ fontSize: "15px" }}>
+                        {route.EndAt}
                       </TableCell>
 
                       <TableCell>
