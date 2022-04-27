@@ -48,10 +48,11 @@ function EditRoute() {
   const [startAt, setStartAt] = useState(route.StartAt.split(" "));
   const [endAt, setEndAt] = useState(route.EndAt.split(" "));
 
-  // console.log(Date.parse(startAt));
-  // console.log(typeof startAt);
+  // on load component change the date format from string to object date so
+  // that our calender can work with date from our route
 
   useEffect(() => {
+    // conver start date to date obj
     setStartAt(
       new Date(
         startAt[0].split("-")[2],
@@ -61,6 +62,8 @@ function EditRoute() {
         startAt[1].split(":")[1]
       )
     );
+    // conver end date to date obj
+
     setEndAt(
       new Date(
         endAt[0].split("-")[2],
