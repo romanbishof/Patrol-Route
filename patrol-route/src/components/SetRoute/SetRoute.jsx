@@ -344,7 +344,9 @@ function SetRoute() {
       overlay.setPosition(e.coordinate);
       window.map.addOverlay(overlay);
       let _template = "{x},{y}";
-      let out = format(e.coordinate, _template, 4);
+
+      // setting format for coordinates
+      let out = format(e.coordinate, _template, 6);
       let splitOut = out.split(",");
       setCoordinates([parseFloat(splitOut[0]), parseFloat(splitOut[1])]);
     });
@@ -402,7 +404,7 @@ function SetRoute() {
             </div>
 
             <div className="setRoute__box-textAndDateInput_input">
-              <h4>Start Date</h4>
+              <h4>Starting Date</h4>
               <input
                 id="RouteStartDate"
                 style={{ height: "41px" }}

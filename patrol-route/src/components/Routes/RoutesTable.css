@@ -3,7 +3,7 @@
 }
 
 .RoutesTable__table{
-    padding: 50px;
+    padding: 0px 50px;
 }
 
 .RoutesTable__button button{
@@ -16,6 +16,13 @@
     margin: 20px 50px 0px 55px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.RoutesTable__securityLever{
+    margin: 0px 0px 0px 65px;
+    display: flex;
+    gap: 50px;
     align-items: center;
 }
 

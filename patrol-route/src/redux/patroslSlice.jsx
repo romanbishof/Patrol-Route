@@ -81,7 +81,8 @@ export const updateRouteAsync = createAsyncThunk(
     await axios.put(process.env.REACT_APP_API_JSON_FILE, updateRoute);
   }
 );
-
+let data = JSON.parse(sessionStorage.getItem("route"));
+console.log(data);
 const initialState = [
   {
     // Jetty: "Apapa",

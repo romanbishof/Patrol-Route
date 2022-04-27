@@ -299,8 +299,18 @@ function RoutesTable() {
           </div>
         </div>
 
+        <div className="RoutesTable__securityLever">
+          <Typography variant="h5">
+            Recuring time: {routes[0].IntervalInMinutes} min
+          </Typography>
+
+          <Typography variant="h5">
+            Security level: L{routes[0].SecurityLevel}
+          </Typography>
+        </div>
+
         <TableContainer
-          sx={{ height: "400px", minHeight: "48%", maxHeight: "48%" }}
+          sx={{ height: "380px", minHeight: "44.5%", maxHeight: "48%" }}
         >
           <Table
             stickyHeader={true}
@@ -323,7 +333,7 @@ function RoutesTable() {
                 <TableCell
                   sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
                 >
-                  Start Date
+                  Starting Date
                 </TableCell>
                 <TableCell
                   sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
