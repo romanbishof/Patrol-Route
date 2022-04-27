@@ -14,12 +14,6 @@
     align-items: flex-end;
     gap: 15px;
 }
-.setRoute__box-textAndDateInput:last-child{}
-
-/* .setRoute__date{
-    height: 20px;
-    cursor: pointer;
-} */
 
 .setRoute__box-buttonActions{
     display: flex;

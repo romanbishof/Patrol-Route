@@ -62,8 +62,7 @@ function EditRoute() {
         startAt[1].split(":")[1]
       )
     );
-    // conver end date to date obj
-
+    // convert end date to date obj
     setEndAt(
       new Date(
         endAt[0].split("-")[2],
@@ -284,13 +283,15 @@ function EditRoute() {
         <div className="editRoute__Title">
           <Typography variant="h3">Edit Selected Route</Typography>
         </div>
-        <div className="editRoute__NameAndDate">
-          {/* <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' id='RouteName' placeholder='Enter Route name...' defaultValue={routeName} onChange={(e) => {setRouteName(e.target.value)}}/>} />
+
+        <Box component="form" autoComplete="off" onSubmit={handleSaveChange}>
+          <div className="editRoute__NameAndDate">
+            {/* <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' id='RouteName' placeholder='Enter Route name...' defaultValue={routeName} onChange={(e) => {setRouteName(e.target.value)}}/>} />
                     <FormControlLabel label='Starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setStartAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }}/>} />
                     <FormControlLabel label='End Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setStartAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }}/>} /> */}
 
-          {/* <div className="editRoute__inputBox"> */}
-          {/* <h3>Route Name</h3>
+            {/* <div className="editRoute__inputBox"> */}
+            {/* <h3>Route Name</h3>
             <TextField
               size="small"
               id="RouteName"
@@ -300,20 +301,21 @@ function EditRoute() {
                 setRouteName(e.target.value);
               }}
             /> */}
-          <TextField
-            label="Route name"
-            InputLabelProps={{ shrink: true }}
-            size="small"
-            placeholder="Enter Route Name..."
-            required={true}
-            defaultValue={routeName}
-            onChange={(e) => {
-              setRouteName(e.target.value);
-            }}
-          />
-          {/* </div> */}
+            <TextField
+              label="Route name"
+              InputLabelProps={{ shrink: true }}
+              size="small"
+              placeholder="Enter Route Name..."
+              required={true}
+              // value={routeName}
+              defaultValue={routeName}
+              onChange={(e) => {
+                setRouteName(e.target.value);
+              }}
+            />
+            {/* </div> */}
 
-          {/* <div className="editRoute__inputBox">
+            {/* <div className="editRoute__inputBox">
             <h3>Starting Date</h3>
             <input
               id="RouteDate"
@@ -326,48 +328,44 @@ function EditRoute() {
             />
           </div> */}
 
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MobileDateTimePicker
-              ampm={false}
-              renderInput={(props) => (
-                <TextField
-                  sx={{ cursor: "pointer" }}
-                  required={true}
-                  size={"small"}
-                  {...props}
-                />
-              )}
-              label="Starting Date"
-              // value={moment(startAt).format("ddd MMM D YYYY HH:mm:ss")}
-              value={startAt}
-              // minDate={startAt}
-              // minTime={startAt}
-              onChange={(newValue) => {
-                setStartAt(newValue);
-              }}
-            />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <MobileDateTimePicker
+                ampm={false}
+                label="Starting Date"
+                renderInput={(props) => (
+                  <TextField
+                    sx={{ cursor: "pointer" }}
+                    required={true}
+                    size={"small"}
+                    {...props}
+                  />
+                )}
+                clearable={false}
+                value={startAt}
+                minDateTime={new Date()}
+                onChange={(newValue) => {
+                  // set start at time
+                  setStartAt(newValue !== null ? newValue : startAt);
+                  // set dynamecly new end time depending on start at time
+                  setEndAt(newValue > endAt ? newValue : endAt);
+                }}
+              />
 
-            <MobileDateTimePicker
-              ampm={false}
-              renderInput={(props) => (
-                <TextField
-                  sx={{ cursor: "pointer" }}
-                  required={true}
-                  size={"small"}
-                  {...props}
-                />
-              )}
-              minDate={startAt}
-              minTime={startAt}
-              label="End Date"
-              value={endAt}
-              onChange={(newValue) => {
-                setEndAt(newValue);
-              }}
-            />
-          </LocalizationProvider>
+              <MobileDateTimePicker
+                ampm={false}
+                label="End Date"
+                renderInput={(props) => (
+                  <TextField required={true} size={"small"} {...props} />
+                )}
+                minDateTime={startAt}
+                value={endAt}
+                onChange={(newValue) => {
+                  setEndAt(newValue !== null ? newValue : endAt);
+                }}
+              />
+            </LocalizationProvider>
 
-          {/* <div className="editRoute__inputBox">
+            {/* <div className="editRoute__inputBox">
             <h3>End Date</h3>
             <input
               id="RouteDate"
@@ -380,161 +378,189 @@ function EditRoute() {
             />
           </div> */}
 
-          <div className="editRoute__buttons">
-            <Button variant="contained" onClick={handleSaveChange}>
-              Save
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => {
-                navigate("/");
-                removeRouteFromMap();
-              }}
-            >
-              Cancel
-            </Button>
+            <div className="editRoute__buttons">
+              <Button variant="contained" type="submit">
+                Save
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  navigate("/");
+                  removeRouteFromMap();
+                }}
+              >
+                Cancel
+              </Button>
+            </div>
           </div>
-          {/* {console.log(new Date())}
-                    {console.log('my date from json: ', date)} */}
-        </div>
 
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  sx={{ width: "100px", fontSize: "16px", fontWeight: "bold" }}
-                >
-                  Point No`
-                </TableCell>
-                <TableCell
-                  sx={{ width: "100px", fontSize: "16px", fontWeight: "bold" }}
-                >
-                  Longitude
-                </TableCell>
-                <TableCell
-                  sx={{ width: "100px", fontSize: "16px", fontWeight: "bold" }}
-                >
-                  Latitude
-                </TableCell>
-                <TableCell
-                  sx={{ width: "100px", fontSize: "16px", fontWeight: "bold" }}
-                >
-                  Interval
-                </TableCell>
-                <TableCell
-                  sx={{ width: "100px", fontSize: "16px", fontWeight: "bold" }}
-                >
-                  Camera
-                </TableCell>
-                <TableCell
-                  sx={{ width: "100px", fontSize: "16px", fontWeight: "bold" }}
-                >
-                  Xenon
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {route.CheckPoints.map((rout) => {
-                let _defaultCameraValue = !rout.Devices.some((elem) =>
-                  rawCameraGUID.includes(elem)
-                )
-                  ? "No Camera"
-                  : rout.Devices.filter((elem) => rawCameraGUID.includes(elem));
-                let _defaultXenonValue = !rout.Devices.some((elem) =>
-                  rawXenonGUID.includes(elem)
-                )
-                  ? "No Xenon"
-                  : rout.Devices.filter((elem) => rawXenonGUID.includes(elem));
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    sx={{
+                      width: "100px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Point No`
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      width: "100px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Longitude
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      width: "100px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Latitude
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      width: "100px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Interval
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      width: "100px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Camera
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      width: "100px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Xenon
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {route.CheckPoints.map((rout) => {
+                  let _defaultCameraValue = !rout.Devices.some((elem) =>
+                    rawCameraGUID.includes(elem)
+                  )
+                    ? "No Camera"
+                    : rout.Devices.filter((elem) =>
+                        rawCameraGUID.includes(elem)
+                      );
+                  let _defaultXenonValue = !rout.Devices.some((elem) =>
+                    rawXenonGUID.includes(elem)
+                  )
+                    ? "No Xenon"
+                    : rout.Devices.filter((elem) =>
+                        rawXenonGUID.includes(elem)
+                      );
 
-                return (
-                  <TableRow key={rout.Id} hover={true}>
-                    <TableCell sx={{ width: "50px", fontSize: "16px" }}>
-                      {rout.Name}
-                    </TableCell>
+                  return (
+                    <TableRow key={rout.Id} hover={true}>
+                      <TableCell sx={{ width: "50px", fontSize: "16px" }}>
+                        {rout.Name}
+                      </TableCell>
 
-                    <TableCell sx={{ width: "100px", fontSize: "17px" }}>
-                      {rout.Latitude}
-                    </TableCell>
+                      <TableCell sx={{ width: "100px", fontSize: "17px" }}>
+                        {rout.Latitude}
+                      </TableCell>
 
-                    <TableCell sx={{ width: "100px", fontSize: "17px" }}>
-                      {rout.Longitude}
-                    </TableCell>
+                      <TableCell sx={{ width: "100px", fontSize: "17px" }}>
+                        {rout.Longitude}
+                      </TableCell>
 
-                    <TableCell>
-                      <TextField
-                        className="editRoute__inputIntervalField"
-                        sx={{ width: "66px", fontSize: "17px" }}
-                        type="number"
-                        size="small"
-                        defaultValue={rout.WaitforSeconds}
-                        label="Seconds(10-180)"
-                        onChange={(e) => {
-                          handleIntervalTime(e, rout.Id);
-                        }}
-                      />
-                    </TableCell>
-
-                    <TableCell sx={{ width: "100px", fontSize: "17px" }}>
-                      <FormControl>
-                        <InputLabel id="TableCameraLabelId">Camera</InputLabel>
-
-                        <Select
-                          sx={{ width: "130px" }}
-                          labelId="TableCameLabelId"
-                          label="TableCamera"
-                          defaultValue={_defaultCameraValue}
+                      <TableCell>
+                        <TextField
+                          className="editRoute__inputIntervalField"
+                          sx={{ width: "66px", fontSize: "17px" }}
+                          type="number"
+                          size="small"
+                          defaultValue={rout.WaitforSeconds}
+                          label="Seconds(10-180)"
                           onChange={(e) => {
-                            handleCameraChange(e, rout.Id);
+                            handleIntervalTime(e, rout.Id);
                           }}
-                        >
-                          {window.rawCamera.map((camera) => {
-                            return (
-                              <MenuItem
-                                value={camera.DeviceId}
-                                key={camera.DeviceId}
-                              >
-                                {camera.DeviceName}
-                              </MenuItem>
-                            );
-                          })}
-                        </Select>
-                      </FormControl>
-                    </TableCell>
+                        />
+                      </TableCell>
 
-                    <TableCell>
-                      <FormControl fullWidth>
-                        <InputLabel id="TableXenonLabelId">Xenon</InputLabel>
+                      <TableCell sx={{ width: "100px", fontSize: "17px" }}>
+                        <FormControl>
+                          <InputLabel id="TableCameraLabelId">
+                            Camera
+                          </InputLabel>
 
-                        <Select
-                          sx={{ width: "130px" }}
-                          labelId="TableXenonLabelId"
-                          label="TableXenon"
-                          defaultValue={_defaultXenonValue}
-                          onChange={(e) => {
-                            handleXenonChange(e, rout.Id);
-                          }}
-                        >
-                          {window.rawXenon.map((_xenon) => {
-                            return (
-                              <MenuItem
-                                value={_xenon.DeviceId}
-                                key={_xenon.DeviceId}
-                              >
-                                {_xenon.DeviceName}
-                              </MenuItem>
-                            );
-                          })}
-                        </Select>
-                      </FormControl>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {/* </Box> */}
+                          <Select
+                            sx={{ width: "130px" }}
+                            labelId="TableCameLabelId"
+                            label="TableCamera"
+                            defaultValue={_defaultCameraValue}
+                            onChange={(e) => {
+                              handleCameraChange(e, rout.Id);
+                            }}
+                          >
+                            {window.rawCamera.map((camera) => {
+                              return (
+                                <MenuItem
+                                  value={camera.DeviceId}
+                                  key={camera.DeviceId}
+                                >
+                                  {camera.DeviceName}
+                                </MenuItem>
+                              );
+                            })}
+                          </Select>
+                        </FormControl>
+                      </TableCell>
+
+                      <TableCell>
+                        <FormControl fullWidth>
+                          <InputLabel id="TableXenonLabelId">Xenon</InputLabel>
+
+                          <Select
+                            sx={{ width: "130px" }}
+                            labelId="TableXenonLabelId"
+                            label="TableXenon"
+                            defaultValue={_defaultXenonValue}
+                            onChange={(e) => {
+                              handleXenonChange(e, rout.Id);
+                            }}
+                          >
+                            {window.rawXenon.map((_xenon) => {
+                              return (
+                                <MenuItem
+                                  value={_xenon.DeviceId}
+                                  key={_xenon.DeviceId}
+                                >
+                                  {_xenon.DeviceName}
+                                </MenuItem>
+                              );
+                            })}
+                          </Select>
+                        </FormControl>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
       </ThemeProvider>
     </div>
   );

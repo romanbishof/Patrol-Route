@@ -437,8 +437,7 @@ function SetRoute() {
                 )}
                 label="Starting Date"
                 value={startAt}
-                minDate={new Date()}
-                minTime={new Date()}
+                minDateTime={new Date()}
                 onChange={(newValue) => {
                   setStartAt(newValue);
                 }}
@@ -456,8 +455,7 @@ function SetRoute() {
                 )}
                 value={endAt}
                 label="End Date"
-                minDate={startAt}
-                minTime={startAt}
+                minDateTime={startAt}
                 onChange={(newValue) => {
                   setEndAt(newValue);
                 }}
