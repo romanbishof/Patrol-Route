@@ -47,7 +47,7 @@ import Stroke from "ol/style/Stroke";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
-import BugReportIcon from "@mui/icons-material/BugReport";
+import MonitorHeartRoundedIcon from "@mui/icons-material/MonitorHeartRounded";
 import "./RoutesTable.css";
 import LogWindow from "../logWindow/LogWindow";
 import axios from "axios";
@@ -58,6 +58,17 @@ function RoutesTable() {
   const [routeId, setRouteId] = useState("");
   const [open, setOpen] = useState(false);
   const [log, setLog] = useState(null);
+  const [dependencies, setDependencies] = useState({
+    PatrolService: {
+      status: "",
+      color: "#000",
+    },
+    NodeBE: {
+      status: "",
+      color: "#000",
+    },
+  });
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -71,6 +82,9 @@ function RoutesTable() {
       primary: {
         main: "#d85728",
       },
+    },
+    typography: {
+      fontFamily: "sans-serif",
     },
   });
 
@@ -267,17 +281,108 @@ function RoutesTable() {
     source.clear();
   }
 
+  // function to reload history of log
   const handleReloadHistory = async () => {
     let res = await axios.get(process.env.REACT_APP_API_LOG_FILR);
     let data = res.data;
     let result = data.map((item) => JSON.parse(item));
     setLog(result);
-    // setLog(result[result.length - 1]);
   };
 
+  // function to send test to patrol service
   const handleTestRoute = async (route) => {
     let testRoute = { ...route, IsActive: true };
     await axios.post(process.env.REACT_APP_TEST, testRoute);
+  };
+
+  // let patrolHC = {
+  //   status: "ok",
+  //   service: "patrol",
+  // };
+
+  const handleCheckDependencies = async () => {
+    // let { data } = await axios.get("http://nnpcbe:5010/api/v1/hc");
+    // console.log(data);
+    await axios
+      .get("http://localhost:9090/hc")
+      .then((resp) => {
+        if (resp.data.status === "ok") {
+          setDependencies({
+            ...dependencies,
+            NodeBE: { status: "ok", color: "#00c853" },
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+        if (err.message === "Network Error") {
+          setDependencies({
+            ...dependencies,
+            NodeBE: { status: "error", color: "#000" },
+          });
+        }
+      });
+
+    // await axios
+    //   .get("http://nnpcbe:5010/api/v1/hc")
+    //   .then((resp) => {
+    //     if (resp.data.status === "ok") {
+    //       setDependencies({
+    //         ...dependencies,
+    //         PatrolService: { status: "ok", color: "#00c853" },
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //     if (err.message === "Network Error") {
+    //       setDependencies({
+    //         ...dependencies,
+    //         PatrolService: { status: "error", color: "#000" },
+    //       });
+    //     }
+    //   });
+
+    // console.log(data);
+
+    // let nodeHC = {
+    //   status: "ok",
+    //   service: "nodeBE",
+    // };
+    // console.log(nodeHC.data);
+    // if (nodeHC.data.status === "ok") {
+    //   setDependencies({
+    //     ...dependencies,
+    //     NodeBE: { status: "ok", color: "#00c853" },
+    //   });
+    // } else {
+    //   setDependencies({
+    //     ...dependencies,
+    //     NodeBE: { status: "error", color: "#000" },
+    //   });
+    // }
+
+    // if (patrolHC.status === "ok") {
+    //   setDependencies({
+    //     ...dependencies,
+    //     PatrolService: { status: "ok", color: "#00c853" },
+    //   });
+    // } else if (patrolHC.status !== "ok") {
+    //   setDependencies({
+    //     ...dependencies,
+    //     PatrolService: { status: "error", color: "#000" },
+    //   });
+    // } else if (nodeHC.status === "ok") {
+    //   setDependencies({
+    //     ...dependencies,
+    //     NodeBE: { status: "ok", color: "#00c853" },
+    //   });
+    // } else if (nodeHC.status !== "ok") {
+    //   setDependencies({
+    //     ...dependencies,
+    //     NodeBE: { status: "error", color: "#000" },
+    //   });
+    // }
   };
 
   return (
@@ -287,6 +392,23 @@ function RoutesTable() {
           <Typography variant="h3">Patrol route</Typography>
 
           <div id="RoutesTable__AddButton" className="RoutesTable__button">
+            <Button variant="contained" onClick={handleCheckDependencies}>
+              Check dependencies
+            </Button>
+            <Tooltip title="Patrol service">
+              <MonitorHeartRoundedIcon
+                sx={{ color: dependencies.PatrolService.color }}
+                fontSize="large"
+              />
+            </Tooltip>
+
+            <Tooltip title="Node BE service">
+              <MonitorHeartRoundedIcon
+                sx={{ color: dependencies.NodeBE.color }}
+                fontSize="large"
+              />
+            </Tooltip>
+
             <Button
               onClick={() => {
                 removeLinePath();
@@ -300,11 +422,11 @@ function RoutesTable() {
         </div>
 
         <div className="RoutesTable__securityLever">
-          <Typography variant="h5">
+          <Typography sx={{ fontSize: "20px" }} variant="h5">
             Recuring time: {routes[0].IntervalInMinutes} min
           </Typography>
 
-          <Typography variant="h5">
+          <Typography sx={{ fontSize: "20px" }} variant="h5">
             Security level: L{routes[0].SecurityLevel}
           </Typography>
         </div>

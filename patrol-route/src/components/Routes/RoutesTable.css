@@ -5,9 +5,14 @@
 .RoutesTable__table{
     padding: 0px 50px;
 }
+.RoutesTable__button{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
 
 .RoutesTable__button button{
-    width: 120px;
+    min-width: 120px;
     font-weight: bold;
     font-family: Arial;
 }

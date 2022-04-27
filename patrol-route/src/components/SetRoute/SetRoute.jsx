@@ -25,6 +25,10 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -42,17 +46,19 @@ import markerImg from "../../images/marker.png";
 import arrowImg from "../../images/arrow2.png";
 import "./SetRoute.css";
 import { createStringXY, format } from "ol/coordinate";
+import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 
 function SetRoute() {
   const state = useSelector((state) => state.patrols);
   const [routeName, setRouteName] = useState("");
   const [routePoint, setRoutePoints] = useState([]);
-  const [startAt, setStartAt] = useState("");
-  const [endAt, setEndAt] = useState("");
+  const [startAt, setStartAt] = useState(new Date());
+  const [endAt, setEndAt] = useState(new Date());
   const [pointNumber, setPointNumber] = useState(1);
   const [interval, setInterval] = useState(10);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  // const [startingDateValue, setStartingDateValue] = useState(new Date());
 
   const submit = open ? "simple-popover" : undefined;
 
@@ -121,8 +127,8 @@ function SetRoute() {
         Id: uuidv4(),
         Name: routeName,
         OrgId: 8,
-        StartAt: startAt,
-        EndAt: endAt,
+        StartAt: moment(startAt).format("DD-MM-YYYY HH:mm"),
+        EndAt: moment(endAt).format("DD-MM-YYYY HH:mm"),
         IsActive: false,
         CheckPoints: routePoint,
       };
@@ -392,20 +398,22 @@ function SetRoute() {
             {/* <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} /> */}
             {/* <FormControlLabel label='Starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setStartAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }} />} /> */}
             {/* <FormControlLabel label='End Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setEndAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }} />} /> */}
-            <div className="setRoute__box-textAndDateInput_input">
-              <h4>Route Name</h4>
-              <TextField
-                size="small"
-                required={true}
-                id="RouteName"
-                placeholder="Enter Route name..."
-                onChange={(e) => setRouteName(e.target.value)}
-              />
-            </div>
+            {/* <div className="setRoute__box-textAndDateInput_input"> */}
+            {/* <h4>Route Name</h4> */}
+            <TextField
+              label="Route Name"
+              InputLabelProps={{ shrink: true }}
+              size="small"
+              required={true}
+              id="RouteName"
+              placeholder="Enter Route name..."
+              onChange={(e) => setRouteName(e.target.value)}
+            />
+            {/* </div> */}
 
-            <div className="setRoute__box-textAndDateInput_input">
-              <h4>Starting Date</h4>
-              <input
+            {/* <div className="setRoute__box-textAndDateInput"> */}
+            {/* <h4>Starting Date</h4> */}
+            {/* <input
                 id="RouteStartDate"
                 style={{ height: "41px" }}
                 type="datetime-local"
@@ -414,10 +422,50 @@ function SetRoute() {
                 onChange={(e) => {
                   setStartAt(moment(e.target.value).format("DD-MM-YYYY HH:mm"));
                 }}
+              /> */}
+            {/* <TextField/> */}
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <MobileDateTimePicker
+                ampm={false}
+                renderInput={(props) => (
+                  <TextField
+                    sx={{ cursor: "pointer" }}
+                    required={true}
+                    size="small"
+                    {...props}
+                  />
+                )}
+                label="Starting Date"
+                value={startAt}
+                minDate={new Date()}
+                minTime={new Date()}
+                onChange={(newValue) => {
+                  setStartAt(newValue);
+                }}
               />
-            </div>
 
-            <div className="setRoute__box-textAndDateInput_input">
+              <MobileDateTimePicker
+                ampm={false}
+                renderInput={(params) => (
+                  <TextField
+                    sx={{ cursor: "pointer" }}
+                    required={true}
+                    size="small"
+                    {...params}
+                  />
+                )}
+                value={endAt}
+                label="End Date"
+                minDate={startAt}
+                minTime={startAt}
+                onChange={(newValue) => {
+                  setEndAt(newValue);
+                }}
+              />
+            </LocalizationProvider>
+            {/* </div> */}
+
+            {/* <div className="setRoute__box-textAndDateInput_input">
               <h4>End Date</h4>
               <input
                 id="RouteEndDate"
@@ -428,7 +476,7 @@ function SetRoute() {
                   setEndAt(moment(e.target.value).format("DD-MM-YYYY HH:mm"));
                 }}
               />
-            </div>
+            </div> */}
 
             <div className="setRoute__box-buttonActions">
               <Button

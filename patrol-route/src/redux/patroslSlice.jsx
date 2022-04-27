@@ -48,13 +48,14 @@ export const getRoutesAsync = createAsyncThunk(
       .get(process.env.REACT_APP_API_JSON_FILE)
       .then((resp) => {
         routes = resp.data;
+        sessionStorage.setItem("route", JSON.stringify(routes));
         return routes;
       })
       .catch((err) => {
         if (err.message === "Network Error") {
-          alert("server is down");
+          routes = JSON.parse(sessionStorage.getItem("routes"));
+          return routes;
         }
-        return routes;
       });
 
     return routes;
@@ -81,8 +82,7 @@ export const updateRouteAsync = createAsyncThunk(
     await axios.put(process.env.REACT_APP_API_JSON_FILE, updateRoute);
   }
 );
-let data = JSON.parse(sessionStorage.getItem("route"));
-console.log(data);
+
 const initialState = [
   {
     // Jetty: "Apapa",
@@ -125,10 +125,9 @@ const patrolSlice = createSlice({
     [getRoutesAsync.fulfilled]: (state, action) => {
       //   sessionStorage.setItem("route", JSON.stringify(state));
       try {
-        state[0] = action.payload;
-        // let obj = sessionStorage.getItem("route");
-        // state[0] = JSON.parse(obj);
-        sessionStorage.setItem("route", JSON.stringify(state));
+        // state[0] = action.payload;
+        let obj = sessionStorage.getItem("route");
+        state[0] = JSON.parse(obj);
       } catch (error) {
         console.log(error);
       }
