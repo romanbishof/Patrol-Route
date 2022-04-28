@@ -58,23 +58,17 @@ function RoutesTable() {
   const [routeId, setRouteId] = useState("");
   const [open, setOpen] = useState(false);
   const [log, setLog] = useState(null);
-  const [dependencies, setDependencies] = useState({
-    PatrolService: {
-      status: "",
-      color: "#000",
-    },
-    NodeBE: {
-      status: "",
-      color: "#000",
-    },
-  });
-
+  const [patrolHC, setPatrolHC] = useState("");
+  const [nodeHC, setNodeHC] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(async () => {
     dispatch(getRoutesAsync());
     // dispatch(getHistoryLogAsync())
+    handleCheckNodeBE();
+    handleCheckPatrol();
+    handleReloadHistory();
   }, [dispatch]);
 
   const theme = createTheme({
@@ -295,94 +289,28 @@ function RoutesTable() {
     await axios.post(process.env.REACT_APP_TEST, testRoute);
   };
 
-  // let patrolHC = {
-  //   status: "ok",
-  //   service: "patrol",
-  // };
-
-  const handleCheckDependencies = async () => {
-    // let { data } = await axios.get("http://nnpcbe:5010/api/v1/hc");
-    // console.log(data);
+  const handleCheckNodeBE = async () => {
     await axios
-      .get("http://localhost:9090/hc")
+      .get(process.env.REACT_APP_HC)
       .then((resp) => {
         if (resp.data.status === "ok") {
-          setDependencies({
-            ...dependencies,
-            NodeBE: { status: "ok", color: "#00c853" },
-          });
+          setNodeHC("ok");
         }
       })
       .catch((err) => {
-        console.log(err.message);
         if (err.message === "Network Error") {
-          setDependencies({
-            ...dependencies,
-            NodeBE: { status: "error", color: "#000" },
-          });
+          setNodeHC("error");
         }
       });
+  };
 
-    // await axios
-    //   .get("http://nnpcbe:5010/api/v1/hc")
-    //   .then((resp) => {
-    //     if (resp.data.status === "ok") {
-    //       setDependencies({
-    //         ...dependencies,
-    //         PatrolService: { status: "ok", color: "#00c853" },
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //     if (err.message === "Network Error") {
-    //       setDependencies({
-    //         ...dependencies,
-    //         PatrolService: { status: "error", color: "#000" },
-    //       });
-    //     }
-    //   });
-
-    // console.log(data);
-
-    // let nodeHC = {
-    //   status: "ok",
-    //   service: "nodeBE",
-    // };
-    // console.log(nodeHC.data);
-    // if (nodeHC.data.status === "ok") {
-    //   setDependencies({
-    //     ...dependencies,
-    //     NodeBE: { status: "ok", color: "#00c853" },
-    //   });
-    // } else {
-    //   setDependencies({
-    //     ...dependencies,
-    //     NodeBE: { status: "error", color: "#000" },
-    //   });
-    // }
-
-    // if (patrolHC.status === "ok") {
-    //   setDependencies({
-    //     ...dependencies,
-    //     PatrolService: { status: "ok", color: "#00c853" },
-    //   });
-    // } else if (patrolHC.status !== "ok") {
-    //   setDependencies({
-    //     ...dependencies,
-    //     PatrolService: { status: "error", color: "#000" },
-    //   });
-    // } else if (nodeHC.status === "ok") {
-    //   setDependencies({
-    //     ...dependencies,
-    //     NodeBE: { status: "ok", color: "#00c853" },
-    //   });
-    // } else if (nodeHC.status !== "ok") {
-    //   setDependencies({
-    //     ...dependencies,
-    //     NodeBE: { status: "error", color: "#000" },
-    //   });
-    // }
+  const handleCheckPatrol = async () => {
+    let patrolHC = await axios.get("http://nnpcbe:5010/api/v1/hc");
+    if (patrolHC.data.status === "ok") {
+      setPatrolHC("ok");
+    } else {
+      setPatrolHC("error");
+    }
   };
 
   return (
@@ -392,22 +320,31 @@ function RoutesTable() {
           <Typography variant="h3">Patrol route</Typography>
 
           <div id="RoutesTable__AddButton" className="RoutesTable__button">
-            <Button variant="contained" onClick={handleCheckDependencies}>
-              Check dependencies
-            </Button>
-            <Tooltip title="Patrol service">
-              <MonitorHeartRoundedIcon
-                sx={{ color: dependencies.PatrolService.color }}
-                fontSize="large"
-              />
-            </Tooltip>
+            <div className="RoutesTable__dependencies">
+              <Tooltip title="Patrol service">
+                <MonitorHeartRoundedIcon
+                  sx={{ color: patrolHC === "ok" ? "#00c853" : "#000" }}
+                  fontSize="large"
+                />
+              </Tooltip>
 
-            <Tooltip title="Node BE service">
-              <MonitorHeartRoundedIcon
-                sx={{ color: dependencies.NodeBE.color }}
-                fontSize="large"
-              />
-            </Tooltip>
+              <Tooltip title="Node BE service">
+                <MonitorHeartRoundedIcon
+                  sx={{ color: nodeHC === "ok" ? "#00c853" : "#000" }}
+                  fontSize="large"
+                />
+              </Tooltip>
+
+              <Button
+                variant="contained"
+                onClick={() => {
+                  handleCheckNodeBE();
+                  handleCheckPatrol();
+                }}
+              >
+                Check dependencies
+              </Button>
+            </div>
 
             <Button
               onClick={() => {

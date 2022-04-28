@@ -11,6 +11,13 @@
     align-items: center;
 }
 
+.RoutesTable__dependencies{
+    display: flex;
+    gap: 10px;
+    border: 1px solid #d85728;
+    border-radius: 5px;
+}
+
 .RoutesTable__button button{
     min-width: 120px;
     font-weight: bold;
