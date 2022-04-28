@@ -291,7 +291,7 @@ function RoutesTable() {
 
   const handleCheckNodeBE = async () => {
     await axios
-      .get(process.env.REACT_APP_HC)
+      .get(process.env.REACT_APP_NODE_HC)
       .then((resp) => {
         if (resp.data.status === "ok") {
           setNodeHC("ok");
@@ -305,7 +305,7 @@ function RoutesTable() {
   };
 
   const handleCheckPatrol = async () => {
-    let patrolHC = await axios.get("http://nnpcbe:5010/api/v1/hc");
+    let patrolHC = await axios.get(process.env.REACT_APP_PATROL_HC);
     if (patrolHC.data.status === "ok") {
       setPatrolHC("ok");
     } else {
@@ -321,6 +321,15 @@ function RoutesTable() {
 
           <div id="RoutesTable__AddButton" className="RoutesTable__button">
             <div className="RoutesTable__dependencies">
+              <Button
+                variant="contained"
+                onClick={() => {
+                  handleCheckNodeBE();
+                  handleCheckPatrol();
+                }}
+              >
+                Check dependencies
+              </Button>
               <Tooltip title="Patrol service">
                 <MonitorHeartRoundedIcon
                   sx={{ color: patrolHC === "ok" ? "#00c853" : "#000" }}
@@ -334,16 +343,6 @@ function RoutesTable() {
                   fontSize="large"
                 />
               </Tooltip>
-
-              <Button
-                variant="contained"
-                onClick={() => {
-                  handleCheckNodeBE();
-                  handleCheckPatrol();
-                }}
-              >
-                Check dependencies
-              </Button>
             </div>
 
             <Button
