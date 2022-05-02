@@ -4,29 +4,42 @@ import axios from "axios";
 export const getDevicesAsync = createAsyncThunk(
   "routes/getDevicesAsynv",
   async () => {
+    let devices;
     const componentsTypes = {
       componentTypes: [118, 117],
     };
-    let res = await axios
+    /*let res = */ await axios
       .post(process.env.REACT_APP_DEVICES_API, componentsTypes, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
+      })
+      .then((resp) => {
+        devices = resp.data;
+        sessionStorage.setItem("Devices", JSON.stringify(resp.data));
+        return devices;
       })
       .catch((error) => {
         if (error.response) {
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
+          devices = JSON.parse(sessionStorage.getItem("Devices"));
+          return;
         } else if (error.request) {
           console.log(error.request);
+          devices = JSON.parse(sessionStorage.getItem("Devices"));
+
+          return devices;
         } else {
           console.log("Error", error.message);
+          devices = JSON.parse(sessionStorage.getItem("Devices"));
+
+          return devices;
         }
-        console.log(error.config);
       });
-    let components = res.data;
-    return components;
+
+    return devices;
   }
 );
 

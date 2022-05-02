@@ -27,7 +27,7 @@ app.get('/hc',(req, resp) => {
         service: 'nodeBE'
     }
 
-    resp.status(200).send(nodeHC_Ok)
+    resp.status(200).send(nodeHC_Ok).setTimeout(2000)
     resp.status(500).send(nodeHC_error)
 })
 

@@ -1,12 +1,15 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
   CardContent,
   CardHeader,
+  Collapse,
   createTheme,
   FormControl,
   FormControlLabel,
+  IconButton,
   InputLabel,
   MenuItem,
   Paper,
@@ -58,7 +61,7 @@ function SetRoute() {
   const [interval, setInterval] = useState(10);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  // const [startingDateValue, setStartingDateValue] = useState(new Date());
+  const [openAlert, setOpenAlert] = useState(false);
 
   const submit = open ? "simple-popover" : undefined;
 
@@ -193,17 +196,11 @@ function SetRoute() {
   };
 
   const handleIntervalTime = (e) => {
-    // let reg = /^[1-9]+[0-9]*$/
-    // reg.test(e.target.value)
-
     // valiation to enter only numbers
     if (e.target.value >= 0 && e.target.value.length <= 3) {
       // setErrorInterval(false)
       setInterval(e.target.value);
     }
-    // else {
-    //     setErrorInterval(true)
-    // }
   };
 
   const handleIntervalTimeChange = (e, Id) => {
@@ -217,39 +214,45 @@ function SetRoute() {
     });
   };
 
-  const handleSaveTemplate = () => {
-    if (camera !== "No Camera") {
-      devices.push(camera);
+  const handleSaveTemplate = (e) => {
+    e.preventDefault();
+
+    if (camera === "No Camera" && xenon === "No Xenon") {
+      setOpenAlert(true);
+    } else {
+      if (camera !== "No Camera") {
+        devices.push(camera);
+      }
+
+      if (xenon !== "No Xenon") {
+        devices.push(xenon);
+      }
+
+      let templatePoint = {
+        Id: uuidv4(),
+        Name: `Point No. ${pointNumber}`,
+        Latitude: coordinates[1].toString(),
+        Longitude: coordinates[0].toString(),
+        WaitforSeconds: interval,
+        Devices: devices,
+      };
+
+      setRoutePoints((oldpoints) => [...oldpoints, templatePoint]);
+      setCamera("No Camera");
+      setXenon("No Xenon");
+      setInterval(10);
+      setDevices([]);
+      setPointNumber(pointNumber + 1);
+
+      // adding new coordinates to global line string to draw line sting as we click on map
+      lineString.push([coordinates[0], coordinates[1]]);
+      addMarker([coordinates[0], coordinates[1]]);
+      drawPolygonOnMap();
+      const _overlay = window.map.getOverlayById("markerOverlay");
+      window.map.removeOverlay(_overlay);
+      setOpenAlert(false);
+      clearPopupOverLay();
     }
-
-    if (xenon !== "No Xenon") {
-      devices.push(xenon);
-    }
-
-    let templatePoint = {
-      Id: uuidv4(),
-      Name: `Point No. ${pointNumber}`,
-      Latitude: coordinates[1].toString(),
-      Longitude: coordinates[0].toString(),
-      WaitforSeconds: interval,
-      Devices: devices,
-    };
-
-    setRoutePoints((oldpoints) => [...oldpoints, templatePoint]);
-    setCamera("No Camera");
-    setXenon("No Xenon");
-    setInterval(10);
-    setDevices([]);
-    setPointNumber(pointNumber + 1);
-
-    // adding new coordinates to global line string to draw line sting as we click on map
-    lineString.push([coordinates[0], coordinates[1]]);
-    addMarker([coordinates[0], coordinates[1]]);
-    drawPolygonOnMap();
-    const _overlay = window.map.getOverlayById("markerOverlay");
-    window.map.removeOverlay(_overlay);
-
-    clearPopupOverLay();
   };
 
   const clearLineString = () => {
@@ -395,11 +398,6 @@ function SetRoute() {
       <ThemeProvider theme={theme}>
         <Box component="form" onSubmit={hendleSaveRoute} autoComplete="off">
           <div className="setRoute__box-textAndDateInput">
-            {/* <FormControlLabel label='Route Name' labelPlacement='top' control={<TextField size='small' required={true} id='RouteName' placeholder='Enter Route name...' onChange={(e) => setRouteName(e.target.value)} />} /> */}
-            {/* <FormControlLabel label='Starting Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setStartAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }} />} /> */}
-            {/* <FormControlLabel label='End Date' labelPlacement='top' control={<input id='RouteDate' style={{ height: "41px" }} type="datetime-local" required={true} onChange={(e) => { setEndAt(moment(e.target.value).format('DD-MM-YYYY HH:mm')) }} />} /> */}
-            {/* <div className="setRoute__box-textAndDateInput_input"> */}
-            {/* <h4>Route Name</h4> */}
             <TextField
               label="Route Name"
               InputLabelProps={{ shrink: true }}
@@ -409,21 +407,7 @@ function SetRoute() {
               placeholder="Enter Route name..."
               onChange={(e) => setRouteName(e.target.value)}
             />
-            {/* </div> */}
 
-            {/* <div className="setRoute__box-textAndDateInput"> */}
-            {/* <h4>Starting Date</h4> */}
-            {/* <input
-                id="RouteStartDate"
-                style={{ height: "41px" }}
-                type="datetime-local"
-                required={true}
-                min={new Date().toLocaleString()}
-                onChange={(e) => {
-                  setStartAt(moment(e.target.value).format("DD-MM-YYYY HH:mm"));
-                }}
-              /> */}
-            {/* <TextField/> */}
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <MobileDateTimePicker
                 ampm={false}
@@ -461,20 +445,6 @@ function SetRoute() {
                 }}
               />
             </LocalizationProvider>
-            {/* </div> */}
-
-            {/* <div className="setRoute__box-textAndDateInput_input">
-              <h4>End Date</h4>
-              <input
-                id="RouteEndDate"
-                style={{ height: "41px" }}
-                type="datetime-local"
-                required={true}
-                onChange={(e) => {
-                  setEndAt(moment(e.target.value).format("DD-MM-YYYY HH:mm"));
-                }}
-              />
-            </div> */}
 
             <div className="setRoute__box-buttonActions">
               <Button
@@ -673,65 +643,83 @@ function SetRoute() {
         </Box>
 
         <div ref={popup} id="popup">
-          <Paper elevation={6} component="form">
-            <CardHeader title="Choose Devices" />
-            <CardContent>
-              <Stack spacing={2} direction={"column"}>
-                <FormControl required={true} fullWidth>
-                  <InputLabel id="CameraLabelId">Camera</InputLabel>
-                  <Select
-                    id="CameraSelectId"
-                    labelId="CameLabelId"
-                    label="Camera"
-                    value={camera}
-                    onChange={(e) => {
-                      setCamera(e.target.value);
-                    }}
+          <Box component="form" onSubmit={handleSaveTemplate}>
+            <Paper elevation={6}>
+              <CardHeader title="Choose Devices" />
+              <CardContent>
+                <Stack spacing={2} direction={"column"}>
+                  <FormControl fullWidth>
+                    <InputLabel id="CameraLabelId">Camera</InputLabel>
+                    <Select
+                      id="CameraSelectId"
+                      labelId="CameLabelId"
+                      label="Camera"
+                      value={camera}
+                      required={true}
+                      onChange={(e) => {
+                        setCamera(e.target.value);
+                      }}
+                    >
+                      {window.rawCamera.map((camera) => {
+                        return (
+                          <MenuItem
+                            value={camera.DeviceId}
+                            key={camera.DeviceId}
+                          >
+                            {camera.DeviceName}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                  <FormControl required={true} fullWidth>
+                    <InputLabel id="XenonLabelId">Xenon</InputLabel>
+                    <Select
+                      labelId="XenonLabelId"
+                      label="Xenon"
+                      value={xenon}
+                      onChange={(e) => {
+                        setXenon(e.target.value);
+                      }}
+                    >
+                      {window.rawXenon.map((_xenon) => {
+                        return (
+                          <MenuItem
+                            value={_xenon.DeviceId}
+                            key={_xenon.DeviceId}
+                          >
+                            {_xenon.DeviceName}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    className="setRoute__inputIntervalField"
+                    type="number"
+                    inputProps={{ maxLength: 1000 }}
+                    size="small"
+                    value={interval}
+                    label="Seconds(10-180)"
+                    onChange={handleIntervalTime}
+                    helperText="Enter only Numbers"
+                  />
+                  <Button
+                    id="Button_saveTemplate"
+                    variant="contained"
+                    type="submit"
                   >
-                    {window.rawCamera.map((camera) => {
-                      return (
-                        <MenuItem value={camera.DeviceId} key={camera.DeviceId}>
-                          {camera.DeviceName}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl required={true} fullWidth>
-                  <InputLabel id="XenonLabelId">Xenon</InputLabel>
-                  <Select
-                    labelId="XenonLabelId"
-                    label="Xenon"
-                    value={xenon}
-                    onChange={(e) => {
-                      setXenon(e.target.value);
-                    }}
-                  >
-                    {window.rawXenon.map((_xenon) => {
-                      return (
-                        <MenuItem value={_xenon.DeviceId} key={_xenon.DeviceId}>
-                          {_xenon.DeviceName}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-                <TextField
-                  className="setRoute__inputIntervalField"
-                  type="number"
-                  inputProps={{ maxLength: 1000 }}
-                  size="small"
-                  value={interval}
-                  label="Seconds(10-180)"
-                  onChange={handleIntervalTime}
-                  helperText="Enter only Numbers"
-                />
-                <Button variant="contained" onClick={handleSaveTemplate}>
-                  Save / Close
-                </Button>
-              </Stack>
-            </CardContent>
-          </Paper>
+                    Save
+                  </Button>
+                  <Collapse in={openAlert}>
+                    <Alert severity="info" sx={{ mb: 2, width: "300px" }}>
+                      "Please select at least one Device before continuing
+                    </Alert>
+                  </Collapse>
+                </Stack>
+              </CardContent>
+            </Paper>
+          </Box>
         </div>
       </ThemeProvider>
     </div>

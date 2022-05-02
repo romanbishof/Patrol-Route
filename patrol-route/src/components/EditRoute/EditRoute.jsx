@@ -66,14 +66,15 @@ function EditRoute() {
   // that our calender can work with date from our route
   useEffect(() => {
     // conver start date to date obj
-    if (startAt !== "undefined") {
+    if (startAt !== "undefined" || startAt === "") {
       setStartAt(convertToTimeObj(startAt));
     } else setStartAt(new Date());
 
-    if (endAt !== "undefined") {
+    if (endAt !== "undefined" || endAt === "") {
       setEndAt(convertToTimeObj(endAt));
     } else setEndAt(new Date());
   }, []);
+
   const theme = createTheme({
     palette: {
       primary: {

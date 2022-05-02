@@ -51,6 +51,7 @@ import MonitorHeartRoundedIcon from "@mui/icons-material/MonitorHeartRounded";
 import "./RoutesTable.css";
 import LogWindow from "../logWindow/LogWindow";
 import axios from "axios";
+import moment from "moment";
 
 function RoutesTable() {
   let routes = useSelector((state) => state.patrols);
@@ -58,14 +59,18 @@ function RoutesTable() {
   const [routeId, setRouteId] = useState("");
   const [open, setOpen] = useState(false);
   const [log, setLog] = useState(null);
-  const [patrolHC, setPatrolHC] = useState("");
-  const [nodeHC, setNodeHC] = useState("");
+  const [patrolHC, setPatrolHC] = useState(null);
+  const [nodeHC, setNodeHC] = useState(null);
+  const [lastUpdateHC, setLastUpdateHC] = useState(
+    moment(sessionStorage.getItem("LastUpdateDependencies")).format(
+      "DD-MM-YYYY HH:mm"
+    )
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(async () => {
     dispatch(getRoutesAsync());
-    // dispatch(getHistoryLogAsync())
     handleCheckNodeBE();
     handleCheckPatrol();
     handleReloadHistory();
@@ -294,7 +299,9 @@ function RoutesTable() {
       .get(process.env.REACT_APP_NODE_HC)
       .then((resp) => {
         if (resp.data.status === "ok") {
-          setNodeHC("ok");
+          setTimeout(() => {
+            setNodeHC("ok");
+          }, 2000);
         }
       })
       .catch((err) => {
@@ -307,7 +314,9 @@ function RoutesTable() {
   const handleCheckPatrol = async () => {
     let patrolHC = await axios.get(process.env.REACT_APP_PATROL_HC);
     if (patrolHC.data.status === "ok") {
-      setPatrolHC("ok");
+      setTimeout(() => {
+        setPatrolHC("ok");
+      }, 2000);
     } else {
       setPatrolHC("error");
     }
@@ -321,15 +330,27 @@ function RoutesTable() {
 
           <div id="RoutesTable__AddButton" className="RoutesTable__button">
             <div className="RoutesTable__dependencies">
-              <Button
-                variant="contained"
-                onClick={() => {
-                  handleCheckNodeBE();
-                  handleCheckPatrol();
-                }}
-              >
-                Check dependencies
-              </Button>
+              <Tooltip title={`Last Update: ${lastUpdateHC}`}>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    sessionStorage.setItem(
+                      "LastUpdateDependencies",
+                      new Date()
+                    );
+                    setLastUpdateHC(
+                      moment(new Date()).format("DD-MM-YYYY HH:mm")
+                    );
+                    setNodeHC("");
+                    setPatrolHC("");
+                    handleCheckNodeBE();
+                    handleCheckPatrol();
+                  }}
+                >
+                  {`Check dependencies`}
+                </Button>
+              </Tooltip>
+
               <Tooltip title="Patrol service">
                 <MonitorHeartRoundedIcon
                   sx={{ color: patrolHC === "ok" ? "#00c853" : "#000" }}
@@ -359,7 +380,7 @@ function RoutesTable() {
 
         <div className="RoutesTable__securityLever">
           <Typography sx={{ fontSize: "20px" }} variant="h5">
-            Recuring time: {routes[0].IntervalInMinutes} min
+            Recurring time: {routes[0].IntervalInMinutes} min
           </Typography>
 
           <Typography sx={{ fontSize: "20px" }} variant="h5">
