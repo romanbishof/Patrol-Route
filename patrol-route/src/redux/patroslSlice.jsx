@@ -96,38 +96,47 @@ export const updateRouteAsync = createAsyncThunk(
   }
 );
 
-const initialState = [
-  {
-    // Jetty: "Apapa",
-    // LastUpdate: "12-05-2021 15:00",
-    // Home: {
-    //     Latitude: 6.454467,
-    //     Longitude: 3.37155
-    // },
-    // SecurityLevel: 2,
-    // IntervalInMinutes: 60,
-    // RoutePlans: []
-  },
-];
+// const initialState = [
+//   {
+//     // Jetty: "Apapa",
+//     // LastUpdate: "12-05-2021 15:00",
+//     // Home: {
+//     //     Latitude: 6.454467,
+//     //     Longitude: 3.37155
+//     // },
+//     // SecurityLevel: 2,
+//     // IntervalInMinutes: 60,
+//     // RoutePlans: []
+//   },
+// ];
+
+const initialState = {
+  Jetty: [],
+  Devices: [],
+  RouteToEdit: [],
+};
 
 const patrolSlice = createSlice({
   name: "patrols",
   initialState: initialState,
   reducers: {
+    setRouteToEdit: (state, action) => {
+      state.RouteToEdit = action.payload;
+    },
     setRoutePlans: (state, action) => {
-      state[0].RoutePlans.push(action.payload);
+      state.Jetty[0].RoutePlans.push(action.payload);
     },
     deleteRoute: (state, action) => {
-      let routes = state[0].RoutePlans.filter(
+      let routes = state.Jetty[0].RoutePlans.filter(
         (routePlan) => routePlan.Id !== action.payload
       );
-      state[0].RoutePlans = routes;
+      state.Jetty[0].RoutePlans = routes;
     },
     updateRoute: (state, action) => {
-      let index = state[0].RoutePlans.findIndex(
+      let index = state.Jetty[0].RoutePlans.findIndex(
         (route) => route.Id === action.payload.Id
       );
-      state[0].RoutePlans[index] = action.payload;
+      state.Jetty[0].RoutePlans[index] = action.payload;
     },
   },
   // using the http protocols logic
@@ -140,7 +149,10 @@ const patrolSlice = createSlice({
       try {
         // state[0] = action.payload;
         let obj = sessionStorage.getItem("route");
-        state[0] = JSON.parse(obj);
+        // state[0] = JSON.parse(obj);
+        if (state.Jetty.length === 0) {
+          state.Jetty.push(JSON.parse(obj));
+        }
       } catch (error) {
         console.log(error);
       }
@@ -160,6 +172,7 @@ const patrolSlice = createSlice({
     [getDevicesAsync.fulfilled]: (state, action) => {
       let rawCamera = [];
       let rawXenon = [];
+
       action.payload.forEach((obj) => {
         if (
           obj.Component.ComponentName === "Surveillance EO" ||
@@ -171,7 +184,8 @@ const patrolSlice = createSlice({
               DeviceName: devicesObj.DeviceName,
             });
           });
-          state.push({
+          // state.push;
+          state.Devices.push({
             rawCamera: rawCamera,
           });
         }
@@ -186,7 +200,8 @@ const patrolSlice = createSlice({
               DeviceName: devicesObj.DeviceName,
             });
           });
-          state.push({
+          // state.push
+          state.Devices.push({
             rawXenon: rawXenon,
           });
         }
@@ -206,6 +221,7 @@ const patrolSlice = createSlice({
   },
 });
 
-export const { setRoutePlans, deleteRoute, updateRoute } = patrolSlice.actions;
+export const { setRoutePlans, deleteRoute, updateRoute, setRouteToEdit } =
+  patrolSlice.actions;
 
 export default patrolSlice.reducer;

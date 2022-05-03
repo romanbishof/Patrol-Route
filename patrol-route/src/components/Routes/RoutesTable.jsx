@@ -32,6 +32,7 @@ import {
   getDevicesAsync,
   getHistoryLogAsync,
   getRoutesAsync,
+  setRouteToEdit,
   updateRoute,
   updateRouteAsync,
 } from "../../redux/patroslSlice";
@@ -89,7 +90,7 @@ function RoutesTable() {
 
   const handleRouteActive = (e, _routeId) => {
     // console.log(_routeId);
-    routes.forEach((obj) => {
+    routes.Jetty[0].forEach((obj) => {
       if ("Jetty" in obj) {
         let newRoutePlan;
         obj.RoutePlans.forEach((routePlan) => {
@@ -116,16 +117,17 @@ function RoutesTable() {
 
   const handleEditRoute = (routeId) => {
     // getting specific route plan by id
-    let route = routes[0].RoutePlans.filter(
+    let [_route] = routes.Jetty[0].RoutePlans.filter(
       (routePlan) => routePlan.Id === routeId
     );
-    // console.log(route);
-    navigate(`/edit-route/:route`, { state: { route: route[0] } });
+    dispatch(setRouteToEdit(_route));
+    navigate(`/edit-route`);
+
     removeLinePath();
   };
 
   const handleShowRoute = (routeId) => {
-    let route = routes[0].RoutePlans.filter(
+    let route = routes.Jetty[0].RoutePlans.filter(
       (routePlan) => routePlan.Id === routeId
     );
     route = route[0];
@@ -380,11 +382,18 @@ function RoutesTable() {
 
         <div className="RoutesTable__securityLever">
           <Typography sx={{ fontSize: "20px" }} variant="h5">
-            Recurring time: {routes[0].IntervalInMinutes} min
+            Recurring time:{" "}
+            {routes.Jetty[0] === undefined
+              ? " "
+              : routes.Jetty[0].IntervalInMinutes}{" "}
+            min
           </Typography>
 
           <Typography sx={{ fontSize: "20px" }} variant="h5">
-            Security level: L{routes[0].SecurityLevel}
+            Security level: L
+            {routes.Jetty[0] === undefined
+              ? " "
+              : routes.Jetty[0].SecurityLevel}
           </Typography>
         </div>
 
@@ -438,10 +447,10 @@ function RoutesTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {routes[0].RoutePlans === undefined ? (
+              {routes.Jetty[0] === undefined ? (
                 <TableRow></TableRow>
               ) : (
-                routes[0].RoutePlans.map((route, index) => {
+                routes.Jetty[0].RoutePlans.map((route, index) => {
                   return (
                     <TableRow key={index} hover={true}>
                       <TableCell width="1%" sx={{ fontSize: "17px" }}>
@@ -487,7 +496,6 @@ function RoutesTable() {
                             />
                           </Tooltip>
 
-                          {/* <Tooltip title="Test Route" arrow> */}
                           <Button
                             variant="contained"
                             size="small"
@@ -497,7 +505,6 @@ function RoutesTable() {
                           >
                             TEST
                           </Button>
-                          {/* </Tooltip> */}
                         </div>
                       </TableCell>
                       <Dialog
@@ -523,20 +530,7 @@ function RoutesTable() {
                           </Button>
                         </DialogActions>
                       </Dialog>
-                      {/* <TableCell>
-                          <FormControl fullWidth>
-                            <InputLabel id='TableSecurityLevelId'>Security Level</InputLabel>
-                            <Select
-                              labelId='TableSecurityLevelId'
-                              label='TableSecurityLevel'
-                              defaultValue={180}
-                              onChange={handleSecurityLevel}>
-                              <MenuItem value={180}>L1</MenuItem>
-                              <MenuItem value={120}>L2</MenuItem>
-                              <MenuItem value={60}>L3</MenuItem>
-                            </Select>
-                          </FormControl>
-                        </TableCell> */}
+
                       <TableCell>
                         <Switch
                           id={`RoutesTable_switch_${index}`}

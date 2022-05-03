@@ -1,11 +1,16 @@
 import {
+  Alert,
   Box,
   Button,
+  CardContent,
+  CardHeader,
+  Collapse,
   createTheme,
   FormControl,
   FormControlLabel,
   InputLabel,
   MenuItem,
+  Paper,
   Select,
   Stack,
   Switch,
@@ -20,16 +25,20 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Feature } from "ol";
 import { LineString, Point } from "ol/geom";
 import { fromLonLat } from "ol/proj";
 import Icon from "ol/style/Icon";
+import Overlay from "ol/Overlay";
 import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateRoute, updateRouteAsync } from "../../redux/patroslSlice";
+import DeleteIcon from "@mui/icons-material/Delete";
 import arrowImage from "../../images/arrow2.png";
 import markerImg from "../../images/marker.png";
 import moment from "moment";
@@ -37,17 +46,28 @@ import "./EditRoute.css";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
+import { format } from "ol/coordinate";
+import { unByKey } from "ol/Observable";
 
 function EditRoute() {
   const state = useSelector((state) => state.patrols);
-  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const route = location.state.route;
+  let route = state.RouteToEdit;
+  const [routeId, setRouteId] = useState("");
   const [routeName, setRouteName] = useState(route.Name);
   const [startAt, setStartAt] = useState(route.StartAt);
   const [endAt, setEndAt] = useState(route.EndAt);
-  // console.log(startAt);
+  const [coordinates, setCoordinates] = useState();
+  const [interval, setInterval] = useState(10);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [camera, setCamera] = useState("No Camera");
+  const [xenon, setXenon] = useState("No Xenon");
+  const [devices, setDevices] = useState([]);
+  const [lineString, setLineString] = useState([]);
+  const [routePoint, setRoutePoints] = useState(route.CheckPoints);
+
+  const popup = useRef();
 
   const convertToTimeObj = (dateStr) => {
     let date = dateStr.split(" ");
@@ -91,7 +111,7 @@ function EditRoute() {
       DeviceId: "No Camera",
       DeviceName: "No Camera",
     });
-    state.forEach((obj) => {
+    state.Devices.forEach((obj) => {
       if ("rawCamera" in obj) {
         obj.rawCamera.forEach((_camera) => {
           window.rawCamera.push(_camera);
@@ -105,7 +125,7 @@ function EditRoute() {
       DeviceId: "No Xenon",
       DeviceName: "No Xenon",
     });
-    state.forEach((obj) => {
+    state.Devices.forEach((obj) => {
       if ("rawXenon" in obj) {
         obj.rawXenon.forEach((_xenon) => {
           window.rawXenon.push(_xenon);
@@ -114,7 +134,27 @@ function EditRoute() {
     });
   }
 
+  const handleDeletePoint = (pointId) => {
+    let newRoutePoint = routePoint.filter((point) => point.Id !== pointId);
+
+    let coordinates = newRoutePoint.map((point) => {
+      let coor = [parseFloat(point.Longitude), parseFloat(point.Latitude)];
+      let coordinate = fromLonLat([coor[0], coor[1]], "EPSG:4326");
+      return coordinate;
+    });
+    setLineString(coordinates);
+    setRoutePoints(
+      newRoutePoint.map((_point, index) => {
+        return { ..._point, Name: `Point No. ${index + 1}` };
+      })
+    );
+    removeRouteFromMap();
+    drawPolygonOnMap(coordinates, route.Name);
+  };
+
   const handleCameraChange = (e, id) => {
+    // console.log(route);
+
     route.CheckPoints.forEach((point) => {
       if (point.Id === id) {
         if (
@@ -124,15 +164,29 @@ function EditRoute() {
           let _obj = point.Devices.filter(
             (elem) => !rawCameraGUID.includes(elem)
           );
-          point.Devices = _obj;
-          point.Devices.push(e.target.value);
+          _obj.push(e.target.value);
+          route = {
+            ...route,
+            CheckPoints: route.CheckPoints.map((_point) => {
+              return _point.Id === id
+                ? { ..._point, Devices: _obj }
+                : { ..._point };
+            }),
+          };
         }
 
         if (e.target.value === "No Camera") {
           let _obj = point.Devices.filter(
             (elem) => !rawCameraGUID.includes(elem)
           );
-          point.Devices = _obj;
+          route = {
+            ...route,
+            CheckPoints: route.CheckPoints.map((_point) => {
+              return _point.Id === id
+                ? { ..._point, Devices: _obj }
+                : { ..._point };
+            }),
+          };
         }
       }
     });
@@ -145,13 +199,33 @@ function EditRoute() {
           e.target.value !== "No Xenon" &&
           !point.Devices.includes(e.target.value)
         ) {
-          point.Devices.push(e.target.value);
-        }
-        if (e.target.value === "No Xenon") {
-          let obj = point.Devices.filter(
+          let _obj = point.Devices.filter(
             (elem) => !rawXenonGUID.includes(elem)
           );
-          point.Devices = obj;
+
+          _obj.push(e.target.value);
+          route = {
+            ...route,
+            CheckPoints: route.CheckPoints.map((_point) => {
+              return _point.Id === id
+                ? { ..._point, Devices: _obj }
+                : { ..._point };
+            }),
+          };
+        }
+        if (e.target.value === "No Xenon") {
+          let _obj = point.Devices.filter(
+            (elem) => !rawXenonGUID.includes(elem)
+          );
+
+          route = {
+            ...route,
+            CheckPoints: route.CheckPoints.map((_point) => {
+              return _point.Id === id
+                ? { ..._point, Devices: _obj }
+                : { ..._point };
+            }),
+          };
         }
       }
     });
@@ -162,17 +236,74 @@ function EditRoute() {
 
     route.CheckPoints.forEach((point) => {
       if (point.Id === id && reg.test(e.target.value)) {
-        point.WaitforSeconds = e.target.value;
+        route = {
+          ...route,
+          CheckPoints: route.CheckPoints.map((_point) => {
+            return _point.Id === id
+              ? { ..._point, WaitforSeconds: e.target.value }
+              : { ..._point };
+          }),
+        };
       }
     });
   };
 
+  const handleSaveTemplate = (e) => {
+    e.preventDefault();
+
+    if (camera === "No Camera" && xenon === "No Xenon") {
+      setOpenAlert(true);
+    } else {
+      if (camera !== "No Camera") {
+        devices.push(camera);
+      }
+
+      if (xenon !== "No Xenon") {
+        devices.push(xenon);
+      }
+
+      let pointNumber = routePoint.length + 1;
+
+      let templatePoint = {
+        Id: uuidv4(),
+        Name: `Point No. ${pointNumber}`,
+        Latitude: coordinates[1].toString(),
+        Longitude: coordinates[0].toString(),
+        WaitforSeconds: interval,
+        Devices: devices,
+      };
+
+      setRoutePoints((oldpoints) => [...oldpoints, templatePoint]);
+      setCamera("No Camera");
+      setXenon("No Xenon");
+      setInterval(10);
+      setDevices([]);
+
+      // adding new coordinates to global line string to draw line sting as we click on map
+
+      lineString.push([coordinates[0], coordinates[1]]);
+
+      addMarker([coordinates[0], coordinates[1]]);
+      drawPolygonOnMap(lineString, route.Name);
+
+      const _overlay = window.map.getOverlayById("markerOverlay");
+      window.map.removeOverlay(_overlay);
+      setOpenAlert(false);
+      clearPopupOverLay();
+    }
+  };
+
   const handleSaveChange = () => {
-    route.Name = routeName;
-    route.StartAt = moment(startAt).format("DD-MM-YYYY HH:mm");
-    route.EndAt = moment(endAt).format("DD-MM-YYYY HH:mm");
-    dispatch(updateRoute(route));
-    dispatch(updateRouteAsync(route));
+    let newRoute = {
+      ...route,
+      Name: routeName,
+      StartAt: moment(startAt).format("DD-MM-YYYY HH:mm"),
+      EndAt: moment(endAt).format("DD-MM-YYYY HH:mm"),
+      CheckPoints: routePoint,
+    };
+
+    dispatch(updateRoute(newRoute));
+    dispatch(updateRouteAsync(newRoute));
     removeRouteFromMap();
     navigate("/");
   };
@@ -217,9 +348,10 @@ function EditRoute() {
   };
 
   const drawPolygonOnMap = (coordinates, routeName) => {
-    let lineString = new LineString(coordinates);
+    setCoordinates(coordinates);
+    let _lineString = new LineString(coordinates);
     let feature = new Feature({
-      geometry: lineString,
+      geometry: _lineString,
     });
     feature.Name = routeName;
     addMarker(coordinates);
@@ -268,14 +400,79 @@ function EditRoute() {
     });
   };
 
+  const clearPopupOverLay = () => {
+    const _overlay = window.map.getOverlayById("popupMenu");
+    window.map.removeOverlay(_overlay);
+  };
+
+  const handleShowPoint = (e) => {
+    console.log(e);
+  };
+
   useEffect(() => {
-    // let vector = route
+    const overlay = new Overlay({
+      element: popup.current,
+      autoPan: true,
+      id: "popupMenu",
+    });
+
+    // get coordinates of the map by click
+    let key = window.map.on("click", (e) => {
+      overlay.setPosition(e.coordinate);
+      window.map.addOverlay(overlay);
+      let _template = "{x},{y}";
+
+      // setting format for coordinates
+      let out = format(e.coordinate, _template, 6);
+      let splitOut = out.split(",");
+      setCoordinates([parseFloat(splitOut[0]), parseFloat(splitOut[1])]);
+    });
+
+    // unmounting component by key that the event returns --> unsubscribe
+    return () => {
+      unByKey(key);
+    };
+  }, []);
+
+  useEffect(() => {
+    let elem = document.createElement("img");
+    elem.src = markerImg;
+    elem.style.maxHeight = "52px";
+    elem.style.maxWidth = "52px";
+    elem.style.filter =
+      "invert(49%) sepia(51%) saturate(697%) hue-rotate(63deg) brightness(93%) contrast(88%)";
+
+    let markerOverlay = new Overlay({
+      element: elem,
+      positioning: "bottom-center",
+      id: "markerOverlay",
+      offset: [-1.33, 4],
+      stopEvent: false,
+    });
+
+    let key = window.map.on("click", (e) => {
+      markerOverlay.setPosition(e.coordinate);
+
+      window.map.addOverlay(markerOverlay);
+    });
+
+    return () => {
+      const _overlay = window.map.getOverlayById("markerOverlay");
+
+      window.map.removeOverlay(_overlay);
+
+      unByKey(key);
+    };
+  }, []);
+
+  useEffect(() => {
     let coordinates = route.CheckPoints.map((point) => {
       let coor = [parseFloat(point.Longitude), parseFloat(point.Latitude)];
       let coordinate = fromLonLat([coor[0], coor[1]], "EPSG:4326");
       return coordinate;
     });
-
+    // setCoordinates(coordinates);
+    setLineString(coordinates);
     drawPolygonOnMap(coordinates, route.Name);
   }, []);
 
@@ -356,12 +553,12 @@ function EditRoute() {
           </div>
 
           <TableContainer>
-            <Table>
+            <Table size="small">
               <TableHead>
                 <TableRow>
                   <TableCell
                     sx={{
-                      width: "100px",
+                      width: "110px",
                       fontSize: "16px",
                       fontWeight: "bold",
                     }}
@@ -413,49 +610,59 @@ function EditRoute() {
                   >
                     Xenon
                   </TableCell>
+                  <TableCell
+                    sx={{
+                      width: "100px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      textAlign: "center",
+                    }}
+                  >
+                    {"Actions"}
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {route.CheckPoints.map((rout) => {
-                  let _defaultCameraValue = !rout.Devices.some((elem) =>
+                {routePoint?.map((point) => {
+                  let _defaultCameraValue = !point.Devices.some((elem) =>
                     rawCameraGUID.includes(elem)
                   )
                     ? "No Camera"
-                    : rout.Devices.filter((elem) =>
+                    : point.Devices.filter((elem) =>
                         rawCameraGUID.includes(elem)
                       );
-                  let _defaultXenonValue = !rout.Devices.some((elem) =>
+                  let _defaultXenonValue = !point.Devices.some((elem) =>
                     rawXenonGUID.includes(elem)
                   )
                     ? "No Xenon"
-                    : rout.Devices.filter((elem) =>
+                    : point.Devices.filter((elem) =>
                         rawXenonGUID.includes(elem)
                       );
 
                   return (
-                    <TableRow key={rout.Id} hover={true}>
+                    <TableRow key={point.Id} hover={true}>
                       <TableCell sx={{ width: "50px", fontSize: "16px" }}>
-                        {rout.Name}
+                        {point.Name}
                       </TableCell>
 
-                      <TableCell sx={{ width: "100px", fontSize: "17px" }}>
-                        {rout.Latitude}
+                      <TableCell sx={{ width: "80px", fontSize: "17px" }}>
+                        {point.Latitude}
                       </TableCell>
 
-                      <TableCell sx={{ width: "100px", fontSize: "17px" }}>
-                        {rout.Longitude}
+                      <TableCell sx={{ width: "80px", fontSize: "17px" }}>
+                        {point.Longitude}
                       </TableCell>
 
-                      <TableCell>
+                      <TableCell sx={{ width: "50px", fontSize: "17px" }}>
                         <TextField
                           className="editRoute__inputIntervalField"
                           sx={{ width: "66px", fontSize: "17px" }}
                           type="number"
                           size="small"
-                          defaultValue={rout.WaitforSeconds}
+                          defaultValue={point.WaitforSeconds}
                           label="Seconds(10-180)"
                           onChange={(e) => {
-                            handleIntervalTime(e, rout.Id);
+                            handleIntervalTime(e, point.Id);
                           }}
                         />
                       </TableCell>
@@ -472,7 +679,7 @@ function EditRoute() {
                             label="TableCamera"
                             defaultValue={_defaultCameraValue}
                             onChange={(e) => {
-                              handleCameraChange(e, rout.Id);
+                              handleCameraChange(e, point.Id);
                             }}
                           >
                             {window.rawCamera.map((camera) => {
@@ -489,7 +696,7 @@ function EditRoute() {
                         </FormControl>
                       </TableCell>
 
-                      <TableCell>
+                      <TableCell sx={{ width: "100px", fontSize: "17px" }}>
                         <FormControl fullWidth>
                           <InputLabel id="TableXenonLabelId">Xenon</InputLabel>
 
@@ -499,7 +706,7 @@ function EditRoute() {
                             label="TableXenon"
                             defaultValue={_defaultXenonValue}
                             onChange={(e) => {
-                              handleXenonChange(e, rout.Id);
+                              handleXenonChange(e, point.Id);
                             }}
                           >
                             {window.rawXenon.map((_xenon) => {
@@ -515,6 +722,27 @@ function EditRoute() {
                           </Select>
                         </FormControl>
                       </TableCell>
+                      <TableCell>
+                        <div className="editRoute_actionCell">
+                          <Tooltip title="Delete" arrow>
+                            <DeleteIcon
+                              sx={{ cursor: "pointer" }}
+                              onClick={() => {
+                                handleDeletePoint(point.Id);
+                              }}
+                            />
+                          </Tooltip>
+
+                          <Tooltip title="Show Point" arrow>
+                            <VisibilityIcon
+                              sx={{ cursor: "pointer" }}
+                              onClick={() => {
+                                handleShowPoint(point.Id);
+                              }}
+                            />
+                          </Tooltip>
+                        </div>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -522,6 +750,86 @@ function EditRoute() {
             </Table>
           </TableContainer>
         </Box>
+
+        <div ref={popup} id="popup">
+          <Box component="form" onSubmit={handleSaveTemplate}>
+            <Paper elevation={6}>
+              <CardHeader title="Choose Devices" />
+              <CardContent>
+                <Stack spacing={2} direction={"column"}>
+                  <FormControl fullWidth>
+                    <InputLabel id="CameraLabelId">Camera</InputLabel>
+                    <Select
+                      id="CameraSelectId"
+                      labelId="CameLabelId"
+                      label="Camera"
+                      value={camera}
+                      required={true}
+                      onChange={(e) => {
+                        setCamera(e.target.value);
+                      }}
+                    >
+                      {window.rawCamera.map((camera) => {
+                        return (
+                          <MenuItem
+                            value={camera.DeviceId}
+                            key={camera.DeviceId}
+                          >
+                            {camera.DeviceName}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                  <FormControl required={true} fullWidth>
+                    <InputLabel id="XenonLabelId">Xenon</InputLabel>
+                    <Select
+                      labelId="XenonLabelId"
+                      label="Xenon"
+                      value={xenon}
+                      onChange={(e) => {
+                        setXenon(e.target.value);
+                      }}
+                    >
+                      {window.rawXenon.map((_xenon) => {
+                        return (
+                          <MenuItem
+                            value={_xenon.DeviceId}
+                            key={_xenon.DeviceId}
+                          >
+                            {_xenon.DeviceName}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    className="setRoute__inputIntervalField"
+                    type="number"
+                    inputProps={{ maxLength: 1000 }}
+                    size="small"
+                    value={interval}
+                    label="Seconds(10-180)"
+                    onChange={handleIntervalTime}
+                    helperText="Enter only Numbers"
+                  />
+                  <Button
+                    id="Button_saveTemplate"
+                    variant="contained"
+                    type="submit"
+                  >
+                    Save
+                  </Button>
+                  <Collapse in={openAlert}>
+                    <Alert severity="info" sx={{ mb: 2, width: "300px" }}>
+                      "Please select at least one Device before continuing
+                    </Alert>
+                  </Collapse>
+                </Stack>
+              </CardContent>
+            </Paper>
+          </Box>
+        </div>
       </ThemeProvider>
     </div>
   );

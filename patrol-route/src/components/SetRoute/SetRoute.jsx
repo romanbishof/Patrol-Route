@@ -57,7 +57,6 @@ function SetRoute() {
   const [routePoint, setRoutePoints] = useState([]);
   const [startAt, setStartAt] = useState(new Date());
   const [endAt, setEndAt] = useState(new Date());
-  const [pointNumber, setPointNumber] = useState(1);
   const [interval, setInterval] = useState(10);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -91,7 +90,7 @@ function SetRoute() {
       DeviceId: "No Camera",
       DeviceName: "No Camera",
     });
-    state.forEach((obj) => {
+    state.Devices.forEach((obj) => {
       if ("rawCamera" in obj) {
         obj.rawCamera.forEach((_camera) => {
           window.rawCamera.push(_camera);
@@ -105,7 +104,7 @@ function SetRoute() {
       DeviceId: "No Xenon",
       DeviceName: "No Xenon",
     });
-    state.forEach((obj) => {
+    state.Devices.forEach((obj) => {
       if ("rawXenon" in obj) {
         obj.rawXenon.forEach((_xenon) => {
           window.rawXenon.push(_xenon);
@@ -135,7 +134,6 @@ function SetRoute() {
         IsActive: false,
         CheckPoints: routePoint,
       };
-      setPointNumber(1);
 
       dispatch(setRoutePlans(newRoute));
       dispatch(postRoutesAsync(newRoute));
@@ -208,7 +206,6 @@ function SetRoute() {
       if (point.Id === Id) {
         if (e.target.value > 0 && e.target.value.length <= 3) {
           point.WaitforSeconds = e.target.value;
-          console.log(point);
         }
       }
     });
@@ -228,6 +225,8 @@ function SetRoute() {
         devices.push(xenon);
       }
 
+      let pointNumber = routePoint.length + 1;
+
       let templatePoint = {
         Id: uuidv4(),
         Name: `Point No. ${pointNumber}`,
@@ -242,7 +241,6 @@ function SetRoute() {
       setXenon("No Xenon");
       setInterval(10);
       setDevices([]);
-      setPointNumber(pointNumber + 1);
 
       // adding new coordinates to global line string to draw line sting as we click on map
       lineString.push([coordinates[0], coordinates[1]]);
@@ -281,6 +279,7 @@ function SetRoute() {
           offset: [-3, 0],
           src: markerImg,
           zIndex: zIndex,
+          color: "#2fff00",
         }),
         zIndex: zIndex,
       })
@@ -371,7 +370,8 @@ function SetRoute() {
     elem.src = markerImg;
     elem.style.maxHeight = "52px";
     elem.style.maxWidth = "52px";
-    elem.id = pointNumber;
+    elem.style.filter =
+      "invert(49%) sepia(51%) saturate(697%) hue-rotate(63deg) brightness(93%) contrast(88%)";
 
     let markerOverlay = new Overlay({
       element: elem,
@@ -383,12 +383,15 @@ function SetRoute() {
 
     let key = window.map.on("click", (e) => {
       markerOverlay.setPosition(e.coordinate);
+
       window.map.addOverlay(markerOverlay);
     });
 
     return () => {
       const _overlay = window.map.getOverlayById("markerOverlay");
+
       window.map.removeOverlay(_overlay);
+
       unByKey(key);
     };
   }, []);
