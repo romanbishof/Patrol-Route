@@ -59,5 +59,6 @@ input::-webkit-inner-spin-button{
 
 .editRoute_actionCell{
     display: flex;
+    justify-content: center;
     gap: 20px;
 }

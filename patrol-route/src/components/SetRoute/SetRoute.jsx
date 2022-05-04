@@ -50,6 +50,8 @@ import arrowImg from "../../images/arrow2.png";
 import "./SetRoute.css";
 import { createStringXY, format } from "ol/coordinate";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
+import Fill from "ol/style/Fill";
+import Text from "ol/style/Text";
 
 function SetRoute() {
   const state = useSelector((state) => state.patrols);
@@ -244,7 +246,7 @@ function SetRoute() {
 
       // adding new coordinates to global line string to draw line sting as we click on map
       lineString.push([coordinates[0], coordinates[1]]);
-      addMarker([coordinates[0], coordinates[1]]);
+      addMarker([coordinates[0], coordinates[1]], pointNumber);
       drawPolygonOnMap();
       const _overlay = window.map.getOverlayById("markerOverlay");
       window.map.removeOverlay(_overlay);
@@ -262,7 +264,7 @@ function SetRoute() {
     window.map.removeOverlay(_overlay);
   };
 
-  const addMarker = (coordinates) => {
+  const addMarker = (coordinates, pointNumber) => {
     // adding new feature to specific coordinates
     var marker = new Feature(new Point(coordinates));
     var zIndex = 1;
@@ -274,12 +276,22 @@ function SetRoute() {
           anchorYUnits: "pixels",
           opacity: 1,
           // size: [20,20],
-          scale: 0.1,
+          scale: 0.12,
           anchorOrigin: "bottom-right",
           offset: [-3, 0],
           src: markerImg,
           zIndex: zIndex,
           color: "#2fff00",
+        }),
+        text: new Text({
+          // font: "25px",
+          fill: new Fill({
+            color: "#000",
+          }),
+          scale: 2.5,
+          offsetY: -34,
+          offsetX: -1,
+          text: String(pointNumber),
         }),
         zIndex: zIndex,
       })

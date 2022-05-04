@@ -48,6 +48,8 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import { format } from "ol/coordinate";
 import { unByKey } from "ol/Observable";
+import Fill from "ol/style/Fill";
+import Text from "ol/style/Text";
 
 function EditRoute() {
   const state = useSelector((state) => state.patrols);
@@ -376,7 +378,7 @@ function EditRoute() {
     let vector = window.map.getAllLayers().find((i) => i.id === "PolygonLayer");
     let vectorSource = vector.getSource();
     // adding new feature to specific coordinates
-    coordinates.forEach((point) => {
+    coordinates.forEach((point, index) => {
       var marker = new Feature(new Point(point));
       var zIndex = 1;
       marker.setStyle(
@@ -387,11 +389,22 @@ function EditRoute() {
             anchorYUnits: "pixels",
             opacity: 1,
             // size: [20,20],
-            scale: 0.1,
+            scale: 0.12,
             anchorOrigin: "bottom-right",
             offset: [-3, 0],
             src: markerImg,
             zIndex: zIndex,
+            color: "#2fff00",
+          }),
+          text: new Text({
+            // font: "25px",
+            fill: new Fill({
+              color: "#000",
+            }),
+            scale: 2.5,
+            offsetY: -34,
+            offsetX: -1,
+            text: String(index + 1),
           }),
           zIndex: zIndex,
         })
@@ -733,14 +746,14 @@ function EditRoute() {
                             />
                           </Tooltip>
 
-                          <Tooltip title="Show Point" arrow>
+                          {/* <Tooltip title="Show Point" arrow>
                             <VisibilityIcon
                               sx={{ cursor: "pointer" }}
                               onClick={() => {
                                 handleShowPoint(point.Id);
                               }}
                             />
-                          </Tooltip>
+                          </Tooltip> */}
                         </div>
                       </TableCell>
                     </TableRow>

@@ -53,6 +53,8 @@ import "./RoutesTable.css";
 import LogWindow from "../logWindow/LogWindow";
 import axios from "axios";
 import moment from "moment";
+import Fill from "ol/style/Fill";
+import Text from "ol/style/Text";
 
 function RoutesTable() {
   let routes = useSelector((state) => state.patrols);
@@ -62,11 +64,13 @@ function RoutesTable() {
   const [log, setLog] = useState(null);
   const [patrolHC, setPatrolHC] = useState(null);
   const [nodeHC, setNodeHC] = useState(null);
+  const [pointNumber, setPointNumber] = useState(0);
   const [lastUpdateHC, setLastUpdateHC] = useState(
     moment(sessionStorage.getItem("LastUpdateDependencies")).format(
       "DD-MM-YYYY HH:mm"
     )
   );
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -209,7 +213,7 @@ function RoutesTable() {
     let vector = window.map.getAllLayers().find((i) => i.id === "PolygonLayer");
     let vectorSource = vector.getSource();
     // adding new feature to specific coordinates
-    coordinates.forEach((point) => {
+    coordinates.forEach((point, index) => {
       var marker = new Feature(new Point(point));
       var zIndex = 1;
       marker.setStyle(
@@ -220,15 +224,27 @@ function RoutesTable() {
             anchorYUnits: "pixels",
             opacity: 1,
             // size: [20,20],
-            scale: 0.1,
+            scale: 0.12,
             anchorOrigin: "bottom-right",
             offset: [0, 0],
             src: markerImg,
             zIndex: zIndex,
+            color: "#00ff00",
+          }),
+          text: new Text({
+            // font: "25px",
+            fill: new Fill({
+              color: "#000",
+            }),
+            scale: 2.5,
+            offsetY: -34,
+            offsetX: -1,
+            text: String(index + 1),
           }),
           zIndex: zIndex,
         })
       );
+
       vectorSource.addFeature(marker);
     });
   };
