@@ -68,7 +68,7 @@ function EditRoute() {
   const [devices, setDevices] = useState([]);
   const [lineString, setLineString] = useState([]);
   const [routePoint, setRoutePoints] = useState(route.CheckPoints);
-
+  const [lastShownPoint, setLastShownPoint] = useState(null);
   const popup = useRef();
 
   const convertToTimeObj = (dateStr) => {
@@ -137,6 +137,7 @@ function EditRoute() {
   }
 
   const handleDeletePoint = (pointId) => {
+    removeRouteFromMap();
     let newRoutePoint = routePoint.filter((point) => point.Id !== pointId);
 
     let coordinates = newRoutePoint.map((point) => {
@@ -150,8 +151,9 @@ function EditRoute() {
         return { ..._point, Name: `Point No. ${index + 1}` };
       })
     );
-    removeRouteFromMap();
+    // removeRouteFromMap();
     drawPolygonOnMap(coordinates, route.Name);
+    setLastShownPoint(null);
   };
 
   const handleCameraChange = (e, id) => {
@@ -418,8 +420,52 @@ function EditRoute() {
     window.map.removeOverlay(_overlay);
   };
 
+  const showPoint = (coordinates, color) => {
+    // adding new feature to specific coordinates
+    // if (lastShownPoint !== null) {
+    //   showPoint(lastShownPoint, "#2fff00");
+    // }
+    if (coordinates !== null) {
+      let vector = window.map
+        .getAllLayers()
+        .find((i) => i.id === "PolygonLayer");
+      let vectorSource = vector.getSource();
+      var marker = new Feature(new Point(coordinates));
+      var zIndex = 1;
+      marker.setStyle(
+        new Style({
+          image: new Icon({
+            anchor: [0.5, 36],
+            anchorXUnits: "fraction",
+            anchorYUnits: "pixels",
+            opacity: 1,
+            // size: [20,20],
+            scale: 0.12,
+            anchorOrigin: "bottom-right",
+            offset: [-3, 0],
+            src: markerImg,
+            zIndex: zIndex,
+            color: color,
+          }),
+          zIndex: zIndex,
+        })
+      );
+      vectorSource.addFeature(marker);
+      setLastShownPoint(coordinates);
+    }
+  };
+
   const handleShowPoint = (e) => {
-    console.log(e);
+    if (lastShownPoint !== null) {
+      showPoint(lastShownPoint, "#2fff00");
+      showPoint([e.Longitude, e.Latitude], "#ff0000");
+      setLastShownPoint([e.Longitude, e.Latitude]);
+    } else if (lastShownPoint === null) {
+      showPoint([e.Longitude, e.Latitude], "#ff0000");
+      setLastShownPoint([e.Longitude, e.Latitude]);
+    }
+    // showPoint([e.Longitude, e.Latitude], "#ff0000");
+    // showPoint(lastShownPoint, "#2fff00");
   };
 
   useEffect(() => {
@@ -746,14 +792,14 @@ function EditRoute() {
                             />
                           </Tooltip>
 
-                          {/* <Tooltip title="Show Point" arrow>
+                          <Tooltip title="Show Point" arrow>
                             <VisibilityIcon
                               sx={{ cursor: "pointer" }}
                               onClick={() => {
-                                handleShowPoint(point.Id);
+                                handleShowPoint(point);
                               }}
                             />
-                          </Tooltip> */}
+                          </Tooltip>
                         </div>
                       </TableCell>
                     </TableRow>
