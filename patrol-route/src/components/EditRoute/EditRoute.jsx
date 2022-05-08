@@ -581,7 +581,6 @@ function EditRoute() {
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <MobileDateTimePicker
                   ampm={false}
-                  label="Starting Date"
                   renderInput={(props) => (
                     <TextField
                       sx={{ cursor: "pointer" }}
@@ -590,27 +589,35 @@ function EditRoute() {
                       {...props}
                     />
                   )}
-                  clearable={false}
+                  label="Starting Date"
+                  // clearable={true}
                   value={startAt}
                   minDateTime={new Date()}
                   onChange={(newValue) => {
                     // set start at time
                     setStartAt(newValue !== null ? newValue : startAt);
+
                     // set dynamecly new end time depending on start at time
-                    setEndAt(newValue > endAt ? newValue : endAt);
+                    setEndAt(endAt > startAt ? endAt : startAt);
+                  }}
+                  onClose={() => {
+                    setStartAt(startAt);
                   }}
                 />
 
                 <MobileDateTimePicker
                   ampm={false}
-                  label="End Date"
                   renderInput={(props) => (
                     <TextField required={true} size={"small"} {...props} />
                   )}
+                  label="End Date"
                   minDateTime={startAt}
                   value={endAt}
                   onChange={(newValue) => {
                     setEndAt(newValue !== null ? newValue : endAt);
+                  }}
+                  onClose={() => {
+                    setEndAt(endAt);
                   }}
                 />
               </LocalizationProvider>

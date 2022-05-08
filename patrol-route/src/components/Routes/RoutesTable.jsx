@@ -64,7 +64,6 @@ function RoutesTable() {
   const [log, setLog] = useState(null);
   const [patrolHC, setPatrolHC] = useState(null);
   const [nodeHC, setNodeHC] = useState(null);
-  const [pointNumber, setPointNumber] = useState(0);
   const [lastUpdateHC, setLastUpdateHC] = useState(
     moment(sessionStorage.getItem("LastUpdateDependencies")).format(
       "DD-MM-YYYY HH:mm"

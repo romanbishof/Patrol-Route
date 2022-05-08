@@ -452,7 +452,7 @@ function SetRoute() {
                     {...params}
                   />
                 )}
-                value={endAt}
+                value={startAt > endAt ? startAt : endAt}
                 label="End Date"
                 minDateTime={startAt}
                 onChange={(newValue) => {
