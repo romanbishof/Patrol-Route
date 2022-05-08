@@ -93,15 +93,14 @@ function RoutesTable() {
   });
 
   const handleRouteActive = (e, _routeId) => {
-    // console.log(_routeId);
-    routes.Jetty[0].forEach((obj) => {
+    routes.Jetty.forEach((obj) => {
       if ("Jetty" in obj) {
         let newRoutePlan;
-        obj.RoutePlans.forEach((routePlan) => {
+        obj.RoutePlans.forEach((route) => {
           // routePlan.Id === _routeId
           // ? {...routePlan, IsActive: e.target.checked} : {...routePlan}
-          if (routePlan.Id === _routeId) {
-            newRoutePlan = { ...routePlan, IsActive: e.target.checked };
+          if (route.Id === _routeId) {
+            newRoutePlan = { ...route, IsActive: e.target.checked };
           }
         });
 
@@ -281,9 +280,8 @@ function RoutesTable() {
     // giving ID to our feature
     feature.Id = routeId;
     addMarker(coordinates);
-    //console.log(feature);
+
     source.addFeature(feature);
-    //console.log(_vector.getSource().getFeatures().length);
   }
 
   // removing the route layer

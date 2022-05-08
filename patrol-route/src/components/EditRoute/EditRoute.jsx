@@ -200,7 +200,6 @@ function EditRoute() {
         return { ...point };
       }
     });
-    console.log(newRoutePoint);
     setRoutePoints(newRoutePoint);
   };
 
@@ -250,7 +249,6 @@ function EditRoute() {
         return { ...point };
       }
     });
-    console.log(newRoutePoint);
     setRoutePoints(newRoutePoint);
   };
 
@@ -440,6 +438,7 @@ function EditRoute() {
     window.map.removeOverlay(_overlay);
   };
 
+  // function to hight light the specific point of route
   const showPoint = (coordinates, color) => {
     // adding new feature to specific coordinates
     // if (lastShownPoint !== null) {
@@ -475,6 +474,7 @@ function EditRoute() {
     }
   };
 
+  // hight light the specific point of route
   const handleShowPoint = (e) => {
     if (lastShownPoint !== null) {
       showPoint(lastShownPoint, "#2fff00");
@@ -484,10 +484,9 @@ function EditRoute() {
       showPoint([e.Longitude, e.Latitude], "#ff0000");
       setLastShownPoint([e.Longitude, e.Latitude]);
     }
-    // showPoint([e.Longitude, e.Latitude], "#ff0000");
-    // showPoint(lastShownPoint, "#2fff00");
   };
 
+  // create overlay by on click to choose starting component
   useEffect(() => {
     const overlay = new Overlay({
       element: popup.current,
@@ -513,6 +512,7 @@ function EditRoute() {
     };
   }, []);
 
+  // adding pop img to click point on map
   useEffect(() => {
     let elem = document.createElement("img");
     elem.src = markerImg;
@@ -543,7 +543,7 @@ function EditRoute() {
       unByKey(key);
     };
   }, []);
-
+  // draw initial route on map
   useEffect(() => {
     let coordinates = route.CheckPoints.map((point) => {
       let coor = [parseFloat(point.Longitude), parseFloat(point.Latitude)];
@@ -756,7 +756,7 @@ function EditRoute() {
                             sx={{ width: "130px" }}
                             labelId="TableCameLabelId"
                             label="TableCamera"
-                            defaultValue={_defaultCameraValue}
+                            value={_defaultCameraValue}
                             onChange={(e) => {
                               handleCameraChange(e, point.Id);
                             }}
@@ -783,7 +783,7 @@ function EditRoute() {
                             sx={{ width: "130px" }}
                             labelId="TableXenonLabelId"
                             label="TableXenon"
-                            defaultValue={_defaultXenonValue}
+                            value={_defaultXenonValue}
                             onChange={(e) => {
                               handleXenonChange(e, point.Id);
                             }}
