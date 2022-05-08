@@ -56,7 +56,6 @@ function EditRoute() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let route = state.RouteToEdit;
-  const [routeId, setRouteId] = useState("");
   const [routeName, setRouteName] = useState(route.Name);
   const [startAt, setStartAt] = useState(route.StartAt);
   const [endAt, setEndAt] = useState(route.EndAt);
@@ -157,9 +156,8 @@ function EditRoute() {
   };
 
   const handleCameraChange = (e, id) => {
-    // console.log(route);
-
-    route.CheckPoints.forEach((point) => {
+    // routePoint.forEach
+    let newRoutePoint = routePoint.map((point) => {
       if (point.Id === id) {
         if (
           e.target.value !== "No Camera" &&
@@ -169,35 +167,46 @@ function EditRoute() {
             (elem) => !rawCameraGUID.includes(elem)
           );
           _obj.push(e.target.value);
-          route = {
-            ...route,
-            CheckPoints: route.CheckPoints.map((_point) => {
-              return _point.Id === id
-                ? { ..._point, Devices: _obj }
-                : { ..._point };
-            }),
-          };
+          return { ...point, Devices: [..._obj] };
+
+          // route = {
+          //   ...route,
+          //   CheckPoints: routePoint.map((_point) => {
+          //     return _point.Id === id
+          //       ? { ..._point, Devices: _obj }
+          //       : { ..._point };
+          //   }),
+          // };
+          // setRoutePoints(route.CheckPoints);
         }
 
         if (e.target.value === "No Camera") {
           let _obj = point.Devices.filter(
             (elem) => !rawCameraGUID.includes(elem)
           );
-          route = {
-            ...route,
-            CheckPoints: route.CheckPoints.map((_point) => {
-              return _point.Id === id
-                ? { ..._point, Devices: _obj }
-                : { ..._point };
-            }),
-          };
+          return { ...point, Devices: [..._obj] };
+          // route = {
+          //   ...route,
+          //   CheckPoints: routePoint.map((_point) => {
+          //     return _point.Id === id
+          //       ? { ..._point, Devices: _obj }
+          //       : { ..._point };
+          //   }),
+          // };
+
+          // setRoutePoints(route.CheckPoints);
         }
+      } else {
+        return { ...point };
       }
     });
+    console.log(newRoutePoint);
+    setRoutePoints(newRoutePoint);
   };
 
   const handleXenonChange = (e, id) => {
-    route.CheckPoints.forEach((point) => {
+    // route.CheckPoints.forEach((point) => {
+    let newRoutePoint = routePoint.map((point) => {
       if (point.Id === id) {
         if (
           e.target.value !== "No Xenon" &&
@@ -208,48 +217,55 @@ function EditRoute() {
           );
 
           _obj.push(e.target.value);
-          route = {
-            ...route,
-            CheckPoints: route.CheckPoints.map((_point) => {
-              return _point.Id === id
-                ? { ..._point, Devices: _obj }
-                : { ..._point };
-            }),
-          };
+          return { ...point, Devices: [..._obj] };
+          // route = {
+          //   ...route,
+          //   CheckPoints: routePoint.map((_point) => {
+          //     return _point.Id === id
+          //       ? { ..._point, Devices: _obj }
+          //       : { ..._point };
+          //   }),
+          // };
+          // setRoutePoints(route.CheckPoints);
         }
+
         if (e.target.value === "No Xenon") {
           let _obj = point.Devices.filter(
             (elem) => !rawXenonGUID.includes(elem)
           );
-
-          route = {
-            ...route,
-            CheckPoints: route.CheckPoints.map((_point) => {
-              return _point.Id === id
-                ? { ..._point, Devices: _obj }
-                : { ..._point };
-            }),
-          };
+          return { ...point, Devices: [..._obj] };
+          // route = {
+          //   ...route,
+          //   CheckPoints: routePoint.map((_point) => {
+          //     return _point.Id === id
+          //       ? { ..._point, Devices: _obj }
+          //       : { ..._point };
+          //   }),
+          // };
+          // setRoutePoints(route.CheckPoints);
         }
+
+        // setRoutePoints(route.CheckPoints);
+      } else {
+        return { ...point };
       }
     });
+    console.log(newRoutePoint);
+    setRoutePoints(newRoutePoint);
   };
 
   const handleIntervalTime = (e, id) => {
     let reg = /^[1-9]+[0-9]*$/;
 
-    route.CheckPoints.forEach((point) => {
+    let newRoutePoint = routePoint.map((point) => {
       if (point.Id === id && reg.test(e.target.value)) {
-        route = {
-          ...route,
-          CheckPoints: route.CheckPoints.map((_point) => {
-            return _point.Id === id
-              ? { ..._point, WaitforSeconds: e.target.value }
-              : { ..._point };
-          }),
-        };
+        return { ...point, WaitforSeconds: e.target.value };
+      } else {
+        return { ...point };
       }
     });
+    console.log(newRoutePoint);
+    setRoutePoints(newRoutePoint);
   };
 
   const handleSaveTemplate = (e) => {
@@ -278,13 +294,17 @@ function EditRoute() {
       };
 
       setRoutePoints((oldpoints) => [...oldpoints, templatePoint]);
+      route = {
+        ...route,
+        CheckPoints: [...route.CheckPoints, templatePoint],
+      };
+      console.log(route.CheckPoints);
       setCamera("No Camera");
       setXenon("No Xenon");
       setInterval(10);
       setDevices([]);
 
       // adding new coordinates to global line string to draw line sting as we click on map
-
       lineString.push([coordinates[0], coordinates[1]]);
 
       addMarker([coordinates[0], coordinates[1]]);
@@ -869,7 +889,9 @@ function EditRoute() {
                     size="small"
                     value={interval}
                     label="Seconds(10-180)"
-                    onChange={handleIntervalTime}
+                    onChange={(e) => {
+                      setInterval(e.target.value);
+                    }}
                     helperText="Enter only Numbers"
                   />
                   <Button
