@@ -3,8 +3,24 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: Arial, sans-serif;
 }
 
 body{
   font-family: sans-serif;
+}
+
+.btn{
+  color: white;
+  background-color: #d85728;
+  border-color: #d85728;
+  font-weight: normal;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  padding: 8px 14px;
+  font-size: 14px;
+  user-select: none;
 }

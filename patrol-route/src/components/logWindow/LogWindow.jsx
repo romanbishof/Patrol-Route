@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./LogWindow.css";
 import { Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 
 function LogWindow({ log }) {
+  const state = useSelector((state) => state.patrols);
   const [logHistory, setLogHistory] = useState([]);
   if (log !== null) {
     log.forEach((obj) => {
@@ -14,7 +16,10 @@ function LogWindow({ log }) {
     });
   }
   return (
-    <div className="logWindow">
+    <div
+      className="logWindow"
+      style={{ border: `2px solid ${state.ThemeColor}` }}
+    >
       {log === null
         ? ""
         : logHistory.map((msg, index) => {

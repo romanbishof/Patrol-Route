@@ -114,6 +114,7 @@ const initialState = {
   Jetty: [],
   Devices: [],
   RouteToEdit: [],
+  ThemeColor: "#d85728",
 };
 
 const patrolSlice = createSlice({
@@ -137,6 +138,9 @@ const patrolSlice = createSlice({
         (route) => route.Id === action.payload.Id
       );
       state.Jetty[0].RoutePlans[index] = action.payload;
+    },
+    setColorTheme: (state, action) => {
+      state.ThemeColor = action.payload;
     },
   },
   // using the http protocols logic
@@ -221,7 +225,12 @@ const patrolSlice = createSlice({
   },
 });
 
-export const { setRoutePlans, deleteRoute, updateRoute, setRouteToEdit } =
-  patrolSlice.actions;
+export const {
+  setRoutePlans,
+  deleteRoute,
+  updateRoute,
+  setRouteToEdit,
+  setColorTheme,
+} = patrolSlice.actions;
 
 export default patrolSlice.reducer;

@@ -25,7 +25,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   deleteRoute,
   deleteRouteAsync,
@@ -65,11 +65,9 @@ function RoutesTable() {
   const [patrolHC, setPatrolHC] = useState(null);
   const [nodeHC, setNodeHC] = useState(null);
   const [lastUpdateHC, setLastUpdateHC] = useState(
-    moment(sessionStorage.getItem("LastUpdateDependencies")).format(
-      "DD-MM-YYYY HH:mm"
-    )
+    moment(sessionStorage.getItem("LastUpdateDependencies"), "DD-MM-YYYY HH:mm")
   );
-
+  const [color, setColor] = useState("#d85728");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -80,10 +78,56 @@ function RoutesTable() {
     handleReloadHistory();
   }, [dispatch]);
 
+  // setting theme color
+  // useEffect(() => {
+  // switch (colorParams.get("color")) {
+  //   case "yellow": {
+  //     dispatch(setColorTheme("#faba01"));
+  //     // setColor("#faba01");
+  //     break;
+  //   }
+  //   case "red": {
+  //     dispatch(setColorTheme("#a80000"));
+  //     // setColor("#a80000");
+  //     break;
+  //   }
+  //   case "green": {
+  //     dispatch(setColorTheme("#668d11"));
+  //     // setColor("#668d11");
+  //     break;
+  //   }
+  //   case "blue": {
+  //     dispatch(setColorTheme("#115F8D"));
+  //     // setColor("#115F8D");
+  //     break;
+  //   }
+  //   case "purple": {
+  //     dispatch(setColorTheme("#9a3797"));
+  //     // setColor("#9a3797");
+  //     break;
+  //   }
+  //   case "KarmaGreen": {
+  //     dispatch(setColorTheme("#009652"));
+  //     // setColor("#009652");
+  //     break;
+  //   }
+  //   case "GrayTint": {
+  //     dispatch(setColorTheme("#d1d6da"));
+  //     // setColor("#d1d6da");
+  //     break;
+  //   }
+  //   case "orange":
+  //   default:
+  //     dispatch(setColorTheme("#d85728"));
+  //     // setColor("#d85728");
+  //     break;
+  // }
+  // }, []);
+
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#d85728",
+        main: routes.ThemeColor,
       },
     },
     typography: {
@@ -344,7 +388,10 @@ function RoutesTable() {
           <Typography variant="h3">Patrol route</Typography>
 
           <div id="RoutesTable__AddButton" className="RoutesTable__button">
-            <div className="RoutesTable__dependencies">
+            <div
+              className="RoutesTable__dependencies"
+              style={{ border: `1px solid ${routes.ThemeColor}` }}
+            >
               <Tooltip title={`Last Update: ${lastUpdateHC}`}>
                 <Button
                   variant="contained"

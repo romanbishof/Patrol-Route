@@ -99,7 +99,7 @@ function EditRoute() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#d85728",
+        main: state.ThemeColor,
       },
     },
   });
