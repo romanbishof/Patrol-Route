@@ -67,7 +67,7 @@ function RoutesTable() {
   const [lastUpdateHC, setLastUpdateHC] = useState(
     moment(sessionStorage.getItem("LastUpdateDependencies"), "DD-MM-YYYY HH:mm")
   );
-  const [color, setColor] = useState("#d85728");
+  // const [color, setColor] = useState("#d85728");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
