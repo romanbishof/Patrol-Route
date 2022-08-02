@@ -8,15 +8,15 @@ import patrolRoutes_routes from './routes/patrolRoutes.js';
 const PORT = 9090;
 const app = express();
 app.use(cors());
-app.use(bodyParser.urlencoded({extended:true})).use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })).use(bodyParser.json())
 
 app.get('/', (req, resp) => {
     resp.send("hello from home page")
 })
 
 // getting health check
-app.get('/hc',(req, resp) => {
-    
+app.get('/hc', (req, resp) => {
+
     const nodeHC_Ok = {
         status: 'ok',
         service: 'nodeBE'

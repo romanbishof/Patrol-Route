@@ -24,3 +24,7 @@ body{
   font-size: 14px;
   user-select: none;
 }
+
+.right{
+  text-align: right;
+}

@@ -1,6 +1,21 @@
+.App{
+    position: absolute;
+    width: 100%;
+    /* height: 850px; */
+    height: 100vh;
+}
 .App__wrapper{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    
+    justify-content: space-between;   
+}
+
+.App__wrapper-left{
+    flex: 1;
+    /* background-color: rgb(152, 221, 221); */
+}
+
+.App__wrapper-right{
+    flex: 1;
+    /* background-color: rgb(240, 140, 140); */
 }

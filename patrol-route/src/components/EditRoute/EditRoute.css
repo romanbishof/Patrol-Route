@@ -1,8 +1,7 @@
 .editRoute{
     display: flex;
     flex-direction: column;
-    padding: 25px 50px 0px 55px;
-    width: 100%;
+    justify-content: center;
 }
 
 .editRoute__inputIntervalField 
@@ -16,35 +15,58 @@ input::-webkit-inner-spin-button{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 20px;
+    padding: 2px 0px 0px 2px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.editRoute__Title h3{
+    padding-left: 5px;
+    font-size: 45px;
 }
 
 .editRoute__buttons {
     display: flex;
     flex-direction: row;   
-    gap: 25px;
+    gap: 15px;
 }
 
 .editRoute__buttons button{
+    max-width: 180px;
     width: 120px;
-    height: 41px;
+    height: 37px;
     font-weight: bold;
     font-family: Arial;
+}
+
+.editRoute__table-container{
+    /* padding-left: 5px; */
+}
+
+.editRoute__table-header{
+    font-weight: bold;
+    font-size: 1.1vw;
+    max-width: 120px;
+    text-align: center;
+}
+
+.editRoute__table-body{
+    font-size: 0.991vw;
+    text-align: center;
+    /* width: 100px; */
 }
 
 .editRoute__NameAndDate{
     display: flex;
     flex-direction: row;
-    gap: 22px;
     justify-content: space-between;
-    align-items: flex-end;
+    /* align-items: flex-end; */
+    padding: 20px 0px 10px 5px;
 }
 
-.editRoute__NameAndDate-wrapper{
-    display: flex;
-    flex-direction: row;
-    gap: 22px;
-    align-items: flex-end;
+
+.editRoute__NameAndDate input{
+    height: 20px;
+    font-size: 14px;
 }
 
 .editRoute__inputBox h3{

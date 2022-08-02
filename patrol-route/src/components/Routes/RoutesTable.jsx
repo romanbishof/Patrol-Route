@@ -415,6 +415,7 @@ function RoutesTable() {
 
               <Tooltip title="Patrol service">
                 <MonitorHeartRoundedIcon
+                  className="RoutesTable__dependencies-icon"
                   sx={{ color: patrolHC === "ok" ? "#00c853" : "#000" }}
                   fontSize="large"
                 />
@@ -422,6 +423,7 @@ function RoutesTable() {
 
               <Tooltip title="Node BE service">
                 <MonitorHeartRoundedIcon
+                  className="RoutesTable__dependencies-icon"
                   sx={{ color: nodeHC === "ok" ? "#00c853" : "#000" }}
                   fontSize="large"
                 />
@@ -458,7 +460,8 @@ function RoutesTable() {
         </div>
 
         <TableContainer
-          sx={{ height: "380px", minHeight: "44.5%", maxHeight: "48%" }}
+          className="RoutesTable__table-container"
+          // sx={{ minHeight: "38.5%", maxHeight: "45%" }}
         >
           <Table
             stickyHeader={true}
@@ -468,41 +471,35 @@ function RoutesTable() {
           >
             <TableHead>
               <TableRow>
-                <TableCell
-                  sx={{ width: "1%", fontSize: "17px", fontWeight: "bold" }}
-                >
-                  Id
+                <TableCell>
+                  <div className="RoutesTable__table-tableCellHead">
+                    <span>{`Id`}</span>
+                  </div>
                 </TableCell>
-                <TableCell
-                  sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
-                >
-                  Route
+                <TableCell>
+                  <div className="RoutesTable__table-tableCellHead">
+                    <span>{`Route`}</span>
+                  </div>
                 </TableCell>
-                <TableCell
-                  sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
-                >
-                  Starting Date
+                <TableCell>
+                  <div className="RoutesTable__table-tableCellHead">
+                    <span>{`Starting Date`}</span>
+                  </div>
                 </TableCell>
-                <TableCell
-                  sx={{ width: "100px", fontSize: "17px", fontWeight: "bold" }}
-                >
-                  End Date
+                <TableCell>
+                  <div className="RoutesTable__table-tableCellHead">
+                    <span>{`End Date`}</span>
+                  </div>
                 </TableCell>
-                <TableCell
-                  sx={{
-                    width: "100px",
-                    fontSize: "17px",
-                    fontWeight: "bold",
-                    textAlign: "center",
-                  }}
-                >
-                  Actions
+                <TableCell>
+                  <div className="RoutesTable__table-tableCellHead right">
+                    <span>{`Actions`}</span>
+                  </div>
                 </TableCell>
-                {/* <TableCell>Security Level</TableCell> */}
-                <TableCell
-                  sx={{ width: "10%", fontSize: "17px", fontWeight: "bold" }}
-                >
-                  Active
+                <TableCell>
+                  <div className="RoutesTable__table-tableCellHead">
+                    <span>{`Active`}</span>
+                  </div>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -513,17 +510,25 @@ function RoutesTable() {
                 routes.Jetty[0].RoutePlans.map((route, index) => {
                   return (
                     <TableRow key={index} hover={true}>
-                      <TableCell width="1%" sx={{ fontSize: "17px" }}>
-                        {index + 1}.
+                      <TableCell>
+                        <div className="RoutesTable__table-tableCell">
+                          {index + 1}
+                        </div>
                       </TableCell>
-                      <TableCell width="13%" sx={{ fontSize: "17px" }}>
-                        {route.Name}
+                      <TableCell>
+                        <div className="RoutesTable__table-tableCell">
+                          {route.Name}
+                        </div>
                       </TableCell>
-                      <TableCell width="22%" sx={{ fontSize: "15px" }}>
-                        {route.StartAt}
+                      <TableCell>
+                        <div className="RoutesTable__table-tableCell">
+                          {route.StartAt}
+                        </div>
                       </TableCell>
-                      <TableCell width="22%" sx={{ fontSize: "15px" }}>
-                        {route.EndAt}
+                      <TableCell>
+                        <div className="RoutesTable__table-tableCell">
+                          {route.EndAt}
+                        </div>
                       </TableCell>
 
                       <TableCell>

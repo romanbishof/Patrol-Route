@@ -1,41 +1,61 @@
 .setRoute{
     display: flex;
-    padding: 50px;
-    width: 100%;
-    justify-content: center;
-    align-items: flex-start;
+    padding: 10px 0px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
 }
-
-
 
 .setRoute__box-textAndDateInput{
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
     gap: 15px;
+    padding: 0px 0px 8px 7px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.setRoute__box-textAndDateInput input{
+    height: 20px;
+    font-size: 14px;
 }
 
 .setRoute__box-buttonActions{
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     gap: 15px;
-    width: 35%;
+    width: 40%;
 }
 
 .setRoute__box-textAndDateInput button{
-    width: 180px;
-    max-height: 20px;
-    padding: 20px;
-    font-size: 13px;
+    max-width: 180px;
+    width: 120px;
+    height: 37px;
+    font-size: 12.5px;
     font-weight: bold;
     font-family: Arial, sans-serif;
 }
 
-/* .setRoute__box-textAndDateInput input{
-    border-radius: 4px;
-    border: 1px solid rgb(173, 171, 171);
-    background: none;
-} */
+
+.setRoute__table-container{
+    padding: 20px 0px 0px 0px;
+}
+
+.setRoute__table{
+    
+}
+
+.setRoute__table-tableCellHead{
+    font-weight: bold;
+    font-size: 1.1vw;
+    max-width: 120px;
+    text-align: center;
+}
+
+.setRoute__table-body{
+    font-size: 0.991vw;
+    text-align: center;
+}
 
 .setRoute__inputIntervalField 
 input::-webkit-outer-spin-button, 
